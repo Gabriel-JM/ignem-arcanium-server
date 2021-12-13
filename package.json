@@ -1,0 +1,29 @@
+{
+  "name": "ignem-arcanium-server",
+  "version": "1.0.0",
+  "description": "Ignem Arcanium Server Project",
+  "main": "index.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rimraf dist && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabriel-JM/ignem-arcanium-server.git"
+  },
+  "author": "Gabriel José",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabriel-JM/ignem-arcanium-server/issues"
+  },
+  "homepage": "https://github.com/Gabriel-JM/ignem-arcanium-server#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.4",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.3"
+  }
+}
