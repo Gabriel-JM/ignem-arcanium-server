@@ -4,9 +4,10 @@
   "description": "Ignem Arcanium Server Project",
   "main": "index.js",
   "private": true,
-  "type": "module",
   "scripts": {
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "test": "jest --runInBand --no-cache",
+    "test:unit": "npm test -- --watch ./tests/unit"
   },
   "repository": {
     "type": "git",
