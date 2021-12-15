@@ -14,8 +14,7 @@ export class DbCreateTorchRegistry implements CreateTorchRegistry {
     }
 
     const torchRegistryId = await this.createTorchRegistryRepository.create({
-      ...params,
-      torchCharge: params.torchCharge || 0
+      ...params
     });
 
     return torchRegistryId

@@ -1,7 +1,7 @@
 export interface CreateTorchRegistryParams {
   characterName: string
   torchCount: number
-  torchCharge?: number
+  torchCharge: number
   isLit: boolean
 }
 
