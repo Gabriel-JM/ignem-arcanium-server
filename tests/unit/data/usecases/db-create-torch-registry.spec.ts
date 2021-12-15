@@ -1,3 +1,4 @@
+import { NoTorchToBeLitError } from '@/data/errors'
 import { DbCreateTorchRegistry } from '@/data/usecases'
 import { mockCreateTorchRegistryRepository } from '../helpers'
 
@@ -18,6 +19,20 @@ describe('DbCreateTorchRegistry', () => {
     torchCharge: 3,
     isLit: false
   }
+
+  it('should throw a NoTorchToBeLitError if torchCount is 0 and isLit is true', async () => {
+    const { sut } = makeSut()
+    const params = {
+      ...dummyCreateTorchRegistryParams,
+      torchCount: 0,
+      torchCharge: 0,
+      isLit: true
+    }
+
+    const promise = sut.create(params)
+
+    await expect(promise).rejects.toThrowError(new NoTorchToBeLitError(params))
+  })
   
   it('should call CreateTorchRegistryRepository with correct values', async () => {
     const { sut, createTorchRegistryRepositorySpy } = makeSut()
