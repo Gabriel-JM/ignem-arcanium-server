@@ -1,5 +1,5 @@
 export function mockCreateTorchRegistryRepository() {
   return {
-    create: jest.fn(() => Promise.resolve('any_id'))
+    create: jest.fn(() => Promise.resolve())
   }
 }

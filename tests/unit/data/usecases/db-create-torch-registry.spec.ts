@@ -1,13 +1,15 @@
 import { NoTorchToBeLitError } from '@/data/errors'
 import { DbCreateTorchRegistry } from '@/data/usecases'
-import { mockCreateTorchRegistryRepository } from '../helpers'
+import { mockCreateTorchRegistryRepository, mockUniqueIdGenerator } from '../helpers'
 
 function makeSut() {
+  const uniqueIdGeneratorSpy = mockUniqueIdGenerator()
   const createTorchRegistryRepositorySpy = mockCreateTorchRegistryRepository()
-  const sut = new DbCreateTorchRegistry(createTorchRegistryRepositorySpy)
+  const sut = new DbCreateTorchRegistry(uniqueIdGeneratorSpy, createTorchRegistryRepositorySpy)
 
   return {
     sut,
+    uniqueIdGeneratorSpy,
     createTorchRegistryRepositorySpy
   }
 }
@@ -33,15 +35,24 @@ describe('DbCreateTorchRegistry', () => {
 
     await expect(promise).rejects.toThrowError(new NoTorchToBeLitError(params))
   })
+
+  it('should call UniqueIdGenerator with correct', async () => {
+    const { sut, uniqueIdGeneratorSpy } = makeSut()
+
+    await sut.create(dummyCreateTorchRegistryParams)
+
+    expect(uniqueIdGeneratorSpy.generate).toHaveBeenCalledWith()
+  })
   
   it('should call CreateTorchRegistryRepository with correct values', async () => {
     const { sut, createTorchRegistryRepositorySpy } = makeSut()
 
     await sut.create(dummyCreateTorchRegistryParams)
 
-    expect(createTorchRegistryRepositorySpy.create).toHaveBeenCalledWith(
-      dummyCreateTorchRegistryParams
-    )
+    expect(createTorchRegistryRepositorySpy.create).toHaveBeenCalledWith({
+      id: 'any_id',
+      ...dummyCreateTorchRegistryParams
+    })
   })
 
   it('should return the torch registry on success', async () => {

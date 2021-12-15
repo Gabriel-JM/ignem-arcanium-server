@@ -1,11 +1,10 @@
 export interface CreateTorchRegistryRepositoryParams {
+  id: string
   characterName: string
   torchCount: number
   torchCharge: number
 }
 
-export type CreateTorchRegistryRepositoryResult = string
-
 export interface CreateTorchRegistryRepository {
-  create(params: CreateTorchRegistryRepositoryParams): Promise<CreateTorchRegistryRepositoryResult>
+  create(params: CreateTorchRegistryRepositoryParams): Promise<void>
 }
