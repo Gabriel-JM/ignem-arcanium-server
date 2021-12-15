@@ -2,11 +2,10 @@ export interface CreateTorchRegistryParams {
   characterName: string
   torchCount: number
   torchCharge?: number
+  isLit: boolean
 }
 
-export interface CreateTorchRegistryResult {
-  id: string
-}
+export type CreateTorchRegistryResult = string
 
 export interface CreateTorchRegistry {
   create(params: CreateTorchRegistryParams): Promise<CreateTorchRegistryResult>
