@@ -11,7 +11,7 @@ export default <Jest.Config.InitialOptions> {
     '.+\\.ts$': 'ts-jest'
   },
   moduleNameMapper: {
-    '^@/(.+)': '<rootDir>/src/$1',
-    '^@/tests/(.+)': '<rootDir>/tests/$1'
+    '^@/tests/(.+)': '<rootDir>/tests/$1',
+    '^@/(.+)': '<rootDir>/src/$1'
   }
 }
