@@ -4,8 +4,9 @@ export default <Jest.Config.InitialOptions> {
   rootDir: './',
   roots: ['<rootDir>/src/', '<rootDir>/tests/'],
   testEnvironment: 'node',
-  collectCoverageFrom: ['<rootDir>/src/'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!<rootDir>/src/**/index.ts'],
   coverageDirectory: 'coverage',
+  coverageReporters: ['lcov', 'text'],
   transform: {
     '.+\\.ts$': 'ts-jest'
   },

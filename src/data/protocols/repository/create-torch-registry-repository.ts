@@ -3,6 +3,7 @@ export interface CreateTorchRegistryRepositoryParams {
   characterName: string
   torchCount: number
   torchCharge: number
+  isLit: boolean
 }
 
 export interface CreateTorchRegistryRepository {

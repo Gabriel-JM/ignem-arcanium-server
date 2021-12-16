@@ -1,4 +1,4 @@
-import knex, { Knex } from 'knex'
+import knex from 'knex'
 import path from 'path'
 
 function connect() {
