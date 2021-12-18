@@ -5,5 +5,5 @@ export interface FindAllTorchRegistriesRepositoryResult {
 }
 
 export interface FindAllTorchRegistriesRepository {
-  findAll(): Promise<FindAllTorchRegistriesRepositoryResult>
+  findAll(): Promise<FindAllTorchRegistriesRepositoryResult[]>
 }

@@ -1,6 +1,13 @@
+export const dummyFindAllTorchRegistriesRepositoryResult = [{
+  torchCount: 1,
+  torchCharge: 6,
+  isLit: true
+}]
+
 export function mockfindAllTorchRegistriesRepository() {
   return {
-    findAll: jest.fn(() => Promise.resolve([]))
+    result: dummyFindAllTorchRegistriesRepositoryResult,
+    findAll: jest.fn(() => Promise.resolve(dummyFindAllTorchRegistriesRepositoryResult))
   }
 }
 
