@@ -55,4 +55,13 @@ describe('DbConsumeAllTorchesCharge', () => {
       fakeTorchRegistries[1]
     ])
   })
+
+  it('should return if FindAllTorchRegistriesRepository returns an empty list', async () => {
+    const { sut, findAllTorchRegistriesRepositorySpy, updateManyTorchRegistriesRepositorySpy } = makeSut()
+    findAllTorchRegistriesRepositorySpy.findAll.mockResolvedValueOnce([])
+
+    await sut.consumeAll()
+
+    expect(updateManyTorchRegistriesRepositorySpy.updateMany).not.toHaveBeenCalled()
+  })
 })

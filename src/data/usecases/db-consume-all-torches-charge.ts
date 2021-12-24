@@ -11,6 +11,8 @@ export class DbConsumeAllTorchesCharge implements ConsumeAllTorchesCharge {
   async consumeAll() {
     const torchRegistries = await this.findAllTorchRegistriesRepository.findAll()
 
+    if (!torchRegistries.length) return
+
     const consumedTorchRegistries = torchRegistries.map(torchRegistry => {
       const torch = new Torch({
         count: torchRegistry.torchCount,
