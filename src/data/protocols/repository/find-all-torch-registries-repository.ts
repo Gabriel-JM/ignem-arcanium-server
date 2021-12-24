@@ -1,4 +1,5 @@
 export interface FindAllTorchRegistriesRepositoryResult {
+  id: string
   torchCount: number
   torchCharge: number
   isLit: boolean
