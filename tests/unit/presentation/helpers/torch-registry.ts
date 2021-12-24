@@ -5,3 +5,9 @@ export function mockCreateTorchRegistry() {
     create: jest.fn(() => Promise.resolve(result))
   }
 }
+
+export function mockConsumeAllTorchesCharge() {
+  return {
+    consumeAll: jest.fn(() => Promise.resolve())
+  }
+}

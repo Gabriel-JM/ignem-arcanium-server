@@ -1,4 +1,4 @@
-import { CreateTorchRegistryController } from '@/presentation/controllers/create-torch-registry-controller'
+import { CreateTorchRegistryController } from '@/presentation/controllers'
 import { ok } from '@/presentation/helpers'
 import { mockCreateTorchRegistry } from '@/tests/unit/presentation/helpers'
 
