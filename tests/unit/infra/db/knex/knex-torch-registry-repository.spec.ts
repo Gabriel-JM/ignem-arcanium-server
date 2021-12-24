@@ -3,15 +3,19 @@ import { knexHelper } from '@/infra/db/knex/knex-helper'
 import { Knex } from 'knex'
 
 function makeSut() {
+  const tableSpy = jest.spyOn(knexHelper, 'table')
   const sut = new KnexTorchRegistryRepository()
 
-  return { sut }
+  return {
+    sut,
+    tableSpy
+  }
 }
 
 describe('KnexTorchRegistryRepository', () => {
   describe('create()', () => {
     it('should call KnexHelper methods with correct values', async () => {
-      const { sut } = makeSut()
+      const { sut, tableSpy } = makeSut()
       const dummyParams = {
         id: 'any_id',
         characterName: 'any_char_name',
@@ -21,7 +25,6 @@ describe('KnexTorchRegistryRepository', () => {
       }
 
       const insertSpy = { insert: jest.fn() }
-      const tableSpy = jest.spyOn(knexHelper, 'table')
       tableSpy.mockImplementationOnce(() => (insertSpy as unknown as Knex.QueryBuilder))
 
       await sut.create(dummyParams)
@@ -34,6 +37,12 @@ describe('KnexTorchRegistryRepository', () => {
         torch_charge: dummyParams.torchCharge,
         is_lit: dummyParams.isLit
       })
+    })
+  })
+
+  describe('findAll()', () => {
+    it('should calls knex methods with correct values', async () => {
+      const { sut, tableSpy } = makeSut()
     })
   })
 })

@@ -1,7 +1,9 @@
 import { CreateTorchRegistryRepository, CreateTorchRegistryRepositoryParams } from '@/data/protocols/repository'
 import { knexHelper } from '@/infra/db/knex/knex-helper'
 
-export class KnexTorchRegistryRepository implements CreateTorchRegistryRepository {
+type TorchRegistryRepository = CreateTorchRegistryRepository
+
+export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   tableName = 'torch_registries'
   
   async create(params: CreateTorchRegistryRepositoryParams) {
