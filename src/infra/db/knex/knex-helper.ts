@@ -10,7 +10,7 @@ function connect() {
     },
     migrations: {
       extension: 'ts',
-      directory: path.resolve('database', 'migrations')
+      directory: path.resolve('dist', 'database', 'migrations')
     },
     useNullAsDefault: true
   })
