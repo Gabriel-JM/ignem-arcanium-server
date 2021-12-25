@@ -15,4 +15,8 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
       is_lit: params.isLit
     })
   }
+
+  async findAll() {
+    await knexHelper.table(this.tableName).select()
+  }
 }

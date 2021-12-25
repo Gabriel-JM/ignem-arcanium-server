@@ -43,6 +43,18 @@ describe('KnexTorchRegistryRepository', () => {
   describe('findAll()', () => {
     it('should calls knex methods with correct values', async () => {
       const { sut, tableSpy } = makeSut()
+      const selectSpy = { select: jest.fn(() => Promise.resolve([{
+        id: 'any_id',
+        torchCount: 2,
+        torchCharge: 6,
+        isLit: false
+      }])) }
+      tableSpy.mockImplementationOnce(() => (selectSpy as unknown as Knex.QueryBuilder))
+
+      await sut.findAll()
+
+      expect(tableSpy).toHaveBeenCalledWith(sut.tableName)
+      expect(selectSpy.select).toHaveBeenCalledWith()
     })
   })
 })
