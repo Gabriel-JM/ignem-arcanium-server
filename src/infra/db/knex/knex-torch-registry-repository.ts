@@ -1,4 +1,4 @@
-import { CreateTorchRegistryRepository, CreateTorchRegistryRepositoryParams, FindAllTorchRegistriesRepository } from '@/data/protocols/repository'
+import { CreateTorchRegistryRepository, CreateTorchRegistryRepositoryParams, FindAllTorchRegistriesRepository, UpdateManyTorchRegistriesRepository, UpdateManyTorchRegistriesRepositoryParams } from '@/data/protocols/repository'
 import { knexHelper } from '@/infra/db/knex/knex-helper'
 
 type TorchRegistryRepository = CreateTorchRegistryRepository & FindAllTorchRegistriesRepository
@@ -28,6 +28,22 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
         torchCharge: dbResult.torch_charge,
         isLit: Boolean(dbResult.is_lit)
       }
+    })
+  }
+
+  async updateMany(params: UpdateManyTorchRegistriesRepositoryParams[]) {
+    await knexHelper.transaction(async (trx) => {
+      await Promise.all(params.map(async record => {
+        await knexHelper
+          .table(this.tableName)
+          .where({ id: record.id })
+          .update({
+            ...(record.torchCount && { torch_count: record.torchCount }),
+            ...(record.torchCharge && { torch_charge: record.torchCharge }),
+            ...(record.isLit && { is_lit: record.isLit })
+          })
+          .transacting(trx)
+      }))
     })
   }
 }

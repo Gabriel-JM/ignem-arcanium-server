@@ -4,11 +4,13 @@ import { Knex } from 'knex'
 
 function makeSut() {
   const tableSpy = jest.spyOn(knexHelper, 'table')
+  const transactionSpy = jest.spyOn(knexHelper, 'transaction')
   const sut = new KnexTorchRegistryRepository()
 
   return {
     sut,
-    tableSpy
+    tableSpy,
+    transactionSpy
   }
 }
 
@@ -75,6 +77,14 @@ describe('KnexTorchRegistryRepository', () => {
         torchCharge: 4,
         isLit: false
       }])
+    })
+  })
+
+  describe('updateMany()', () => {
+    it('should call knex methods with correct values', async () => {
+      const { sut, transactionSpy } = makeSut()
+
+      
     })
   })
 })
