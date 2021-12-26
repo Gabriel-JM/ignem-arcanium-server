@@ -1,7 +1,7 @@
-import knex from 'knex'
+import knex, { Knex } from 'knex'
 import path from 'path'
 
-function connect() {
+export function connect() {
   return knex({
     client: 'sqlite3',
     connection: {
@@ -16,14 +16,24 @@ function connect() {
   })
 }
 
-class KnexHelper {
-  #knexConnection = connect()
+export class KnexHelper {
+
+  constructor(private readonly knexConnection: Knex) {}
   
   table(tableName: string) {
-    return this.#knexConnection.table(tableName)
+    return this.knexConnection.table(tableName)
+  }
+
+  async transaction(transactionCallback: (trx: Knex.Transaction) => Promise<Knex | void>) {
+    const knexTransaction = await this.knexConnection.transaction()
+    
+    try {
+      await transactionCallback(knexTransaction)
+
+      return await knexTransaction.commit()
+    } catch (err) {
+      await knexTransaction.rollback()
+      throw err
+    }
   }
 }
-
-const knexHelper = new KnexHelper()
-
-export { knexHelper }

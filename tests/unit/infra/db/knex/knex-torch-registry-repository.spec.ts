@@ -1,21 +1,34 @@
 import { KnexTorchRegistryRepository } from '@/infra/db'
-import { knexHelper } from '@/infra/db/knex/knex-helper'
+import { KnexHelper } from '@/infra/db/knex/knex-helper'
+import { mockKnex } from '@/tests/unit/infra/helpers'
 import { Knex } from 'knex'
 
 function makeSut() {
-  const tableSpy = jest.spyOn(knexHelper, 'table')
-  const sut = new KnexTorchRegistryRepository()
+  const fakeKnex = mockKnex(
+    'table',
+    'select',
+    'insert',
+    'where',
+    'update',
+    'transaction',
+    'transacting',
+    'commit',
+    'rollback'
+  )
+  const knexHelper = new KnexHelper(fakeKnex as unknown as Knex)
+  const sut = new KnexTorchRegistryRepository(knexHelper)
 
   return {
     sut,
-    tableSpy
+    knexHelper,
+    fakeKnex
   }
 }
 
 describe('KnexTorchRegistryRepository', () => {
   describe('create()', () => {
     it('should call KnexHelper methods with correct values', async () => {
-      const { sut, tableSpy } = makeSut()
+      const { sut, fakeKnex } = makeSut()
       const dummyParams = {
         id: 'any_id',
         characterName: 'any_char_name',
@@ -24,13 +37,10 @@ describe('KnexTorchRegistryRepository', () => {
         isLit: true
       }
 
-      const insertSpy = { insert: jest.fn() }
-      tableSpy.mockImplementationOnce(() => (insertSpy as unknown as Knex.QueryBuilder))
-
       await sut.create(dummyParams)
 
-      expect(tableSpy).toHaveBeenCalledWith(sut.tableName)
-      expect(insertSpy.insert).toHaveBeenCalledWith({
+      expect(fakeKnex.table).toHaveBeenCalledWith(sut.tableName)
+      expect(fakeKnex.insert).toHaveBeenCalledWith({
         id: dummyParams.id,
         character_name: dummyParams.characterName,
         torch_count: dummyParams.torchCount,
@@ -42,14 +52,13 @@ describe('KnexTorchRegistryRepository', () => {
 
   describe('findAll()', () => {
     it('should calls knex methods with correct values', async () => {
-      const { sut, tableSpy } = makeSut()
-      const selectSpy = { select: jest.fn(() => Promise.resolve([])) }
-      tableSpy.mockImplementationOnce(() => (selectSpy as unknown as Knex.QueryBuilder))
+      const { sut, fakeKnex } = makeSut()
+      fakeKnex.select.mockImplementationOnce(() => Promise.resolve([]))
 
       await sut.findAll()
 
-      expect(tableSpy).toHaveBeenCalledWith(sut.tableName)
-      expect(selectSpy.select).toHaveBeenCalledWith(
+      expect(fakeKnex.table).toHaveBeenCalledWith(sut.tableName)
+      expect(fakeKnex.select).toHaveBeenCalledWith(
         'id',
         'torch_count',
         'torch_charge',
@@ -58,14 +67,13 @@ describe('KnexTorchRegistryRepository', () => {
     })
 
     it('should return the correct mapped object', async () => {
-      const { sut, tableSpy } = makeSut()
-      const selectSpy = { select: jest.fn(() => Promise.resolve([{
+      const { sut, fakeKnex } = makeSut()
+      fakeKnex.select.mockImplementationOnce(() => Promise.resolve([{
         id: 'any_id',
         torch_count: 1,
         torch_charge: 4,
         is_lit: 0
-      }])) }
-      tableSpy.mockImplementationOnce(() => (selectSpy as unknown as Knex.QueryBuilder))
+      }]))
 
       const response = await sut.findAll()
 
@@ -75,6 +83,46 @@ describe('KnexTorchRegistryRepository', () => {
         torchCharge: 4,
         isLit: false
       }])
+    })
+  })
+
+  describe('updateMany()', () => {
+    it('should call knex methods with correct values', async () => {
+      const { sut, fakeKnex } = makeSut()
+
+      const input = [{
+        id: 'any_id',
+        isLit: true
+      }, {
+        id: 'any_id',
+        torchCount: 1
+      }, {
+        id: 'any_id',
+        torchCharge: 4
+      }]
+
+      const expectedUpdateParams = [
+        { is_lit: true },
+        { torch_count: 1 },
+        { torch_charge: 4 }
+      ]
+
+      await sut.updateMany(input)
+      
+      for (const i in input) {
+        const index = Number(i)
+        const inputData = input[index]
+
+        expect(fakeKnex.table).toHaveBeenCalledWith(sut.tableName)
+        expect(fakeKnex.where).toHaveBeenNthCalledWith(index + 1, {
+          id: inputData.id
+        })
+        expect(fakeKnex.update).toHaveBeenNthCalledWith(
+          index + 1,
+          expectedUpdateParams[index]
+        )
+        expect(fakeKnex.commit).toHaveBeenCalledWith()
+      }
     })
   })
 })
