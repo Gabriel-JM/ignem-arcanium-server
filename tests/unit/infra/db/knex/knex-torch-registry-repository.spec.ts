@@ -124,5 +124,17 @@ describe('KnexTorchRegistryRepository', () => {
         expect(fakeKnex.commit).toHaveBeenCalledWith()
       }
     })
+
+    it('should call rollback knex method if something went wrong', async () => {
+      const { sut, fakeKnex } = makeSut()
+      fakeKnex.update.mockImplementationOnce(() => {
+        throw new Error()
+      })
+
+      const promise = sut.updateMany([{ id: 'any_id', isLit: true }])
+
+      await expect(promise).rejects.toThrowError(Error)
+      expect(fakeKnex.rollback).toHaveBeenCalledWith()
+    })
   })
 })
