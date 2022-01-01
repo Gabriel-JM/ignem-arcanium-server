@@ -21,11 +21,12 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   async findAll() {
     const dbResultList = await this.knexHelper
       .table(this.tableName)
-      .select('id', 'torch_count', 'torch_charge', 'is_lit')
+      .select('id', 'character_name', 'torch_count', 'torch_charge', 'is_lit')
 
     return dbResultList.map(dbResult => {
       return {
         id: dbResult.id,
+        characterName: dbResult.character_name,
         torchCount: dbResult.torch_count,
         torchCharge: dbResult.torch_charge,
         isLit: Boolean(dbResult.is_lit)

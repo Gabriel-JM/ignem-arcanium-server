@@ -1,5 +1,6 @@
 export const dummyFindAllTorchRegistriesRepositoryResult = [{
   id: 'any_id',
+  characterName: 'any_name',
   torchCount: 1,
   torchCharge: 6,
   isLit: true

@@ -30,12 +30,14 @@ describe('DbConsumeAllTorchesCharge', () => {
     const fakeTorchRegistries = [
       {
         id: 'id-1',
+        characterName: 'any_name',
         torchCount: 1,
         torchCharge: 3,
         isLit: true,
       },
       {
         id: 'id-2',
+        characterName: 'any_name',
         torchCount: 2,
         torchCharge: 1,
         isLit: false
@@ -52,7 +54,12 @@ describe('DbConsumeAllTorchesCharge', () => {
         torchCharge: 2,
         isLit: fakeTorchRegistries[0].isLit
       },
-      fakeTorchRegistries[1]
+      {
+        id: fakeTorchRegistries[1].id,
+        torchCount: fakeTorchRegistries[1].torchCount,
+        torchCharge: fakeTorchRegistries[1].torchCharge,
+        isLit: fakeTorchRegistries[1].isLit
+      }
     ])
   })
 

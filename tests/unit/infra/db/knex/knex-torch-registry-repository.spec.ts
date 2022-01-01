@@ -60,6 +60,7 @@ describe('KnexTorchRegistryRepository', () => {
       expect(fakeKnex.table).toHaveBeenCalledWith(sut.tableName)
       expect(fakeKnex.select).toHaveBeenCalledWith(
         'id',
+        'character_name',
         'torch_count',
         'torch_charge',
         'is_lit'
