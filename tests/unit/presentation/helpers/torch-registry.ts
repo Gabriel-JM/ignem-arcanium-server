@@ -1,3 +1,10 @@
+export function mockFindAllTorchRegistries() {
+  return {
+    result: [],
+    findAll: jest.fn(() => Promise.resolve([]))
+  }
+}
+
 export function mockCreateTorchRegistry() {
   const result = 'any_id'
   return {
