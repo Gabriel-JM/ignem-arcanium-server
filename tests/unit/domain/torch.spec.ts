@@ -11,6 +11,22 @@ const makeSut = ({
 })
 
 describe('Torch', () => {
+  describe('increaseCharge()', () => {
+    it('should not increase charge above 6', () => {
+      const sut = makeSut({
+        charge: 5
+      })
+
+      sut.increaseCharge(2)
+
+      expect(sut.getValues()).toEqual({
+        torchCount: 1,
+        torchCharge: 6,
+        isLit: true
+      })
+    })
+  })
+
   describe('consumeCharge()', () => {
     it('should not decrease torch charge if torch is not lit', () => {
       const sut = makeSut({ isLit: false })

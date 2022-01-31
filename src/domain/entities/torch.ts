@@ -8,6 +8,7 @@ export class Torch {
   #count: number
   #charge: number
   #isLit: boolean
+  #chargeLimit = 6
 
   constructor(data: TorchData) {
     this.#count = data.count
@@ -21,22 +22,32 @@ export class Torch {
     this.#charge--
 
     if (this.#charge !== 0) return
-    
+
     this.removeTorch()
+  }
+
+  increaseCharge(quantity: number) {
+    this.#charge = this.#charge + quantity > this.#chargeLimit
+      ? this.#chargeLimit
+      : this.#charge + quantity
   }
 
   removeTorch(quantity = 1) {
     this.#count -= quantity
     this.#isLit = false
-    
+
     if (this.#count <= 0) {
       this.#count = 0
       this.#charge = 0
-      
+
       return
     }
-    
-    this.#charge = 6
+
+    this.#charge = this.#chargeLimit
+  }
+
+  addTorch(quantity: number) {
+    this.#count = this.#count + quantity
   }
 
   getValues() {
