@@ -46,10 +46,6 @@ export class Torch {
     this.#charge = this.#chargeLimit
   }
 
-  addTorch(quantity: number) {
-    this.#count = this.#count + quantity
-  }
-
   getValues() {
     return {
       torchCount: this.#count,
