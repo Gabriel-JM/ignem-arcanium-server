@@ -6,6 +6,14 @@ export const dummyFindAllTorchRegistriesRepositoryResult = [{
   isLit: true
 }]
 
+export const mockRepositoryTorchRegistry = () => ({
+  id: 'any_id',
+  characterName: 'any_name',
+  torchCount: 1,
+  torchCharge: 6,
+  isLit: true
+})
+
 export function mockfindAllTorchRegistriesRepository() {
   return {
     result: dummyFindAllTorchRegistriesRepositoryResult,
@@ -22,5 +30,20 @@ export function mockCreateTorchRegistryRepository() {
 export function mockUpdateManyTorchRegistriesRepository() {
   return {
     updateMany: jest.fn(() => Promise.resolve())
+  }
+}
+
+export function mockUpdateTorchRegistryRepository() {
+  return {
+    update: jest.fn(() => Promise.resolve())
+  }
+}
+
+export function mockFindTorchRegistryByIdRepository() {
+  const result = mockRepositoryTorchRegistry()
+
+  return {
+    result,
+    findById: jest.fn(() => Promise.resolve(result))
   }
 }

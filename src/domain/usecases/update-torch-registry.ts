@@ -1,7 +1,8 @@
 export interface UpdateTorchRegistryParams {
-  torchCount: number | string
-  torchCharge: number | string
-  isLit: boolean
+  id: string
+  torchCount?: number | string
+  torchCharge?: number | string
+  isLit?: boolean
 }
 
 export interface UpdateTorchRegistry {
