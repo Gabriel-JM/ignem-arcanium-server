@@ -16,6 +16,12 @@ export class Torch {
     this.#isLit = data.isLit
   }
 
+  increaseCharge(quantity: number) {
+    this.#charge = this.#charge + quantity > this.#chargeLimit
+      ? this.#chargeLimit
+      : this.#charge + quantity
+  }
+
   consumeCharge() {
     if (!this.#isLit) return
 
@@ -26,10 +32,8 @@ export class Torch {
     this.removeTorch()
   }
 
-  increaseCharge(quantity: number) {
-    this.#charge = this.#charge + quantity > this.#chargeLimit
-      ? this.#chargeLimit
-      : this.#charge + quantity
+  addTorch(quantity: number) {
+    this.#count += quantity
   }
 
   removeTorch(quantity = 1) {

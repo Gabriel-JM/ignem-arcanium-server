@@ -11,6 +11,20 @@ const makeSut = ({
 })
 
 describe('Torch', () => {
+  describe('addTorch()', () => {
+    it('should increase the torch count by adding a torch', () => {
+      const sut = makeSut()
+
+      sut.addTorch(1)
+
+      expect(sut.getValues()).toEqual({
+        torchCount: 2,
+        torchCharge: 6,
+        isLit: true
+      })
+    })
+  })
+
   describe('increaseCharge()', () => {
     it('should correct increase charge by the given amount', () => {
       const sut = makeSut({
