@@ -22,10 +22,10 @@ export class Torch {
       : this.#charge + quantity
   }
 
-  consumeCharge() {
+  consumeCharge(quantity = 1) {
     if (!this.#isLit) return
 
-    this.#charge--
+    this.#charge -= quantity
 
     if (this.#charge !== 0) return
 

@@ -1,3 +1,5 @@
+import { FindTorchRegistryByIdRepositoryResult } from '@/data/protocols/repository'
+
 export const dummyFindAllTorchRegistriesRepositoryResult = [{
   id: 'any_id',
   characterName: 'any_name',
@@ -44,6 +46,9 @@ export function mockFindTorchRegistryByIdRepository() {
 
   return {
     result,
-    findById: jest.fn(() => Promise.resolve(result))
+    findById: jest.fn<
+      Promise<FindTorchRegistryByIdRepositoryResult>,
+      []
+    >(() => Promise.resolve(result))
   }
 }
