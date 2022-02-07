@@ -87,6 +87,22 @@ describe('KnexTorchRegistryRepository', () => {
     })
   })
 
+  describe('update()', () => {
+    it('should call knex methods with correct values', async () => {
+      const { sut, fakeKnex } = makeSut()
+      const input = {
+        id: 'any_id',
+        torchCount: 3
+      }
+
+      await sut.update(input)
+
+      expect(fakeKnex.table).toHaveBeenCalledWith(sut.tableName)
+      expect(fakeKnex.where).toHaveBeenCalledWith({ id: input.id })
+      expect(fakeKnex.update).toHaveBeenCalledWith({ torch_count: input.torchCount })
+    })
+  })
+
   describe('updateMany()', () => {
     it('should call knex methods with correct values', async () => {
       const { sut, fakeKnex } = makeSut()

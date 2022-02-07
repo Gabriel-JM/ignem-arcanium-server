@@ -1,7 +1,18 @@
-import { CreateTorchRegistryRepository, CreateTorchRegistryRepositoryParams, FindAllTorchRegistriesRepository, UpdateManyTorchRegistriesRepository, UpdateManyTorchRegistriesRepositoryParams } from '@/data/protocols/repository'
+import {
+  CreateTorchRegistryRepository,
+  CreateTorchRegistryRepositoryParams,
+  FindAllTorchRegistriesRepository,
+  UpdateManyTorchRegistriesRepository,
+  UpdateManyTorchRegistriesRepositoryParams,
+  UpdateTorchRegistryRepository,
+  UpdateTorchRegistryRepositoryParams
+} from '@/data/protocols/repository'
 import { KnexHelper } from '@/infra/db/knex/knex-helper'
 
-type TorchRegistryRepository = CreateTorchRegistryRepository & FindAllTorchRegistriesRepository
+type TorchRegistryRepository = CreateTorchRegistryRepository
+  & FindAllTorchRegistriesRepository
+  & UpdateManyTorchRegistriesRepository
+  & UpdateTorchRegistryRepository
 
 export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   tableName = 'torch_registries'
@@ -32,6 +43,17 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
         isLit: Boolean(dbResult.is_lit)
       }
     })
+  }
+
+  async update(params: UpdateTorchRegistryRepositoryParams) {
+    await this.knexHelper
+      .table(this.tableName)
+      .where({ id: params.id })
+      .update({
+        ...params.torchCount && { torch_count: params.torchCount },
+        ...params.torchCharge && { torch_charge: params.torchCharge },
+        ...params.isLit && { is_lit: params.isLit }
+      })
   }
 
   async updateMany(params: UpdateManyTorchRegistriesRepositoryParams[]) {
