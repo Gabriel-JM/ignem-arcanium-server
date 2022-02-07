@@ -10,6 +10,7 @@ function makeSut() {
     'insert',
     'where',
     'update',
+    'first',
     'transaction',
     'transacting',
     'commit',
@@ -90,16 +91,33 @@ describe('KnexTorchRegistryRepository', () => {
   describe('findById()', () => {
     it('should call knex methods with correct values', async () => {
       const { sut, fakeKnex } = makeSut()
-      const input = {
-        id: 'any_id',
-        torchCount: 3
-      }
 
-      await sut.update(input)
+      await sut.findById('any_id')
 
       expect(fakeKnex.table).toHaveBeenCalledWith(sut.tableName)
-      expect(fakeKnex.where).toHaveBeenCalledWith({ id: input.id })
-      expect(fakeKnex.update).toHaveBeenCalledWith({ torch_count: input.torchCount })
+      expect(fakeKnex.where).toHaveBeenCalledWith({ id: 'any_id' })
+      expect(fakeKnex.first).toHaveBeenCalledWith()
+    })
+
+    it('should return the correct mapped values from database, if as an result', async () => {
+      const { sut, fakeKnex } = makeSut()
+      fakeKnex.first.mockResolvedValueOnce({
+        id: 'any_id',
+        character_name: 'any_name',
+        torch_count: 2,
+        torch_charge: 3,
+        is_lit: 1
+      })
+
+      const response = await sut.findById('any_id')
+
+      expect(response).toEqual({
+        id: 'any_id',
+        characterName: 'any_name',
+        torchCount: 2,
+        torchCharge: 3,
+        isLit: true
+      })
     })
   })
 

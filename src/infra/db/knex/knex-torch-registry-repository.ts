@@ -14,7 +14,7 @@ interface DbTorchRegistry {
   character_name: string
   torch_count: number
   torch_charge: number
-  is_Lit: boolean
+  is_lit: boolean
 }
 
 type TorchRegistryRepository = CreateTorchRegistryRepository
@@ -32,7 +32,7 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
     characterName: dbData.character_name,
     torchCount: dbData.torch_count,
     torchCharge: dbData.torch_charge,
-    isLit: Boolean(dbData.is_Lit)
+    isLit: Boolean(dbData.is_lit)
   })
   
   async create(params: CreateTorchRegistryRepositoryParams) {
