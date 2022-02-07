@@ -8,6 +8,8 @@ import { Torch } from '@/domain/entities'
 import { UpdateTorchRegistry, UpdateTorchRegistryParams } from '@/domain/usecases'
 
 export class DbUpdateTorchRegistry implements UpdateTorchRegistry {
+  #torchAdditionStringFormat = /^(\+|\-)\d{1,2}$/
+  
   constructor(
     private readonly updateTorchRegistryRepository: UpdateTorchRegistryRepository,
     private readonly findTorchRegistryByIdRepository: FindTorchRegistryByIdRepository
@@ -19,7 +21,8 @@ export class DbUpdateTorchRegistry implements UpdateTorchRegistry {
     const isTorchChargeString = typeof params.torchCharge === 'string'
 
     if (isTorchChargeString || isTorchCountString) {
-      const repositoryTorchData = await this.findTorchRegistryByIdRepository.findById(params.id)
+      const repositoryTorchData = await this.findTorchRegistryByIdRepository
+        .findById(params.id)
 
       if (!repositoryTorchData) {
         throw new TorchRegistryNotFoundError({ id: params.id })
@@ -32,28 +35,14 @@ export class DbUpdateTorchRegistry implements UpdateTorchRegistry {
       })
 
       if (isTorchCountString) {
-        const torchCount = String(params.torchCount)
-
-        if (!this.#validateFormat(torchCount)) {
-          throw new InvalidTorchAdditionValueError(torchCount)
-        }
-
-        const operation = torchCount.at(0)
-        const quantity = Number(torchCount.substring(1))
+        const { operation, quantity } = this.#getOperationAndQuantity(params.torchCount)
 
         operation === '+' && torch.addTorch(quantity)
         operation === '-' && torch.removeTorch(quantity)
       }
 
       if (isTorchChargeString) {
-        const torchCharge = String(params.torchCharge)
-
-        if (!this.#validateFormat(torchCharge)) {
-          throw new InvalidTorchAdditionValueError(torchCharge)
-        }
-
-        const operation = torchCharge.at(0)
-        const quantity = Number(torchCharge.substring(1))
+        const { operation, quantity } = this.#getOperationAndQuantity(params.torchCharge)
 
         operation === '+' && torch.increaseCharge(quantity)
         operation === '-' && torch.consumeCharge(quantity)
@@ -77,7 +66,16 @@ export class DbUpdateTorchRegistry implements UpdateTorchRegistry {
     })
   }
 
-  #validateFormat(value: string) {
-    return /^(\+|\-)\d{1,2}$/.test(value)
+  #getOperationAndQuantity(data: string | number | undefined) {
+    const stringData = String(data)
+
+    if (!this.#torchAdditionStringFormat.test(stringData)) {
+      throw new InvalidTorchAdditionValueError(stringData)
+    }
+
+    const operation = stringData.at(0)
+    const quantity = Number(stringData.substring(1))
+
+    return { operation, quantity }
   }
 }
