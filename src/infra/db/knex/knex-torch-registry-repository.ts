@@ -2,6 +2,7 @@ import {
   CreateTorchRegistryRepository,
   CreateTorchRegistryRepositoryParams,
   FindAllTorchRegistriesRepository,
+  FindTorchRegistryByIdRepository,
   UpdateManyTorchRegistriesRepository,
   UpdateManyTorchRegistriesRepositoryParams,
   UpdateTorchRegistryRepository,
@@ -19,6 +20,7 @@ interface DbTorchRegistry {
 
 type TorchRegistryRepository = CreateTorchRegistryRepository
   & FindAllTorchRegistriesRepository
+  & FindTorchRegistryByIdRepository
   & UpdateManyTorchRegistriesRepository
   & UpdateTorchRegistryRepository
 

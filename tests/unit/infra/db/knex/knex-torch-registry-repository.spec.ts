@@ -99,7 +99,7 @@ describe('KnexTorchRegistryRepository', () => {
       expect(fakeKnex.first).toHaveBeenCalledWith()
     })
 
-    it('should return the correct mapped values from database, if as an result', async () => {
+    it('should return the correct mapped values from database, if has an result', async () => {
       const { sut, fakeKnex } = makeSut()
       fakeKnex.first.mockResolvedValueOnce({
         id: 'any_id',
@@ -118,6 +118,15 @@ describe('KnexTorchRegistryRepository', () => {
         torchCharge: 3,
         isLit: true
       })
+    })
+
+    it('should return the correct mapped values from database, if has no result', async () => {
+      const { sut, fakeKnex } = makeSut()
+      fakeKnex.first.mockResolvedValueOnce(null)
+
+      const response = await sut.findById('any_id')
+
+      expect(response).toEqual(null)
     })
   })
 
