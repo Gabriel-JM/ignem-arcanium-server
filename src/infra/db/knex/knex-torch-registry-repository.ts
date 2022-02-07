@@ -9,6 +9,14 @@ import {
 } from '@/data/protocols/repository'
 import { KnexHelper } from '@/infra/db/knex/knex-helper'
 
+interface DbTorchRegistry {
+  id: string
+  character_name: string
+  torch_count: number
+  torch_charge: number
+  is_Lit: boolean
+}
+
 type TorchRegistryRepository = CreateTorchRegistryRepository
   & FindAllTorchRegistriesRepository
   & UpdateManyTorchRegistriesRepository
@@ -18,6 +26,14 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   tableName = 'torch_registries'
 
   constructor(private readonly knexHelper: KnexHelper) {}
+
+  #mapFields = (dbData: DbTorchRegistry) => ({
+    id: dbData.id,
+    characterName: dbData.character_name,
+    torchCount: dbData.torch_count,
+    torchCharge: dbData.torch_charge,
+    isLit: Boolean(dbData.is_Lit)
+  })
   
   async create(params: CreateTorchRegistryRepositoryParams) {
     await this.knexHelper.table(this.tableName).insert({
@@ -29,20 +45,21 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
     })
   }
 
+  async findById(id: string) {
+    const dbResult = await this.knexHelper
+      .table(this.tableName)
+      .where({ id })
+      .first()
+
+    return dbResult ? this.#mapFields(dbResult) : null
+  }
+
   async findAll() {
     const dbResultList = await this.knexHelper
       .table(this.tableName)
       .select('id', 'character_name', 'torch_count', 'torch_charge', 'is_lit')
 
-    return dbResultList.map(dbResult => {
-      return {
-        id: dbResult.id,
-        characterName: dbResult.character_name,
-        torchCount: dbResult.torch_count,
-        torchCharge: dbResult.torch_charge,
-        isLit: Boolean(dbResult.is_lit)
-      }
-    })
+    return dbResultList.map(this.#mapFields)
   }
 
   async update(params: UpdateTorchRegistryRepositoryParams) {
