@@ -3,6 +3,7 @@ import {
   CreateTorchRegistryRepositoryParams,
   FindAllTorchRegistriesRepository,
   FindTorchRegistryByIdRepository,
+  FindTorchRegistryByIdRepositoryResult,
   UpdateManyTorchRegistriesRepository,
   UpdateManyTorchRegistriesRepositoryParams,
   UpdateTorchRegistryRepository,
@@ -51,7 +52,7 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
     const dbResult = await this.knexHelper
       .table(this.tableName)
       .where({ id })
-      .first()
+      .first<DbTorchRegistry>()
 
     return dbResult ? this.#mapFields(dbResult) : null
   }

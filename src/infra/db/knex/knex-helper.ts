@@ -3,7 +3,7 @@ import path from 'path'
 
 export function connect() {
   return knex({
-    client: 'sqlite3',
+    client: 'better-sqlite3',
     connection: {
       filename: path.resolve('database', 'ignem-arcanium.db'),
       charset: 'utf8'
