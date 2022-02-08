@@ -5,7 +5,7 @@
   "main": "dist/src/main/index.js",
   "private": true,
   "scripts": {
-    "dev": "npm run build && node .",
+    "dev": "npm run build && node ./dist/src/main/index.js",
     "build": "rimraf dist && tsc --project ./tsconfig-build.json",
     "test": "jest --runInBand --no-cache",
     "test:cov": "npm test -- --coverage",
@@ -21,6 +21,9 @@
     "url": "https://github.com/Gabriel-JM/ignem-arcanium-server/issues"
   },
   "homepage": "https://github.com/Gabriel-JM/ignem-arcanium-server#readme",
+  "_moduleAliases": {
+    "@": "dist/src"
+  },
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "@types/websocket": "^1.0.5",
@@ -33,6 +36,7 @@
   "dependencies": {
     "better-sqlite3": "^7.5.0",
     "knex": "^1.0.2",
+    "module-alias": "^2.2.2",
     "nanoid": "^3.1.30",
     "websocket": "^1.0.34"
   }
