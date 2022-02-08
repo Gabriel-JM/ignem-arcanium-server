@@ -18,3 +18,9 @@ export function mockConsumeAllTorchesCharge() {
     consumeAll: jest.fn(() => Promise.resolve())
   }
 }
+
+export function mockUpdateTorchRegistry() {
+  return {
+    update: jest.fn(() => Promise.resolve())
+  }
+}
