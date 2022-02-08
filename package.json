@@ -2,9 +2,10 @@
   "name": "ignem-arcanium-server",
   "version": "1.0.0",
   "description": "Ignem Arcanium Server Project",
-  "main": "index.js",
+  "main": "dist/src/main/index.js",
   "private": true,
   "scripts": {
+    "dev": "npm run build && node .",
     "build": "rimraf dist && tsc --project ./tsconfig-build.json",
     "test": "jest --runInBand --no-cache",
     "test:cov": "npm test -- --coverage",
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/Gabriel-JM/ignem-arcanium-server#readme",
   "devDependencies": {
     "@types/jest": "^27.0.3",
+    "@types/websocket": "^1.0.5",
     "jest": "^27.4.4",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.1",
