@@ -1,6 +1,7 @@
 import { createServer } from 'node:http'
 import { server as WebSocketServer } from 'websocket'
 import crypto from 'crypto'
+import { RouteContext, router } from '@/main/server/router'
 
 const server = createServer((_req, res) => {
   res.end('Hello from HTTP!')
@@ -14,7 +15,17 @@ webSocketServer.on('request', request => {
   const connectionId = crypto.randomUUID()
   const connection = request.accept()
 
-  setInterval(() => connection.send(JSON.stringify({ connectionId })), 5000)
+  connection.on('message', message => {
+    if (message.type === 'utf8') {
+      const messageData = JSON.parse(message.utf8Data) as RouteContext
+
+      const handler = router.getHandler(messageData.event)
+
+      handler?.(messageData)
+    }
+  })
+
+  connection.send(JSON.stringify({ connectionId }))
 })
 
 export { server }
