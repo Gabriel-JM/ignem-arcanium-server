@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "npm run build && node ./dist/src/main/index.js",
-    "build": "rimraf dist && tsc --project ./tsconfig-build.json",
+    "build": "rimraf dist && tsc -p ./tsconfig-build.json",
+    "build:watch": "tsc -p ./tsconfig-build.json --watch",
     "test": "jest --runInBand --no-cache",
     "test:cov": "npm test -- --coverage",
     "test:unit": "npm test -- --watch --roots ./tests/unit --roots ./src"

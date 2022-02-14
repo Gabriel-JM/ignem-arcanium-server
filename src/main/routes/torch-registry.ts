@@ -1,4 +1,5 @@
 import { Router } from '@/main/server/router'
+import { randomUUID } from 'crypto'
 
 export function torchRegistryRoutes(router: Router) {
   router.defineRoute({
@@ -9,7 +10,13 @@ export function torchRegistryRoutes(router: Router) {
       connection.send(JSON.stringify({
         event: 'create-torch-registry-response',
         headers: ctx.headers,
-        data: null
+        data: {
+          id: randomUUID(),
+          characterName: 'any name',
+          torchCount: 1,
+          torchCharge: 3,
+          isLit: true
+        }
       }))      
     }
   })
