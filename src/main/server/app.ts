@@ -18,13 +18,13 @@ webSocketServer.on('request', request => {
   const connectionId = crypto.randomUUID()
   const connection = request.accept()
 
-  connection.on('message', message => {
+  connection.on('message', async message => {
     if (message.type === 'utf8') {
       const messageData = JSON.parse(message.utf8Data) as RouteContext
 
       const handler = router.getHandler(messageData.event)
 
-      handler?.(messageData, connection)
+      await handler?.(messageData, connection)
     }
   })
 
