@@ -2,7 +2,7 @@ import { RouteContext } from '@/main/server/router'
 import { Controller } from '@/presentation/protocols'
 import { connection } from 'websocket'
 
-export function adapt(controller: Controller, responseEvent: string) {
+export function adaptEvent(controller: Controller, responseEvent: string) {
   return async (ctx: RouteContext, conn: connection) => {
     const requestData = {
       ...ctx?.headers,
@@ -13,6 +13,7 @@ export function adapt(controller: Controller, responseEvent: string) {
 
     conn.send(JSON.stringify({
       event: responseEvent,
+      statusCode: response.statusCode,
       headers: ctx.headers,
       data: response.body
     }))

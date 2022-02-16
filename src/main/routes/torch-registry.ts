@@ -1,23 +1,10 @@
+import { adaptEvent } from '@/main/adapters'
+import { makeCreateTorchRegistryController } from '@/main/factories/controllers'
 import { Router } from '@/main/server/router'
-import { randomUUID } from 'crypto'
 
 export function torchRegistryRoutes(router: Router) {
-  router.defineRoute({
-    entryEvent: 'create-torch-registry',
-    responseEvent: 'create-torch-registry-response',
-    handler: async (ctx, connection) => {
-      console.log(ctx)
-      connection.send(JSON.stringify({
-        event: 'create-torch-registry-response',
-        headers: ctx.headers,
-        data: {
-          id: randomUUID(),
-          characterName: 'any name',
-          torchCount: 1,
-          torchCharge: 3,
-          isLit: true
-        }
-      }))      
-    }
-  })
+  router.defineRoute('create-torch-registry', adaptEvent(
+    makeCreateTorchRegistryController(),
+    'create-torch-registry-response'
+  ))
 }
