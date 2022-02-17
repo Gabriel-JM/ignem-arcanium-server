@@ -2,19 +2,21 @@ import { Validator } from '@/validation/protocols'
 
 export class ValueInBetweenValidator implements Validator {
   constructor(
-    private readonly min: number,
-    private readonly max: number,
-    private readonly fieldName: string
+    private readonly fields: Record<string, [number, number]>
   ) {}
   
   validate(input: any): string[] {
-    const value = input[this.fieldName]
-    const isInBetween = value >= this.min && value <= this.max
-    
-    if (!isInBetween) {
-      return [`${this.fieldName} must be in between ${this.min} and ${this.max}`]
-    }
+    const invalidFields = Object.keys(this.fields).filter(field => {
+      const [min, max] = this.fields[field]
+      const value = input[field]
+      const isInBetween = value >= min && value <= max
 
-    return []    
+      return !isInBetween
+    })
+
+    return invalidFields.map(field => {
+      const [min, max] = this.fields[field]
+      return `${field} must be in between ${min} and ${max}`
+    })
   }
 }
