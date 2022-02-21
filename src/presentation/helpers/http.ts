@@ -11,3 +11,10 @@ export function noContent() {
     body: null
   }
 }
+
+export function badRequest(data: any) {
+  return {
+    statusCode: 400,
+    body: data
+  }
+}
