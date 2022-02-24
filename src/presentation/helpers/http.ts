@@ -18,3 +18,10 @@ export function badRequest(data: any) {
     body: data
   }
 }
+
+export function serverError(data: any) {
+  return {
+    statusCode: 500,
+    body: data
+  }
+}
