@@ -23,11 +23,13 @@ describe('Create torch registry validation', () => {
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
-          error: 'Validation Error',
-          details: [
-            'characterName is required',
-            'characterName must be of type string'
-          ]
+          error: {
+            name: 'Validation Error',
+            details: [
+              'characterName is required',
+              'characterName must be of type string'
+            ]
+          }
         })
       })
   })
@@ -49,11 +51,13 @@ describe('Create torch registry validation', () => {
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
-          error: 'Validation Error',
-          details: [
-            'torchCount is required',
-            'torchCount must be of type number'
-          ]
+          error: {
+            name: 'Validation Error',
+            details: [
+              'torchCount is required',
+              'torchCount must be of type number'
+            ]
+          }
         })
       })
   })
@@ -75,12 +79,14 @@ describe('Create torch registry validation', () => {
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
-          error: 'Validation Error',
-          details: [
-            'torchCharge is required',
-            'torchCharge must be of type number',
-            'torchCharge must be in between 0 and 6'
-          ]
+          error: {
+            name: 'Validation Error',
+            details: [
+              'torchCharge is required',
+              'torchCharge must be of type number',
+              'torchCharge must be in between 0 and 6'
+            ]
+          }
         })
       })
   })
@@ -103,10 +109,12 @@ describe('Create torch registry validation', () => {
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
-          error: 'Validation Error',
-          details: [
-            'torchCharge must be in between 0 and 6'
-          ]
+          error: {
+            name: 'Validation Error',
+            details: [
+              'torchCharge must be in between 0 and 6'
+            ]
+          }
         })
       })
   })
@@ -129,10 +137,12 @@ describe('Create torch registry validation', () => {
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
-          error: 'Validation Error',
-          details: [
-            'torchCharge must be in between 0 and 6'
-          ]
+          error: {
+            name: 'Validation Error',
+            details: [
+              'torchCharge must be in between 0 and 6'
+            ]
+          }
         })
       })
   })
@@ -154,11 +164,13 @@ describe('Create torch registry validation', () => {
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
-          error: 'Validation Error',
-          details: [
-            'isLit is required',
-            'isLit must be of type boolean'
-          ]
+          error: {
+            name: 'Validation Error',
+            details: [
+              'isLit is required',
+              'isLit must be of type boolean'
+            ]
+          }
         })
       })
   })

@@ -13,8 +13,10 @@ export class ValidationControllerDecorator implements Controller {
 
     if (validationErrors.length) {
       return badRequest({
-        error: 'Validation Error',
-        details: validationErrors
+        error: {
+          name: 'Validation Error',
+          details: validationErrors
+        }
       })
     }
 

@@ -1,6 +1,16 @@
 import { badRequest, serverError } from '@/presentation/helpers'
 import { Controller, HTTPResponse } from '@/presentation/protocols'
 
+interface ApplicationError extends Error {
+  type: string
+  details?: string[]
+}
+
+const errorTypesToResponseTypes: Record<string, (data: any) => HTTPResponse> = {
+  BusinessRule: badRequest,
+  unknown: serverError
+}
+
 export class ErrorHandlerControllerDecorator implements Controller {
   constructor(private readonly controller: Controller) {}
   
@@ -8,32 +18,22 @@ export class ErrorHandlerControllerDecorator implements Controller {
     try {
       return await this.controller.handle(params)
     } catch(err) {
-      const error = err as Error
+      const error = err as ApplicationError
       const errorClassName = error?.constructor
         ? error.constructor.name
         : 'UnknownError'
 
       console.error(`[${errorClassName}]`, err)
 
-      switch (errorClassName) {
-        case 'InvalidTorchAdditionValueError':
-          return badRequest({
-            error: 'InvalidTorchAdditionValue',
-            details: [error.message]
-          })
+      const responseType = errorTypesToResponseTypes[error.type]
+        ?? errorTypesToResponseTypes.unknown
 
-        case 'NoTorchToBeLitError':
-          return badRequest({
-            error: 'NoTorchToBeLit',
-            details: [error.message]
-          })
-
-        default:
-          return serverError({
-            error: 'InternalError',
-            details: ['Unknown error']
-          })
-      }
+      return responseType({
+        error: {
+          name: error.name,
+          details: error.details ?? [error.message]
+        }
+      })
     }
   }
 }
