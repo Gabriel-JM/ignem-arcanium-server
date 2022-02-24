@@ -1,4 +1,7 @@
 import Jest from '@jest/types'
+import dotenvSafe from 'dotenv-safe'
+
+dotenvSafe.config({ path: '.env.test' })
 
 export default <Jest.Config.InitialOptions> {
   rootDir: './',

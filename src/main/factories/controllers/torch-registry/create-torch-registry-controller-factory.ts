@@ -7,7 +7,10 @@ import { makeCreateTorchRegistryValidator } from '@/main/factories/validators'
 import { CreateTorchRegistryController } from '@/presentation/controllers'
 
 export function makeCreateTorchRegistryController() {
-  const knexHelper = new KnexHelper(connect())
+  const dbFileName = process.env.NODE_ENV === 'development'
+    ? 'ignem-arcanium.db'
+    : 'ignem-arcanium.test.db'
+  const knexHelper = new KnexHelper(connect(dbFileName))
   const torchRegistryRepository = new KnexTorchRegistryRepository(knexHelper)
   const uniqueIdGenerator = new NanoIdUniqueIdGenerator()
   const dbCreateTorchRegistry = new DbCreateTorchRegistry(

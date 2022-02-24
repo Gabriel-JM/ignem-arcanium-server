@@ -1,7 +1,7 @@
 import knex, { Knex } from 'knex'
 import path from 'path'
 
-export function connect(fileName = 'ignem-arcanium.db') {
+export function connect(fileName = 'ignem-arcanium.db') : Knex {
   return knex({
     client: 'better-sqlite3',
     connection: {

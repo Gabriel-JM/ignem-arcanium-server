@@ -4,3 +4,4 @@ coverage
 dist
 **/*.db
 .env*
+!.env.example
