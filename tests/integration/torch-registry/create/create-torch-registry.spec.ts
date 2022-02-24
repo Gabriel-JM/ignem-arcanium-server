@@ -17,6 +17,32 @@ describe('Create torch registry', () => {
     await knex.raw('delete from torch_registries;')
   })
 
+  it('should return a NoTorchToBeLitError response, if torchCount is 0', async () => {
+    await request(server).ws('/ws')
+      .expectJson(createConnectionValidation)
+      .sendJson({
+        event: 'create-torch-registry',
+        headers: {},
+        data: {
+          characterName: 'any_name',
+          torchCount: 0,
+          torchCharge: 0,
+          isLit: true
+        }
+      })
+      .expectJson(messageData => {
+        expect(messageData.event).toBe('create-torch-registry-response')
+        expect(messageData.statusCode).toBe(400)
+        expect(messageData.headers).toEqual({})
+        expect(messageData.data).toEqual({
+          error: {
+            name: 'NoTorchToBeLitError',
+            details: ['No torch to be lit']
+          }
+        })
+      })
+  })
+
   it('should successfully create the torch registry in database', async () => {
     await request(server).ws('/ws')
       .expectJson(createConnectionValidation)

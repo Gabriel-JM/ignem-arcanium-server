@@ -1,4 +1,5 @@
 export class InvalidTorchAdditionValueError extends Error {
+  name = 'InvalidTorchAdditionValueError'
   type = 'BusinessRule'
 
   constructor(readonly value: string) {

@@ -3,6 +3,7 @@ import { KnexTorchRegistryRepository } from '@/infra/db'
 import { connect, KnexHelper } from '@/infra/db/knex/knex-helper'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification'
 import { ValidationControllerDecorator } from '@/main/decorators'
+import { ErrorHandlerControllerDecorator } from '@/main/decorators/error-handler-controller-decorator'
 import { makeCreateTorchRegistryValidator } from '@/main/factories/validators'
 import { CreateTorchRegistryController } from '@/presentation/controllers'
 
@@ -20,8 +21,10 @@ export function makeCreateTorchRegistryController() {
 
   const controller = new CreateTorchRegistryController(dbCreateTorchRegistry)
 
-  return new ValidationControllerDecorator(
-    makeCreateTorchRegistryValidator(),
-    controller
+  return new ErrorHandlerControllerDecorator(
+    new ValidationControllerDecorator(
+      makeCreateTorchRegistryValidator(),
+      controller
+    )
   )
 }
