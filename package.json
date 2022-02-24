@@ -8,7 +8,7 @@
     "dev": "npm run build && node ./dist/src/main/index.js",
     "build": "rimraf dist && tsc -p ./tsconfig-build.json",
     "build:watch": "tsc -p ./tsconfig-build.json --watch",
-    "test": "jest --runInBand --no-cache",
+    "test": "jest --runInBand --no-cache --forceExit",
     "test:cov": "npm test -- --coverage",
     "test:unit": "npm test -- --watch --roots ./tests/unit --roots ./src",
     "test:int": "npm test -- --watch --roots ./tests/integration --roots ./src"

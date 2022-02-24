@@ -15,6 +15,7 @@ describe('Create torch registry', () => {
 
   afterAll(async () => {
     await knex.raw('delete from torch_registries;')
+    await knex.destroy()
   })
 
   it('should return a NoTorchToBeLitError response, if torchCount is 0', async () => {
@@ -57,11 +58,6 @@ describe('Create torch registry', () => {
         }
       })
       .expectJson(messageData => {
-        expect(messageData.event).toBe('create-torch-registry-response')
-        expect(messageData.statusCode).toBe(200)
-        expect(messageData.headers).toEqual({})
-        expect(messageData.data).toHaveProperty('id')
-
         knex
           .select()
           .from('torch_registries')
@@ -75,6 +71,11 @@ describe('Create torch registry', () => {
               is_lit: 0
             })
           })
+
+        expect(messageData.event).toBe('create-torch-registry-response')
+        expect(messageData.statusCode).toBe(200)
+        expect(messageData.headers).toEqual({})
+        expect(messageData.data).toHaveProperty('id')
       })
   })
 })

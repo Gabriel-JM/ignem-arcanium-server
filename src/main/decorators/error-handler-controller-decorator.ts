@@ -23,7 +23,7 @@ export class ErrorHandlerControllerDecorator implements Controller {
         ? error.constructor.name
         : 'UnknownError'
 
-      console.error(`[${errorClassName}]`, err)
+      process.env.SHOW_LOGS === 'true' && console.error(`[${errorClassName}]`, err)
 
       const responseType = errorTypesToResponseTypes[error.type]
         ?? errorTypesToResponseTypes.unknown
