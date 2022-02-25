@@ -1,7 +1,7 @@
 import { DbConsumeAllTorchesCharge } from '@/data/usecases'
 import { KnexTorchRegistryRepository } from '@/infra/db'
 import { connect, KnexHelper } from '@/infra/db/knex/knex-helper'
-import { ErrorHandlerControllerDecorator } from '@/main/decorators/error-handler-controller-decorator'
+import { ErrorHandlerControllerDecorator } from '@/main/decorators'
 import { ConsumeAllTorchesChargeController } from '@/presentation/controllers'
 
 export function makeConsumeAllTorchesController() {
@@ -17,7 +17,5 @@ export function makeConsumeAllTorchesController() {
 
   const controller = new ConsumeAllTorchesChargeController(dbConsumeAllTorches)
 
-  return new ErrorHandlerControllerDecorator(
-    controller
-  )
+  return new ErrorHandlerControllerDecorator(controller)
 }

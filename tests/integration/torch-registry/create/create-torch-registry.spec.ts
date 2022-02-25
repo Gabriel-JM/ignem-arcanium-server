@@ -3,9 +3,9 @@ import { server } from '@/main/server/app'
 import { createConnectionValidation } from '@/tests/integration/connection/create-connection'
 import request from 'superwstest'
 
-const knex = connect('ignem-arcanium.test.db')
-
 describe('Create torch registry', () => {
+  const knex = connect('ignem-arcanium.test.db')
+  
   beforeAll(async () => {
     await knex.migrate.latest()
   })
