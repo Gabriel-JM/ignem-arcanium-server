@@ -1,5 +1,5 @@
 import { adaptEvent } from '@/main/adapters'
-import { makeConsumeAllTorchesController, makeCreateTorchRegistryController } from '@/main/factories/controllers'
+import { makeConsumeAllTorchesController, makeCreateTorchRegistryController, makeFindAllTorchRegistriesController } from '@/main/factories/controllers'
 import { Router } from '@/main/server/router'
 
 export function torchRegistryRoutes(router: Router) {
@@ -11,5 +11,10 @@ export function torchRegistryRoutes(router: Router) {
   router.defineRoute('consume-all-torches', adaptEvent(
     makeConsumeAllTorchesController(),
     'consume-all-torches-response'
+  ))
+
+  router.defineRoute('find-all-torch-registries', adaptEvent(
+    makeFindAllTorchRegistriesController(),
+    'find-all-torch-registries-response'
   ))
 }
