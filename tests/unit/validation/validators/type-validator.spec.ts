@@ -1,6 +1,6 @@
 import { TypeValidator } from '@/validation/validators/type-validator'
 
-function makeSut(fields: Record<string, string>) {
+function makeSut(fields: Record<string, string | string[]>) {
   const sut = new TypeValidator(fields)
 
   return sut
@@ -51,5 +51,21 @@ describe('TypeValidator', () => {
     })
 
     expect(response).toEqual([])
+  })
+
+  it('should validate one of types passed as array', () => {
+    const sut = makeSut({
+      value1: ['string', 'number'],
+      value2: ['number', 'boolean']
+    })
+
+    const response = sut.validate({
+      value1: 10,
+      value2: 'wrong-value'
+    })
+
+    expect(response).toEqual([
+      'value2 must be one of types: number, boolean'
+    ])
   })
 })
