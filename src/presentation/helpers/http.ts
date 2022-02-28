@@ -19,6 +19,13 @@ export function badRequest(data: any) {
   }
 }
 
+export function notFound(data: any) {
+  return {
+    statusCode: 404,
+    body: data
+  }
+}
+
 export function serverError(data: any) {
   return {
     statusCode: 500,

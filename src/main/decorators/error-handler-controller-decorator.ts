@@ -1,4 +1,4 @@
-import { badRequest, serverError } from '@/presentation/helpers'
+import { badRequest, notFound, serverError } from '@/presentation/helpers'
 import { Controller, HTTPResponse } from '@/presentation/protocols'
 
 interface ApplicationError extends Error {
@@ -7,6 +7,7 @@ interface ApplicationError extends Error {
 }
 
 const errorTypesToResponseTypes: Record<string, (data: any) => HTTPResponse> = {
+  Search: notFound,
   BusinessRule: badRequest,
   unknown: serverError
 }
