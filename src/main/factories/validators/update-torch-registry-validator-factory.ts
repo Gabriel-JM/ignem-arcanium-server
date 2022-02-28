@@ -18,13 +18,13 @@ export function makeUpdateTorchRegistryValidator() {
     }),
     new CustomValidator({
       torchCharge: {
-        message: 'torchCharge must be between 0 and 6',
+        message: 'torchCharge must be in between 0 and 6',
         validationFn(value) {
           if (typeof value === 'string') {
             value = Number(value.substring(1))
           }
 
-          return value >= 0 || value <= 6
+          return value >= 0 && value <= 6
         }
       }
     })
