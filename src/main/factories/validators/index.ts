@@ -1,1 +1,1 @@
-export * from './create-torch-registry/create-torch-registry-validator-factory'
+export * from './create-torch-registry-validator-factory'
