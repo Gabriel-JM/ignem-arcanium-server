@@ -55,7 +55,6 @@ describe('Update torch registry validation', () => {
           error: {
             name: 'Validation Error',
             details: [
-              'torchCount is required',
               'torchCount must be one of types: string, number'
             ]
           }
@@ -83,7 +82,6 @@ describe('Update torch registry validation', () => {
           error: {
             name: 'Validation Error',
             details: [
-              'torchCharge is required',
               'torchCharge must be one of types: string, number',
               'torchCharge must be in between 0 and 6'
             ]
@@ -224,7 +222,6 @@ describe('Update torch registry validation', () => {
           error: {
             name: 'Validation Error',
             details: [
-              'isLit is required',
               'isLit must be of type boolean'
             ]
           }

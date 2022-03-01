@@ -30,7 +30,7 @@ describe('Update torch registry', () => {
           isLit: false
         }
       })
-      .expectJson((messageData) => {
+      .expectJson((messageData) => {        
         expect(messageData.event).toBe('update-torch-registry-response')
         expect(messageData.statusCode).toBe(404)
         expect(messageData.headers).toEqual({})
