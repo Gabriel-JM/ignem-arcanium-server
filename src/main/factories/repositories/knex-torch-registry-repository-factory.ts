@@ -1,11 +1,9 @@
 import { KnexTorchRegistryRepository } from '@/infra/db'
-import { connect, KnexHelper } from '@/infra/db/knex/knex-helper'
+import { KnexHelper } from '@/infra/db/knex/knex-helper'
+import { knexConnection } from '@/main/factories/repositories'
 
 export function makeKnexTorchRegistryRepository() {
-  const dbFileName = process.env.NODE_ENV === 'development'
-    ? 'ignem-arcanium.db'
-    : 'ignem-arcanium.test.db'
-  const knexHelper = new KnexHelper(connect(dbFileName))
+  const knexHelper = new KnexHelper(knexConnection)
   const torchRegistryRepository = new KnexTorchRegistryRepository(knexHelper)
 
   return torchRegistryRepository
