@@ -1,21 +1,20 @@
 import { connect } from '@/infra/db/knex/knex-helper'
 import { server } from '@/main/server/app'
 import { createConnectionValidation } from '@/tests/integration/connection/create-connection'
+import { testKnex } from '@/tests/integration/test-db-connection/knex'
 import request from 'superwstest'
 
 describe('Create torch registry', () => {
-  const knex = connect('ignem-arcanium.test.db')
-  
   beforeAll(async () => {
-    await knex.migrate.latest()
+    await testKnex.migrate.latest()
   })
 
   beforeEach((done) => void server.listen(0, 'localhost', done))
   afterEach((done) => void server.close(done))
 
   afterAll(async () => {
-    await knex.raw('delete from torch_registries;')
-    await knex.destroy()
+    await testKnex.raw('delete from torch_registries;')
+    await testKnex.destroy()
   })
 
   it('should return a NoTorchToBeLitError response, if torchCount is 0', async () => {
@@ -58,7 +57,7 @@ describe('Create torch registry', () => {
         }
       })
       .expectJson(messageData => {
-        knex
+        testKnex
           .select()
           .from('torch_registries')
           .where({ id: messageData.data.id })

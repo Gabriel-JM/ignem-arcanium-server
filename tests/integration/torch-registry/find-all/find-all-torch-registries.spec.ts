@@ -1,6 +1,6 @@
-import { connect } from '@/infra/db/knex/knex-helper'
 import { server } from '@/main/server/app'
 import { createConnectionValidation } from '@/tests/integration/connection/create-connection'
+import { testKnex } from '@/tests/integration/test-db-connection/knex'
 import crypto from 'crypto'
 import request from 'superwstest'
 
@@ -21,18 +21,16 @@ const mapFields = (dbData: DbTorchRegistry) => ({
 })
 
 describe('Find all torch registries', () => {
-  const knex = connect('ignem-arcanium.test.db')
-  
   beforeAll(async () => {
-    await knex.migrate.latest()
+    await testKnex.migrate.latest()
   })
 
   beforeEach((done) => void server.listen(0, 'localhost', done))
   afterEach((done) => void server.close(done))
 
   afterAll(async () => {
-    await knex.raw('delete from torch_registries;')
-    await knex.destroy()
+    await testKnex.raw('delete from torch_registries;')
+    await testKnex.destroy()
   })
 
   it('should return all torch registries', async () => {
@@ -60,7 +58,7 @@ describe('Find all torch registries', () => {
       }
     ]
     
-    await knex.table('torch_registries').insert(torchesData)
+    await testKnex.table('torch_registries').insert(torchesData)
 
     await request(server).ws('/ws')
       .expectJson(createConnectionValidation)

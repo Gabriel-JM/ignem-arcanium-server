@@ -2,21 +2,19 @@ import { server } from '@/main/server/app'
 import { createConnectionValidation } from '@/tests/integration/connection/create-connection'
 import request from 'superwstest'
 import { randomUUID } from 'crypto'
-import { connect } from '@/infra/db/knex/knex-helper'
+import { testKnex } from '@/tests/integration/test-db-connection/knex'
 
-describe('Update torch registry', () => {
-  const knex = connect('ignem-arcanium.test.db')
-  
+describe('Update torch registry', () => {  
   beforeAll(async () => {
-    await knex.migrate.latest()
+    await testKnex.migrate.latest()
   })
 
   beforeEach((done) => void server.listen(0, 'localhost', done))
   afterEach((done) => void server.close(done))
 
   afterAll(async () => {
-    await knex.raw('delete from torch_registries;')
-    await knex.destroy()
+    await testKnex.raw('delete from torch_registries;')
+    await testKnex.destroy()
   })
 
   it('should return a TorchRegistryNotFoundError if the provided id is not found', async () => {
