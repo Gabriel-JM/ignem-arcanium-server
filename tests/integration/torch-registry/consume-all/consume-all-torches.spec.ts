@@ -25,21 +25,21 @@ describe('Consume all torches', () => {
         character_name: 'any_character_name',
         torch_count: 2,
         torch_charge: 1,
-        is_lit: 1
+        is_lit: true
       },
       {
         id: crypto.randomUUID(),
         character_name: 'any_character_name',
         torch_count: 1,
         torch_charge: 3,
-        is_lit: 1
+        is_lit: true
       },
       {
         id: crypto.randomUUID(),
         character_name: 'any_character_name',
         torch_count: 1,
         torch_charge: 3,
-        is_lit: 0
+        is_lit: false
       }
     ]
     

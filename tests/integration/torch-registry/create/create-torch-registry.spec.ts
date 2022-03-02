@@ -1,4 +1,3 @@
-import { connect } from '@/infra/db/knex/knex-helper'
 import { server } from '@/main/server/app'
 import { createConnectionValidation } from '@/tests/integration/connection/create-connection'
 import { testKnex } from '@/tests/integration/test-db-connection/knex'
@@ -67,7 +66,7 @@ describe('Create torch registry', () => {
               character_name: 'any_name',
               torch_count: 1,
               torch_charge: 3,
-              is_lit: 0
+              is_lit: false
             })
           })
 
