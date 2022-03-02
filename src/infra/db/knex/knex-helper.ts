@@ -1,13 +1,12 @@
 import knex, { Knex } from 'knex'
 import path from 'path'
 
-export function connect(fileName = 'ignem-arcanium.db') : Knex {
+export function connect() : Knex {
+  const connection = process.env.DB_URL
+
   return knex({
-    client: 'better-sqlite3',
-    connection: {
-      filename: path.resolve('database', fileName),
-      charset: 'utf8'
-    },
+    client: 'pg',
+    connection,
     migrations: {
       extension: 'ts',
       directory: path.resolve('dist', 'database', 'migrations')
