@@ -5,6 +5,7 @@
   "main": "dist/src/main/index.js",
   "private": true,
   "scripts": {
+    "start": "node ./dist/src/main/index.js",
     "predev": "npm run build",
     "dev": "node ./dist/src/main/index.js",
     "build": "rimraf dist && tsc -p ./tsconfig-build.json",
