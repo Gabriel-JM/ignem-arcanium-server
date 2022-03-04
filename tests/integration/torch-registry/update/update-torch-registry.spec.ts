@@ -4,7 +4,7 @@ import request from 'superwstest'
 import { randomUUID } from 'crypto'
 import { testKnex } from '@/tests/integration/test-db-connection/knex'
 
-describe('Update torch registry', () => {  
+describe('Update torch registry', () => {
   beforeAll(async () => {
     await testKnex.migrate.latest()
   })
@@ -30,7 +30,7 @@ describe('Update torch registry', () => {
           isLit: false
         }
       })
-      .expectJson((messageData) => {        
+      .expectJson((messageData) => {
         expect(messageData.event).toBe('update-torch-registry-response')
         expect(messageData.statusCode).toBe(404)
         expect(messageData.headers).toEqual({})
@@ -39,6 +39,44 @@ describe('Update torch registry', () => {
             name: 'TorchRegistryNotFoundError',
             details: [
               'Torch registry not found'
+            ]
+          }
+        })
+      })
+  })
+
+  it('should return an InvalidTorchAdditionValueError if an invalid torchCount or torchCharge is provided', async () => {
+    const torchRegistryId = randomUUID()
+
+    await testKnex.table('torch_registries').insert({
+      id: torchRegistryId,
+      character_name: 'any_name',
+      torch_count: 1,
+      torch_charge: 3,
+      is_lit: true
+    })
+
+    await request(server).ws('/ws')
+      .expectJson(createConnectionValidation)
+      .sendJson({
+        event: 'update-torch-registry',
+        headers: {},
+        data: {
+          id: torchRegistryId,
+          torchCount: '*1',
+          torchCharge: '+1',
+          isLit: false
+        }
+      })
+      .expectJson((messageData) => {
+        expect(messageData.event).toBe('update-torch-registry-response')
+        expect(messageData.statusCode).toBe(400)
+        expect(messageData.headers).toEqual({})
+        expect(messageData.data).toEqual({
+          error: {
+            name: 'InvalidTorchAdditionValueError',
+            details: [
+              'Invalid value passed to torch count or charge addition. value: *1'
             ]
           }
         })

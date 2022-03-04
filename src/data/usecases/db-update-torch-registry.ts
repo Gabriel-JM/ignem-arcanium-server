@@ -9,16 +9,23 @@ import { UpdateTorchRegistry, UpdateTorchRegistryParams } from '@/domain/usecase
 
 export class DbUpdateTorchRegistry implements UpdateTorchRegistry {
   #torchAdditionStringFormat = /^(\+|\-)\d{1,2}$/
-  
+
   constructor(
     private readonly updateTorchRegistryRepository: UpdateTorchRegistryRepository,
     private readonly findTorchRegistryByIdRepository: FindTorchRegistryByIdRepository
-  ) {}
-  
+  ) { }
+
   async update(params: UpdateTorchRegistryParams): Promise<void> {
     let torchData = { ...params }
     const isTorchCountString = typeof params.torchCount === 'string'
     const isTorchChargeString = typeof params.torchCharge === 'string'
+
+    const repositoryTorchData = await this.findTorchRegistryByIdRepository
+      .findById(params.id)
+
+    if (!repositoryTorchData) {
+      throw new TorchRegistryNotFoundError({ id: params.id })
+    }
 
     if (isTorchChargeString || isTorchCountString) {
       const repositoryTorchData = await this.findTorchRegistryByIdRepository
@@ -57,7 +64,7 @@ export class DbUpdateTorchRegistry implements UpdateTorchRegistry {
     const torchCharge = torchData.torchCharge
       ? Number(torchData.torchCharge)
       : undefined
-  
+
     await this.updateTorchRegistryRepository.update({
       id: torchData.id,
       torchCount,
