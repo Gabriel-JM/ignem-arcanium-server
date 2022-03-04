@@ -82,4 +82,90 @@ describe('Update torch registry', () => {
         })
       })
   })
+  
+  it('should add the incomming value to the existing one if torchCount and torchCharge are strings', async () => {
+    const torchRegistryId = randomUUID()
+
+    await testKnex.table('torch_registries').insert({
+      id: torchRegistryId,
+      character_name: 'any_name',
+      torch_count: 1,
+      torch_charge: 3,
+      is_lit: true
+    })
+
+    await request(server).ws('/ws')
+      .expectJson(createConnectionValidation)
+      .sendJson({
+        event: 'update-torch-registry',
+        headers: {},
+        data: {
+          id: torchRegistryId,
+          torchCount: '+2',
+          torchCharge: '+1',
+          isLit: false
+        }
+      })
+      .expectJson((messageData) => {
+        testKnex.select().from('torch_registries').then(console.log)
+
+        testKnex.select().from('torch_registries').where({ id: torchRegistryId }).then(([torchRegistry]) => {
+          expect(torchRegistry).toEqual({
+            id: torchRegistryId,
+            character_name: 'any_name',
+            torch_count: 3,
+            torch_charge: 4,
+            is_lit: true
+          })
+        })
+
+        expect(messageData.event).toBe('update-torch-registry-response')
+        expect(messageData.statusCode).toBe(204)
+        expect(messageData.headers).toEqual({})
+        expect(messageData.data).toBeNull()
+      })
+  })
+
+  it('should replace the existing value to the incomming one if torchCount and torchCharge are numbers', async () => {
+    const torchRegistryId = randomUUID()
+
+    await testKnex.table('torch_registries').insert({
+      id: torchRegistryId,
+      character_name: 'any_name',
+      torch_count: 1,
+      torch_charge: 3,
+      is_lit: true
+    })
+
+    await request(server).ws('/ws')
+      .expectJson(createConnectionValidation)
+      .sendJson({
+        event: 'update-torch-registry',
+        headers: {},
+        data: {
+          id: torchRegistryId,
+          torchCount: 2,
+          torchCharge: 6,
+          isLit: false
+        }
+      })
+      .expectJson((messageData) => {
+        testKnex.select().from('torch_registries').then(console.log)
+
+        testKnex.select().from('torch_registries').where({ id: torchRegistryId }).then(([torchRegistry]) => {
+          expect(torchRegistry).toEqual({
+            id: torchRegistryId,
+            character_name: 'any_name',
+            torch_count: 2,
+            torch_charge: 6,
+            is_lit: true
+          })
+        })
+
+        expect(messageData.event).toBe('update-torch-registry-response')
+        expect(messageData.statusCode).toBe(204)
+        expect(messageData.headers).toEqual({})
+        expect(messageData.data).toBeNull()
+      })
+  })
 })
