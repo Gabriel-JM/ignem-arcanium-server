@@ -23,6 +23,16 @@ services:
     ports:
       - 5432:5432
 
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@email.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - 4500:80
+    depends_on:
+      - pg
+
   pg-tests:
     image: postgres
     environment:
