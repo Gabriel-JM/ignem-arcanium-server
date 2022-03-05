@@ -5,7 +5,8 @@ import { RouteContext, router } from '@/main/server/router'
 import { defineRoutes } from '@/main/config/routes'
 
 const server = createServer((_req, res) => {
-  res.end('Hello from HTTP!')
+  res.statusCode = 404
+  res.end('Not Found!')
 })
 
 const webSocketServer = new WebSocketServer({ httpServer: server })
