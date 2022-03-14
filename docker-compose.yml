@@ -4,8 +4,8 @@ services:
     container_name: 'ignem-arcanium'
     user: 1000:1000
     working_dir: /app
-    expose:
-      - 8000
+    ports:
+      - 8000:8000
     depends_on:
       - pg
     volumes:
