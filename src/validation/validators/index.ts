@@ -1,3 +1,5 @@
 export * from './required-fields-validator'
 export * from './value-in-between-validator'
 export * from './type-validator'
+export * from './custom-validator'
+export * from './regex-validator'
