@@ -63,4 +63,12 @@ describe('DbCreateAccount', () => {
       password: textHasherSpy.result
     })
   })
+
+  it('should return id on success', async () => {
+    const { sut, uniqueIdGeneratorSpy } = makeSut()
+
+    const response = await sut.create(dummyCreateParams)
+
+    expect(response).toBe(uniqueIdGeneratorSpy.result)
+  })
 })

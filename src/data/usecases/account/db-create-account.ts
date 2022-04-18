@@ -22,6 +22,6 @@ export class DbCreateAccount implements CreateAccount {
       password: hashedPassword
     })
 
-    return ''
+    return id
   }
 }
