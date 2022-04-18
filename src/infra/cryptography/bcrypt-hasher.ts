@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import { TextHasher } from '@/data/protocols/cryptography'
 
-export class BcryptAdapter implements TextHasher {
+export class BcryptHasher implements TextHasher {
   constructor (private readonly salt: number) {}
 
   async hash (value: string): Promise<string> {
