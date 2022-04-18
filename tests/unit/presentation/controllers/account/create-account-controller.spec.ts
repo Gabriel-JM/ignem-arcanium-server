@@ -1,4 +1,5 @@
 import { CreateAccountController } from '@/presentation/controllers'
+import { ok } from '@/presentation/helpers'
 import { mockCreateAccount } from '@/tests/unit/helpers'
 
 function makeSut() {
@@ -28,5 +29,13 @@ describe('CreateAccountController', () => {
       email: dummyCreateAccount.email,
       password: dummyCreateAccount.password
     })
+  })
+
+  it('should return the account id on success', async () => {
+    const { sut, createAccountSpy } = makeSut()
+
+    const response = await sut.handle(dummyCreateAccount)
+
+    expect(response).toEqual(ok({ accountId: createAccountSpy.result }))
   })
 })
