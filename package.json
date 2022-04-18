@@ -29,6 +29,7 @@
     "@": "dist/src"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/dotenv-safe": "^8.1.2",
     "@types/jest": "^27.0.3",
     "@types/websocket": "^1.0.5",

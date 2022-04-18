@@ -13,7 +13,7 @@ export class DbCreateAccount implements CreateAccount {
   async create(params: CreateAccountParams): Promise<string> {
     const id = this.uniqueIdGenerator.generate()
 
-    const hashedPassword = this.textHasher.hash(params.password)
+    const hashedPassword = await this.textHasher.hash(params.password)
 
     await this.createAccountRepository.create({
       id,

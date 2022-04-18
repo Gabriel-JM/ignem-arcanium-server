@@ -1,3 +1,3 @@
 export interface TextHasher {
-  hash(text: string): string
+  hash(text: string): Promise<string>
 }
