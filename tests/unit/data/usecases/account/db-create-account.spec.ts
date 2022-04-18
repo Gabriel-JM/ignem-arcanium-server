@@ -1,15 +1,25 @@
 import { DbCreateAccount } from '@/data/usecases'
-import { mockTextHasher, mockUniqueIdGenerator } from '@/tests/unit/data/helpers'
+import {
+  mockCreateAccountRepository,
+  mockTextHasher,
+  mockUniqueIdGenerator
+} from '@/tests/unit/data/helpers'
 
 function makeSut() {
   const uniqueIdGeneratorSpy = mockUniqueIdGenerator()
   const textHasherSpy = mockTextHasher()
-  const sut = new DbCreateAccount(uniqueIdGeneratorSpy, textHasherSpy)
+  const createAccountRepositorySpy = mockCreateAccountRepository()
+  const sut = new DbCreateAccount(
+    uniqueIdGeneratorSpy,
+    textHasherSpy,
+    createAccountRepositorySpy
+  )
 
   return {
     sut,
     uniqueIdGeneratorSpy,
-    textHasherSpy
+    textHasherSpy,
+    createAccountRepositorySpy
   }
 }
 
@@ -34,5 +44,23 @@ describe('DbCreateAccount', () => {
     await sut.create(dummyCreateParams)
 
     expect(textHasherSpy.hash).toHaveBeenCalledWith(dummyCreateParams.password)
+  })
+
+  it('should call CreateAccountRepository with correct values', async () => {
+    const {
+      sut,
+      uniqueIdGeneratorSpy,
+      textHasherSpy,
+      createAccountRepositorySpy
+    } = makeSut()
+
+    await sut.create(dummyCreateParams)
+
+    expect(createAccountRepositorySpy.create).toHaveBeenCalledWith({
+      id: uniqueIdGeneratorSpy.result,
+      name: dummyCreateParams.name,
+      email: dummyCreateParams.email,
+      password: textHasherSpy.result
+    })
   })
 })
