@@ -3,7 +3,6 @@ import {
   CreateTorchRegistryRepositoryParams,
   FindAllTorchRegistriesRepository,
   FindTorchRegistryByIdRepository,
-  FindTorchRegistryByIdRepositoryResult,
   UpdateManyTorchRegistriesRepository,
   UpdateManyTorchRegistriesRepositoryParams,
   UpdateTorchRegistryRepository,
