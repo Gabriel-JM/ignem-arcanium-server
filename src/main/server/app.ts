@@ -23,7 +23,7 @@ webSocketServer.on('request', request => {
     if (message.type === 'utf8') {
       const messageData = JSON.parse(message.utf8Data) as RouteContext
 
-      const handler = router.getHandler(messageData.event)
+      const handler = router.getWsHandler(messageData.event)
 
       await handler?.(messageData, connection)
     }

@@ -11,18 +11,18 @@ export interface RouteContext {
 export type RouteHandler = (ctx: RouteContext, conn: connection) => Promise<void>
 
 export interface Router {
-  defineRoute(eventName: string, handler: RouteHandler): void
-  getHandler(event: string): RouteHandler | undefined
+  wsEvent(eventName: string, handler: RouteHandler): void
+  getWsHandler(event: string): RouteHandler | undefined
 }
 
 class WebSocketRouter implements Router {
   routeEvents = new Map<string, RouteHandler>()
 
-  defineRoute(eventName: string, handler: RouteHandler) {
+  wsEvent(eventName: string, handler: RouteHandler) {
     this.routeEvents.set(eventName, handler)
   }
 
-  getHandler(event: string) {
+  getWsHandler(event: string) {
     return this.routeEvents.get(event)
   }
 }
