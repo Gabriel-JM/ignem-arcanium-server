@@ -3,8 +3,30 @@ import { server as WebSocketServer } from 'websocket'
 import crypto from 'crypto'
 import { RouteContext, router } from '@/main/server/router'
 import { defineRoutes } from '@/main/config/routes'
+import { getRequestData } from '@/main/server/get-request-data'
 
-const server = createServer((_req, res) => {
+const server = createServer(async (req, res) => {
+  const { method = 'GET', url } = req
+
+  const { pathname, searchParams } = new URL(`http://any-host.io${url}`)
+
+  const queryParams = Object.fromEntries(searchParams.entries())
+
+  const body = await getRequestData(req)
+
+  const { handler, params } = router.getHttpHandler(method.toLowerCase(), pathname)
+
+  if (handler) {
+    const request = {
+      headers: req.headers,
+      params,
+      queryParams,
+      body
+    }
+
+    return handler(request, res)
+  }
+
   res.statusCode = 404
   res.end('Not Found!')
 })
