@@ -1,20 +1,10 @@
 import { server } from '@/main/server/app'
-import { createConnectionValidation } from '@/tests/integration/connection/create-connection'
+import { createConnectionValidation, initServerAndDb } from '@/tests/integration/connection'
 import { testKnex } from '@/tests/integration/test-db-connection/knex'
 import request from 'superwstest'
 
 describe('Create torch registry', () => {
-  beforeAll(async () => {
-    await testKnex.migrate.latest()
-  })
-
-  beforeEach((done) => void server.listen(0, 'localhost', done))
-  afterEach((done) => void server.close(done))
-
-  afterAll(async () => {
-    await testKnex.raw('delete from torch_registries;')
-    await testKnex.destroy()
-  })
+  initServerAndDb(server, testKnex, 'torch_registries')
 
   it('should return a NoTorchToBeLitError response, if torchCount is 0', async () => {
     await request(server).ws('/ws')

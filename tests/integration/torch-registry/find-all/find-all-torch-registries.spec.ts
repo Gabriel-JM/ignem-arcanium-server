@@ -1,5 +1,5 @@
 import { server } from '@/main/server/app'
-import { createConnectionValidation } from '@/tests/integration/connection/create-connection'
+import { createConnectionValidation, initServerAndDb } from '@/tests/integration/connection'
 import { testKnex } from '@/tests/integration/test-db-connection/knex'
 import crypto from 'crypto'
 import request from 'superwstest'
@@ -21,17 +21,7 @@ const mapFields = (dbData: DbTorchRegistry) => ({
 })
 
 describe('Find all torch registries', () => {
-  beforeAll(async () => {
-    await testKnex.migrate.latest()
-  })
-
-  beforeEach((done) => void server.listen(0, 'localhost', done))
-  afterEach((done) => void server.close(done))
-
-  afterAll(async () => {
-    await testKnex.raw('delete from torch_registries;')
-    await testKnex.destroy()
-  })
+  initServerAndDb(server, testKnex, 'torch_registries')
 
   it('should return all torch registries', async () => {
     const torchesData = [

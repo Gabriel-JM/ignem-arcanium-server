@@ -1,6 +1,6 @@
 import request from 'superwstest'
 import { server } from '@/main/server/app'
-import { createConnectionValidation } from '@/tests/integration/connection/create-connection'
+import { createConnectionValidation } from '@/tests/integration/connection'
 import { randomUUID } from 'crypto'
 
 describe('Update torch registry validation', () => {

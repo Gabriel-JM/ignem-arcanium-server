@@ -1,21 +1,11 @@
 import { server } from '@/main/server/app'
-import { createConnectionValidation } from '@/tests/integration/connection/create-connection'
+import { createConnectionValidation, initServerAndDb } from '@/tests/integration/connection'
 import request from 'superwstest'
 import { randomUUID } from 'crypto'
 import { testKnex } from '@/tests/integration/test-db-connection/knex'
 
 describe('Update torch registry', () => {
-  beforeAll(async () => {
-    await testKnex.migrate.latest()
-  })
-
-  beforeEach((done) => void server.listen(0, 'localhost', done))
-  afterEach((done) => void server.close(done))
-
-  afterAll(async () => {
-    await testKnex.raw('delete from torch_registries;')
-    await testKnex.destroy()
-  })
+  initServerAndDb(server, testKnex, 'torch_registries')
 
   it('should return a TorchRegistryNotFoundError if the provided id is not found', async () => {
     await request(server).ws('/ws')
@@ -107,8 +97,6 @@ describe('Update torch registry', () => {
         }
       })
       .expectJson((messageData) => {
-        testKnex.select().from('torch_registries').then(console.log)
-
         testKnex.select().from('torch_registries').where({ id: torchRegistryId }).then(([torchRegistry]) => {
           expect(torchRegistry).toEqual({
             id: torchRegistryId,
@@ -150,8 +138,6 @@ describe('Update torch registry', () => {
         }
       })
       .expectJson((messageData) => {
-        testKnex.select().from('torch_registries').then(console.log)
-
         testKnex.select().from('torch_registries').where({ id: torchRegistryId }).then(([torchRegistry]) => {
           expect(torchRegistry).toEqual({
             id: torchRegistryId,
