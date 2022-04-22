@@ -1,5 +1,5 @@
 import { CreateAccount } from '@/domain/usecases'
-import { ok } from '@/presentation/helpers'
+import { created } from '@/presentation/helpers'
 import { Controller, HTTPResponse } from '@/presentation/protocols'
 
 export class CreateAccountController implements Controller {
@@ -12,6 +12,6 @@ export class CreateAccountController implements Controller {
       password: params.password
     })
     
-    return ok({ accountId })
+    return created({ accountId })
   }
 }

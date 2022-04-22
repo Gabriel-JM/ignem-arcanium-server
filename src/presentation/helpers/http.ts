@@ -5,6 +5,13 @@ export function ok(data: any) {
   }
 }
 
+export function created(data: any) {
+  return  {
+    statusCode: 201,
+    body: data
+  }
+}
+
 export function noContent() {
   return {
     statusCode: 204,
