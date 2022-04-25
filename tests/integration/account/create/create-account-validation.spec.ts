@@ -1,33 +1,39 @@
 import { server } from '@/main/server/app'
-import { httpRequest } from '@/tests/integration/http'
+import chai from 'chai'
+import chaiHttp from 'chai-http'
+import { testKnex } from '@/tests/integration/test-db-connection/knex'
 
 describe('Create account validation', () => {
   beforeAll(() => {
-    server.listen(3333)
+    chai.use(chaiHttp)
   })
 
-  afterAll(() => {
+  afterAll(async () => {
+    await testKnex.raw('delete from accounts')
+    await testKnex.destroy()
     server.close()
   })
 
   test('name', async () => {
-    const response = await httpRequest({
-      method: 'post',
-      url: 'http://localhost:3333/accounts',
-      body: {
+    chai.request(server)
+      .post('/accounts')
+      .send({
         name: 12,
         email: 'any@email.com',
         password: 'any_password'
-      }
-    })
-
-    expect(response.statusCode).toBe(400)
-    expect(response.body).toEqual({
-      error: {
-        details: [
-          'name must be a string'
-        ]
-      }
-    })
+      })
+      .then((response) => {
+        const body = JSON.parse(response.text)
+        
+        expect(response.status).toBe(400)
+        expect(body).toEqual({
+          error: {
+            name: 'Validation Error',
+            details: [
+              'name must be of type string'
+            ]
+          }
+        })
+      })
   })
 })

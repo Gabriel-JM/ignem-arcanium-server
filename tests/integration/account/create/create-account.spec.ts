@@ -1,19 +1,32 @@
-import request from 'superwstest'
+import chai from 'chai'
+import chaiHttp from 'chai-http'
 import { server } from '@/main/server/app'
-import { initServerAndDb } from '@/tests/integration/connection'
 import { testKnex } from '@/tests/integration/test-db-connection/knex'
 
 describe('Create account', () => {
-  initServerAndDb(server, testKnex, 'accounts')
+  beforeAll(() => {
+    chai.use(chaiHttp)
+  })
+
+  afterAll(async () => {
+    await testKnex.raw('delete from accounts')
+    await testKnex.destroy()
+    server.close()
+  })
 
   it('should return the accountId of created account', async () => {
-    await request(server)
+    chai.request(server)
       .post('/accounts')
       .send({
         name: 'User',
         email: 'user@email.com',
         password: 'secret_password'
       })
-      .expect(201)
+      .then(response => {
+        const body = JSON.parse(response.text)
+
+        expect(response.status).toBe(201)
+        expect(body.accountId).toBeDefined()
+      })
   })
 })
