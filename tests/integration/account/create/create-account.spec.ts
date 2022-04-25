@@ -11,7 +11,6 @@ describe('Create account', () => {
   afterAll(async () => {
     await testKnex.raw('delete from accounts')
     await testKnex.destroy()
-    server.close()
   })
 
   it('should return the accountId of created account', async () => {
