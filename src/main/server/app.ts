@@ -4,9 +4,18 @@ import crypto from 'crypto'
 import { RouteContext, router } from '@/main/server/router'
 import { defineRoutes } from '@/main/config/routes'
 import { getRequestData } from '@/main/server/get-request-data'
+import { cors } from '@/main/server/cors'
 
 const server = createServer(async (req, res) => {
   const { method = 'GET', url } = req
+
+  if (method === 'OPTIONS') {
+    cors(res)
+    res.statusCode = 200
+    res.end()
+
+    return
+  }
 
   const { pathname, searchParams } = new URL(`http://any-host.io${url}`)
 
