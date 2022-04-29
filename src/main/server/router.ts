@@ -18,7 +18,7 @@ export interface RequestData {
 }
 
 export type WsEventHandler = (ctx: RouteContext, conn: connection) => Promise<void>
-export type HttpRouteHandler = (req: RequestData, res: ServerResponse) => Promise<void>
+export type HttpRouteHandler = (req: RequestData, res: ServerResponse) => void | Promise<void>
 export type HttpRoute = {
   handler: HttpRouteHandler
   params: Record<string, string>
