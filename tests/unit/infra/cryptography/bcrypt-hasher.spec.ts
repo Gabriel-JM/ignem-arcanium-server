@@ -34,4 +34,27 @@ describe('Bcrypt Adapter', () => {
       await expect(sut.hash('any_value')).rejects.toThrow()
     })
   })
+
+  describe('compare()', () => {
+    it('should call bcrypt.compare with correct value', async () => {
+      const sut = new BcryptHasher(salt)
+      await sut.compare('any_value', 'value_to_compare')
+
+      expect(compareSpy).toHaveBeenCalledWith('any_value', 'value_to_compare')
+    })
+
+    it('should return true on compare success', async () => {
+      const sut = new BcryptHasher(salt)
+      const isEqual = await sut.compare('any_value', 'value_to_compare')
+
+      expect(isEqual).toBe(true)
+    })
+
+    it('should throws if bcrypt.compare throws', async () => {
+      const sut = new BcryptHasher(salt)
+      compareSpy.mockImplementationOnce(() => { throw new Error() })
+
+      await expect(sut.compare('any_value', 'value_to_compare')).rejects.toThrow()
+    })
+  })
 })
