@@ -11,3 +11,10 @@ export function mockHashComparer() {
     compare: jest.fn(() => Promise.resolve(true))
   }
 }
+
+export function mockEncrypter() {
+  return {
+    result: 'any_token',
+    encrypt: jest.fn(() => Promise.resolve('any_token'))
+  }
+}

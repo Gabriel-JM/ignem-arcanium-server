@@ -1,12 +1,13 @@
 import { AccountNotFoundError } from '@/data/errors'
-import { HashComparer } from '@/data/protocols/cryptography'
+import { Encrypter, HashComparer } from '@/data/protocols/cryptography'
 import { FindAccountByEmailRepository } from '@/data/protocols/repository'
 import { AccountLogin, AccountLoginParams, AccountLoginResult } from '@/domain/usecases'
 
 export class DbAccountLogin implements AccountLogin {
   constructor(
     private readonly findAccountByEmailRepository: FindAccountByEmailRepository,
-    private readonly hashComparer: HashComparer
+    private readonly hashComparer: HashComparer,
+    private readonly encrypter: Encrypter
   ) {}
   
   async login(params: AccountLoginParams): Promise<AccountLoginResult> {
@@ -22,6 +23,11 @@ export class DbAccountLogin implements AccountLogin {
       throw new AccountNotFoundError()
     }
 
-    return {} as AccountLoginResult
+    const token = await this.encrypter.encrypt(account.id)
+
+    return {
+      name: account.name,
+      token
+    }
   }
 }

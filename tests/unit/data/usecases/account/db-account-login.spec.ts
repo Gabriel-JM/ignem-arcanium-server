@@ -1,16 +1,22 @@
 import { AccountNotFoundError } from '@/data/errors'
 import { DbAccountLogin } from '@/data/usecases'
-import { mockFindAccountByEmailRepository, mockHashComparer } from '@/tests/unit/mocks'
+import { mockEncrypter, mockFindAccountByEmailRepository, mockHashComparer } from '@/tests/unit/mocks'
 
 function makeSut() {
   const findAccountByEmailRepositorySpy = mockFindAccountByEmailRepository()
   const hashComparerSpy = mockHashComparer()
-  const sut = new DbAccountLogin(findAccountByEmailRepositorySpy, hashComparerSpy)
+  const encrypterSpy = mockEncrypter()
+  const sut = new DbAccountLogin(
+    findAccountByEmailRepositorySpy,
+    hashComparerSpy,
+    encrypterSpy
+  )
 
   return {
     sut,
     findAccountByEmailRepositorySpy,
-    hashComparerSpy
+    hashComparerSpy,
+    encrypterSpy
   }
 }
 
@@ -57,5 +63,26 @@ describe('DbAccountLogin', () => {
     const promise = sut.login(dummyLoginParams)
 
     await expect(promise).rejects.toThrowError(new AccountNotFoundError())
+  })
+
+  it('should call Encrypter with correct values', async () => {
+    const { sut, findAccountByEmailRepositorySpy, encrypterSpy } = makeSut()
+
+    await sut.login(dummyLoginParams)
+
+    expect(encrypterSpy.encrypt).toHaveBeenCalledWith(
+      findAccountByEmailRepositorySpy.result.id
+    )
+  })
+
+  it('should return token and account name on success', async () => {
+    const { sut, findAccountByEmailRepositorySpy, encrypterSpy } = makeSut()
+
+    const response = await sut.login(dummyLoginParams)
+
+    expect(response).toEqual({
+      name: findAccountByEmailRepositorySpy.result.name,
+      token: encrypterSpy.result
+    })
   })
 })
