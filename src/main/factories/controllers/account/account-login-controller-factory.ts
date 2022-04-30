@@ -6,7 +6,7 @@ import { makeAccountLoginValidator } from '@/main/factories/validators/account/a
 import { GenericController } from '@/presentation/controllers'
 
 export function makeAccountLoginController() {
-  const jwtEncrypter = new JwtEncrypter('secret')
+  const jwtEncrypter = new JwtEncrypter(process.env.ENCRYPTER_SECRET)
   const salt = 12
   const bcryptHasher = new BcryptHasher(salt)
   const accountRepository = makeKnexAccountRepository()
