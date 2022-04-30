@@ -3,6 +3,11 @@ export interface AccountLoginParams {
   password: string
 }
 
+export interface AccountLoginResult {
+  name: string
+  token: string
+}
+
 export interface AccountLogin {
-  login(params: AccountLoginParams): Promise<string>
+  login(params: AccountLoginParams): Promise<AccountLoginResult>
 }
