@@ -1,3 +1,4 @@
+import { AccountNotFoundError } from '@/data/errors'
 import { DbAccountLogin } from '@/data/usecases'
 import { mockFindAccountByEmailRepository } from '@/tests/unit/mocks'
 
@@ -25,5 +26,14 @@ describe('DbAccountLogin', () => {
     expect(findAccountByEmailRepositorySpy.findByEmail).toHaveBeenCalledWith(
       dummyLoginParams.email
     )
+  })
+
+  it('should throw an AccountNotFoundError if FindAccountByEmailRepository returns null', async () => {
+    const { sut, findAccountByEmailRepositorySpy } = makeSut()
+    findAccountByEmailRepositorySpy.findByEmail.mockResolvedValueOnce(null)
+
+    const promise = sut.login(dummyLoginParams)
+
+    await expect(promise).rejects.toThrowError(new AccountNotFoundError())
   })
 })

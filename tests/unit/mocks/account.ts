@@ -1,3 +1,5 @@
+import { FindAccountByEmailRepositoryResult } from '@/data/protocols/repository'
+
 export function mockFindAccountByEmailRepository() {
   const result = {
     id: 'any_id',
@@ -8,6 +10,8 @@ export function mockFindAccountByEmailRepository() {
 
   return {
     result,
-    findByEmail: jest.fn(() => Promise.resolve(result))
+    findByEmail: jest.fn<Promise<FindAccountByEmailRepositoryResult>, []>(
+      () => Promise.resolve(result)
+    )
   }
 }

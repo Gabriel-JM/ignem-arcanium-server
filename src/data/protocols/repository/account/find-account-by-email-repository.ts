@@ -1,4 +1,4 @@
-export interface FindAccountByEmailRepositoryResult {
+export type FindAccountByEmailRepositoryResult = null | {
   id: string
   name: string
   email: string
