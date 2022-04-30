@@ -1,14 +1,16 @@
 import { AccountNotFoundError } from '@/data/errors'
 import { DbAccountLogin } from '@/data/usecases'
-import { mockFindAccountByEmailRepository } from '@/tests/unit/mocks'
+import { mockFindAccountByEmailRepository, mockHashComparer } from '@/tests/unit/mocks'
 
 function makeSut() {
   const findAccountByEmailRepositorySpy = mockFindAccountByEmailRepository()
-  const sut = new DbAccountLogin(findAccountByEmailRepositorySpy)
+  const hashComparerSpy = mockHashComparer()
+  const sut = new DbAccountLogin(findAccountByEmailRepositorySpy, hashComparerSpy)
 
   return {
     sut,
-    findAccountByEmailRepositorySpy
+    findAccountByEmailRepositorySpy,
+    hashComparerSpy
   }
 }
 
@@ -31,6 +33,26 @@ describe('DbAccountLogin', () => {
   it('should throw an AccountNotFoundError if FindAccountByEmailRepository returns null', async () => {
     const { sut, findAccountByEmailRepositorySpy } = makeSut()
     findAccountByEmailRepositorySpy.findByEmail.mockResolvedValueOnce(null)
+
+    const promise = sut.login(dummyLoginParams)
+
+    await expect(promise).rejects.toThrowError(new AccountNotFoundError())
+  })
+
+  it('should call HashComparer with correct values', async () => {
+    const { sut, findAccountByEmailRepositorySpy, hashComparerSpy } = makeSut()
+
+    await sut.login(dummyLoginParams)
+
+    expect(hashComparerSpy.compare).toHaveBeenCalledWith(
+      dummyLoginParams.password,
+      findAccountByEmailRepositorySpy.result.password
+    )
+  })
+
+  it('should throw an AccountNotFoundError if HashComparer returns false', async () => {
+    const { sut, hashComparerSpy } = makeSut()
+    hashComparerSpy.compare.mockResolvedValueOnce(false)
 
     const promise = sut.login(dummyLoginParams)
 

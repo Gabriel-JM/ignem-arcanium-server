@@ -1,9 +1,9 @@
 import { DbCreateAccount } from '@/data/usecases'
+import { mockUniqueIdGenerator } from '@/tests/unit/data/helpers'
 import {
   mockCreateAccountRepository,
-  mockTextHasher,
-  mockUniqueIdGenerator
-} from '@/tests/unit/data/helpers'
+  mockTextHasher
+} from '@/tests/unit/mocks'
 
 function makeSut() {
   const uniqueIdGeneratorSpy = mockUniqueIdGenerator()
