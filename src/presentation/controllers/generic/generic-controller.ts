@@ -3,7 +3,7 @@ import { Controller, HTTPResponse } from '@/presentation/protocols'
 
 export class GenericController implements Controller {
   constructor(
-    private readonly usecaseMethod: (...args: unknown[]) => Promise<unknown>,
+    private readonly usecaseMethod: (...args: any[]) => Promise<unknown>,
     private readonly responseFunction = ok
   ) {}
   
