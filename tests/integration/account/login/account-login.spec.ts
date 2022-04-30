@@ -17,23 +17,22 @@ describe('Create account', () => {
   })
 
   it('should return an account not found error if an unregistred email is provided', async () => {
-    chai.request(server)
+    const response = await chai.request(server)
       .post('/login')
       .send({
         email: 'unregistred@email.com',
         password: 'secret_password'
       })
-      .then(response => {
-        const body = JSON.parse(response.text)
 
-        expect(response.status).toBe(400)
-        expect(body).toEqual({
-          error: {
-            name: 'AccountNotFoundError',
-            details: ['Login failure, email or password are incorrect']
-          }
-        })
-      })
+    const body = JSON.parse(response.text)
+
+    expect(response.status).toBe(400)
+    expect(body).toEqual({
+      error: {
+        name: 'AccountNotFoundError',
+        details: ['Login failure, email or password are incorrect']
+      }
+    })
   })
 
   it('should return an account not found error if passwords did not match', async () => {
@@ -44,23 +43,22 @@ describe('Create account', () => {
       password: 'correct_password'
     })
 
-    chai.request(server)
+    const response = await chai.request(server)
       .post('/login')
       .send({
         email: 'valid@email.com',
         password: 'wrong_password'
       })
-      .then(response => {
-        const body = JSON.parse(response.text)
 
-        expect(response.status).toBe(400)
-        expect(body).toEqual({
-          error: {
-            name: 'AccountNotFoundError',
-            details: ['Login failure, email or password are incorrect']
-          }
-        })
-      })
+    const body = JSON.parse(response.text)
+
+    expect(response.status).toBe(400)
+    expect(body).toEqual({
+      error: {
+        name: 'AccountNotFoundError',
+        details: ['Login failure, email or password are incorrect']
+      }
+    })
   })
 
   it('should return the name and token on login success', async () => {

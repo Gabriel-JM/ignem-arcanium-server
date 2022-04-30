@@ -14,18 +14,17 @@ describe('Create account', () => {
   })
 
   it('should return the accountId of created account', async () => {
-    chai.request(server)
+    const response = await chai.request(server)
       .post('/accounts')
       .send({
         name: 'User',
         email: 'user@email.com',
         password: 'secret_password'
       })
-      .then(response => {
-        const body = JSON.parse(response.text)
+      
+    const body = JSON.parse(response.text)
 
-        expect(response.status).toBe(201)
-        expect(body.accountId).toBeDefined()
-      })
+    expect(response.status).toBe(201)
+    expect(body.accountId).toBeDefined()
   })
 })
