@@ -1,7 +1,7 @@
 import { DbUpdateTorchRegistry } from '@/data/usecases'
-import { ErrorHandlerControllerDecorator, ValidationControllerDecorator } from '@/main/decorators'
+import { applyErrorAndValidationDecorators } from '@/main/factories/decorators'
 import { makeKnexTorchRegistryRepository } from '@/main/factories/repositories'
-import { makeUpdateTorchRegistryValidator } from '@/main/factories/validators/update-torch-registry-validator-factory'
+import { makeUpdateTorchRegistryValidator } from '@/main/factories/validators'
 import { UpdateTorchRegistryController } from '@/presentation/controllers'
 
 export function makeUpdateTorchRegistryController() {
@@ -13,10 +13,8 @@ export function makeUpdateTorchRegistryController() {
 
   const controller = new UpdateTorchRegistryController(dbUpdateTorchRegistry)
 
-  return new ErrorHandlerControllerDecorator(
-    new ValidationControllerDecorator(
-      makeUpdateTorchRegistryValidator(),
-      controller
-    )
+  return applyErrorAndValidationDecorators(
+    controller,
+    makeUpdateTorchRegistryValidator()
   )
 }

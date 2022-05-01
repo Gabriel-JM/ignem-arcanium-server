@@ -1,6 +1,6 @@
 import { DbCreateTorchRegistry } from '@/data/usecases'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification'
-import { ErrorHandlerControllerDecorator, ValidationControllerDecorator } from '@/main/decorators'
+import { applyErrorAndValidationDecorators } from '@/main/factories/decorators'
 import { makeKnexTorchRegistryRepository } from '@/main/factories/repositories'
 import { makeCreateTorchRegistryValidator } from '@/main/factories/validators'
 import { CreateTorchRegistryController } from '@/presentation/controllers'
@@ -15,10 +15,8 @@ export function makeCreateTorchRegistryController() {
 
   const controller = new CreateTorchRegistryController(dbCreateTorchRegistry)
 
-  return new ErrorHandlerControllerDecorator(
-    new ValidationControllerDecorator(
-      makeCreateTorchRegistryValidator(),
-      controller
-    )
+  return applyErrorAndValidationDecorators(
+    controller,
+    makeCreateTorchRegistryValidator()
   )
 }

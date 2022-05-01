@@ -1,9 +1,9 @@
 import { DbAccountLogin } from '@/data/usecases'
 import { JwtEncrypter } from '@/infra/cryptography'
-import { ErrorHandlerControllerDecorator, ValidationControllerDecorator } from '@/main/decorators'
+import { applyErrorAndValidationDecorators } from '@/main/factories/decorators'
 import { makeKnexAccountRepository } from '@/main/factories/repositories'
 import { makeBcryptHasher } from '@/main/factories/services'
-import { makeAccountLoginValidator } from '@/main/factories/validators/account/account-login-validator-factory'
+import { makeAccountLoginValidator } from '@/main/factories/validators'
 import { GenericController } from '@/presentation/controllers'
 
 export function makeAccountLoginController() {
@@ -20,10 +20,8 @@ export function makeAccountLoginController() {
     dbAccountLogin.login.bind(dbAccountLogin)
   )
 
-  return new ErrorHandlerControllerDecorator(
-    new ValidationControllerDecorator(
-      makeAccountLoginValidator(),
-      controller
-    )
+  return applyErrorAndValidationDecorators(
+    controller,
+    makeAccountLoginValidator()
   )
 }

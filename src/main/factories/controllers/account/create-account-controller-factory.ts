@@ -1,7 +1,7 @@
 import { DbCreateAccount } from '@/data/usecases'
 import { JwtEncrypter } from '@/infra/cryptography'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification'
-import { ErrorHandlerControllerDecorator, ValidationControllerDecorator } from '@/main/decorators'
+import { applyErrorAndValidationDecorators } from '@/main/factories/decorators'
 import { makeKnexAccountRepository } from '@/main/factories/repositories'
 import { makeBcryptHasher } from '@/main/factories/services'
 import { makeCreateAccountValidator } from '@/main/factories/validators'
@@ -21,10 +21,8 @@ export function makeCreateAccountController() {
   )
   const controller = new CreateAccountController(dbCreateAccount)
 
-  return new ErrorHandlerControllerDecorator(
-    new ValidationControllerDecorator(
-      makeCreateAccountValidator(),
-      controller
-    )
+  return applyErrorAndValidationDecorators(
+    controller,
+    makeCreateAccountValidator()
   )
 }
