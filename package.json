@@ -11,7 +11,7 @@
     "build": "rimraf dist && tsc -p ./tsconfig-build.json",
     "build:watch": "tsc -p ./tsconfig-build.json --watch",
     "test": "jest --runInBand --no-cache --forceExit",
-    "test:cov": "npm test -- --coverage",
+    "test:cov": "docker-compose up -d pg-tests && npm test -- --coverage",
     "test:unit": "npm test -- --watch --roots ./tests/unit --roots ./src",
     "test:int": "docker-compose up -d pg-tests && npm test -- --watch --roots ./tests/integration --roots ./src"
   },

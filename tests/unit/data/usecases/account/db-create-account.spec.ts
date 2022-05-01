@@ -2,6 +2,7 @@ import { DbCreateAccount } from '@/data/usecases'
 import { mockUniqueIdGenerator } from '@/tests/unit/data/helpers'
 import {
   mockCreateAccountRepository,
+  mockEncrypter,
   mockTextHasher
 } from '@/tests/unit/mocks'
 
@@ -9,17 +10,20 @@ function makeSut() {
   const uniqueIdGeneratorSpy = mockUniqueIdGenerator()
   const textHasherSpy = mockTextHasher()
   const createAccountRepositorySpy = mockCreateAccountRepository()
+  const encrypterSpy = mockEncrypter()
   const sut = new DbCreateAccount(
     uniqueIdGeneratorSpy,
     textHasherSpy,
-    createAccountRepositorySpy
+    createAccountRepositorySpy,
+    encrypterSpy
   )
 
   return {
     sut,
     uniqueIdGeneratorSpy,
     textHasherSpy,
-    createAccountRepositorySpy
+    createAccountRepositorySpy,
+    encrypterSpy
   }
 }
 
@@ -61,6 +65,27 @@ describe('DbCreateAccount', () => {
       name: dummyCreateParams.name,
       email: dummyCreateParams.email,
       password: textHasherSpy.result
+    })
+  })
+
+  it('should call Encrypter with correct values', async () => {
+    const { sut, uniqueIdGeneratorSpy, encrypterSpy } = makeSut()
+
+    await sut.create(dummyCreateParams)
+
+    expect(encrypterSpy.encrypt).toHaveBeenCalledWith(
+      uniqueIdGeneratorSpy.result
+    )
+  })
+
+  it('should return token and account name on success', async () => {
+    const { sut, encrypterSpy } = makeSut()
+
+    const response = await sut.create(dummyCreateParams)
+
+    expect(response).toEqual({
+      name: dummyCreateParams.name,
+      token: encrypterSpy.result
     })
   })
 })

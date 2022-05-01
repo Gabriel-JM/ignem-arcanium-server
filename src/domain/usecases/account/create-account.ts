@@ -4,6 +4,11 @@ export interface CreateAccountParams {
   password: string
 }
 
+export interface CreateAccountResult {
+  name: string
+  token: string
+}
+
 export interface CreateAccount {
-  create(params: CreateAccountParams): Promise<void>
+  create(params: CreateAccountParams): Promise<CreateAccountResult>
 }

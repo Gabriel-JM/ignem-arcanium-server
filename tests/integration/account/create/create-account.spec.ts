@@ -25,6 +25,7 @@ describe('Create account', () => {
     const body = JSON.parse(response.text)
 
     expect(response.status).toBe(201)
-    expect(body.accountId).toBeDefined()
+    expect(body.name).toBe('User')
+    expect(typeof body.token).toBe('string')
   })
 })

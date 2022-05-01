@@ -1,8 +1,14 @@
 import { FindAccountByEmailRepositoryResult } from '@/data/protocols/repository'
 
 export function mockCreateAccount() {
+  const result = {
+    name: 'any_name',
+    token: 'any_token'
+  }
+
   return {
-    create: jest.fn(() => Promise.resolve())
+    result,
+    create: jest.fn(() => Promise.resolve(result))
   }
 }
 

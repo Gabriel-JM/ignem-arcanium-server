@@ -1,4 +1,5 @@
 import { DbCreateAccount } from '@/data/usecases'
+import { JwtEncrypter } from '@/infra/cryptography'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification'
 import { ErrorHandlerControllerDecorator, ValidationControllerDecorator } from '@/main/decorators'
 import { makeKnexAccountRepository } from '@/main/factories/repositories'
@@ -7,6 +8,7 @@ import { makeCreateAccountValidator } from '@/main/factories/validators'
 import { CreateAccountController } from '@/presentation/controllers'
 
 export function makeCreateAccountController() {
+  const jwtEncrypter = new JwtEncrypter(process.env.ENCRYPTER_SECRET)
   const nanoIdGenerator = new NanoIdUniqueIdGenerator()
   const bcryptHashser = makeBcryptHasher()
   const accountRepository = makeKnexAccountRepository()
@@ -14,7 +16,8 @@ export function makeCreateAccountController() {
   const dbCreateAccount = new DbCreateAccount(
     nanoIdGenerator,
     bcryptHashser,
-    accountRepository
+    accountRepository,
+    jwtEncrypter
   )
   const controller = new CreateAccountController(dbCreateAccount)
 

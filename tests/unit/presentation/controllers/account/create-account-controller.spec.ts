@@ -31,11 +31,11 @@ describe('CreateAccountController', () => {
     })
   })
 
-  it('should return the account id on success', async () => {
+  it('should return the access credentials on success', async () => {
     const { sut, createAccountSpy } = makeSut()
 
     const response = await sut.handle(dummyCreateAccount)
 
-    expect(response).toEqual(created({ accountId: '' }))
+    expect(response).toEqual(created(createAccountSpy.result))
   })
 })
