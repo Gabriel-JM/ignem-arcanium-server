@@ -11,6 +11,8 @@ export class CreateAccountController implements Controller {
       email: params.email,
       password: params.password
     })
+
+    
     
     return created({ accountId })
   }

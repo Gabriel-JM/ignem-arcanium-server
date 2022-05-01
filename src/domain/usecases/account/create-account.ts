@@ -5,5 +5,5 @@ export interface CreateAccountParams {
 }
 
 export interface CreateAccount {
-  create(params: CreateAccountParams): Promise<string>
+  create(params: CreateAccountParams): Promise<void>
 }

@@ -1,6 +1,6 @@
 import { CreateAccountController } from '@/presentation/controllers'
 import { created } from '@/presentation/helpers'
-import { mockCreateAccount } from '@/tests/unit/helpers'
+import { mockCreateAccount } from '@/tests/unit/mocks'
 
 function makeSut() {
   const createAccountSpy = mockCreateAccount()
@@ -36,6 +36,6 @@ describe('CreateAccountController', () => {
 
     const response = await sut.handle(dummyCreateAccount)
 
-    expect(response).toEqual(created({ accountId: createAccountSpy.result }))
+    expect(response).toEqual(created({ accountId: '' }))
   })
 })

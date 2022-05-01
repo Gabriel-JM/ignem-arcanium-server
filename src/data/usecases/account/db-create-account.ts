@@ -10,7 +10,7 @@ export class DbCreateAccount implements CreateAccount {
     private readonly createAccountRepository: CreateAccountRepository
   ) {}
   
-  async create(params: CreateAccountParams): Promise<string> {
+  async create(params: CreateAccountParams): Promise<void> {
     const id = this.uniqueIdGenerator.generate()
 
     const hashedPassword = await this.textHasher.hash(params.password)
@@ -21,7 +21,5 @@ export class DbCreateAccount implements CreateAccount {
       email: params.email,
       password: hashedPassword
     })
-
-    return id
   }
 }
