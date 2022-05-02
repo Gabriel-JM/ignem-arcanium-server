@@ -1,3 +1,5 @@
 export * from './account'
 export * from './cryptography'
 export * from './knex'
+export * from './id'
+export * from './torch-registry'

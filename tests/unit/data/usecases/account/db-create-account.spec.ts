@@ -1,5 +1,6 @@
+import { EmailAlreadyInUseError } from '@/data/errors'
 import { DbCreateAccount } from '@/data/usecases'
-import { mockUniqueIdGenerator } from '@/tests/unit/data/helpers'
+import { mockCheckAccountByEmailRepository, mockUniqueIdGenerator } from '@/tests/unit/mocks'
 import {
   mockCreateAccountRepository,
   mockEncrypter,
@@ -7,11 +8,13 @@ import {
 } from '@/tests/unit/mocks'
 
 function makeSut() {
+  const checkAccountByEmailRepositorySpy = mockCheckAccountByEmailRepository()
   const uniqueIdGeneratorSpy = mockUniqueIdGenerator()
   const textHasherSpy = mockTextHasher()
   const createAccountRepositorySpy = mockCreateAccountRepository()
   const encrypterSpy = mockEncrypter()
   const sut = new DbCreateAccount(
+    checkAccountByEmailRepositorySpy,
     uniqueIdGeneratorSpy,
     textHasherSpy,
     createAccountRepositorySpy,
@@ -20,6 +23,7 @@ function makeSut() {
 
   return {
     sut,
+    checkAccountByEmailRepositorySpy,
     uniqueIdGeneratorSpy,
     textHasherSpy,
     createAccountRepositorySpy,
@@ -33,6 +37,25 @@ describe('DbCreateAccount', () => {
     email: 'any@email.com',
     password: 'any_password'
   }
+
+  it('should call CheckAccountByEmailRepository with correct values', async () => {
+    const { sut, checkAccountByEmailRepositorySpy } = makeSut()
+
+    await sut.create(dummyCreateParams)
+
+    expect(checkAccountByEmailRepositorySpy.checkByEmail).toHaveBeenCalledWith(
+      dummyCreateParams.email
+    )
+  })
+
+  it('should throw EmailAlreadyInUseError if the provided email is already in use', async () => {
+    const { sut, checkAccountByEmailRepositorySpy } = makeSut()
+    checkAccountByEmailRepositorySpy.checkByEmail.mockResolvedValueOnce(true)
+
+    const promise = sut.create(dummyCreateParams)
+
+    await expect(promise).rejects.toThrowError(new EmailAlreadyInUseError())
+  })
 
   it('should call UniqueIdGenerator with correct values', async () => {
     const { sut, uniqueIdGeneratorSpy } = makeSut()

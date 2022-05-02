@@ -12,6 +12,13 @@ export function mockCreateAccount() {
   }
 }
 
+export function mockCheckAccountByEmailRepository() {
+  return {
+    result: false,
+    checkByEmail: jest.fn(() => Promise.resolve(false))
+  }
+}
+
 export function mockCreateAccountRepository() {
   return {
     create: jest.fn(() => Promise.resolve())

@@ -3,7 +3,7 @@ import { DbUpdateTorchRegistry } from '@/data/usecases'
 import {
   mockFindTorchRegistryByIdRepository,
   mockUpdateTorchRegistryRepository
-} from '@/tests/unit/data/helpers'
+} from '@/tests/unit/mocks'
 
 function makeSut() {
   const updateTorchRegistryRepositorySpy = mockUpdateTorchRegistryRepository()
