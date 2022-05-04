@@ -14,6 +14,7 @@ export function makeCreateAccountController() {
   const accountRepository = makeKnexAccountRepository()
 
   const dbCreateAccount = new DbCreateAccount(
+    accountRepository,
     nanoIdGenerator,
     bcryptHashser,
     accountRepository,

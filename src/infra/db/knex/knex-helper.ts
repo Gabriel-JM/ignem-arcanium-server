@@ -18,6 +18,10 @@ export function connect() : Knex {
 export class KnexHelper {
 
   constructor(private readonly knexConnection: Knex) {}
+
+  get conn() {
+    return this.knexConnection
+  }
   
   table(tableName: string) {
     return this.knexConnection.table(tableName)
