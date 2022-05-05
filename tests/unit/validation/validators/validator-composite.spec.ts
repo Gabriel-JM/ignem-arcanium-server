@@ -31,14 +31,22 @@ describe('ValidatorComposite', () => {
 
   it('should return all validators errors in the same array', () => {
     const { sut, validator1, validator2 } = makeSut()
-    validator1.validate.mockReturnValueOnce(['count must be of type number'])
-    validator2.validate.mockReturnValueOnce(['count must be between 0 and 10'])
+    validator1.validate.mockReturnValueOnce([
+      'count must be of type number', 
+      'name must be of type string'
+    ])
+    validator2.validate.mockReturnValueOnce([
+      'name has invalid format',
+      'count must be between 0 and 10'
+    ])
 
     const response = sut.validate({ count: '10' })
 
     expect(response).toEqual([
       'count must be of type number',
-      'count must be between 0 and 10'
+      'count must be between 0 and 10',
+      'name must be of type string',
+      'name has invalid format'
     ])
   })
 })
