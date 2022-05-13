@@ -19,10 +19,7 @@ export class ErrorHandlerControllerDecorator implements Controller {
     try {
       return await this.controller.handle(params)
     } catch(err) {
-      const error = err as ApplicationError
-      const errorClassName = error?.constructor
-        ? error.constructor.name
-        : 'UnknownError'
+      const [errorClassName, error] = this.#sanitizeErrorDetails(err as Error)
 
       process.env.SHOW_LOGS === 'true' && console.error(`[${errorClassName}]`, err)
 
@@ -36,5 +33,26 @@ export class ErrorHandlerControllerDecorator implements Controller {
         }
       })
     }
+  }
+
+  #sanitizeErrorDetails(err: Error): [string, ApplicationError] {
+    const errorClassName = err?.constructor
+      ? err.constructor.name
+      : 'UnknownError'
+    
+    const sanitizers: Record<string, (err: Error) => void> = {
+      DatabaseError(err: Error) {
+        const error = err as Error & { detail: string, details: string[] }
+
+        error.name = 'DataError'
+        error.details = [error.detail]
+      }
+    }
+
+    if ((errorClassName in sanitizers)) {
+      sanitizers[errorClassName](err)
+    }
+
+    return [errorClassName, err as ApplicationError]
   }
 }
