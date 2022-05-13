@@ -18,3 +18,10 @@ export function mockEncrypter() {
     encrypt: jest.fn(() => Promise.resolve('any_token'))
   }
 }
+
+export function mockEncryptionVerifier() {
+  return {
+    result: true,
+    verify: jest.fn(() => true)
+  }
+}

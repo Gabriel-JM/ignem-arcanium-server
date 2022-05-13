@@ -5,3 +5,4 @@ export * from './db-update-torch-registry'
 
 export * from './account/db-create-account'
 export * from './account/db-account-login'
+export * from './account/local-verify-token'
