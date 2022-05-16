@@ -1,3 +1,7 @@
+export interface VerifyTokenParams {
+  token: string
+}
+
 export interface VerifyToken {
-  verify(token: string): void
+  verify(params: VerifyTokenParams): void
 }

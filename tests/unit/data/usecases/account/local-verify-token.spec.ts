@@ -13,10 +13,14 @@ function makeSut() {
 }
 
 describe('LocalVerifyToken', () => {
+  const dummyVerifyParams = {
+    token: 'any_token'
+  }
+
   it('should call EncryptionVerifier with correct values', () => {
     const { sut, encryptionVerifierSpy } = makeSut()
 
-    sut.verify('any_token')
+    sut.verify(dummyVerifyParams)
 
     expect(encryptionVerifierSpy.verify).toHaveBeenCalledWith('any_token')
   })
@@ -25,6 +29,7 @@ describe('LocalVerifyToken', () => {
     const { sut, encryptionVerifierSpy } = makeSut()
     encryptionVerifierSpy.verify.mockReturnValueOnce(false)
 
-    expect(() => sut.verify('any_token')).toThrowError(new InvalidAccessTokenError())
+    expect(() => sut.verify(dummyVerifyParams))
+      .toThrowError(new InvalidAccessTokenError())
   })
 })
