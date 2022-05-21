@@ -1,4 +1,4 @@
-import { DbConsumeAllTorchesCharge } from '@/data/usecases/db-consume-all-torches-charge'
+import { DbConsumeAllTorchesCharge } from '@/data/usecases'
 import {
   mockfindAllTorchRegistriesRepository,
   mockUpdateManyTorchRegistriesRepository
