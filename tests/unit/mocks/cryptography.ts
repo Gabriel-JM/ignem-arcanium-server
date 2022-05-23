@@ -25,3 +25,14 @@ export function mockEncryptionVerifier() {
     verify: jest.fn(() => true)
   }
 }
+
+export function mockDecrypter() {
+  const result = {
+    id: 'any_id'
+  }
+  
+  return {
+    result,
+    decrypt: jest.fn(() => Promise.resolve(result))
+  }
+}

@@ -1,6 +1,7 @@
 export * from './account/db-create-account'
 export * from './account/db-account-login'
 export * from './account/local-verify-token'
+export * from './account/db-load-account-by-token'
 
 export * from './character/db-create-character'
 
