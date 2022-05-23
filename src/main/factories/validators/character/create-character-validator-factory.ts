@@ -1,5 +1,5 @@
 import { ValidatorComposite } from '@/validation/composites'
-import { RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
+import { MinValueValidator, RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
 
 export function makeCreateCharacterValidator() {
   return new ValidatorComposite([
@@ -31,5 +31,17 @@ export function makeCreateCharacterValidator() {
       wisdom: 'number',
       charism: 'number'
     }),
+    new MinValueValidator({
+      level: 1,
+      gold: 0,
+      hp: 10,
+      mp: 10,
+      strength: 1,
+      dexterity: 1,
+      constitution: 1,
+      intelligence: 1,
+      wisdom: 1,
+      charism: 1
+    })
   ])
 }
