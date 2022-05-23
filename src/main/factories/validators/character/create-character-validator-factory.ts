@@ -30,6 +30,6 @@ export function makeCreateCharacterValidator() {
       intelligence: 'number',
       wisdom: 'number',
       charism: 'number'
-    })
+    }),
   ])
 }

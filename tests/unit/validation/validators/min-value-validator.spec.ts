@@ -1,14 +1,14 @@
 import { MinValueValidator } from '@/validation/validators'
 
-function makeSut(minValue: number, fields: string[]) {
-  const sut = new MinValueValidator(minValue, fields)
+function makeSut(fields: Record<string, number>) {
+  const sut = new MinValueValidator(fields)
 
   return sut
 }
 
 describe('MinValueValidator', () => {
   it('should return the correct error message when it is invalid', () => {
-    const sut = makeSut(10, ['field'])
+    const sut = makeSut({ field: 10 })
 
     const response = sut.validate({ field: 9 })
 
@@ -16,7 +16,7 @@ describe('MinValueValidator', () => {
   })
 
   it('should return an empty array if all fields exists', () => {
-    const sut = makeSut(10, ['field'])
+    const sut = makeSut({ field: 10 })
 
     const reponse = sut.validate({ field: 11 })
 
