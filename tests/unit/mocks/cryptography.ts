@@ -33,6 +33,6 @@ export function mockDecrypter() {
   
   return {
     result,
-    decrypt: jest.fn(() => Promise.resolve(result))
+    decrypt: jest.fn<any, []>(() => Promise.resolve(result))
   }
 }

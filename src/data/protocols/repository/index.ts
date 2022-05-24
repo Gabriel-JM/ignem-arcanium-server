@@ -7,5 +7,6 @@ export * from './find-torch-registry-by-id-repository'
 export * from './account/create-account-repository'
 export * from './account/find-account-by-email-repository'
 export * from './account/check-account-by-email-repository'
+export * from './account/find-account-by-id-repository'
 
 export * from './character/create-character-repository'

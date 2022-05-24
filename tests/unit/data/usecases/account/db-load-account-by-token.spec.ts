@@ -1,14 +1,16 @@
 import { InvalidAccessTokenError } from '@/data/errors'
 import { DbLoadAccountByToken } from '@/data/usecases'
-import { mockDecrypter } from '@/tests/unit/mocks'
+import { fakeAccount, mockDecrypter, mockFindAccountByIdRepository } from '@/tests/unit/mocks'
 
 function makeSut() {
   const decrypterSpy = mockDecrypter()
-  const sut = new DbLoadAccountByToken(decrypterSpy)
+  const findAccountByIdRepositorySpy = mockFindAccountByIdRepository()
+  const sut = new DbLoadAccountByToken(decrypterSpy, findAccountByIdRepositorySpy)
 
   return {
     sut,
-    decrypterSpy
+    decrypterSpy,
+    findAccountByIdRepositorySpy
   }
 }
 
@@ -28,5 +30,32 @@ describe('DbLoadAccountByToken', () => {
     const promise = sut.load('any_token')
 
     await expect(promise).rejects.toThrowError(new InvalidAccessTokenError())
+  })
+
+  it('should call FindAccountByIdRepository with correct values', async () => {
+    const { sut, decrypterSpy, findAccountByIdRepositorySpy } = makeSut()
+
+    await sut.load('any_token')
+
+    expect(findAccountByIdRepositorySpy.findById).toHaveBeenCalledWith(
+      decrypterSpy.result.id
+    )
+  })
+
+  it('should throw an InvalidAccessTokenError if Repository returns null', async () => {
+    const { sut, findAccountByIdRepositorySpy } = makeSut()
+    findAccountByIdRepositorySpy.findById.mockResolvedValueOnce(null as any)
+
+    const promise = sut.load('any_token')
+
+    await expect(promise).rejects.toThrowError(new InvalidAccessTokenError())
+  })
+
+  it('should return an account on success', async () => {
+    const { sut } = makeSut()
+
+    const response = await sut.load('any_token')
+
+    expect(response).toEqual(fakeAccount())
   })
 })
