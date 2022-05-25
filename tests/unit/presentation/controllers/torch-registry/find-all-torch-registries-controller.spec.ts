@@ -1,6 +1,6 @@
 import { FindAllTorchRegistriesController } from '@/presentation/controllers'
 import { ok } from '@/presentation/helpers'
-import { mockFindAllTorchRegistries } from '@/tests/unit/presentation/helpers'
+import { mockFindAllTorchRegistries } from '@/tests/unit/mocks'
 
 function makeSut() {
   const findAllTorchRegistriesSpy = mockFindAllTorchRegistries()
