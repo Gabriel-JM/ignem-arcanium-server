@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
-import { Encrypter, EncryptionVerifier } from '@/data/protocols/cryptography'
+import { Decrypter, Encrypter, EncryptionVerifier } from '@/data/protocols/cryptography'
 
-export class JwtEncrypter implements Encrypter, EncryptionVerifier {
+export class JwtEncrypter implements Encrypter, EncryptionVerifier, Decrypter {
   constructor(private readonly secret: string) {}
   
   verify(value: string): boolean {
@@ -10,6 +10,14 @@ export class JwtEncrypter implements Encrypter, EncryptionVerifier {
       return true
     } catch {
       return false
+    }
+  }
+
+  async decrypt<T = unknown>(value: string): Promise<T | null> {
+    try {
+      return await jwt.verify(value, this.secret) as T
+    } catch {
+      return null
     }
   }
 
