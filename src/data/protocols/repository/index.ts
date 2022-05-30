@@ -4,6 +4,7 @@ export * from './account/check-account-by-email-repository'
 export * from './account/find-account-by-id-repository'
 
 export * from './character/create-character-repository'
+export * from './character/find-all-characters-repository'
 
 export * from './torch-registry/create-torch-registry-repository'
 export * from './torch-registry/find-all-torch-registries-repository'

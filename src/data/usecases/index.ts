@@ -4,6 +4,7 @@ export * from './account/local-verify-token'
 export * from './account/db-load-account-by-token'
 
 export * from './character/db-create-character'
+export * from './character/db-find-all-characters'
 
 export * from './torch-registry/db-create-torch-registry'
 export * from './torch-registry/db-consume-all-torches-charge'
