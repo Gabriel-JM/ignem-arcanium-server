@@ -3,13 +3,16 @@ import {
   CreateAccountRepository,
   CreateAccountRepositoryParams,
   FindAccountByEmailRepository,
-  FindAccountByEmailRepositoryResult
+  FindAccountByEmailRepositoryResult,
+  FindAccountByIdRepository,
+  FindAccountByIdRepositoryResult
 } from '@/data/protocols/repository'
 import { KnexHelper } from '@/infra/db/knex/knex-helper'
 
 type Repository = CreateAccountRepository
   & FindAccountByEmailRepository
   & CheckAccountByEmailRepository
+  & FindAccountByIdRepository
 
 export class KnexAccountRepository implements Repository {
   tableName = 'accounts'
@@ -24,6 +27,15 @@ export class KnexAccountRepository implements Repository {
       .first()
 
     return Boolean(exists)
+  }
+
+  async findById(id: string) {
+    const accountData = await this.knexHelper
+      .table(this.tableName)
+      .where({ id })
+      .first<FindAccountByIdRepositoryResult>()
+
+    return accountData ?? null
   }
 
   async findByEmail(email: string): Promise<FindAccountByEmailRepositoryResult> {

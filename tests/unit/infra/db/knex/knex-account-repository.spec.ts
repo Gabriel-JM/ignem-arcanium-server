@@ -50,7 +50,7 @@ describe('KnexAccountRepository', () => {
       expect(fakeKnex.first).toHaveBeenCalledWith()
     })
 
-    it('should return null if no account if find', async () => {
+    it('should return null if no account is found', async () => {
       const { sut, fakeKnex } = makeSut()
       fakeKnex.first.mockResolvedValueOnce(undefined)
 
@@ -104,6 +104,42 @@ describe('KnexAccountRepository', () => {
       const response = await sut.checkByEmail('any_email')
 
       expect(response).toBe(false)
+    })
+  })
+
+  describe('findById()', () => {
+    it('should call KnexHelper methods with correct values', async () => {
+      const { sut, fakeKnex } = makeSut()
+
+      await sut.findById('any_id')
+
+      expect(fakeKnex.table).toHaveBeenCalledWith(sut.tableName)
+      expect(fakeKnex.where).toHaveBeenCalledWith({ id: 'any_id' })
+      expect(fakeKnex.first).toHaveBeenCalledWith()
+    })
+
+    it('should return null if no account is found', async () => {
+      const { sut, fakeKnex } = makeSut()
+      fakeKnex.first.mockResolvedValueOnce(undefined)
+
+      const response = await sut.findById('any_id')
+
+      expect(response).toBeNull()
+    })
+
+    it('should return the account data on success', async () => {
+      const { sut, fakeKnex } = makeSut()
+      const fakeAccount = {
+        id: 'any_id',
+        name: 'any_name',
+        email: 'any_email',
+        password: 'any_password'
+      }
+      fakeKnex.first.mockResolvedValueOnce(fakeAccount)
+
+      const response = await sut.findById('any_id')
+
+      expect(response).toEqual(fakeAccount)
     })
   })
 })
