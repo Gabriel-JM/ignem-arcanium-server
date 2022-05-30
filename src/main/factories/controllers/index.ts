@@ -7,3 +7,4 @@ export * from './account/account-login-controller-factory'
 export * from './account/verify-token-controller-factory'
 
 export * from './character/create-character-controller-factory'
+export * from './character/find-all-characters-controller-factory'
