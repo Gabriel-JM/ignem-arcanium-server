@@ -1,11 +1,40 @@
-import { CreateCharacterRepository, CreateCharacterRepositoryParams } from '@/data/protocols/repository'
+import {
+  CreateCharacterRepository,
+  CreateCharacterRepositoryParams,
+  FindAllCharactersRepository
+} from '@/data/protocols/repository'
 import { KnexHelper } from '@/infra/db/knex/knex-helper'
 
-export class KnexCharacterRepository implements CreateCharacterRepository {
+interface DbCharacter extends Omit<CreateCharacterRepositoryParams, 'accountId'> {
+  account_id: string
+}
+
+type Repository = CreateCharacterRepository
+  & FindAllCharactersRepository
+
+export class KnexCharacterRepository implements Repository {
   tableName = 'characters'
 
   constructor(private readonly knexHelper: KnexHelper) {}
+
+  #mapFields(dbData: DbCharacter) {
+    const { account_id: accountId, ...rest } = dbData
+
+    return {
+      ...rest,
+      accountId
+    }
+  }
   
+  async findAll(accountId: string) {
+    const characters = await this.knexHelper
+      .table(this.tableName)
+      .select<DbCharacter[]>()
+      .where({ account_id: accountId })
+
+    return characters.map(this.#mapFields)
+  }
+
   async create(params: CreateCharacterRepositoryParams): Promise<void> {
     await this.knexHelper
       .table(this.tableName)
