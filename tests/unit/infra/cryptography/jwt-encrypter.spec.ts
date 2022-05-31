@@ -21,7 +21,7 @@ describe('JwtEncrypter', () => {
     it('should call JWT sign method with correct values', async () => {
       const { sut, signSpy } = makeSut()
   
-      await sut.encrypt('any_id')
+      await sut.encrypt({ id: 'any_id' })
   
       expect(signSpy).toHaveBeenCalledWith(
         { id: 'any_id' },
@@ -33,7 +33,7 @@ describe('JwtEncrypter', () => {
     it('should return an encrypted token on success', async () => {
       const { sut } = makeSut()
   
-      const response = await sut.encrypt('any_id')
+      const response = await sut.encrypt({ id: 'any_id' })
   
       expect(response).toBe('encrypted_token')
     })

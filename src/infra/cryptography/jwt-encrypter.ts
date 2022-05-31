@@ -21,8 +21,8 @@ export class JwtEncrypter implements Encrypter, EncryptionVerifier, Decrypter {
     }
   }
 
-  async encrypt(id: string): Promise<string> {
-    const token = await jwt.sign({ id }, this.secret, {
+  async encrypt(data: Record<string, unknown>): Promise<string> {
+    const token = await jwt.sign(data, this.secret, {
       expiresIn: '8d'
     })
 

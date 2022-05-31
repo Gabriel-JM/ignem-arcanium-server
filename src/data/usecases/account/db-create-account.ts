@@ -31,7 +31,7 @@ export class DbCreateAccount implements CreateAccount {
       password: hashedPassword
     })
 
-    const token = await this.encrypter.encrypt(id)
+    const token = await this.encrypter.encrypt({ id, name: params.name })
 
     return {
       name: params.name,

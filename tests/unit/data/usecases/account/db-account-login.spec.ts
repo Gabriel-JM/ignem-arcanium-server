@@ -70,9 +70,10 @@ describe('DbAccountLogin', () => {
 
     await sut.login(dummyLoginParams)
 
-    expect(encrypterSpy.encrypt).toHaveBeenCalledWith(
-      findAccountByEmailRepositorySpy.result.id
-    )
+    expect(encrypterSpy.encrypt).toHaveBeenCalledWith({
+      id: findAccountByEmailRepositorySpy.result.id,
+      name: findAccountByEmailRepositorySpy.result.name
+    })
   })
 
   it('should return token and account name on success', async () => {

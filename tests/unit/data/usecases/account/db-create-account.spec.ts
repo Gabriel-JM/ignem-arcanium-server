@@ -96,9 +96,10 @@ describe('DbCreateAccount', () => {
 
     await sut.create(dummyCreateParams)
 
-    expect(encrypterSpy.encrypt).toHaveBeenCalledWith(
-      uniqueIdGeneratorSpy.result
-    )
+    expect(encrypterSpy.encrypt).toHaveBeenCalledWith({
+      id: uniqueIdGeneratorSpy.result,
+      name: dummyCreateParams.name
+    })
   })
 
   it('should return token and account name on success', async () => {

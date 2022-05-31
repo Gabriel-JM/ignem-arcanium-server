@@ -23,7 +23,10 @@ export class DbAccountLogin implements AccountLogin {
       throw new AccountNotFoundError()
     }
 
-    const token = await this.encrypter.encrypt(account.id)
+    const token = await this.encrypter.encrypt({
+      id: account.id,
+      name: account.name
+    })
 
     return {
       name: account.name,
