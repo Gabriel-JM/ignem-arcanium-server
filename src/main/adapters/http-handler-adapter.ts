@@ -7,6 +7,7 @@ export function adaptRoute(controller: Controller) {
   return async (req: RequestData, res: ServerResponse) => {
     const data = {
       ...req.body,
+      ...req.headers,
       ...req.params,
       ...req.queryParams
     }
