@@ -8,6 +8,7 @@ import { JwtEncrypter } from '@/infra/cryptography'
 describe('Create account', () => {
   beforeAll(async () => {
     chai.use(chaiHttp)
+    await testKnex.migrate.latest()
     await testKnex.raw('delete from accounts')
     await testKnex.destroy()
   })
@@ -31,7 +32,7 @@ describe('Create account', () => {
   it('should return a 204 response with no content on verification success', async () => {
     const accountId = nanoid()
 
-    const token = await new JwtEncrypter(process.env.ENCRYPTER_SECRET).encrypt(accountId)
+    const token = await new JwtEncrypter(process.env.ENCRYPTER_SECRET).encrypt({ id: accountId })
 
     const response = await chai.request(server)
       .post('/verify')

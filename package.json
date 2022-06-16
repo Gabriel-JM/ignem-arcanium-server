@@ -13,7 +13,8 @@
     "test": "jest --runInBand --no-cache --forceExit",
     "test:cov": "docker-compose up -d pg-tests && npm test -- --coverage",
     "test:unit": "npm test -- --watch --roots ./tests/unit --roots ./src",
-    "test:int": "docker-compose up -d pg-tests && npm test -- --watch --roots ./tests/integration --roots ./src"
+    "test:int": "docker-compose -f docker-compose.test.yml up -d && sleep 10s && npm test -- --watch --roots ./tests/integration --roots ./src",
+    "posttest:int": "docker-compose -f docker-compose.test.yml down"
   },
   "repository": {
     "type": "git",
