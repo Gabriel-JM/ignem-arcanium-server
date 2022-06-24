@@ -1,4 +1,6 @@
 import {
+  CheckCharacterRepository,
+  CheckCharacterRepositoryParams,
   CreateCharacterRepository,
   CreateCharacterRepositoryParams,
   FindAllCharactersRepository
@@ -11,6 +13,7 @@ interface DbCharacter extends Omit<CreateCharacterRepositoryParams, 'accountId'>
 
 type Repository = CreateCharacterRepository
   & FindAllCharactersRepository
+  & CheckCharacterRepository
 
 export class KnexCharacterRepository implements Repository {
   tableName = 'characters'
@@ -24,6 +27,16 @@ export class KnexCharacterRepository implements Repository {
       ...rest,
       accountId
     }
+  }
+
+  async check({ id, accountId }: CheckCharacterRepositoryParams) {
+    const exists = await this.knexHelper
+      .table(this.tableName)
+      .select(this.knexHelper.conn.raw('1'))
+      .where({ id, account_id: accountId })
+      .first()
+
+    return Boolean(exists)
   }
   
   async findAll(accountId: string) {

@@ -4,7 +4,7 @@ import { fakeCharacter, fakeCreateCharacterParams, mockKnex } from '@/tests/unit
 import { Knex } from 'knex'
 
 function makeSut() {
-  const fakeKnex = mockKnex('table', 'insert', 'select', 'where')
+  const fakeKnex = mockKnex('table', 'insert', 'select', 'where', 'raw', 'first')
   const knexHelper = new KnexHelper(fakeKnex as unknown as Knex)
   const sut = new KnexCharacterRepository(knexHelper)
 
@@ -69,6 +69,47 @@ describe('KnexCharacterRepository', () => {
       const response = await sut.findAll('any_account_id')
 
       expect(response).toEqual([fakeCharacter()])
+    })
+  })
+
+  describe('check()', () => {
+    const checkParams = {
+      id: 'any_id',
+      accountId: 'any_account_id'
+    }
+
+    it('should call KnexHelper methods with correct values', async () => {
+      const { sut, fakeKnex } = makeSut()
+      fakeKnex.first.mockResolvedValueOnce([])
+
+      await sut.check(checkParams)
+
+      expect(fakeKnex.table).toHaveBeenCalledWith('characters')
+      expect(fakeKnex.select).toHaveBeenCalledWith(fakeKnex)
+      expect(fakeKnex.raw).toHaveBeenCalledWith('1')
+      expect(fakeKnex.where).toHaveBeenCalledWith({
+        id: checkParams.id,
+        account_id: checkParams.accountId
+      })
+      expect(fakeKnex.first).toHaveBeenCalledWith()
+    })
+
+    it('should return true if query returns a response', async () => {
+      const { sut, fakeKnex } = makeSut()
+      fakeKnex.first.mockResolvedValueOnce({ '?column?': 1 })
+
+      const response = await sut.check(checkParams)
+
+      expect(response).toBe(true)
+    })
+
+    it('should return false if query returns undefined', async () => {
+      const { sut, fakeKnex } = makeSut()
+      fakeKnex.first.mockResolvedValueOnce(undefined)
+
+      const response = await sut.check(checkParams)
+
+      expect(response).toBe(false)
     })
   })
 })
