@@ -10,6 +10,7 @@ describe('Create account', () => {
   })
 
   afterEach(async () => {
+    await testKnex.raw('delete from characters')
     await testKnex.raw('delete from accounts')
   })
 

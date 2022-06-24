@@ -8,11 +8,14 @@ import { randomUUID } from 'crypto'
 describe('Create account', () => {
   beforeAll(async () => {
     chai.use(chaiHttp)
+  })
+
+  afterEach(async () => {
+    await testKnex.raw('delete from characters')
     await testKnex.raw('delete from accounts')
   })
 
   afterAll(async () => {
-    await testKnex.raw('delete from accounts')
     await testKnex.destroy()
   })
 

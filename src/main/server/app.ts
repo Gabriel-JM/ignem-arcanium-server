@@ -1,6 +1,6 @@
 import { createServer } from 'node:http'
+import crypto from 'node:crypto'
 import { server as WebSocketServer } from 'websocket'
-import crypto from 'crypto'
 import { RouteContext, router } from '@/main/server/router'
 import { defineRoutes } from '@/main/config/routes'
 import { getRequestData } from '@/main/server/get-request-data'

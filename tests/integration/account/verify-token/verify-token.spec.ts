@@ -8,8 +8,14 @@ import { JwtEncrypter } from '@/infra/cryptography'
 describe('Create account', () => {
   beforeAll(async () => {
     chai.use(chaiHttp)
-    await testKnex.migrate.latest()
+  })
+
+  afterEach(async () => {
+    await testKnex.raw('delete from characters')
     await testKnex.raw('delete from accounts')
+  })
+
+  afterAll(async () => {
     await testKnex.destroy()
   })
 
