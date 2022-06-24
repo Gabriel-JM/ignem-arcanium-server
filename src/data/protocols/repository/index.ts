@@ -5,6 +5,8 @@ export * from './account/find-account-by-id-repository'
 
 export * from './character/create-character-repository'
 export * from './character/find-all-characters-repository'
+export * from './character/check-character-repository'
+export * from './character/delete-character-repository'
 
 export * from './torch-registry/create-torch-registry-repository'
 export * from './torch-registry/find-all-torch-registries-repository'

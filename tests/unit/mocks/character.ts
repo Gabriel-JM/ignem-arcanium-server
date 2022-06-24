@@ -1,5 +1,3 @@
-import { FindAllCharactersRepositoryResult } from '@/data/protocols/repository'
-
 export function fakeCreateCharacterParams() {
   return {
     accountId: 'any_account_id',
@@ -49,5 +47,18 @@ export function mockFindAllCharactersRepository() {
   return {
     result,
     findAll: jest.fn(() => Promise.resolve(result))
+  }
+}
+
+export function mockCheckCharacterRepository() {
+  return {
+    result: true,
+    check: jest.fn(() => Promise.resolve(true))
+  }
+}
+
+export function mockDeleteCharacterRepository() {
+  return {
+    delete: jest.fn(() => Promise.resolve())
   }
 }
