@@ -3,6 +3,8 @@ import {
   CheckCharacterRepositoryParams,
   CreateCharacterRepository,
   CreateCharacterRepositoryParams,
+  DeleteCharacterRepository,
+  DeleteCharacterRepositoryParams,
   FindAllCharactersRepository
 } from '@/data/protocols/repository'
 import { KnexHelper } from '@/infra/db/knex/knex-helper'
@@ -14,6 +16,7 @@ interface DbCharacter extends Omit<CreateCharacterRepositoryParams, 'accountId'>
 type Repository = CreateCharacterRepository
   & FindAllCharactersRepository
   & CheckCharacterRepository
+  & DeleteCharacterRepository
 
 export class KnexCharacterRepository implements Repository {
   tableName = 'characters'
@@ -67,5 +70,12 @@ export class KnexCharacterRepository implements Repository {
         wisdom: params.wisdom,
         charism: params.charism
       })
+  }
+
+  async delete(params: DeleteCharacterRepositoryParams) {
+    await this.knexHelper
+      .table(this.tableName)
+      .where({ id: params.id, account_id: params.accountId })
+      .delete()
   }
 }

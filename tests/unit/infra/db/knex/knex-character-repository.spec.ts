@@ -4,7 +4,15 @@ import { fakeCharacter, fakeCreateCharacterParams, mockKnex } from '@/tests/unit
 import { Knex } from 'knex'
 
 function makeSut() {
-  const fakeKnex = mockKnex('table', 'insert', 'select', 'where', 'raw', 'first')
+  const fakeKnex = mockKnex(
+    'table',
+    'insert',
+    'select',
+    'where',
+    'raw',
+    'first',
+    'delete'
+  )
   const knexHelper = new KnexHelper(fakeKnex as unknown as Knex)
   const sut = new KnexCharacterRepository(knexHelper)
 
@@ -110,6 +118,26 @@ describe('KnexCharacterRepository', () => {
       const response = await sut.check(checkParams)
 
       expect(response).toBe(false)
+    })
+  })
+
+  describe('delete()', () => {
+    const deleteParams = {
+      id: 'any_id',
+      accountId: 'any_account_id'
+    }
+
+    it('should call KnexHelper methods with correct values', async () => {
+      const { sut, fakeKnex } = makeSut()
+
+      await sut.delete(deleteParams)
+
+      expect(fakeKnex.table).toHaveBeenCalledWith('characters')
+      expect(fakeKnex.where).toHaveBeenCalledWith({
+        id: deleteParams.id,
+        account_id: deleteParams.accountId
+      })
+      expect(fakeKnex.delete).toHaveBeenCalledWith()
     })
   })
 })
