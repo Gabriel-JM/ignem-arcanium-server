@@ -6,6 +6,7 @@ export * from './account/load-account-by-token'
 export * from './character/create-character'
 export * from './character/find-all-characters'
 export * from './character/delete-character'
+export * from './character/update-character'
 
 export * from './torch-registry/create-torch-registry'
 export * from './torch-registry/consume-all-torches-charge'

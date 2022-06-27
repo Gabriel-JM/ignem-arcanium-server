@@ -62,3 +62,9 @@ export function mockDeleteCharacterRepository() {
     delete: jest.fn(() => Promise.resolve())
   }
 }
+
+export function mockUpdateCharacterRepository() {
+  return {
+    update: jest.fn(() => Promise.resolve())
+  }
+}
