@@ -9,6 +9,7 @@ function makeSut() {
     'insert',
     'select',
     'where',
+    'update',
     'raw',
     'first',
     'delete'
@@ -138,6 +139,25 @@ describe('KnexCharacterRepository', () => {
         account_id: deleteParams.accountId
       })
       expect(fakeKnex.delete).toHaveBeenCalledWith()
+    })
+  })
+
+  describe('update()', () => {
+    it('should call KnexHelper methods with correct values', async () => {
+      const { sut, fakeKnex } = makeSut()
+
+      await sut.update({
+        id: 'any_id',
+        accountId: 'any_account_id',
+        gold: 100
+      })
+
+      expect(fakeKnex.table).toHaveBeenCalledWith('characters')
+      expect(fakeKnex.where).toHaveBeenCalledWith({
+        id: 'any_id',
+        account_id: 'any_account_id'
+      })
+      expect(fakeKnex.update).toHaveBeenCalledWith({ gold: 100 })
     })
   })
 })
