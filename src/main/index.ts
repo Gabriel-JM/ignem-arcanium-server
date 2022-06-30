@@ -1,9 +1,7 @@
+import 'dotenv-safe/config'
 import 'module-alias/register'
 import { server } from './server/app'
 import { knexConnection } from '@/main/factories/repositories'
-import { loadEnvs } from '@/main/config/load-envs'
-
-loadEnvs()
 
 const port = process.env.PORT || 8000
 
@@ -23,7 +21,7 @@ function start() {
 
     retries--
     console.log('Retrying... retries left:', retries)
-    setTimeout(start, 500)
+    setTimeout(start, 1500)
   })
 }
 
