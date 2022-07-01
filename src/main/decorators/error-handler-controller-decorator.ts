@@ -21,7 +21,9 @@ export class ErrorHandlerControllerDecorator implements Controller {
     } catch(err) {
       const [errorClassName, error] = this.#sanitizeErrorDetails(err as Error)
 
-      process.env.SHOW_LOGS === 'true' && console.error(`[${errorClassName}]`, err)
+      if (process.env.SHOW_LOGS === 'true') {
+        this.#logError(errorClassName, error)
+      }
 
       const responseType = errorTypesToResponseTypes[error.type]
         ?? errorTypesToResponseTypes.unknown
@@ -54,5 +56,18 @@ export class ErrorHandlerControllerDecorator implements Controller {
     }
 
     return [errorClassName, err as ApplicationError]
+  }
+
+  #logError(className: string, err: Error) {
+    const { stack, ...errData } = err
+
+    Reflect.deleteProperty(errData, 'type')
+
+    const [
+      message = 'No message',
+      at = 'at ?'
+    ] = stack?.split('\n') ?? []
+
+    console.error(`[${className}]`, message, at, errData)
   }
 }
