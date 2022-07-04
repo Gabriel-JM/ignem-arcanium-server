@@ -7,14 +7,14 @@
   "scripts": {
     "start": "node ./dist/src/main/index.js",
     "predev": "npm run build",
-    "dev": "node ./dist/src/main/index.js",
+    "dev": "concurrently 'npm run build -- --watch' 'node ./dist/src/main/index.js'",
     "build": "rimraf dist && tsc -p ./tsconfig-build.json",
     "build:watch": "tsc -p ./tsconfig-build.json --watch",
     "test": "jest --runInBand --no-cache --forceExit",
-    "test:cov": "docker-compose up -d pg-tests && npm test -- --coverage",
     "test:unit": "npm test -- --watch --roots ./tests/unit --roots ./src",
     "test:int": "docker-compose -f docker-compose.test.yml up -d && sleep 10s && npm test -- --watch --roots ./tests/integration --roots ./src",
     "posttest:int": "docker-compose -f docker-compose.test.yml down",
+    "test:cov": "docker-compose -f docker-compose.test.yml up -d && npm test -- --coverage",
     "check": "ncu"
   },
   "repository": {
@@ -39,6 +39,7 @@
     "@types/websocket": "^1.0.5",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
+    "concurrently": "^7.2.2",
     "jest": "^28.1.2",
     "npm-check-updates": "^15.0.2",
     "rimraf": "^3.0.2",
@@ -53,7 +54,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^2.1.0",
     "module-alias": "^2.2.2",
-    "nanoid": "^4.0.0",
+    "nanoid": "3.3.4",
     "pg": "^8.7.3",
     "websocket": "^1.0.34"
   }
