@@ -1,17 +1,18 @@
 export interface CreateCharacterParams {
   accountId: string
   name: string
+  gold: number
   icon: string
   level: number
-  gold: number
-  hp: number
-  mp: number
+  characterPoints: number
+  alignment: string
+  description?: string
   strength: number
   dexterity: number
   constitution: number
   intelligence: number
   wisdom: number
-  charism: number
+  charisma: number
 }
 
 export interface CreateCharacterResult {
