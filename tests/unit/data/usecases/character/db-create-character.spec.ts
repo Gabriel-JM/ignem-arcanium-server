@@ -31,6 +31,8 @@ describe('DbCreateCharacter', () => {
 
     expect(createCharacterRepositorySpy.create).toHaveBeenCalledWith({
       id: uniqueIdGeneratorSpy.result,
+      hp: 12,
+      mp: 12,
       ...dummyCreateCharacterParams
     })
   })

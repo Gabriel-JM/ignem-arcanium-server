@@ -28,7 +28,10 @@ describe('KnexCharacterRepository', () => {
   describe('create()', () => {
     const dummyCreateParams = {
       ...fakeCreateCharacterParams(),
-      id: 'any_id'
+      id: 'any_id',
+      hp: 12,
+      mp: 12,
+      charism: 1
     }
 
     it('should call KnexHelper methods with correct values', async () => {
@@ -77,7 +80,22 @@ describe('KnexCharacterRepository', () => {
 
       const response = await sut.findAll('any_account_id')
 
-      expect(response).toEqual([fakeCharacter()])
+      expect(response).toEqual([ {
+        id: 'any_id',
+        accountId: 'any_account_id',
+        name: 'any_name',
+        icon: 'any_icon',
+        level: 1,
+        gold: 10,
+        hp: 11,
+        mp: 12,
+        strength: 1,
+        dexterity: 1,
+        constitution: 1,
+        intelligence: 2,
+        wisdom: 1,
+        charism: 1
+      }])
     })
   })
 

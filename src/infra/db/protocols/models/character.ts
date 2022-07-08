@@ -1,13 +1,14 @@
-export interface CreateCharacterRepositoryParams {
+export interface DbCharacter {
   id: string
-  accountId: string
+  account_id: string
   name: string
+  gold: number
   icon: string
   level: number
-  characterPoints: number
+  experience: number
+  character_points: number
   alignment: string
   description?: string
-  gold: number
   hp: number
   mp: number
   strength: number
@@ -16,8 +17,4 @@ export interface CreateCharacterRepositoryParams {
   intelligence: number
   wisdom: number
   charisma: number
-}
-
-export interface CreateCharacterRepository {
-  create(params: CreateCharacterRepositoryParams): Promise<void>
 }

@@ -1,18 +1,21 @@
+import { CreateCharacterParams } from '@/domain/usecases'
+
 export function fakeCreateCharacterParams() {
-  return {
+  return <CreateCharacterParams> {
     accountId: 'any_account_id',
     name: 'any_name',
     icon: 'any_icon',
     level: 1,
     gold: 10,
-    hp: 11,
-    mp: 12,
+    alignment: 'any_alignment',
+    characterPoints: 1,
+    description: 'any_description',
     strength: 1,
     dexterity: 1,
     constitution: 1,
     intelligence: 2,
     wisdom: 1,
-    charism: 1
+    charisma: 1
   }
 }
 
@@ -31,7 +34,7 @@ export function fakeCharacter() {
     constitution: 1,
     intelligence: 2,
     wisdom: 1,
-    charism: 1
+    charisma: 1
   }
 }
 
@@ -42,7 +45,7 @@ export function mockCreateCharacterRepository() {
 }
 
 export function mockFindAllCharactersRepository() {
-  const result = [fakeCharacter()]
+  const result = [{ ...fakeCharacter(), charism: 1 }]
 
   return {
     result,

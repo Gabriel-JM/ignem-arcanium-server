@@ -10,10 +10,7 @@ import {
   UpdateCharacterRepositoryParams
 } from '@/data/protocols/repository'
 import { KnexHelper } from '@/infra/db/knex/knex-helper'
-
-interface DbCharacter extends Omit<CreateCharacterRepositoryParams, 'accountId'> {
-  account_id: string
-}
+import { DbCharacter } from '@/infra/db/protocols/models'
 
 type Repository = CreateCharacterRepository
   & FindAllCharactersRepository
@@ -27,7 +24,11 @@ export class KnexCharacterRepository implements Repository {
   constructor(private readonly knexHelper: KnexHelper) {}
 
   #mapFields(dbData: DbCharacter) {
-    const { account_id: accountId, ...rest } = dbData
+    const {
+      account_id: accountId,
+      character_points: characterPoints,
+      ...rest
+    } = dbData
 
     return {
       ...rest,
@@ -51,7 +52,24 @@ export class KnexCharacterRepository implements Repository {
       .select<DbCharacter[]>()
       .where({ account_id: accountId })
 
-    return characters.map(this.#mapFields)
+    return characters.map(character => {
+      return {
+        id: character.id,
+        accountId: character.account_id,
+        name: character.name,
+        icon: character.icon,
+        level: character.level,
+        gold: character.gold,
+        hp: character.hp,
+        mp: character.mp,
+        strength: character.strength,
+        dexterity: character.dexterity,
+        constitution: character.constitution,
+        intelligence: character.intelligence,
+        wisdom: character.wisdom,
+        charism: character.charisma
+      }
+    })
   }
 
   async create(params: CreateCharacterRepositoryParams): Promise<void> {
@@ -71,7 +89,7 @@ export class KnexCharacterRepository implements Repository {
         constitution: params.constitution,
         intelligence: params.intelligence,
         wisdom: params.wisdom,
-        charism: params.charism
+        charism: params.charisma
       })
   }
 

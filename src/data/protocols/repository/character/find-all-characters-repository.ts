@@ -1,4 +1,4 @@
-import { FindAllCharacters, FindAllCharactersResult } from '@/domain/usecases'
+import { FindAllCharactersResult } from '@/domain/usecases'
 
 export type FindAllCharactersRepositoryResult = FindAllCharactersResult
 
