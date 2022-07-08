@@ -30,8 +30,7 @@ describe('KnexCharacterRepository', () => {
       ...fakeCreateCharacterParams(),
       id: 'any_id',
       hp: 12,
-      mp: 12,
-      charism: 1
+      mp: 12
     }
 
     it('should call KnexHelper methods with correct values', async () => {
@@ -54,7 +53,7 @@ describe('KnexCharacterRepository', () => {
         constitution: dummyCreateParams.constitution,
         intelligence: dummyCreateParams.intelligence,
         wisdom: dummyCreateParams.wisdom,
-        charism: dummyCreateParams.charism
+        charisma: dummyCreateParams.charisma
       })
     })
   })
@@ -73,29 +72,16 @@ describe('KnexCharacterRepository', () => {
 
     it('should call KnexHelper methods with correct values', async () => {
       const { sut, fakeKnex } = makeSut()
+      const fakeChar = fakeCharacter()
       fakeKnex.where.mockResolvedValueOnce([{
-        ...fakeCharacter(),
-        account_id: 'any_account_id'
+        ...fakeChar,
+        account_id: fakeChar.accountId,
+        character_points: fakeChar.characterPoints
       }])
 
       const response = await sut.findAll('any_account_id')
 
-      expect(response).toEqual([ {
-        id: 'any_id',
-        accountId: 'any_account_id',
-        name: 'any_name',
-        icon: 'any_icon',
-        level: 1,
-        gold: 10,
-        hp: 11,
-        mp: 12,
-        strength: 1,
-        dexterity: 1,
-        constitution: 1,
-        intelligence: 2,
-        wisdom: 1,
-        charism: 1
-      }])
+      expect(response).toEqual([fakeCharacter()])
     })
   })
 

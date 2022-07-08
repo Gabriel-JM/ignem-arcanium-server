@@ -8,7 +8,7 @@ export interface DbCharacter {
   experience: number
   character_points: number
   alignment: string
-  description?: string
+  description: string
   hp: number
   mp: number
   strength: number
