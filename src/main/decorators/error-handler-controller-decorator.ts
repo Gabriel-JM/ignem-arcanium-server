@@ -68,6 +68,7 @@ export class ErrorHandlerControllerDecorator implements Controller {
       at = 'at ?'
     ] = stack?.split('\n') ?? []
 
-    console.error(`[${className}]`, message, at, errData)
+    console.log(`[${className}]`, message)
+    console.log(` ${at}`, errData)
   }
 }
