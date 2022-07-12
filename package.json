@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node ./dist/src/main/index.js",
     "predev": "npm run build",
-    "dev": "concurrently 'npm run build -- --watch' 'node ./dist/src/main/index.js'",
+    "dev": "npm start",
     "build": "rimraf dist && tsc -p ./tsconfig-build.json",
     "build:watch": "tsc -p ./tsconfig-build.json --watch",
     "test": "jest --runInBand --no-cache --forceExit",

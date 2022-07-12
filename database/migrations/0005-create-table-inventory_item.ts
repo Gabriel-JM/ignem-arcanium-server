@@ -3,7 +3,7 @@ import { Knex } from 'knex'
 export async function up(knex: Knex) {
   await knex.schema.createTable('inventory_item', tableBuilder => {
     tableBuilder.string('inventory_id').references('id').inTable('inventories')
-    tableBuilder.string('item_id').references('id').inTable('item')
+    tableBuilder.string('item_id').references('id').inTable('items')
   })
 }
 
