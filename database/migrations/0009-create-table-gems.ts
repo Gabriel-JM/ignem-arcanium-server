@@ -5,7 +5,6 @@ export async function up(knex: Knex) {
     tableBuilder.string('id').primary().notNullable()
     tableBuilder.string('item_id').references('id').inTable('items')
     tableBuilder.integer('magic_tier').notNullable()
-    tableBuilder.boolean('known').defaultTo(false)
   })
 }
 
