@@ -57,24 +57,51 @@ export class KnexCharacterRepository implements Repository {
   }
 
   async create(params: CreateCharacterRepositoryParams): Promise<void> {
-    await this.knexHelper
-      .table(this.tableName)
-      .insert({
-        id: params.id,
-        account_id: params.accountId,
-        name: params.name,
-        icon: params.icon,
-        level: params.level,
-        gold: params.gold,
-        hp: params.hp,
-        mp: params.mp,
-        strength: params.strength,
-        dexterity: params.dexterity,
-        constitution: params.constitution,
-        intelligence: params.intelligence,
-        wisdom: params.wisdom,
-        charisma: params.charisma
-      })
+    await this.knexHelper.transaction(async trx => {
+      await this.knexHelper
+        .table(this.tableName)
+        .insert({
+          id: params.id,
+          account_id: params.accountId,
+          name: params.name,
+          icon: params.icon,
+          level: params.level,
+          gold: params.gold,
+          hp: params.hp,
+          mp: params.mp,
+          strength: params.strength,
+          dexterity: params.dexterity,
+          constitution: params.constitution,
+          intelligence: params.intelligence,
+          wisdom: params.wisdom,
+          charisma: params.charisma
+        })
+        .transacting(trx)
+
+      await this.knexHelper
+        .table('inventories')
+        .insert({
+          
+        })
+    })
+    // await this.knexHelper
+    //   .table(this.tableName)
+    //   .insert({
+    //     id: params.id,
+    //     account_id: params.accountId,
+    //     name: params.name,
+    //     icon: params.icon,
+    //     level: params.level,
+    //     gold: params.gold,
+    //     hp: params.hp,
+    //     mp: params.mp,
+    //     strength: params.strength,
+    //     dexterity: params.dexterity,
+    //     constitution: params.constitution,
+    //     intelligence: params.intelligence,
+    //     wisdom: params.wisdom,
+    //     charisma: params.charisma
+    //   })
   }
 
   async delete(params: DeleteCharacterRepositoryParams) {
