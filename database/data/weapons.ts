@@ -1,10 +1,8 @@
-import { nanoid } from 'nanoid'
-
 export function makeWeapons() {
   return [
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: '4aO5DzTD_phJDk885XjUt',
+      weaponId: 'R6lkk2GI7OhGnVQInAkWD',
       name: 'Dagger',
       description: 'Deadly short range blade',
       damage: 'STR/DEX+1',
@@ -16,8 +14,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'vu14yrNkknYUlcu1I80yE',
+      weaponId: 'BEN7Mp1XWEkwh5HLU6sV8',
       name: 'Wood Staff',
       description: 'A wood made combat staff',
       damage: 'STR+2',
@@ -29,8 +27,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'uEiLvsFkKLy1ud7d3KSmn',
+      weaponId: 'qr-qLO29Y0is_PpFQEGVZ',
       name: 'Short Sword',
       description: 'A short and light weight combat sword',
       damage: 'STR/DEX+2',
@@ -42,8 +40,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'WGunVWuKbPwT-pYCgRJZ2',
+      weaponId: 'fO_tfw2OXR_SpujyWqSz3',
       name: 'Long Sword',
       description: 'Most common and versatile sword used by warriors and kings',
       damage: 'STR+3',
@@ -55,8 +53,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'HI2_jiPj0cCybKvSzHv8v',
+      weaponId: 'PTV9yePZfescBFYbO1jQW',
       name: 'Great Sword',
       description: 'A really long blade sword, that most be used with two hands and sometimes',
       damage: 'STR+4',
@@ -68,8 +66,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'ri9hEbHYbaO9i-aOI6ZAP',
+      weaponId: '7gfS6AO655jqwbRn07C18',
       name: 'Rapier',
       description: 'A straight sword with a narrow pointed blade',
       damage: 'STR/DEX+2',
@@ -81,8 +79,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'kWcr2KRNlPAfqbm684_LH',
+      weaponId: '0HcyBMlT30HXc1NRazxme',
       name: 'Axe',
       description: 'A combat designed hand axe',
       damage: 'STR+3',
@@ -94,8 +92,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'bAJQftjiYvxJiDMuAESIm',
+      weaponId: 'tggSQqMBSUGNXydywpNxd',
       name: 'War Axe',
       description: 'A two hands great axe used in wars',
       damage: 'STR+4',
@@ -107,8 +105,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'sWhrH2WXRD1Bdl5RWQr_u',
+      weaponId: 'iG-G6qtDbbGK8gvto89FK',
       name: 'Hammer',
       description: 'A combat designed Hammer',
       damage: 'STR+3',
@@ -120,8 +118,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'sPo7kBX0b2P-w3fyexzLN',
+      weaponId: 'xojg-Npnq12sxzqzvemNM',
       name: 'Warhammer',
       description: 'A really heavy and powerful hammer',
       damage: 'STR+4',
@@ -133,8 +131,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: '1kcSBgkE2qJ3kJNPrE989',
+      weaponId: 'V2IeVbSNEduEe1QeHveU5',
       name: 'Short Bow',
       description: 'A light and small bow',
       damage: '1D6',
@@ -146,8 +144,8 @@ export function makeWeapons() {
       distance: 35
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: '8SUZ0Uvkx4oDS0KkdyUe7',
+      weaponId: 'rXWzgxjIl8s5itFGiO22E',
       name: 'Normal Bow',
       description: 'Common bow made for combat',
       damage: '1D6+2',
@@ -159,8 +157,8 @@ export function makeWeapons() {
       distance: 40
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: '056iamptUme3kQm2UTiai',
+      weaponId: 'fNVtBullwitPNZ0OveIC3',
       name: 'Long Bow',
       description: 'A great, more powerful and difficult to use bow',
       damage: '2D6',
@@ -172,8 +170,8 @@ export function makeWeapons() {
       distance: 45
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: 'IhnI2xkh5Dmv1Ml-K0bVM',
+      weaponId: 'QsLlpn9VYVnInU3oElLbg',
       name: 'Hand Crossbow',
       description: 'A small crossbow that can be used with a single hand',
       damage: '1D6+2',
@@ -185,8 +183,8 @@ export function makeWeapons() {
       distance: 40
     },
     {
-      itemId: nanoid(),
-      weaponId: nanoid(),
+      itemId: '-2GE7X9b57OLWI-Jtn91X',
+      weaponId: '8OURUnwUh-7nCtDDxGko4',
       name: 'Crossbow',
       description: 'Classic and powerful crossbow',
       damage: '1D6+4',
