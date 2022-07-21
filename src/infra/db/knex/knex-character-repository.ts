@@ -66,6 +66,9 @@ export class KnexCharacterRepository implements Repository {
           name: params.name,
           icon: params.icon,
           level: params.level,
+          experience: 0,
+          character_points: params.characterPoints,
+          alignment: params.alignment,
           gold: params.gold,
           hp: params.hp,
           mp: params.mp,
@@ -74,7 +77,8 @@ export class KnexCharacterRepository implements Repository {
           constitution: params.constitution,
           intelligence: params.intelligence,
           wisdom: params.wisdom,
-          charisma: params.charisma
+          charisma: params.charisma,
+          ...params.description && { description: params.description }
         })
         .transacting(trx)
 
