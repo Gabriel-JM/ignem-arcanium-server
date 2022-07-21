@@ -1,5 +1,6 @@
 export interface CreateCharacterRepositoryParams {
   id: string
+  inventoryId: string
   accountId: string
   name: string
   icon: string

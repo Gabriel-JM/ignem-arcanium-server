@@ -12,7 +12,11 @@ function makeSut() {
     'update',
     'raw',
     'first',
-    'delete'
+    'delete',
+    'transacting',
+    'transaction',
+    'commit',
+    'rollback'
   )
   const knexHelper = new KnexHelper(fakeKnex as unknown as Knex)
   const sut = new KnexCharacterRepository(knexHelper)
@@ -29,6 +33,7 @@ describe('KnexCharacterRepository', () => {
     const dummyCreateParams = {
       ...fakeCreateCharacterParams(),
       id: 'any_id',
+      inventoryId: 'any_inventory_id',
       hp: 12,
       mp: 12
     }
@@ -38,8 +43,8 @@ describe('KnexCharacterRepository', () => {
 
       await sut.create(dummyCreateParams)
 
-      expect(fakeKnex.table).toHaveBeenCalledWith(sut.tableName)
-      expect(fakeKnex.insert).toHaveBeenCalledWith({
+      expect(fakeKnex.table).toHaveBeenNthCalledWith(1, sut.tableName)
+      expect(fakeKnex.insert).toHaveBeenNthCalledWith(1, {
         id: dummyCreateParams.id,
         account_id: dummyCreateParams.accountId,
         name: dummyCreateParams.name,
@@ -54,6 +59,11 @@ describe('KnexCharacterRepository', () => {
         intelligence: dummyCreateParams.intelligence,
         wisdom: dummyCreateParams.wisdom,
         charisma: dummyCreateParams.charisma
+      })
+      expect(fakeKnex.table).toHaveBeenNthCalledWith(2, 'inventories')
+      expect(fakeKnex.insert).toHaveBeenNthCalledWith(2, {
+        id: dummyCreateParams.inventoryId,
+        size: 200
       })
     })
   })
