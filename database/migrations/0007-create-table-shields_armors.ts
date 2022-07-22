@@ -1,7 +1,7 @@
 import { Knex } from 'knex'
 
 export async function up(knex: Knex) {
-  await knex.schema.createTable('armors', tableBuilder => {
+  await knex.schema.createTable('shields_armors', tableBuilder => {
     tableBuilder.string('id').primary().notNullable()
     tableBuilder.string('item_id').references('id').inTable('items')
     tableBuilder.string('damage_reduction').notNullable()
@@ -12,5 +12,5 @@ export async function up(knex: Knex) {
 }
 
 export async function down(knex: Knex) {
-  await knex.schema.dropTable('armors')
+  await knex.schema.dropTable('shields_armors')
 }

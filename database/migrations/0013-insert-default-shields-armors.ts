@@ -1,35 +1,34 @@
 import { Knex } from 'knex'
-import { makeWeapons } from '../data/weapons'
+import { makeShieldsAndArmors } from '../data/shields-and-armors'
 
-const weapons = makeWeapons()
+const shieldsAndArmors = makeShieldsAndArmors()
 
 export async function up(knex: Knex) {
-  for (const data of weapons) {
+  for (const data of shieldsAndArmors) {
     await knex('items').insert({
       id: data.itemId,
       name: data.name,
-      type: 'WEAPON',
+      type: data.type,
       description: data.description,
       price: data.price,
       weight: data.weight,
       rarity: 'COMMON'
     })
   
-    await knex('weapons').insert({
-      id: data.weaponId,
+    await knex('shields_armors').insert({
+      id: data.shieldArmorId,
       item_id: data.itemId,
-      damage: data.damage,
+      damage_reduction: data.damageReduction,
       damage_type: data.damageType,
       properties: data.properties,
-      initiative_modifier: data.initiativeModifier,
-      distance: data.distance
+      initiative_modifier: data.initiativeModifier
     })
   }
 }
 
 export async function down(knex: Knex) {
-  for (const { itemId, weaponId } of weapons) {
+  for (const { itemId, shieldArmorId } of shieldsAndArmors) {
     await knex('items').where({ id: itemId }).delete()
-    await knex('weapons').where({ id: weaponId }).delete()
+    await knex('shields_armors').where({ id: shieldArmorId }).delete()
   }
 }
