@@ -1,5 +1,5 @@
 import { ValidatorComposite } from '@/validation/composites'
-import { MinValueValidator, RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
+import { MinValueValidator, OneOfValuesValidator, RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
 
 export function makeCreateCharacterValidator() {
   return new ValidatorComposite([
@@ -8,6 +8,8 @@ export function makeCreateCharacterValidator() {
       'icon',
       'level',
       'gold',
+      'alignment',
+      'characterPoints',
       'hp',
       'mp',
       'strength',
@@ -22,6 +24,9 @@ export function makeCreateCharacterValidator() {
       icon: 'string',
       level: 'number',
       gold: 'number',
+      alignment: 'string',
+      characterPoints: 'number',
+      description: 'string',
       hp: 'number',
       mp: 'number',
       strength: 'number',
@@ -42,6 +47,19 @@ export function makeCreateCharacterValidator() {
       intelligence: 1,
       wisdom: 1,
       charism: 1
+    }),
+    new OneOfValuesValidator({
+      alignment: [
+        'Lawful Good',
+        'Lawful Neutral',
+        'Lawful Evil',
+        'Neutral Good',
+        'Neutral',
+        'Neutral Evil',
+        'Chaotic Good',
+        'Chaotic Neutral',
+        'Chaotic Evil'
+      ]
     })
   ])
 }
