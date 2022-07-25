@@ -110,12 +110,51 @@ export function makeShieldsAndArmors() {
       name: 'Buckler',
       type: 'SHIELD',
       description: 'A small shield made of leather and/or wood good for parrying',
-      damageReduction: '2+FOR',
+      damageReduction: 'FOR+2',
       damageType: '["SLASH","PIERCE","STRIKE"]',
-      properties: '["HEAVY_3","RESISTANT"]',
+      properties: '["LIGHT"]',
       initiativeModifier: 0,
       price: 12,
-      weight: 20
+      weight: 30
+    },
+    {
+      itemId: '_-V-OtKEEhTGBJ0gtR61Y',
+      shieldArmorId: 'XPQtZjpxkxjl_fric7TH9',
+      name: 'Round Shield',
+      type: 'SHIELD',
+      description: 'A classic shield used by light weight warriors',
+      damageReduction: 'FOR+4',
+      damageType: '["SLASH","PIERCE","STRIKE"]',
+      properties: '["LIGHT"]',
+      initiativeModifier: 0,
+      price: 24,
+      weight: 50
+    },
+    {
+      itemId: 'cA0qYnUR1YiLUiTub0Uav',
+      shieldArmorId: '-K5v6OXFhEiruy6Y5ShQ3',
+      name: 'Medium Shield',
+      type: 'SHIELD',
+      description: 'Shield used by knights and front line warriors',
+      damageReduction: 'FOR+6',
+      damageType: '["SLASH","PIERCE","STRIKE"]',
+      properties: '["HEAVY"]',
+      initiativeModifier: -1,
+      price: 50,
+      weight: 80
+    },
+    {
+      itemId: 'cA0qYnUR1YiLUiTub0Uav',
+      shieldArmorId: '-K5v6OXFhEiruy6Y5ShQ3',
+      name: 'Greatshield',
+      type: 'SHIELD',
+      description: 'Shields that are so big that can cover a person and be used as wall',
+      damageReduction: 'FOR+8',
+      damageType: '["SLASH","PIERCE","STRIKE"]',
+      properties: '["HEAVY"]',
+      initiativeModifier: -2,
+      price: 80,
+      weight: 120
     }
   ]
 }
