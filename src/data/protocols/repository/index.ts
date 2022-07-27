@@ -14,3 +14,5 @@ export * from './torch-registry/find-all-torch-registries-repository'
 export * from './torch-registry/update-many-torch-registries-repository'
 export * from './torch-registry/update-torch-registry-repository'
 export * from './torch-registry/find-torch-registry-by-id-repository'
+
+export * from './item/list-all-common-items-repository'
