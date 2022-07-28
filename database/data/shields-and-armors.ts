@@ -144,8 +144,8 @@ export function makeShieldsAndArmors() {
       weight: 80
     },
     {
-      itemId: 'cA0qYnUR1YiLUiTub0Uav',
-      shieldArmorId: '-K5v6OXFhEiruy6Y5ShQ3',
+      itemId: '3ewCFUioD0q6V7O8ZqK6d',
+      shieldArmorId: 'LapqUdL0lHd2uFfGjtM91',
       name: 'Greatshield',
       type: 'SHIELD',
       description: 'Shields that are so big that can cover a person and be used as wall',
