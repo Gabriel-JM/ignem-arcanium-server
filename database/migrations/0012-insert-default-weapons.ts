@@ -19,7 +19,6 @@ export async function up(knex: Knex) {
       id: data.weaponId,
       item_id: data.itemId,
       damage: data.damage,
-      damage_type: data.damageType,
       properties: data.properties,
       initiative_modifier: data.initiativeModifier,
       distance: data.distance
