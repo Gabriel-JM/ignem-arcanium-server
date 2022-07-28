@@ -11,16 +11,14 @@ export interface Item {
 }
 
 export interface Weapon extends Item {
-  damage: string
-  damageTypes: string[]
+  damage: Record<string, string>
   properties: string[]
   initiativeModifier: number
   distance: number
 }
 
 export interface ShieldOrArmor extends Item {
-  damageReduction: string
-  damageTypes: string[]
+  damageReduction: Record<string, string>
   properties: string[]
   initiativeModifier: number
 }
