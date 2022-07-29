@@ -6,6 +6,7 @@ export async function up(knex: Knex) {
     tableBuilder.string('item_id').references('id').inTable('items')
     tableBuilder.integer('brew_price').notNullable()
     tableBuilder.integer('brew_time').notNullable()
+    tableBuilder.text('effects').notNullable()
   })
 }
 
