@@ -1,2 +1,7 @@
 export * from './character'
 export * from './inventory'
+export * from './item'
+export * from './weapon'
+export * from './shield-and-armor'
+export * from './alchemical-item'
+export * from './gem'
