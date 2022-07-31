@@ -13,4 +13,4 @@ export * from './torch-registry/db-consume-all-torches-charge'
 export * from './torch-registry/db-find-all-torch-registries'
 export * from './torch-registry/db-update-torch-registry'
 
-export * from './item/db-list-all-common-item'
+export * from './item/db-list-all-common-items'
