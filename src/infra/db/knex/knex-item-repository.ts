@@ -59,7 +59,7 @@ export class KnexItemRepository implements ListAllCommonItemsRepository {
     const dbWeapons = await this.knexHelper
       .table('items')
       .select(
-        'id as weapons.id',
+        'weapons.id as id',
         ...itemsFields,
         ...weaponsFields
       )
@@ -79,7 +79,7 @@ export class KnexItemRepository implements ListAllCommonItemsRepository {
     const dbShieldsAndArmors = await this.knexHelper
       .table('items')
       .select(
-        'id as shields_armors.id',
+        'shields_armors.id as id',
         ...itemsFields,
         ...shieldsAndArmorsFields
       )
@@ -104,7 +104,7 @@ export class KnexItemRepository implements ListAllCommonItemsRepository {
     const dbAlchemicalItems = await this.knexHelper
       .table('items')
       .select(
-        'id as alchemical_items.id',
+        'alchemical_items.id as id',
         ...itemsFields,
         ...alchemicalItemsFields
       )
@@ -124,7 +124,7 @@ export class KnexItemRepository implements ListAllCommonItemsRepository {
   async #findAllGems() {
     const dbGems = await this.knexHelper
       .table('items')
-      .select('id as gems.id', 'gems.magic_tier', ...itemsFields)
+      .select('gems.id as id', 'gems.magic_tier', ...itemsFields)
       .join('gems', 'gems.item_id', 'items.id')
 
     return dbGems.map(gem => {
