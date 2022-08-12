@@ -17,20 +17,20 @@ export function mockCreateAccount() {
 
   return {
     result,
-    create: jest.fn(() => Promise.resolve(result))
+    create: vi.fn(() => Promise.resolve(result))
   }
 }
 
 export function mockCheckAccountByEmailRepository() {
   return {
     result: false,
-    checkByEmail: jest.fn(() => Promise.resolve(false))
+    checkByEmail: vi.fn(() => Promise.resolve(false))
   }
 }
 
 export function mockCreateAccountRepository() {
   return {
-    create: jest.fn(() => Promise.resolve())
+    create: vi.fn(() => Promise.resolve())
   }
 }
 
@@ -39,7 +39,7 @@ export function mockFindAccountByEmailRepository() {
 
   return {
     result,
-    findByEmail: jest.fn<Promise<FindAccountByEmailRepositoryResult>, []>(
+    findByEmail: vi.fn<Promise<FindAccountByEmailRepositoryResult>, []>(
       () => Promise.resolve(result)
     )
   }
@@ -50,6 +50,6 @@ export function mockFindAccountByIdRepository() {
   
   return {
     result,
-    findById: jest.fn(() => Promise.resolve(result))
+    findById: vi.fn(() => Promise.resolve(result))
   }
 }

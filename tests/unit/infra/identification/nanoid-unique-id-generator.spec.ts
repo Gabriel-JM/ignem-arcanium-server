@@ -1,5 +1,5 @@
-jest.mock('nanoid', () => {
-  return { nanoid: jest.fn(() => 'any_id') }
+vi.mock('nanoid', () => {
+  return { nanoid: vi.fn(() => 'any_id') }
 })
 
 import { nanoid } from 'nanoid'

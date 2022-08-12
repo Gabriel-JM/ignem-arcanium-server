@@ -10,9 +10,9 @@
     "dev": "npm start",
     "build": "rimraf dist && tsc -p ./tsconfig-build.json",
     "build:watch": "tsc -p ./tsconfig-build.json --watch",
-    "test": "jest --runInBand --no-cache --forceExit",
-    "test:unit": "npm test -- --watch --roots ./tests/unit --roots ./src",
-    "test:int": "docker-compose -f docker-compose.test.yml up -d && sleep 10s && npm test -- --watch --roots ./tests/integration --roots ./src",
+    "test": "vitest",
+    "test:unit": "npm test -- -r='./tests/unit'",
+    "test:int": "docker-compose -f docker-compose.test.yml up -d && sleep 10s && npm test -- -r='./tests/integration'",
     "posttest:int": "docker-compose -f docker-compose.test.yml down",
     "test:cov": "docker-compose -f docker-compose.test.yml up -d && npm test -- --coverage",
     "check": "ncu"
@@ -33,20 +33,18 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/dotenv-safe": "^8.1.2",
-    "@types/jest": "^28.1.4",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^18.0.1",
     "@types/websocket": "^1.0.5",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "concurrently": "^7.2.2",
-    "jest": "^28.1.2",
     "npm-check-updates": "^15.0.2",
     "rimraf": "^3.0.2",
     "superwstest": "^2.0.2",
-    "ts-jest": "^28.0.5",
-    "ts-node": "^10.8.2",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vite": "^3.0.6",
+    "vitest": "^0.21.1"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

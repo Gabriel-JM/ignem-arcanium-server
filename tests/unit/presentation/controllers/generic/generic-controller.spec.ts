@@ -2,7 +2,7 @@ import { GenericController } from '@/presentation/controllers'
 import { badRequest, ok } from '@/presentation/helpers'
 
 function makeSut(responseFunction = ok) {
-  const fakeUsecaseMethod = jest.fn(() => Promise.resolve({
+  const fakeUsecaseMethod = vi.fn(() => Promise.resolve({
     hello: 'world'
   }))
   const sut = new GenericController(fakeUsecaseMethod, responseFunction)

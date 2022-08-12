@@ -17,6 +17,6 @@ export function mockListAllCommonItemsRepository() {
 
   return {
     result,
-    listAllCommon: jest.fn(() => Promise.resolve(result))
+    listAllCommon: vi.fn(() => Promise.resolve(result))
   }
 }

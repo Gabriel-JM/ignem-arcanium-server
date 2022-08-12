@@ -10,7 +10,7 @@ export function makeAlchemicalItems() {
         + ' which has a lighter regenerative effect and is simpler to produce.',
       effects: '2/3 turn regeneration.',
       brewPrice: 4,
-      brewTime: '15min',
+      brewTime: '15 minutes',
       price: 8,
       weight: 2
     },
@@ -25,7 +25,7 @@ export function makeAlchemicalItems() {
         + ' target when hit.',
       effects: 'Adds 2 magic damage to a weapon that has a blade, for 5 turns.',
       brewPrice: 15,
-      brewTime: '20min',
+      brewTime: '20 minutes',
       price: 30,
       weight: 2
     }

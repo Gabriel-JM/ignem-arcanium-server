@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt'
 import { BcryptHasher } from '@/infra/cryptography'
 
-const hashSpy = jest.spyOn(bcrypt, 'hash')
+const hashSpy = vi.spyOn(bcrypt, 'hash')
 
 hashSpy.mockImplementation(() => 'hashed_value')
 
-const compareSpy = jest.spyOn(bcrypt, 'compare')
+const compareSpy = vi.spyOn(bcrypt, 'compare')
 
 compareSpy.mockImplementation(() => true)
 

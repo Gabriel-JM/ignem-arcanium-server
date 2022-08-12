@@ -3,7 +3,7 @@ import { Validator } from '@/validation/protocols'
 
 class FakeValidator implements Validator {
   result = []
-  validate = jest.fn<string[], []>(() => this.result)
+  validate = vi.fn<string[], []>(() => this.result)
 }
 
 function makeSut() {

@@ -1,16 +1,17 @@
 import request from 'superwstest'
 import { server } from '@/main/server/app'
 import { createConnectionValidation } from '@/tests/integration/connection'
+import { randomUUID } from 'crypto'
 
-describe('Create torch registry validation', () => {
-  beforeEach((done) => void server.listen(0, 'localhost', done))
-  afterEach((done) => void server.close(done))
+describe('Update torch registry validation', () => {
+  beforeEach(() => void server.listen(0, 'localhost'))
+  afterEach(() => void server.close())
   
-  test('characterName', async () => {
+  test('id', async () => {
     await request(server).ws('/ws')
       .expectJson(createConnectionValidation)
       .sendJson({
-        event: 'create-torch-registry',
+        event: 'update-torch-registry',
         headers: {},
         data: {
           torchCount: 1,
@@ -19,15 +20,15 @@ describe('Create torch registry validation', () => {
         }
       })
       .expectJson((messageData) => {
-        expect(messageData.event).toBe('create-torch-registry-response')
+        expect(messageData.event).toBe('update-torch-registry-response')
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
           error: {
             name: 'Validation Error',
             details: [
-              'characterName is required',
-              'characterName must be of type string'
+              'id is required',
+              'id must be of type string'
             ]
           }
         })
@@ -38,24 +39,23 @@ describe('Create torch registry validation', () => {
     await request(server).ws('/ws')
       .expectJson(createConnectionValidation)
       .sendJson({
-        event: 'create-torch-registry',
+        event: 'update-torch-registry',
         headers: {},
         data: {
-          characterName: 'any_name',
+          id: randomUUID(),
           torchCharge: 3,
           isLit: false
         }
       })
       .expectJson((messageData) => {
-        expect(messageData.event).toBe('create-torch-registry-response')
+        expect(messageData.event).toBe('update-torch-registry-response')
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
           error: {
             name: 'Validation Error',
             details: [
-              'torchCount is required',
-              'torchCount must be of type number'
+              'torchCount must be one of types: string, number'
             ]
           }
         })
@@ -66,24 +66,23 @@ describe('Create torch registry validation', () => {
     await request(server).ws('/ws')
       .expectJson(createConnectionValidation)
       .sendJson({
-        event: 'create-torch-registry',
+        event: 'update-torch-registry',
         headers: {},
         data: {
-          characterName: 'any_name',
-          torchCount: 1,
+          id: randomUUID(),
+          torchCount: 3,
           isLit: false
         }
       })
       .expectJson((messageData) => {
-        expect(messageData.event).toBe('create-torch-registry-response')
+        expect(messageData.event).toBe('update-torch-registry-response')
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
           error: {
             name: 'Validation Error',
             details: [
-              'torchCharge is required',
-              'torchCharge must be of type number',
+              'torchCharge must be one of types: string, number',
               'torchCharge must be in between 0 and 6'
             ]
           }
@@ -91,21 +90,21 @@ describe('Create torch registry validation', () => {
       })
   })
 
-  test('torchCharge greater than 6', async () => {
+  test('numeric torchCharge greater than 6', async () => {
     await request(server).ws('/ws')
       .expectJson(createConnectionValidation)
       .sendJson({
-        event: 'create-torch-registry',
+        event: 'update-torch-registry',
         headers: {},
         data: {
-          characterName: 'any_name',
+          id: randomUUID(),
           torchCount: 1,
           torchCharge: 7,
           isLit: false
         }
       })
       .expectJson((messageData) => {
-        expect(messageData.event).toBe('create-torch-registry-response')
+        expect(messageData.event).toBe('update-torch-registry-response')
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
@@ -119,21 +118,77 @@ describe('Create torch registry validation', () => {
       })
   })
 
-  test('torchCharge lower than 0', async () => {
+  test('numeric torchCharge lower than 0', async () => {
     await request(server).ws('/ws')
       .expectJson(createConnectionValidation)
       .sendJson({
-        event: 'create-torch-registry',
+        event: 'update-torch-registry',
         headers: {},
         data: {
-          characterName: 'any_name',
+          id: randomUUID(),
           torchCount: 1,
           torchCharge: -1,
           isLit: false
         }
       })
       .expectJson((messageData) => {
-        expect(messageData.event).toBe('create-torch-registry-response')
+        expect(messageData.event).toBe('update-torch-registry-response')
+        expect(messageData.statusCode).toBe(400)
+        expect(messageData.headers).toEqual({})
+        expect(messageData.data).toEqual({
+          error: {
+            name: 'Validation Error',
+            details: [
+              'torchCharge must be in between 0 and 6'
+            ]
+          }
+        })
+      })
+  })
+
+  test('string torchCharge greater than 6', async () => {
+    await request(server).ws('/ws')
+      .expectJson(createConnectionValidation)
+      .sendJson({
+        event: 'update-torch-registry',
+        headers: {},
+        data: {
+          id: randomUUID(),
+          torchCount: 1,
+          torchCharge: '+7',
+          isLit: false
+        }
+      })
+      .expectJson((messageData) => {
+        expect(messageData.event).toBe('update-torch-registry-response')
+        expect(messageData.statusCode).toBe(400)
+        expect(messageData.headers).toEqual({})
+        expect(messageData.data).toEqual({
+          error: {
+            name: 'Validation Error',
+            details: [
+              'torchCharge must be in between 0 and 6'
+            ]
+          }
+        })
+      })
+  })
+
+  test('string torchCharge lower than 0', async () => {
+    await request(server).ws('/ws')
+      .expectJson(createConnectionValidation)
+      .sendJson({
+        event: 'update-torch-registry',
+        headers: {},
+        data: {
+          id: randomUUID(),
+          torchCount: 1,
+          torchCharge: '-7',
+          isLit: false
+        }
+      })
+      .expectJson((messageData) => {
+        expect(messageData.event).toBe('update-torch-registry-response')
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
@@ -151,23 +206,22 @@ describe('Create torch registry validation', () => {
     await request(server).ws('/ws')
       .expectJson(createConnectionValidation)
       .sendJson({
-        event: 'create-torch-registry',
+        event: 'update-torch-registry',
         headers: {},
         data: {
-          characterName: 'any_name',
+          id: randomUUID(),
           torchCount: 1,
           torchCharge: 3
         }
       })
       .expectJson((messageData) => {
-        expect(messageData.event).toBe('create-torch-registry-response')
+        expect(messageData.event).toBe('update-torch-registry-response')
         expect(messageData.statusCode).toBe(400)
         expect(messageData.headers).toEqual({})
         expect(messageData.data).toEqual({
           error: {
             name: 'Validation Error',
             details: [
-              'isLit is required',
               'isLit must be of type boolean'
             ]
           }

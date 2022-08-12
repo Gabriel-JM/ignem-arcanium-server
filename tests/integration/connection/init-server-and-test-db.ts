@@ -6,8 +6,16 @@ export function initServerAndDb(server: Server, testKnex: Knex, tableName: strin
     await testKnex.migrate.latest()
   })
 
-  beforeEach((done) => void server.listen(0, 'localhost', done))
-  afterEach((done) => void server.close(done))
+  beforeEach(() => {
+    return new Promise(resolve => {
+      server.listen(0, 'localhost', resolve)
+    })
+  })
+  afterEach(() => {
+    return new Promise(resolve => {
+      server.close(resolve as (err?: Error | undefined) => void)
+    })
+  })
 
   afterAll(async () => {
     await testKnex.raw('delete from ' + tableName)

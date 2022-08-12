@@ -2,9 +2,9 @@ import jwt from 'jsonwebtoken'
 import { JwtEncrypter } from '@/infra/cryptography/jwt-encrypter'
 
 function makeSut() {
-  const signSpy = jest.spyOn(jwt, 'sign')
+  const signSpy = vi.spyOn(jwt, 'sign')
   signSpy.mockImplementation(() => 'encrypted_token')
-  const verifySpy = jest.spyOn(jwt, 'verify')
+  const verifySpy = vi.spyOn(jwt, 'verify')
   verifySpy.mockImplementation(() => ({}))
 
   const sut = new JwtEncrypter('secret')

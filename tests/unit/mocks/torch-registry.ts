@@ -19,25 +19,25 @@ export const mockRepositoryTorchRegistry = () => ({
 export function mockfindAllTorchRegistriesRepository() {
   return {
     result: dummyFindAllTorchRegistriesRepositoryResult,
-    findAll: jest.fn(() => Promise.resolve(dummyFindAllTorchRegistriesRepositoryResult))
+    findAll: vi.fn(() => Promise.resolve(dummyFindAllTorchRegistriesRepositoryResult))
   }
 }
 
 export function mockCreateTorchRegistryRepository() {
   return {
-    create: jest.fn(() => Promise.resolve())
+    create: vi.fn(() => Promise.resolve())
   }
 }
 
 export function mockUpdateManyTorchRegistriesRepository() {
   return {
-    updateMany: jest.fn(() => Promise.resolve())
+    updateMany: vi.fn(() => Promise.resolve())
   }
 }
 
 export function mockUpdateTorchRegistryRepository() {
   return {
-    update: jest.fn(() => Promise.resolve())
+    update: vi.fn(() => Promise.resolve())
   }
 }
 
@@ -46,7 +46,7 @@ export function mockFindTorchRegistryByIdRepository() {
 
   return {
     result,
-    findById: jest.fn<
+    findById: vi.fn<
       Promise<FindTorchRegistryByIdRepositoryResult>,
       []
     >(() => Promise.resolve(result))
@@ -56,7 +56,7 @@ export function mockFindTorchRegistryByIdRepository() {
 export function mockFindAllTorchRegistries() {
   return {
     result: [],
-    findAll: jest.fn(() => Promise.resolve([]))
+    findAll: vi.fn(() => Promise.resolve([]))
   }
 }
 
@@ -64,19 +64,19 @@ export function mockCreateTorchRegistry() {
   const result = 'any_id'
   return {
     result,
-    create: jest.fn(() => Promise.resolve(result))
+    create: vi.fn(() => Promise.resolve(result))
   }
 }
 
 export function mockConsumeAllTorchesCharge() {
   return {
-    consumeAll: jest.fn(() => Promise.resolve())
+    consumeAll: vi.fn(() => Promise.resolve())
   }
 }
 
 export function mockUpdateTorchRegistry() {
   return {
-    update: jest.fn(() => Promise.resolve())
+    update: vi.fn(() => Promise.resolve())
   }
 }
 

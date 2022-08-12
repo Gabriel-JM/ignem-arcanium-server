@@ -43,7 +43,7 @@ export function fakeCharacter() {
 
 export function mockCreateCharacterRepository() {
   return {
-    create: jest.fn(() => Promise.resolve())
+    create: vi.fn(() => Promise.resolve())
   }
 }
 
@@ -52,25 +52,25 @@ export function mockFindAllCharactersRepository() {
 
   return {
     result,
-    findAll: jest.fn(() => Promise.resolve(result))
+    findAll: vi.fn(() => Promise.resolve(result))
   }
 }
 
 export function mockCheckCharacterRepository() {
   return {
     result: true,
-    check: jest.fn(() => Promise.resolve(true))
+    check: vi.fn(() => Promise.resolve(true))
   }
 }
 
 export function mockDeleteCharacterRepository() {
   return {
-    delete: jest.fn(() => Promise.resolve())
+    delete: vi.fn(() => Promise.resolve())
   }
 }
 
 export function mockUpdateCharacterRepository() {
   return {
-    update: jest.fn(() => Promise.resolve())
+    update: vi.fn(() => Promise.resolve())
   }
 }
