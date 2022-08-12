@@ -28,6 +28,24 @@ export function makeAlchemicalItems() {
       brewTime: '20 minutes',
       price: 30,
       weight: 2
+    },
+    {
+      itemId: 'M59NVQzkPY3bFvTkk8E3d',
+      alchemicalItemId: 'ihdxTdFT2a8dn48Cruglx',
+      name: 'Weak Poisonous Oil',
+      type: 'OIL',
+      rarity: 'UNCOMMON',
+      description: 'A vial of a weapon-specific oil mixed with a weaker poison,'
+        + ' this oil has a gray, almost black color with light green flecks.'
+        + ' The poison does not have an effect just by having contact with the'
+        + ' skin, thanks to that the mixture with the oil and using it with a'
+        + ' weapon is important.',
+      effects: 'Adds poison effect to a weapon that has a blade, for 5 turns.'
+        + ' The poison has a DC 7 against Constitution, and a damage rate of 2/3 turns.',
+      brewPrice: 10,
+      brewTime: '20 minutos',
+      price: 22,
+      weight: 2
     }
   ]
 }
