@@ -12,3 +12,5 @@ export * from './character/delete-character-controller-factory'
 export * from './character/update-character-controller-factory'
 
 export * from './item/list-all-common-items-controller-factory'
+
+export * from './info/attributes/attributes-details-controller-factory'
