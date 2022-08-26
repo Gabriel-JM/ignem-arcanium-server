@@ -14,7 +14,7 @@
     "test:unit": "npm test -- -r='./tests/unit'",
     "test:int": "docker-compose -f docker-compose.test.yml up -d && sleep 10s && npm test -- -r='./tests/integration'",
     "posttest:int": "docker-compose -f docker-compose.test.yml down",
-    "test:cov": "docker-compose -f docker-compose.test.yml up -d && npm test -- --coverage",
+    "test:cov": "npm run test:unit -- --run --coverage",
     "check": "ncu"
   },
   "repository": {
@@ -33,9 +33,10 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/dotenv-safe": "^8.1.2",
-    "@types/jsonwebtoken": "^8.5.8",
-    "@types/node": "^18.7.1",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "^18.7.13",
     "@types/websocket": "^1.0.5",
+    "c8": "^7.12.0",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "concurrently": "^7.2.2",
@@ -43,8 +44,8 @@
     "rimraf": "^3.0.2",
     "superwstest": "^2.0.3",
     "typescript": "^4.7.4",
-    "vite": "^3.0.6",
-    "vitest": "^0.21.1"
+    "vite": "^3.0.9",
+    "vitest": "^0.22.1"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -53,7 +54,7 @@
     "knex": "^2.2.0",
     "module-alias": "^2.2.2",
     "nanoid": "3.3.4",
-    "pg": "^8.7.3",
+    "pg": "^8.8.0",
     "websocket": "^1.0.34"
   }
 }

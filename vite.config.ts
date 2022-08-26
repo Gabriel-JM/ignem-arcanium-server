@@ -16,6 +16,7 @@ export default defineConfig({
     environment: 'node',
     globals: true,
     coverage: {
+      reportsDirectory: '../../coverage',
       exclude: ['src/main']
     }
   }
