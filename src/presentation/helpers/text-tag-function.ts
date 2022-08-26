@@ -1,6 +1,6 @@
 export function text(strings: TemplateStringsArray, ...values: any[]) {
   const fullText = strings.reduce((acc, str, index) => {
-    return acc + str + values[index]
+    return acc + str + (values[index] ?? '')
   }, '')
 
   return fullText
