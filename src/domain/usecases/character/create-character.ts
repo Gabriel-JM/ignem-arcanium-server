@@ -1,3 +1,8 @@
+export interface CreateCharacterInventoryItem {
+  itemId: string
+  quantity: number
+}
+
 export interface CreateCharacterParams {
   accountId: string
   name: string
@@ -13,6 +18,7 @@ export interface CreateCharacterParams {
   intelligence: number
   wisdom: number
   charisma: number
+  inventoryItems?: Array<CreateCharacterInventoryItem>
 }
 
 export interface CreateCharacterResult {

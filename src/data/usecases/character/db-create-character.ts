@@ -4,14 +4,20 @@ import { CreateCharacter, CreateCharacterParams, CreateCharacterResult } from '@
 import { CharacterHealthPoints, CharacterManaPoints } from '@/domain/value-objects'
 
 export class DbCreateCharacter implements CreateCharacter {
+  #uniqueIdGenerator: UniqueIdGenerator
+  #createCharacterRepository: CreateCharacterRepository
+
   constructor(
-    private readonly uniqueIdGenerator: UniqueIdGenerator,
-    private readonly createCharacterRepository: CreateCharacterRepository
-  ) {}
+    uniqueIdGenerator: UniqueIdGenerator,
+    createCharacterRepository: CreateCharacterRepository
+  ) {
+    this.#uniqueIdGenerator = uniqueIdGenerator
+    this.#createCharacterRepository = createCharacterRepository
+  }
   
   async create(params: CreateCharacterParams): Promise<CreateCharacterResult> {
-    const id = this.uniqueIdGenerator.generate()
-    const inventoryId = this.uniqueIdGenerator.generate()
+    const id = this.#uniqueIdGenerator.generate()
+    const inventoryId = this.#uniqueIdGenerator.generate()
 
     const hp = new CharacterHealthPoints(
       params.level,
@@ -20,7 +26,7 @@ export class DbCreateCharacter implements CreateCharacter {
     ).value
     const mp = new CharacterManaPoints(params.level, params.intelligence).value
 
-    await this.createCharacterRepository.create({
+    await this.#createCharacterRepository.create({
       id,
       inventoryId,
       accountId: params.accountId,
@@ -38,7 +44,8 @@ export class DbCreateCharacter implements CreateCharacter {
       constitution: params.constitution,
       intelligence: params.intelligence,
       wisdom: params.wisdom,
-      charisma: params.charisma
+      charisma: params.charisma,
+      inventoryItems: params.inventoryItems
     })
 
     return { id }
