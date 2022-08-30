@@ -2,8 +2,8 @@ import { ValidatorComposite } from '@/validation/composites'
 import { Validator } from '@/validation/protocols'
 
 class FakeValidator implements Validator {
-  result = []
-  validate = vi.fn<string[], []>(() => this.result)
+  result: string[] = []
+  validate = vi.fn<[], string[]>(() => this.result)
 }
 
 function makeSut() {

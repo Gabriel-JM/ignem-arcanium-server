@@ -11,7 +11,7 @@ export default defineConfig({
       '@': path.resolve('src'),
     }
   },
-  root: './test/unit',
+  root: './tests/unit',
   test: {
     environment: 'node',
     globals: true,
