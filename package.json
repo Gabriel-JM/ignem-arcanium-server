@@ -4,6 +4,7 @@
   "description": "Ignem Arcanium Server Project",
   "main": "dist/src/main/index.js",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node ./dist/src/main/index.js",
     "predev": "npm run build",

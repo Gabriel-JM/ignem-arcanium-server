@@ -1,7 +1,7 @@
-import { AccountNotFoundError } from '@/data/errors'
-import { Encrypter, HashComparer } from '@/data/protocols/cryptography'
-import { FindAccountByEmailRepository } from '@/data/protocols/repository'
-import { AccountLogin, AccountLoginParams, AccountLoginResult } from '@/domain/usecases'
+import { AccountNotFoundError } from '@/data/errors/index.js'
+import { Encrypter, HashComparer } from '@/data/protocols/cryptography/index.js'
+import { FindAccountByEmailRepository } from '@/data/protocols/repository/index.js'
+import { AccountLogin, AccountLoginParams, AccountLoginResult } from '@/domain/usecases/index.js'
 
 export class DbAccountLogin implements AccountLogin {
   constructor(

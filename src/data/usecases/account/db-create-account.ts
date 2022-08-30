@@ -1,8 +1,8 @@
-import { EmailAlreadyInUseError } from '@/data/errors'
-import { Encrypter, TextHasher } from '@/data/protocols/cryptography'
-import { UniqueIdGenerator } from '@/data/protocols/identification'
-import { CheckAccountByEmailRepository, CreateAccountRepository } from '@/data/protocols/repository'
-import { CreateAccount, CreateAccountParams, CreateAccountResult } from '@/domain/usecases'
+import { EmailAlreadyInUseError } from '@/data/errors/index.js'
+import { Encrypter, TextHasher } from '@/data/protocols/cryptography/index.js'
+import { UniqueIdGenerator } from '@/data/protocols/identification/index.js'
+import { CheckAccountByEmailRepository, CreateAccountRepository } from '@/data/protocols/repository/index.js'
+import { CreateAccount, CreateAccountParams, CreateAccountResult } from '@/domain/usecases/index.js'
 
 export class DbCreateAccount implements CreateAccount {
   constructor(
