@@ -4,7 +4,7 @@ export class ListValidationComposite implements Validator {
   #listName: string
   #validators: Validator[]
   
-  constructor(listName: string, validators: Validator[]) {
+  constructor(listName: string, ...validators: Validator[]) {
     this.#listName = listName
     this.#validators = validators
   }

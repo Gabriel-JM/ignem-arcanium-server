@@ -9,7 +9,7 @@ class FakeValidator implements Validator {
 function makeSut() {
   const validator1 = new FakeValidator()
   const validator2 = new FakeValidator()
-  const sut = new ListValidationComposite('list', [validator1, validator2])
+  const sut = new ListValidationComposite('list', validator1, validator2)
 
   return {
     sut,

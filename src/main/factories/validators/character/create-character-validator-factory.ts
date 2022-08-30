@@ -1,4 +1,4 @@
-import { ValidatorComposite } from '@/validation/composites'
+import { ListValidationComposite, ValidatorComposite } from '@/validation/composites'
 import { MinValueValidator, OneOfValuesValidator, RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
 
 export function makeCreateCharacterValidator() {
@@ -34,7 +34,8 @@ export function makeCreateCharacterValidator() {
       constitution: 'number',
       intelligence: 'number',
       wisdom: 'number',
-      charism: 'number'
+      charism: 'number',
+      inventoryItems: 'array'
     }),
     new MinValueValidator({
       level: 1,
@@ -60,6 +61,12 @@ export function makeCreateCharacterValidator() {
         'Chaotic Neutral',
         'Chaotic Evil'
       ]
-    })
+    }),
+    new ListValidationComposite(
+      'inventoryItems',
+      new RequiredFieldsValidator(['itemId', 'quantity']),
+      new TypeValidator({ itemId: 'string', quantity: 'number' }),
+      new MinValueValidator({ quantity: 1 })
+    )
   ])
 }
