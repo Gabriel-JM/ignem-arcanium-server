@@ -1,10 +1,14 @@
 import { Validator } from '@/validation/protocols'
 
 export class ValidatorComposite implements Validator {
-  constructor(private readonly validators: Validator[]) {}
+  readonly #validators: Validator[]
+
+  constructor(...validators: Validator[]) {
+    this.#validators = validators
+  }
 
   validate(input: any): string[] {
-    const validationsResults = this.validators.map(validator => {
+    const validationsResults = this.#validators.map(validator => {
       return validator.validate(input)
     }).flat()
 

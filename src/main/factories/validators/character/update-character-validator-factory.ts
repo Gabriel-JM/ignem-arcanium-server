@@ -2,7 +2,7 @@ import { ValidatorComposite } from '@/validation/composites'
 import { MinValueValidator, RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
 
 export function makeUpdateCharacterValidator() {
-  return new ValidatorComposite([
+  return new ValidatorComposite(
     new RequiredFieldsValidator('accountId'),
     new TypeValidator({
       accountId: 'string',
@@ -31,5 +31,5 @@ export function makeUpdateCharacterValidator() {
       wisdom: 1,
       charism: 1
     })
-  ])
+  )
 }

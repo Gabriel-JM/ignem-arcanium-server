@@ -2,7 +2,7 @@ import { ListValidationComposite, ValidatorComposite } from '@/validation/compos
 import { MinValueValidator, OneOfValuesValidator, RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
 
 export function makeCreateCharacterValidator() {
-  return new ValidatorComposite([
+  return new ValidatorComposite(
     new RequiredFieldsValidator(
       'name',
       'icon',
@@ -68,5 +68,5 @@ export function makeCreateCharacterValidator() {
       new TypeValidator({ itemId: 'string', quantity: 'number' }),
       new MinValueValidator({ quantity: 1 })
     )
-  ])
+  )
 }

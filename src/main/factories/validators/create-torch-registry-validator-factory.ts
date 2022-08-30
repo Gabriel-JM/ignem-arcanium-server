@@ -6,7 +6,7 @@ import {
 } from '@/validation/validators'
 
 export function makeCreateTorchRegistryValidator() {
-  const validator = new ValidatorComposite([
+  const validator = new ValidatorComposite(
     new RequiredFieldsValidator(
       'characterName',
       'torchCount',
@@ -22,7 +22,7 @@ export function makeCreateTorchRegistryValidator() {
     new ValueInBetweenValidator({
       torchCharge: [0, 6]
     })
-  ])
+  )
 
   return validator
 }

@@ -3,7 +3,7 @@ import { RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
 import { CustomValidator } from '@/validation/validators/custom-validator'
 
 export function makeUpdateTorchRegistryValidator() {
-  const validator = new ValidatorComposite([
+  const validator = new ValidatorComposite(
     new RequiredFieldsValidator('id'),
     new TypeValidator({
       id: 'string',
@@ -23,7 +23,7 @@ export function makeUpdateTorchRegistryValidator() {
         }
       }
     })
-  ])
+  )
 
   return validator
 }
