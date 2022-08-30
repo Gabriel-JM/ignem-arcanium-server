@@ -4,9 +4,7 @@ import { CustomValidator } from '@/validation/validators/custom-validator'
 
 export function makeUpdateTorchRegistryValidator() {
   const validator = new ValidatorComposite([
-    new RequiredFieldsValidator([
-      'id'
-    ]),
+    new RequiredFieldsValidator('id'),
     new TypeValidator({
       id: 'string',
       torchCount: ['string', 'number'],

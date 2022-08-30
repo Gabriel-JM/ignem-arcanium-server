@@ -7,12 +7,12 @@ import {
 
 export function makeCreateTorchRegistryValidator() {
   const validator = new ValidatorComposite([
-    new RequiredFieldsValidator([
+    new RequiredFieldsValidator(
       'characterName',
       'torchCount',
       'torchCharge',
       'isLit'
-    ]),
+    ),
     new TypeValidator({
       characterName: 'string',
       torchCount: 'number',

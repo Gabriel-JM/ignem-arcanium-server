@@ -3,7 +3,7 @@ import { MinValueValidator, RequiredFieldsValidator, TypeValidator } from '@/val
 
 export function makeUpdateCharacterValidator() {
   return new ValidatorComposite([
-    new RequiredFieldsValidator(['accountId']),
+    new RequiredFieldsValidator('accountId'),
     new TypeValidator({
       accountId: 'string',
       name: 'string',

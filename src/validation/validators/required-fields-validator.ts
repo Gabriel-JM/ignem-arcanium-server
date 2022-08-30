@@ -1,10 +1,14 @@
 import { Validator } from '@/validation/protocols'
 
 export class RequiredFieldsValidator implements Validator {
-  constructor(private readonly fields: string[]) {}
+  #fields: string[]
+
+  constructor(...fields: string[]) {
+    this.#fields = fields
+  }
   
   validate(input: any): string[] {
-    const missingFields = this.fields.filter(field => {
+    const missingFields = this.#fields.filter(field => {
       return !(field in input)
     })
     

@@ -1,7 +1,7 @@
-import { RequiredFieldsValidator } from '@/validation/validators/required-fields-validator'
+import { RequiredFieldsValidator } from '@/validation/validators'
 
 function makeSut(fields: string[]) {
-  return new RequiredFieldsValidator(fields)
+  return new RequiredFieldsValidator(...fields)
 }
 
 describe('RequiredFieldsValidator', () => {

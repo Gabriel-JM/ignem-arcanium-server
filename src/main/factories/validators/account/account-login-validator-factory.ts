@@ -3,7 +3,7 @@ import { RegexValidator, RequiredFieldsValidator, TypeValidator } from '@/valida
 
 export function makeAccountLoginValidator() {
   return new ValidatorComposite([
-    new RequiredFieldsValidator(['email', 'password']),
+    new RequiredFieldsValidator('email', 'password'),
     new TypeValidator({ email: 'string', password: 'string' }),
     new RegexValidator({ email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })
   ])

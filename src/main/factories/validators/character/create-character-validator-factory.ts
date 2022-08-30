@@ -3,7 +3,7 @@ import { MinValueValidator, OneOfValuesValidator, RequiredFieldsValidator, TypeV
 
 export function makeCreateCharacterValidator() {
   return new ValidatorComposite([
-    new RequiredFieldsValidator([
+    new RequiredFieldsValidator(
       'name',
       'icon',
       'level',
@@ -18,7 +18,7 @@ export function makeCreateCharacterValidator() {
       'intelligence',
       'wisdom',
       'charism'
-    ]),
+    ),
     new TypeValidator({
       name: 'string',
       icon: 'string',
@@ -64,7 +64,7 @@ export function makeCreateCharacterValidator() {
     }),
     new ListValidationComposite(
       'inventoryItems',
-      new RequiredFieldsValidator(['itemId', 'quantity']),
+      new RequiredFieldsValidator('itemId', 'quantity'),
       new TypeValidator({ itemId: 'string', quantity: 'number' }),
       new MinValueValidator({ quantity: 1 })
     )
