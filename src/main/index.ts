@@ -1,5 +1,4 @@
 import 'dotenv-safe/config.js'
-import 'module-alias/register.js'
 import { server } from './server/app.js'
 import { knexConnection } from '@/main/factories/repositories/index.js'
 

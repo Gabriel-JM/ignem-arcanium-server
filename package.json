@@ -2,11 +2,12 @@
   "name": "ignem-arcanium-server",
   "version": "1.0.0",
   "description": "Ignem Arcanium Server Project",
-  "main": "dist/src/main/index.js",
+  "main": "./dist/src/main/index.js",
+  "exports": "./dist/src/main/index.js",
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node ./dist/src/main/index.js",
+    "start": "node --loader=esm-module-alias/loader ./dist/src/main/index.js",
     "predev": "npm run build",
     "dev": "npm start",
     "build": "rimraf dist && tsc -p ./tsconfig-build.json",
@@ -28,7 +29,7 @@
     "url": "https://github.com/Gabriel-JM/ignem-arcanium-server/issues"
   },
   "homepage": "https://github.com/Gabriel-JM/ignem-arcanium-server#readme",
-  "_moduleAliases": {
+  "aliases": {
     "@": "dist/src"
   },
   "devDependencies": {
@@ -51,9 +52,9 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "dotenv-safe": "^8.2.0",
+    "esm-module-alias": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^2.2.0",
-    "module-alias": "^2.2.2",
     "nanoid": "3.3.4",
     "pg": "^8.8.0",
     "websocket": "^1.0.34"
