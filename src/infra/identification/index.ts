@@ -1,1 +1,1 @@
-export * from './nanoid-unique-id-generator'
+export * from './nanoid-unique-id-generator.js'

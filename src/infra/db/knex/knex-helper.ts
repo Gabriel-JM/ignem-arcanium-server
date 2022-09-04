@@ -4,7 +4,7 @@ import path from 'path'
 export function connect() : Knex {
   const connection = process.env.DB_URL
 
-  return knex({
+  return knex.default({
     client: 'pg',
     connection,
     migrations: {
@@ -16,19 +16,22 @@ export function connect() : Knex {
 }
 
 export class KnexHelper {
+  #knexConnection: Knex
 
-  constructor(private readonly knexConnection: Knex) {}
+  constructor(knexConnection: Knex) {
+    this.#knexConnection = knexConnection
+  }
 
   get conn() {
-    return this.knexConnection
+    return this.#knexConnection
   }
   
   table(tableName: string) {
-    return this.knexConnection.table(tableName)
+    return this.#knexConnection.table(tableName)
   }
 
   async transaction(transactionCallback: (trx: Knex.Transaction) => Promise<Knex | void>) {
-    const knexTransaction = await this.knexConnection.transaction()
+    const knexTransaction = await this.#knexConnection.transaction()
     
     try {
       await transactionCallback(knexTransaction)

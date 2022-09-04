@@ -1,4 +1,4 @@
-import { LoadAccountByTokenResult } from '@/domain/usecases'
+import { LoadAccountByTokenResult } from '@/domain/usecases/index.js'
 
 export type FindAccountByIdRepositoryResult = null | LoadAccountByTokenResult
 

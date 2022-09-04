@@ -1,4 +1,4 @@
-import { UpdateCharacterParams } from '@/domain/usecases'
+import { UpdateCharacterParams } from '@/domain/usecases/index.js'
 
 export type UpdateCharacterRepositoryParams = UpdateCharacterParams
 

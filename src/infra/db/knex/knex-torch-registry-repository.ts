@@ -7,8 +7,8 @@ import {
   UpdateManyTorchRegistriesRepositoryParams,
   UpdateTorchRegistryRepository,
   UpdateTorchRegistryRepositoryParams
-} from '@/data/protocols/repository'
-import { KnexHelper } from '@/infra/db/knex/knex-helper'
+} from '@/data/protocols/repository/index.js'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
 
 interface DbTorchRegistry {
   id: string
@@ -26,8 +26,11 @@ type TorchRegistryRepository = CreateTorchRegistryRepository
 
 export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   tableName = 'torch_registries'
+  #knexHelper: KnexHelper
 
-  constructor(private readonly knexHelper: KnexHelper) {}
+  constructor(knexHelper: KnexHelper) {
+    this.#knexHelper = knexHelper
+  }
 
   #mapFields = (dbData: DbTorchRegistry) => ({
     id: dbData.id,
@@ -38,7 +41,7 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   })
   
   async create(params: CreateTorchRegistryRepositoryParams) {
-    await this.knexHelper.table(this.tableName).insert({
+    await this.#knexHelper.table(this.tableName).insert({
       id: params.id,
       character_name: params.characterName,
       torch_count: params.torchCount,
@@ -48,7 +51,7 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   }
 
   async findById(id: string) {
-    const dbResult = await this.knexHelper
+    const dbResult = await this.#knexHelper
       .table(this.tableName)
       .where({ id })
       .first<DbTorchRegistry>()
@@ -57,7 +60,7 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   }
 
   async findAll() {
-    const dbResultList = await this.knexHelper
+    const dbResultList = await this.#knexHelper
       .table(this.tableName)
       .select('id', 'character_name', 'torch_count', 'torch_charge', 'is_lit')
 
@@ -65,7 +68,7 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   }
 
   async update(params: UpdateTorchRegistryRepositoryParams) {
-    await this.knexHelper
+    await this.#knexHelper
       .table(this.tableName)
       .where({ id: params.id })
       .update({
@@ -76,9 +79,9 @@ export class KnexTorchRegistryRepository implements TorchRegistryRepository {
   }
 
   async updateMany(params: UpdateManyTorchRegistriesRepositoryParams[]) {
-    await this.knexHelper.transaction(async (trx) => {
+    await this.#knexHelper.transaction(async (trx) => {
       await Promise.all(params.map(async record => {
-        return await this.knexHelper
+        return await this.#knexHelper
           .table(this.tableName)
           .where({ id: record.id })
           .update({

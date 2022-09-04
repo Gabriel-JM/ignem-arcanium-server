@@ -1,6 +1,6 @@
-import { ListAllCommonItemsRepository } from '@/data/protocols/repository'
-import { ListAllCommonItemsResult } from '@/domain/usecases'
-import { KnexHelper } from '@/infra/db/knex/knex-helper'
+import { ListAllCommonItemsRepository } from '@/data/protocols/repository/index.js'
+import { ListAllCommonItemsResult } from '@/domain/usecases/index.js'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
 
 const itemsFields = ([
   'id',

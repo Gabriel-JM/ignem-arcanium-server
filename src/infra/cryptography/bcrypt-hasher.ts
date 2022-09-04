@@ -1,11 +1,15 @@
 import bcrypt from 'bcrypt'
-import { HashComparer, TextHasher } from '@/data/protocols/cryptography'
+import { HashComparer, TextHasher } from '@/data/protocols/cryptography/index.js'
 
 export class BcryptHasher implements TextHasher, HashComparer {
-  constructor (private readonly salt: number) {}
+  #salt: number
+  
+  constructor (salt: number) {
+    this.#salt = salt
+  }
 
   async hash (value: string): Promise<string> {
-    const hash = await bcrypt.hash(value, this.salt)
+    const hash = await bcrypt.hash(value, this.#salt)
 
     return hash
   }
