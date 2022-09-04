@@ -1,6 +1,6 @@
-import { UpdateTorchRegistry } from '@/domain/usecases'
-import { noContent } from '@/presentation/helpers'
-import { Controller, HTTPResponse } from '@/presentation/protocols'
+import { UpdateTorchRegistry } from '@/domain/usecases/index.js'
+import { noContent } from '@/presentation/helpers/index.js'
+import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
 
 interface UpdateTorchRegistryControllerParams {
   id: string
@@ -10,10 +10,14 @@ interface UpdateTorchRegistryControllerParams {
 }
 
 export class UpdateTorchRegistryController implements Controller {
-  constructor(private readonly updateTorchRegistry: UpdateTorchRegistry) {}
+  #updateTorchRegistry: UpdateTorchRegistry
+  
+  constructor(updateTorchRegistry: UpdateTorchRegistry) {
+    this.#updateTorchRegistry = updateTorchRegistry
+  }
   
   async handle(params: UpdateTorchRegistryControllerParams): Promise<HTTPResponse> {
-    await this.updateTorchRegistry.update({
+    await this.#updateTorchRegistry.update({
       id: params.id,
       torchCount: params.torchCount,
       torchCharge: params.torchCharge,

@@ -1,13 +1,17 @@
-import { Validator } from '@/validation/protocols'
+import { Validator } from '@/validation/protocols/index.js'
 
 export class OneOfValuesValidator implements Validator {
+  #fields: Record<string, unknown[]>
+  
   constructor(
-    private readonly fields: Record<string, unknown[]>
-  ) {}
+    fields: Record<string, unknown[]>
+  ) {
+    this.#fields = fields
+  }
   
   validate(input: any): string[] {
     const invalidFields = Object
-      .entries(this.fields)
+      .entries(this.#fields)
       .filter(([field, options]) => {
         const fieldValue = input[field]
 

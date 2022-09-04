@@ -1,14 +1,18 @@
-import { CreateTorchRegistry, CreateTorchRegistryParams } from '@/domain/usecases'
-import { ok } from '@/presentation/helpers'
-import { Controller } from '@/presentation/protocols'
+import { CreateTorchRegistry, CreateTorchRegistryParams } from '@/domain/usecases/index.js'
+import { ok } from '@/presentation/helpers/index.js'
+import { Controller } from '@/presentation/protocols/index.js'
 
 type RequestParams = CreateTorchRegistryParams
 
 export class CreateTorchRegistryController implements Controller {
-  constructor(private readonly createTorchRegistry: CreateTorchRegistry) {}
+  #createTorchRegistry: CreateTorchRegistry
+  
+  constructor(createTorchRegistry: CreateTorchRegistry) {
+    this.#createTorchRegistry = createTorchRegistry
+  }
   
   async handle(params: RequestParams) {
-    const torchRegistryId = await this.createTorchRegistry.create({
+    const torchRegistryId = await this.#createTorchRegistry.create({
       characterName: params.characterName,
       torchCount: params.torchCount,
       torchCharge: params.torchCharge,

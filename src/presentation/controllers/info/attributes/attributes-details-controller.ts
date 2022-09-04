@@ -1,5 +1,5 @@
-import { ok, text } from '@/presentation/helpers'
-import { Controller, HTTPResponse } from '@/presentation/protocols'
+import { ok, text } from '@/presentation/helpers/index.js'
+import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
 
 export class AttributesDetailsController implements Controller {
   attributesDetails = {

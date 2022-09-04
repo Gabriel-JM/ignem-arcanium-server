@@ -1,12 +1,16 @@
-import { Validator } from '@/validation/protocols'
+import { Validator } from '@/validation/protocols/index.js'
 
 export class RegexValidator implements Validator {
-  constructor(private readonly fields: Record<string, RegExp>) {}
+  #fields: Record<string, RegExp>
+
+  constructor(fields: Record<string, RegExp>) {
+    this.#fields = fields
+  }
 
   validate(input: any): string[] {
-    const invalidFields = Object.keys(this.fields).filter(field => {
+    const invalidFields = Object.keys(this.#fields).filter(field => {
       const inputValue = input[field]
-      const regex = this.fields[field]
+      const regex = this.#fields[field]
 
       return !regex.test(inputValue)
     })

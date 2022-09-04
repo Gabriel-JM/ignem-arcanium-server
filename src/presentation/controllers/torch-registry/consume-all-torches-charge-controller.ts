@@ -1,12 +1,16 @@
-import { ConsumeAllTorchesCharge } from '@/domain/usecases'
-import { noContent } from '@/presentation/helpers'
-import { Controller, HTTPResponse } from '@/presentation/protocols'
+import { ConsumeAllTorchesCharge } from '@/domain/usecases/index.js'
+import { noContent } from '@/presentation/helpers/index.js'
+import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
 
 export class ConsumeAllTorchesChargeController implements Controller {
-  constructor(private readonly consumeAllTorchesCharge: ConsumeAllTorchesCharge) {}
+  #consumeAllTorchesCharge: ConsumeAllTorchesCharge
+  
+  constructor(consumeAllTorchesCharge: ConsumeAllTorchesCharge) {
+    this.#consumeAllTorchesCharge = consumeAllTorchesCharge
+  }
 
   async handle(): Promise<HTTPResponse> {
-    await this.consumeAllTorchesCharge.consumeAll()
+    await this.#consumeAllTorchesCharge.consumeAll()
 
     return noContent()
   }

@@ -1,4 +1,4 @@
-import { Validator } from '@/validation/protocols'
+import { Validator } from '@/validation/protocols/index.js'
 
 export interface CustomValidatorRecord {
   message: string
@@ -6,16 +6,20 @@ export interface CustomValidatorRecord {
 }
 
 export class CustomValidator implements Validator {
-  constructor(private readonly fields: Record<string, CustomValidatorRecord>) {}
+  #fields: Record<string, CustomValidatorRecord>
+
+  constructor(fields: Record<string, CustomValidatorRecord>) {
+    this.#fields = fields
+  }
   
   validate(input: any) {
-    const invalidFields = Object.keys(this.fields).filter(field => {
-      const { validationFn } = this.fields[field]
+    const invalidFields = Object.keys(this.#fields).filter(field => {
+      const { validationFn } = this.#fields[field]
       const value = input[field]
       
       return !validationFn(value)
     })
 
-    return invalidFields.map(field => this.fields[field].message)
+    return invalidFields.map(field => this.#fields[field].message)
   }
 }

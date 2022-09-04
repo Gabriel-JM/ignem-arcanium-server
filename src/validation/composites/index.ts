@@ -1,2 +1,2 @@
-export * from './validator-composite'
-export * from './list-validation-composite'
+export * from './validator-composite.js'
+export * from './list-validation-composite.js'

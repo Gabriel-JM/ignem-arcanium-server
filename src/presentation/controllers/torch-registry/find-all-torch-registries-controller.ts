@@ -1,12 +1,16 @@
-import { FindAllTorchRegistries } from '@/domain/usecases'
-import { ok } from '@/presentation/helpers'
-import { Controller } from '@/presentation/protocols'
+import { FindAllTorchRegistries } from '@/domain/usecases/index.js'
+import { ok } from '@/presentation/helpers/index.js'
+import { Controller } from '@/presentation/protocols/index.js'
 
 export class FindAllTorchRegistriesController implements Controller {
-  constructor(private readonly findAllTorchRegistries: FindAllTorchRegistries) {}
+  #findAllTorchRegistries: FindAllTorchRegistries
+
+  constructor(findAllTorchRegistries: FindAllTorchRegistries) {
+    this.#findAllTorchRegistries = findAllTorchRegistries
+  }
 
   async handle() {
-    const registries = await this.findAllTorchRegistries.findAll()
+    const registries = await this.#findAllTorchRegistries.findAll()
 
     return ok(registries)
   }
