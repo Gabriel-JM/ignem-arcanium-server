@@ -1,1 +1,1 @@
-export * from './torch'
+export * from './torch.js'

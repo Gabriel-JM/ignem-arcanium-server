@@ -1,15 +1,21 @@
-import { NotFoundError } from '@/data/errors'
-import { CheckCharacterRepository, DeleteCharacterRepository } from '@/data/protocols/repository'
-import { DeleteCharacter, DeleteCharacterParams } from '@/domain/usecases'
+import { NotFoundError } from '@/data/errors/index.js'
+import { CheckCharacterRepository, DeleteCharacterRepository } from '@/data/protocols/repository/index.js'
+import { DeleteCharacter, DeleteCharacterParams } from '@/domain/usecases/index.js'
 
 export class DbDeleteCharacter implements DeleteCharacter {
+  #checkCharacterRepository: CheckCharacterRepository
+  #deleteCharacterRepository: DeleteCharacterRepository  
+  
   constructor (
-    private readonly checkCharacterRepository: CheckCharacterRepository,
-    private readonly deleteCharacterRepository: DeleteCharacterRepository
-  ) {}
+    checkCharacterRepository: CheckCharacterRepository,
+    deleteCharacterRepository: DeleteCharacterRepository
+  ) {
+    this.#checkCharacterRepository = checkCharacterRepository
+    this.#deleteCharacterRepository = deleteCharacterRepository
+  }
   
   async delete(params: DeleteCharacterParams): Promise<void> {
-    const existsCharacter = await this.checkCharacterRepository.check({
+    const existsCharacter = await this.#checkCharacterRepository.check({
       id: params.id,
       accountId: params.accountId
     })
@@ -18,7 +24,7 @@ export class DbDeleteCharacter implements DeleteCharacter {
       throw new NotFoundError('Character')
     }
 
-    await this.deleteCharacterRepository.delete({
+    await this.#deleteCharacterRepository.delete({
       id: params.id,
       accountId: params.accountId
     })

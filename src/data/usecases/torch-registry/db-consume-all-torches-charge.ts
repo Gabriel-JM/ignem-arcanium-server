@@ -1,15 +1,24 @@
-import { FindAllTorchRegistriesRepository, UpdateManyTorchRegistriesRepository } from '@/data/protocols/repository'
-import { Torch } from '@/domain/entities/torch'
-import { ConsumeAllTorchesCharge } from '@/domain/usecases'
+import {
+  FindAllTorchRegistriesRepository,
+  UpdateManyTorchRegistriesRepository
+} from '@/data/protocols/repository/index.js'
+import { Torch } from '@/domain/entities/index.js'
+import { ConsumeAllTorchesCharge } from '@/domain/usecases/index.js'
 
 export class DbConsumeAllTorchesCharge implements ConsumeAllTorchesCharge {
+  #findAllTorchRegistriesRepository: FindAllTorchRegistriesRepository
+  #updateManyTorchRegistriesRepository: UpdateManyTorchRegistriesRepository  
+  
   constructor(
-    private readonly findAllTorchRegistriesRepository: FindAllTorchRegistriesRepository,
-    private readonly updateManyTorchRegistriesRepository: UpdateManyTorchRegistriesRepository
-  ) {}
+    findAllTorchRegistriesRepository: FindAllTorchRegistriesRepository,
+    updateManyTorchRegistriesRepository: UpdateManyTorchRegistriesRepository
+  ) {
+    this.#findAllTorchRegistriesRepository = findAllTorchRegistriesRepository
+    this.#updateManyTorchRegistriesRepository = updateManyTorchRegistriesRepository
+  }
   
   async consumeAll() {
-    const torchRegistries = await this.findAllTorchRegistriesRepository.findAll()
+    const torchRegistries = await this.#findAllTorchRegistriesRepository.findAll()
 
     if (!torchRegistries.length) return
 
@@ -28,6 +37,6 @@ export class DbConsumeAllTorchesCharge implements ConsumeAllTorchesCharge {
       }
     })
 
-    await this.updateManyTorchRegistriesRepository.updateMany(consumedTorchRegistries)
+    await this.#updateManyTorchRegistriesRepository.updateMany(consumedTorchRegistries)
   }
 }

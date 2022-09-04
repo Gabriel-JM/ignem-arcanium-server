@@ -1,7 +1,7 @@
-import { UniqueIdGenerator } from '@/data/protocols/identification'
-import { CreateCharacterRepository } from '@/data/protocols/repository'
-import { CreateCharacter, CreateCharacterParams, CreateCharacterResult } from '@/domain/usecases'
-import { CharacterHealthPoints, CharacterManaPoints } from '@/domain/value-objects'
+import { UniqueIdGenerator } from '@/data/protocols/identification/index.js'
+import { CreateCharacterRepository } from '@/data/protocols/repository/index.js'
+import { CreateCharacter, CreateCharacterParams, CreateCharacterResult } from '@/domain/usecases/index.js'
+import { CharacterHealthPoints, CharacterManaPoints } from '@/domain/value-objects/index.js'
 
 export class DbCreateCharacter implements CreateCharacter {
   #uniqueIdGenerator: UniqueIdGenerator

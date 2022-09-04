@@ -4,19 +4,25 @@ import { FindAccountByIdRepository } from '@/data/protocols/repository/index.js'
 import { LoadAccountByToken, LoadAccountByTokenResult } from '@/domain/usecases/index.js'
 
 export class DbLoadAccountByToken implements LoadAccountByToken {
+  #decrypter: Decrypter
+  #findAccountByIdRepository: FindAccountByIdRepository
+
   constructor(
-    private readonly decrypter: Decrypter,
-    private readonly findAccountByIdRepository: FindAccountByIdRepository
-  ) {}
+    decrypter: Decrypter,
+    findAccountByIdRepository: FindAccountByIdRepository
+  ) {
+    this.#decrypter = decrypter
+    this.#findAccountByIdRepository = findAccountByIdRepository
+  }
   
   async load(token: string): Promise<LoadAccountByTokenResult> {
-    const accountData = await this.decrypter.decrypt<Record<'id', string>>(token)
+    const accountData = await this.#decrypter.decrypt<Record<'id', string>>(token)
 
     if (!accountData) {
       throw new InvalidAccessTokenError()
     }
 
-    const account = await this.findAccountByIdRepository.findById(accountData.id)
+    const account = await this.#findAccountByIdRepository.findById(accountData.id)
 
     if (!account) {
       throw new InvalidAccessTokenError()

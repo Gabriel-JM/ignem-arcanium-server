@@ -1,11 +1,15 @@
-import { FindAllTorchRegistriesRepository } from '@/data/protocols/repository'
-import { FindAllTorchRegistries, FindAllTorchRegistriesResult } from '@/domain/usecases'
+import { FindAllTorchRegistriesRepository } from '@/data/protocols/repository/index.js'
+import { FindAllTorchRegistries } from '@/domain/usecases/index.js'
 
 export class DbFindAllTorchRegistries implements FindAllTorchRegistries {
-  constructor(private readonly findAllTorchRegistriesRepository: FindAllTorchRegistriesRepository) {}
+  #findAllTorchRegistriesRepository: FindAllTorchRegistriesRepository
+
+  constructor(findAllTorchRegistriesRepository: FindAllTorchRegistriesRepository) {
+    this.#findAllTorchRegistriesRepository = findAllTorchRegistriesRepository
+  }
 
   async findAll() {
-    const torchRegistriesList = await this.findAllTorchRegistriesRepository.findAll()
+    const torchRegistriesList = await this.#findAllTorchRegistriesRepository.findAll()
 
     return torchRegistriesList
   }

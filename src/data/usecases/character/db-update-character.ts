@@ -1,11 +1,15 @@
-import { UpdateCharacterRepository } from '@/data/protocols/repository'
-import { UpdateCharacter, UpdateCharacterParams } from '@/domain/usecases'
+import { UpdateCharacterRepository } from '@/data/protocols/repository/index.js'
+import { UpdateCharacter, UpdateCharacterParams } from '@/domain/usecases/index.js'
 
 export class DbUpdateCharacter implements UpdateCharacter {
-  constructor(private readonly updateCharacterRepository: UpdateCharacterRepository) {}
+  #updateCharacterRepository: UpdateCharacterRepository
+
+  constructor(updateCharacterRepository: UpdateCharacterRepository) {
+    this.#updateCharacterRepository = updateCharacterRepository
+  }
   
   async update(params: UpdateCharacterParams): Promise<void> {
-    await this.updateCharacterRepository.update({
+    await this.#updateCharacterRepository.update({
       ...params
     })
   }

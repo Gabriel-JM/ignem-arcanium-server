@@ -1,12 +1,16 @@
-import { InvalidAccessTokenError } from '@/data/errors'
-import { EncryptionVerifier } from '@/data/protocols/cryptography'
-import { VerifyToken, VerifyTokenParams } from '@/domain/usecases'
+import { InvalidAccessTokenError } from '@/data/errors/index.js'
+import { EncryptionVerifier } from '@/data/protocols/cryptography/index.js'
+import { VerifyToken, VerifyTokenParams } from '@/domain/usecases/index.js'
 
 export class LocalVerifyToken implements VerifyToken {
-  constructor(private readonly encryptionVerifier: EncryptionVerifier) {}
+  #encryptionVerifier: EncryptionVerifier
+
+  constructor(encryptionVerifier: EncryptionVerifier) {
+    this.#encryptionVerifier = encryptionVerifier
+  }
   
   verify({ token }: VerifyTokenParams): void {
-    const isValid = this.encryptionVerifier.verify(token)
+    const isValid = this.#encryptionVerifier.verify(token)
 
     if (!isValid) {
       throw new InvalidAccessTokenError()

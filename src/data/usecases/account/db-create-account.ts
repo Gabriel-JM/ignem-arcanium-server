@@ -5,33 +5,45 @@ import { CheckAccountByEmailRepository, CreateAccountRepository } from '@/data/p
 import { CreateAccount, CreateAccountParams, CreateAccountResult } from '@/domain/usecases/index.js'
 
 export class DbCreateAccount implements CreateAccount {
+  #checkAccountByEmailRepository: CheckAccountByEmailRepository
+  #uniqueIdGenerator: UniqueIdGenerator
+  #textHasher: TextHasher
+  #createAccountRepository: CreateAccountRepository
+  #encrypter: Encrypter  
+  
   constructor(
-    private readonly checkAccountByEmailRepository: CheckAccountByEmailRepository,
-    private readonly uniqueIdGenerator: UniqueIdGenerator,
-    private readonly textHasher: TextHasher,
-    private readonly createAccountRepository: CreateAccountRepository,
-    private readonly encrypter: Encrypter
-  ) {}
+    checkAccountByEmailRepository: CheckAccountByEmailRepository,
+    uniqueIdGenerator: UniqueIdGenerator,
+    textHasher: TextHasher,
+    createAccountRepository: CreateAccountRepository,
+    encrypter: Encrypter
+  ) {
+    this.#checkAccountByEmailRepository = checkAccountByEmailRepository
+    this.#uniqueIdGenerator = uniqueIdGenerator
+    this.#textHasher = textHasher
+    this.#createAccountRepository = createAccountRepository
+    this.#encrypter = encrypter
+  }
   
   async create(params: CreateAccountParams): Promise<CreateAccountResult> {
-    const exists = await this.checkAccountByEmailRepository.checkByEmail(params.email)
+    const exists = await this.#checkAccountByEmailRepository.checkByEmail(params.email)
 
     if (exists) {
       throw new EmailAlreadyInUseError()
     }
 
-    const id = this.uniqueIdGenerator.generate()
+    const id = this.#uniqueIdGenerator.generate()
 
-    const hashedPassword = await this.textHasher.hash(params.password)
+    const hashedPassword = await this.#textHasher.hash(params.password)
 
-    await this.createAccountRepository.create({
+    await this.#createAccountRepository.create({
       id,
       name: params.name,
       email: params.email,
       password: hashedPassword
     })
 
-    const token = await this.encrypter.encrypt({ id, name: params.name })
+    const token = await this.#encrypter.encrypt({ id, name: params.name })
 
     return {
       name: params.name,

@@ -1,11 +1,10 @@
-import { InvalidTorchAdditionValueError } from '@/data/errors'
-import { TorchRegistryNotFoundError } from '@/data/errors/torch-registry-not-found-error'
+import { InvalidTorchAdditionValueError, TorchRegistryNotFoundError } from '@/data/errors/index.js'
 import {
   FindTorchRegistryByIdRepository,
   UpdateTorchRegistryRepository
-} from '@/data/protocols/repository'
-import { Torch } from '@/domain/entities'
-import { UpdateTorchRegistry, UpdateTorchRegistryParams } from '@/domain/usecases'
+} from '@/data/protocols/repository/index.js'
+import { Torch } from '@/domain/entities/index.js'
+import { UpdateTorchRegistry, UpdateTorchRegistryParams } from '@/domain/usecases/index.js'
 
 export class DbUpdateTorchRegistry implements UpdateTorchRegistry {
   #torchAdditionStringFormat = /^(\+|\-)\d{1,2}$/
