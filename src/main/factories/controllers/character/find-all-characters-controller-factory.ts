@@ -1,8 +1,8 @@
-import { DbFindAllCharacters } from '@/data/usecases'
-import { ErrorHandlerControllerDecorator } from '@/main/decorators'
-import { makeAuthDecorator } from '@/main/factories/decorators'
-import { makeKnexCharacterRepository } from '@/main/factories/repositories'
-import { GenericController } from '@/presentation/controllers'
+import { DbFindAllCharacters } from '@/data/usecases/index.js'
+import { ErrorHandlerControllerDecorator } from '@/main/decorators/index.js'
+import { makeAuthDecorator } from '@/main/factories/decorators/index.js'
+import { makeKnexCharacterRepository } from '@/main/factories/repositories/index.js'
+import { GenericController } from '@/presentation/controllers/index.js'
 
 export function makeFindAllCharactersController() {
   const knexCharacterRepository = makeKnexCharacterRepository()

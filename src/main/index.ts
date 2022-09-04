@@ -1,7 +1,7 @@
 import 'dotenv-safe/config'
 import 'module-alias/register'
-import { server } from './server/app'
-import { knexConnection } from '@/main/factories/repositories'
+import { server } from './server/app.js'
+import { knexConnection } from '@/main/factories/repositories/index.js'
 
 const port = process.env.PORT || 8000
 

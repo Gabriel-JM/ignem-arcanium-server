@@ -1,4 +1,4 @@
-import { BcryptHasher } from '@/infra/cryptography'
+import { BcryptHasher } from '@/infra/cryptography/index.js'
 
 export function makeBcryptHasher() {
   const salt = 12

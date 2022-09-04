@@ -1,5 +1,9 @@
-import { ValidatorComposite } from '@/validation/composites'
-import { RegexValidator, RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
+import { ValidatorComposite } from '@/validation/composites/index.js'
+import {
+  RegexValidator,
+  RequiredFieldsValidator,
+  TypeValidator
+} from '@/validation/validators/index.js'
 
 export function makeAccountLoginValidator() {
   return new ValidatorComposite(

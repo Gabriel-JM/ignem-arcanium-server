@@ -1,6 +1,6 @@
-import { InvalidAccessTokenError } from '@/data/errors'
-import { LoadAccountByToken } from '@/domain/usecases'
-import { Controller, HTTPResponse } from '@/presentation/protocols'
+import { InvalidAccessTokenError } from '@/data/errors/index.js'
+import { LoadAccountByToken } from '@/domain/usecases/index.js'
+import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
 
 interface AuthControllerDecoratorParams {
   authorization: string

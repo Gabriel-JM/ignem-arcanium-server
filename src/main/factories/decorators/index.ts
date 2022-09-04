@@ -1,2 +1,2 @@
-export * from './error-and-validation-decorators-factory'
-export * from './auth-decorator-factory'
+export * from './error-and-validation-decorators-factory.js'
+export * from './auth-decorator-factory.js'

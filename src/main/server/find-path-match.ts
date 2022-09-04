@@ -1,4 +1,4 @@
-import { HttpRouteHandler } from '@/main/server/router'
+import { HttpRouteHandler } from '@/main/server/router.js'
 
 interface RouteInfo {
 	method: string

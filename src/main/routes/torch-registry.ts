@@ -1,7 +1,11 @@
-import { adaptEvent } from '@/main/adapters'
-import { makeConsumeAllTorchesController, makeCreateTorchRegistryController, makeFindAllTorchRegistriesController } from '@/main/factories/controllers'
-import { makeUpdateTorchRegistryController } from '@/main/factories/controllers/torch-registry/update-torch-registry-controller-factory'
-import { Router } from '@/main/server/router'
+import { adaptEvent } from '@/main/adapters/index.js'
+import {
+  makeConsumeAllTorchesController,
+  makeCreateTorchRegistryController,
+  makeFindAllTorchRegistriesController,
+  makeUpdateTorchRegistryController
+} from '@/main/factories/controllers/index.js'
+import { Router } from '@/main/server/router.js'
 
 export function torchRegistryRoutes(router: Router) {
   router.wsEvent('create-torch-registry', adaptEvent(

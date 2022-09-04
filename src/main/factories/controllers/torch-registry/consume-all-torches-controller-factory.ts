@@ -1,7 +1,7 @@
-import { DbConsumeAllTorchesCharge } from '@/data/usecases'
-import { ErrorHandlerControllerDecorator } from '@/main/decorators'
-import { makeKnexTorchRegistryRepository } from '@/main/factories/repositories'
-import { ConsumeAllTorchesChargeController } from '@/presentation/controllers'
+import { DbConsumeAllTorchesCharge } from '@/data/usecases/index.js'
+import { ErrorHandlerControllerDecorator } from '@/main/decorators/index.js'
+import { makeKnexTorchRegistryRepository } from '@/main/factories/repositories/index.js'
+import { ConsumeAllTorchesChargeController } from '@/presentation/controllers/index.js'
 
 export function makeConsumeAllTorchesController() {
   const torchRegistryRepository = makeKnexTorchRegistryRepository()

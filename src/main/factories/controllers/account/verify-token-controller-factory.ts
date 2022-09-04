@@ -1,9 +1,9 @@
-import { LocalVerifyToken } from '@/data/usecases'
-import { JwtEncrypter } from '@/infra/cryptography'
-import { applyErrorAndValidationDecorators } from '@/main/factories/decorators'
-import { makeVerifyTokenValidator } from '@/main/factories/validators/account/verify-token-validator-factory'
-import { GenericController } from '@/presentation/controllers'
-import { noContent } from '@/presentation/helpers'
+import { LocalVerifyToken } from '@/data/usecases/index.js'
+import { JwtEncrypter } from '@/infra/cryptography/index.js'
+import { applyErrorAndValidationDecorators } from '@/main/factories/decorators/index.js'
+import { makeVerifyTokenValidator } from '@/main/factories/validators/index.js'
+import { GenericController } from '@/presentation/controllers/index.js'
+import { noContent } from '@/presentation/helpers/index.js'
 
 export function makeVerifyTokenController() {
   const jwtEncrypter = new JwtEncrypter(process.env.ENCRYPTER_SECRET)

@@ -1,6 +1,9 @@
-import { ValidatorComposite } from '@/validation/composites'
-import { RequiredFieldsValidator, TypeValidator } from '@/validation/validators'
-import { CustomValidator } from '@/validation/validators/custom-validator'
+import { ValidatorComposite } from '@/validation/composites/index.js'
+import {
+  CustomValidator,
+  RequiredFieldsValidator,
+  TypeValidator
+} from '@/validation/validators/index.js'
 
 export function makeUpdateTorchRegistryValidator() {
   const validator = new ValidatorComposite(

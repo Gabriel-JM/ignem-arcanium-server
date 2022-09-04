@@ -1,10 +1,10 @@
 import { createServer } from 'node:http'
 import crypto from 'node:crypto'
 import { server as WebSocketServer } from 'websocket'
-import { RouteContext, router } from '@/main/server/router'
-import { defineRoutes } from '@/main/config/routes'
-import { getRequestData } from '@/main/server/get-request-data'
-import { cors } from '@/main/server/cors'
+import { RouteContext, router } from '@/main/server/router.js'
+import { defineRoutes } from '@/main/config/routes.js'
+import { getRequestData } from '@/main/server/get-request-data.js'
+import { cors } from '@/main/server/cors.js'
 
 const server = createServer(async (req, res) => {
   const { method = 'GET', url } = req

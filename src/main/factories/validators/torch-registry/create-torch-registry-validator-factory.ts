@@ -1,9 +1,9 @@
-import { ValidatorComposite } from '@/validation/composites'
+import { ValidatorComposite } from '@/validation/composites/index.js'
 import {
   RequiredFieldsValidator,
   TypeValidator,
   ValueInBetweenValidator
-} from '@/validation/validators'
+} from '@/validation/validators/index.js'
 
 export function makeCreateTorchRegistryValidator() {
   const validator = new ValidatorComposite(
