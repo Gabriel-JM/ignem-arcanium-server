@@ -1,5 +1,5 @@
 import { Knex } from 'knex'
-import { makeTools } from '../data/tools'
+import { makeTools } from '../data/tools.js'
 
 const tools = makeTools()
 

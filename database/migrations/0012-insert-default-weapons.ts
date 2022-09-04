@@ -1,5 +1,5 @@
 import { Knex } from 'knex'
-import { makeWeapons } from '../data/weapons'
+import { makeWeapons } from '../data/weapons.js'
 
 const weapons = makeWeapons()
 

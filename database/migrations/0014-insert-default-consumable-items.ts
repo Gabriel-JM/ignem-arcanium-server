@@ -1,5 +1,5 @@
 import { Knex } from 'knex'
-import { makeConsumableItems } from '../data/consumable-items'
+import { makeConsumableItems } from '../data/consumable-items.js'
 
 const consumables = makeConsumableItems()
 

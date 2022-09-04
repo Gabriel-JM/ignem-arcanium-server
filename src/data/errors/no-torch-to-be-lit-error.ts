@@ -1,4 +1,4 @@
-import { CreateTorchRegistryParams } from '@/domain/usecases'
+import { CreateTorchRegistryParams } from '@/domain/usecases/index.js'
 
 export class NoTorchToBeLitError extends Error {
   name = 'NoTorchToBeLitError'
