@@ -1,6 +1,6 @@
-import { KnexAccountRepository } from '@/infra/db'
-import { KnexHelper } from '@/infra/db/knex/knex-helper'
-import { mockKnex } from '@/tests/unit/mocks'
+import { KnexAccountRepository } from '@/infra/db/index.js'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
+import { mockKnex } from '@/tests/unit/mocks/index.js'
 import { Knex } from 'knex'
 
 function makeSut() {

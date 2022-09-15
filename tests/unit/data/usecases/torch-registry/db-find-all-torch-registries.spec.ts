@@ -1,5 +1,5 @@
-import { DbFindAllTorchRegistries } from '@/data/usecases'
-import { mockfindAllTorchRegistriesRepository } from '@/tests/unit/mocks'
+import { DbFindAllTorchRegistries } from '@/data/usecases/index.js'
+import { mockfindAllTorchRegistriesRepository } from '@/tests/unit/mocks/index.js'
 
 function makeSut() {
   const findAllTorchRegistriesRepositorySpy = mockfindAllTorchRegistriesRepository()

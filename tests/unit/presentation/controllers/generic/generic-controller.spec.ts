@@ -1,5 +1,5 @@
-import { GenericController } from '@/presentation/controllers'
-import { badRequest, ok } from '@/presentation/helpers'
+import { GenericController } from '@/presentation/controllers/index.js'
+import { badRequest, ok } from '@/presentation/helpers/index.js'
 
 function makeSut(responseFunction = ok) {
   const fakeUsecaseMethod = vi.fn(() => Promise.resolve({

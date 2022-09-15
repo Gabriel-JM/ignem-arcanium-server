@@ -1,6 +1,10 @@
-import { AccountNotFoundError } from '@/data/errors'
-import { DbAccountLogin } from '@/data/usecases'
-import { mockEncrypter, mockFindAccountByEmailRepository, mockHashComparer } from '@/tests/unit/mocks'
+import { AccountNotFoundError } from '@/data/errors/index.js'
+import { DbAccountLogin } from '@/data/usecases/index.js'
+import {
+  mockEncrypter,
+  mockFindAccountByEmailRepository,
+  mockHashComparer
+} from '@/tests/unit/mocks/index.js'
 
 function makeSut() {
   const findAccountByEmailRepositorySpy = mockFindAccountByEmailRepository()

@@ -1,4 +1,4 @@
-import { FindAccountByEmailRepositoryResult } from '@/data/protocols/repository'
+import { FindAccountByEmailRepositoryResult } from '@/data/protocols/repository/index.js'
 
 export function fakeAccount() {
   return {
@@ -39,7 +39,7 @@ export function mockFindAccountByEmailRepository() {
 
   return {
     result,
-    findByEmail: vi.fn<Promise<FindAccountByEmailRepositoryResult>, []>(
+    findByEmail: vi.fn<[], Promise<FindAccountByEmailRepositoryResult>>(
       () => Promise.resolve(result)
     )
   }

@@ -1,4 +1,4 @@
-import { FindTorchRegistryByIdRepositoryResult } from '@/data/protocols/repository'
+import { FindTorchRegistryByIdRepositoryResult } from '@/data/protocols/repository/index.js'
 
 export const dummyFindAllTorchRegistriesRepositoryResult = [{
   id: 'any_id',
@@ -47,8 +47,8 @@ export function mockFindTorchRegistryByIdRepository() {
   return {
     result,
     findById: vi.fn<
-      Promise<FindTorchRegistryByIdRepositoryResult>,
-      []
+      [],
+      Promise<FindTorchRegistryByIdRepositoryResult>
     >(() => Promise.resolve(result))
   }
 }

@@ -1,4 +1,4 @@
-import { CharacterManaPoints } from '@/domain/value-objects'
+import { CharacterManaPoints } from '@/domain/value-objects/index.js'
 
 describe('CharacterManaPoints', () => {
   it('should generate the correct mana points value', () => {

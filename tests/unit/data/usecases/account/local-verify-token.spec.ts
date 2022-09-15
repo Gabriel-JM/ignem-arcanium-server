@@ -1,6 +1,6 @@
-import { InvalidAccessTokenError } from '@/data/errors'
-import { LocalVerifyToken } from '@/data/usecases'
-import { mockEncryptionVerifier } from '@/tests/unit/mocks'
+import { InvalidAccessTokenError } from '@/data/errors/index.js'
+import { LocalVerifyToken } from '@/data/usecases/index.js'
+import { mockEncryptionVerifier } from '@/tests/unit/mocks/index.js'
 
 function makeSut() {
   const encryptionVerifierSpy = mockEncryptionVerifier()

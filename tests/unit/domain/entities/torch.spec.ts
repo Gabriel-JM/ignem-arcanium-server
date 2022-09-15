@@ -1,4 +1,4 @@
-import { Torch, TorchData } from '@/domain/entities'
+import { Torch, TorchData } from '@/domain/entities/index.js'
 
 const makeSut = ({
   count = 1,

@@ -1,11 +1,11 @@
-import { EmailAlreadyInUseError } from '@/data/errors'
-import { DbCreateAccount } from '@/data/usecases'
-import { mockCheckAccountByEmailRepository, mockUniqueIdGenerator } from '@/tests/unit/mocks'
+import { EmailAlreadyInUseError } from '@/data/errors/index.js'
+import { DbCreateAccount } from '@/data/usecases/index.js'
+import { mockCheckAccountByEmailRepository, mockUniqueIdGenerator } from '@/tests/unit/mocks/index.js'
 import {
   mockCreateAccountRepository,
   mockEncrypter,
   mockTextHasher
-} from '@/tests/unit/mocks'
+} from '@/tests/unit/mocks/index.js'
 
 function makeSut() {
   const checkAccountByEmailRepositorySpy = mockCheckAccountByEmailRepository()

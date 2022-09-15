@@ -1,4 +1,4 @@
-import { RequiredFieldsValidator } from '@/validation/validators'
+import { RequiredFieldsValidator } from '@/validation/validators/index.js'
 
 function makeSut(fields: string[]) {
   return new RequiredFieldsValidator(...fields)

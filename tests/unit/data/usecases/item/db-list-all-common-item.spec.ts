@@ -1,5 +1,5 @@
-import { DbListAllCommonItems } from '@/data/usecases'
-import { mockListAllCommonItemsRepository } from '@/tests/unit/mocks/items'
+import { DbListAllCommonItems } from '@/data/usecases/index.js'
+import { mockListAllCommonItemsRepository } from '@/tests/unit/mocks/index.js'
 
 function makeSut() {
   const listAllCommonItemsRepositorySpy = mockListAllCommonItemsRepository()

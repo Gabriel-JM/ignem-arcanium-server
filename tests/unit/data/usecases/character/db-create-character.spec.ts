@@ -1,5 +1,9 @@
-import { DbCreateCharacter } from '@/data/usecases'
-import { fakeCreateCharacterParams, mockCreateCharacterRepository, mockUniqueIdGenerator } from '@/tests/unit/mocks'
+import { DbCreateCharacter } from '@/data/usecases/index.js'
+import {
+  fakeCreateCharacterParams,
+  mockCreateCharacterRepository,
+  mockUniqueIdGenerator
+} from '@/tests/unit/mocks/index.js'
 
 function makeSut() {
   const uniqueIdGeneratorSpy = mockUniqueIdGenerator()

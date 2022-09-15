@@ -3,7 +3,7 @@ vi.mock('nanoid', () => {
 })
 
 import { nanoid } from 'nanoid'
-import { NanoIdUniqueIdGenerator } from '@/infra/identification'
+import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
 
 describe('NanoIdUniqueIdGenerator', () => {
   it('should call nanoid function', () => {

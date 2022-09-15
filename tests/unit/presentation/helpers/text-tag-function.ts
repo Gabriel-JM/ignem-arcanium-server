@@ -1,4 +1,4 @@
-import { text } from '@/presentation/helpers'
+import { text } from '@/presentation/helpers/index.js'
 
 describe('textTagFunction', () => {
   it('should remove all line breaks', () => {

@@ -1,6 +1,6 @@
-import { KnexCharacterRepository } from '@/infra/db'
-import { KnexHelper } from '@/infra/db/knex/knex-helper'
-import { fakeCharacter, fakeCreateCharacterParams, mockKnex } from '@/tests/unit/mocks'
+import { KnexCharacterRepository } from '@/infra/db/index.js'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
+import { fakeCharacter, fakeCreateCharacterParams, mockKnex, mockUniqueIdGenerator } from '@/tests/unit/mocks/index.js'
 import { Knex } from 'knex'
 
 function makeSut() {
@@ -19,7 +19,8 @@ function makeSut() {
     'rollback'
   )
   const knexHelper = new KnexHelper(fakeKnex as unknown as Knex)
-  const sut = new KnexCharacterRepository(knexHelper)
+  const uniqueIdGeneratorSpy = mockUniqueIdGenerator()
+  const sut = new KnexCharacterRepository(knexHelper, uniqueIdGeneratorSpy)
 
   return {
     sut,

@@ -1,6 +1,6 @@
-import { ConsumeAllTorchesChargeController } from '@/presentation/controllers'
-import { noContent } from '@/presentation/helpers'
-import { mockConsumeAllTorchesCharge } from '@/tests/unit/mocks'
+import { ConsumeAllTorchesChargeController } from '@/presentation/controllers/index.js'
+import { noContent } from '@/presentation/helpers/index.js'
+import { mockConsumeAllTorchesCharge } from '@/tests/unit/mocks/index.js'
 
 function makeSut() {
   const consumeAllTorchesChargeSpy = mockConsumeAllTorchesCharge()

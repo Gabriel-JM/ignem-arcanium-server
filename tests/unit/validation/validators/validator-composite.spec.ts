@@ -1,5 +1,5 @@
-import { ValidatorComposite } from '@/validation/composites'
-import { Validator } from '@/validation/protocols'
+import { ValidatorComposite } from '@/validation/composites/index.js'
+import { Validator } from '@/validation/protocols/index.js'
 
 class FakeValidator implements Validator {
   result: string[] = []
@@ -9,7 +9,7 @@ class FakeValidator implements Validator {
 function makeSut() {
   const validator1 = new FakeValidator()
   const validator2 = new FakeValidator()
-  const sut = new ValidatorComposite([validator1, validator2])
+  const sut = new ValidatorComposite(validator1, validator2)
 
   return {
     sut,

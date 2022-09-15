@@ -1,5 +1,5 @@
-import { DbFindAllCharacters } from '@/data/usecases'
-import { mockFindAllCharactersRepository } from '@/tests/unit/mocks'
+import { DbFindAllCharacters } from '@/data/usecases/index.js'
+import { mockFindAllCharactersRepository } from '@/tests/unit/mocks/index.js'
 
 function makeSut() {
   const findAllCharactersRepositorySpy = mockFindAllCharactersRepository()

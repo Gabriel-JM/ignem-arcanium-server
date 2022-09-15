@@ -33,6 +33,6 @@ export function mockDecrypter() {
   
   return {
     result,
-    decrypt: vi.fn<any, []>(() => Promise.resolve(result))
+    decrypt: vi.fn<[], Promise<any>>(() => Promise.resolve(result))
   }
 }

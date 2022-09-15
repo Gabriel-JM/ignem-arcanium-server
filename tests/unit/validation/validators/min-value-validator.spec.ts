@@ -1,4 +1,4 @@
-import { MinValueValidator } from '@/validation/validators'
+import { MinValueValidator } from '@/validation/validators/index.js'
 
 function makeSut(fields: Record<string, number>) {
   const sut = new MinValueValidator(fields)

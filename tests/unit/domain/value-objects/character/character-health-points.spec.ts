@@ -1,4 +1,4 @@
-import { CharacterHealthPoints } from '@/domain/value-objects'
+import { CharacterHealthPoints } from '@/domain/value-objects/index.js'
 
 describe('CharacterHealthPoints', () => {
   it('should generate the correct health points value', () => {
