@@ -17,7 +17,7 @@ export default defineConfig({
     globals: true,
     coverage: {
       reportsDirectory: '../../coverage',
-      exclude: ['src/main']
+      exclude: ['src/main', 'src/presentation/controllers/info']
     }
   }
 })
