@@ -34,7 +34,7 @@ async function setupSut() {
     constitution: 1,
     intelligence: 1,
     wisdom: 1,
-    charism: 1
+    charisma: 1
   }
 
   const dbCharacter = {

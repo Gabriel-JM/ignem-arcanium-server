@@ -7,6 +7,14 @@ export type EquipementSlotErrors = Array<{
   item: Item
 }>
 
+export interface EquipmentProps {
+  leftHand: Weapon | ShieldOrArmor
+  rightHand: Weapon | ShieldOrArmor
+  armor: ShieldOrArmor
+  accessory1: Item
+  accessory2: Item
+}
+
 export class Equipment {
   #leftHand: Weapon | ShieldOrArmor
   #rightHand: Weapon | ShieldOrArmor
@@ -14,13 +22,13 @@ export class Equipment {
   #accessory1: Item
   #accessory2: Item
   
-  constructor(
-    leftHand: Weapon | ShieldOrArmor,
-    rightHand: Weapon | ShieldOrArmor,
-    armor: ShieldOrArmor,
-    accessory1: Item,
-    accessory2: Item
-  ) {
+  constructor({
+    leftHand,
+    rightHand,
+    armor,
+    accessory1,
+    accessory2
+  }: EquipmentProps) {
     this.#leftHand = leftHand
     this.#rightHand = rightHand
     this.#armor = armor
