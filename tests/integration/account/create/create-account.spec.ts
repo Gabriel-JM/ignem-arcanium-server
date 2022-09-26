@@ -1,7 +1,7 @@
 import chai from 'chai'
 import chaiHttp from 'chai-http'
-import { server } from '@/main/server/app'
-import { testKnex } from '@/tests/integration/test-db-connection/knex'
+import { server } from '@/main/server/app.js'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { randomUUID } from 'crypto'
 
 describe('Create account', () => {

@@ -1,9 +1,9 @@
 import chai from 'chai'
 import chaiHttp from 'chai-http'
-import { server } from '@/main/server/app'
-import { testKnex } from '@/tests/integration/test-db-connection/knex'
+import { server } from '@/main/server/app.js'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { nanoid } from 'nanoid'
-import { JwtEncrypter } from '@/infra/cryptography'
+import { JwtEncrypter } from '@/infra/cryptography/index.js'
 
 describe('Create account', () => {
   beforeAll(async () => {

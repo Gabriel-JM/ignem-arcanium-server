@@ -1,6 +1,6 @@
 import chai from 'chai'
 import chaiHttp from 'chai-http'
-import { server } from '@/main/server/app'
+import { server } from '@/main/server/app.js'
 
 describe('Create account validation', () => {
   beforeAll(() => {

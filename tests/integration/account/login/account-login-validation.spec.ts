@@ -1,4 +1,4 @@
-import { server } from '@/main/server/app'
+import { server } from '@/main/server/app.js'
 import chai from 'chai'
 import chaiHttp from 'chai-http'
 
