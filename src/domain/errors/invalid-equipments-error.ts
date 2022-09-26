@@ -3,10 +3,12 @@ import { EquipementSlotErrors } from '@/domain/entities/equipment.js'
 export class InvalidEquipmentsError extends Error {
   name = 'InvalidEquipmentError'
   type = 'BusinessRule'
-  details: EquipementSlotErrors
+  details: string[]
 
   constructor(equipmentErrors: EquipementSlotErrors) {
     super('Invalid equipments')
-    this.details = equipmentErrors
+    this.details = equipmentErrors.map(err => {
+      return `Item ${err.item.name} cannot be equipped in ${err.slot}`
+    })
   }
 }

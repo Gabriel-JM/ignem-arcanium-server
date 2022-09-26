@@ -31,7 +31,7 @@ export class ErrorHandlerControllerDecorator implements Controller {
       return responseType({
         error: {
           name: error.name,
-          details: error.details ?? [{ message: error.message }]
+          details: error.details ?? [error.message]
         }
       })
     }
