@@ -1,9 +1,9 @@
 import chai from 'chai'
 import chaiHttp from 'chai-http'
-import { server } from '@/main/server/app'
-import { testKnex } from '@/tests/integration/test-db-connection/knex'
-import { NanoIdUniqueIdGenerator } from '@/infra/identification'
-import { JwtEncrypter } from '@/infra/cryptography'
+import { server } from '@/main/server/app.js'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
+import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
+import { JwtEncrypter } from '@/infra/cryptography/index.js'
 
 async function setupSut() {
   const idGenerator = new NanoIdUniqueIdGenerator()

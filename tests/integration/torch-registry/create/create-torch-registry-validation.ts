@@ -1,6 +1,6 @@
 import request from 'superwstest'
-import { server } from '@/main/server/app'
-import { createConnectionValidation } from '@/tests/integration/connection'
+import { server } from '@/main/server/app.js'
+import { createConnectionValidation } from '@/tests/integration/connection/index.js'
 
 describe('Create torch registry validation', () => {
   beforeEach(() => void server.listen(0, 'localhost'))

@@ -1,6 +1,6 @@
-import { server } from '@/main/server/app'
-import { createConnectionValidation, initServerAndDb } from '@/tests/integration/connection'
-import { testKnex } from '@/tests/integration/test-db-connection/knex'
+import { server } from '@/main/server/app.js'
+import { createConnectionValidation, initServerAndDb } from '@/tests/integration/connection/index.js'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import request from 'superwstest'
 
 describe('Create torch registry', () => {

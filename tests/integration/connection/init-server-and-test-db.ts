@@ -1,4 +1,4 @@
-import { Server } from 'http'
+import { Server } from 'node:http'
 import { Knex } from 'knex'
 
 export function initServerAndDb(server: Server, testKnex: Knex, tableName: string) {
