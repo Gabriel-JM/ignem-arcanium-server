@@ -1,20 +1,24 @@
+export type ItemTypes = (
+  | 'CONSUMABLE'
+  | 'WEAPON'
+  | 'SHIELD'
+  | 'ARMOR'
+  | 'ACCESSORY'
+  | 'OIL'
+  | 'OINTMENT'
+  | 'POTION'
+)
+
 export interface Item {
   id: string
   name: string
-  type: string
+  type: ItemTypes
   description: string
   price: number
   weight: number
   rarity: string
   charges?: number
   requirements: Record<string, number>
-}
-
-export interface Weapon extends Item {
-  damage: Record<string, string>
-  properties: string[]
-  initiativeModifier: number
-  distance: number
 }
 
 export interface ShieldOrArmor extends Item {

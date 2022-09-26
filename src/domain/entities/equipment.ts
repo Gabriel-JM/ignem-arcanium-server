@@ -1,5 +1,5 @@
 import { InvalidEquipmentsError } from '@/domain/errors/invalid-equipments-error.js'
-import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/items.js'
+import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
 
 export type EquipementSlotErrors = Array<{
   slot: string

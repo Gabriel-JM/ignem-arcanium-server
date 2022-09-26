@@ -1,10 +1,10 @@
-import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/items.js'
+import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
 
 export function fakeItem() {
   return <Item> {
     id: 'any_id',
     name: 'any_name',
-    type: 'any_type',
+    type: 'CONSUMABLE',
     description: 'any_description',
     rarity: 'any_rarity',
     charges: 0,
