@@ -1,1 +1,1 @@
-export * from './invalid-equipments-error.js'
+export * from './equipment/index.js'

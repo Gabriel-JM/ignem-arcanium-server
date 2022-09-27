@@ -1,4 +1,5 @@
-import { InvalidEquipmentsError } from '@/domain/errors/invalid-equipments-error.js'
+import { InvalidEquipmentsError } from '@/domain/errors/equipment/invalid-equipments-error.js'
+import { TwoHandsInUseError } from '@/domain/errors/index.js'
 import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
 
 export type EquipementSlotErrors = Array<{
@@ -8,19 +9,19 @@ export type EquipementSlotErrors = Array<{
 }>
 
 export interface EquipmentProps {
-  leftHand: Weapon | ShieldOrArmor
-  rightHand: Weapon | ShieldOrArmor
-  armor: ShieldOrArmor
-  accessory1: Item
-  accessory2: Item
+  leftHand?: Weapon | ShieldOrArmor
+  rightHand?: Weapon | ShieldOrArmor
+  armor?: ShieldOrArmor
+  accessory1?: Item
+  accessory2?: Item
 }
 
 export class Equipment {
-  #leftHand: Weapon | ShieldOrArmor
-  #rightHand: Weapon | ShieldOrArmor
-  #armor: ShieldOrArmor
-  #accessory1: Item
-  #accessory2: Item
+  #leftHand?: Weapon | ShieldOrArmor
+  #rightHand?: Weapon | ShieldOrArmor
+  #armor?: ShieldOrArmor
+  #accessory1?: Item
+  #accessory2?: Item
   
   constructor({
     leftHand,
@@ -40,39 +41,82 @@ export class Equipment {
 
   #validateEquipment() {
     const errors: EquipementSlotErrors = []
-
     const validHandItemTypes = ['WEAPON', 'SHIELD']
-    const invalidLeftHandItem = !validHandItemTypes.includes(this.#leftHand.type)
-    const invalidRightHandItem = !validHandItemTypes.includes(this.#rightHand.type)
 
-    invalidLeftHandItem && errors.push({
-      slot: 'Left Hand',
-      field: 'leftHand',
-      item: this.#leftHand
-    })
-    invalidRightHandItem && errors.push({
-      slot: 'Right Hand',
-      field: 'rightHand',
-      item: this.#rightHand
-    })
-    this.#armor.type !== 'ARMOR' && errors.push({
-      slot: 'Armor',
-      field: 'armor',
-      item: this.#armor
-    })
-    this.#accessory1.type !== 'ACCESSORY' && errors.push({
-      slot: 'Accessory 1',
-      field: 'accessory1',
-      item: this.#accessory1
-    })
-    this.#accessory2.type !== 'ACCESSORY' && errors.push({
-      slot: 'Accessory 2',
-      field: 'accessory2',
-      item: this.#accessory2
-    })
+    if (this.#leftHand) {
+      const invalidLeftHandItem = !validHandItemTypes.includes(this.#leftHand?.type)
+      
+      invalidLeftHandItem && errors.push({
+        slot: 'Left Hand',
+        field: 'leftHand',
+        item: this.#leftHand
+      })
+    }
+    
+    if (this.#rightHand) {
+      const invalidRightHandItem = !validHandItemTypes.includes(this.#rightHand?.type)
+      
+      invalidRightHandItem && errors.push({
+        slot: 'Right Hand',
+        field: 'rightHand',
+        item: this.#rightHand
+      })
+    }
+
+    if (this.#armor) {
+      this.#armor.type !== 'ARMOR' && errors.push({
+        slot: 'Armor',
+        field: 'armor',
+        item: this.#armor
+      })
+    }
+
+    if (this.#accessory1) {
+      this.#accessory1.type !== 'ACCESSORY' && errors.push({
+        slot: 'Accessory 1',
+        field: 'accessory1',
+        item: this.#accessory1
+      })
+    }
+
+    if (this.#accessory2) {
+      this.#accessory2.type !== 'ACCESSORY' && errors.push({
+        slot: 'Accessory 2',
+        field: 'accessory2',
+        item: this.#accessory2
+      })
+    }
 
     if (errors.length) {
       throw new InvalidEquipmentsError(errors)
+    }
+
+    this.#validateTwoHands(
+      'Left Hand',
+      this.#leftHand as Weapon,
+      this.#rightHand as Weapon
+    )
+    this.#validateTwoHands(
+      'Right Hand',
+      this.#rightHand as Weapon,
+      this.#leftHand as Weapon
+    )
+  }
+
+  #validateTwoHands(
+    field: string,
+    twoHandsWeapon?: Weapon,
+    extraWeapon?: Weapon
+  ) {
+    if (
+      twoHandsWeapon?.properties.includes('TWO_HANDS')
+      && extraWeapon
+    ) {
+      throw new TwoHandsInUseError({
+        field,
+        twoHandsWeapon,
+        extraWeapon
+      })
     }
   }
 }

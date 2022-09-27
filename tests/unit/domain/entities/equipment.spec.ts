@@ -1,13 +1,14 @@
 import { Equipment } from '@/domain/entities/index.js'
-import { InvalidEquipmentsError } from '@/domain/errors/index.js'
-import { fakeItem, fakeShieldOrArmor, fakeWeapon } from '@/tests/unit/mocks/items.js'
+import { InvalidEquipmentsError, TwoHandsInUseError } from '@/domain/errors/index.js'
+import { ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
+import { fakeItem, fakeArmor, fakeShield, fakeWeapon, fakeAccessory } from '@/tests/unit/mocks/items.js'
 
 const defaultProps = {
   leftHand: fakeWeapon(),
-  rightHand: fakeShieldOrArmor(),
-  armor: fakeShieldOrArmor(),
-  accessory1: fakeItem(),
-  accessory2: fakeItem()
+  rightHand: fakeShield(),
+  armor: fakeArmor(),
+  accessory1: fakeAccessory(),
+  accessory2: fakeAccessory()
 }
 
 function makeSut(props = defaultProps) {
@@ -40,7 +41,7 @@ describe('Equipment', () => {
     expect(
       () => makeSut({
         ...defaultProps,
-        rightHand: { ...fakeShieldOrArmor(), type: 'CONSUMABLE' },
+        rightHand: { ...fakeShield(), type: 'CONSUMABLE' },
         accessory1: { ...fakeItem(), type: 'WEAPON' }
       })
     )
@@ -48,10 +49,7 @@ describe('Equipment', () => {
         {
           field: 'rightHand',
           slot: 'Right Hand',
-          item: {
-            ...fakeShieldOrArmor(),
-            type: 'CONSUMABLE'
-          }
+          item: { ...fakeShield(), type: 'CONSUMABLE' }
         },
         {
           field: 'accessory1',
@@ -59,5 +57,33 @@ describe('Equipment', () => {
           item: { ...fakeItem(), type: 'WEAPON' }
         }
       ]))
+  })
+
+  it('should throw an TwoHandsInUseError if you equip a right hand with two hands already in use', () => {
+    expect(
+      () => makeSut({
+        ...defaultProps,
+        leftHand: { ...fakeWeapon(), properties: ['TWO_HANDS'] }
+      })
+    )
+      .toThrowError(new TwoHandsInUseError({
+        field: 'Left Hand',
+        twoHandsWeapon: { ...fakeWeapon(), properties: ['TWO_HANDS'] },
+        extraWeapon: defaultProps.rightHand
+      }))
+  })
+
+  it('should throw an TwoHandsInUseError if you equip a left hand with two hands already in use', () => {
+    expect(
+      () => makeSut({
+        ...defaultProps,
+        rightHand: { ...fakeWeapon(), properties: ['TWO_HANDS'] } as unknown as ShieldOrArmor
+      })
+    )
+      .toThrowError(new TwoHandsInUseError({
+        field: 'Right Hand',
+        twoHandsWeapon: { ...fakeWeapon(), properties: ['TWO_HANDS'] },
+        extraWeapon: defaultProps.leftHand
+      }))
   })
 })

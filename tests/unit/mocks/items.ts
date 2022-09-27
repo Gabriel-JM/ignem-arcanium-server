@@ -17,6 +17,7 @@ export function fakeItem() {
 export function fakeWeapon() {
   return <Weapon> {
     ...fakeItem(),
+    type: 'WEAPON',
     damage: { slash: '1D6' },
     distance: 0,
     initiativeModifier: 0,
@@ -24,13 +25,28 @@ export function fakeWeapon() {
   }
 }
 
-export function fakeShieldOrArmor() {
+export function fakeShield() {
   return <ShieldOrArmor> {
     ...fakeItem(),
+    type: 'SHIELD',
     damageReduction: { slash: '1' },
     distance: 0,
     initiativeModifier: 0,
     properties: []
+  }
+}
+
+export function fakeArmor() {
+  return <ShieldOrArmor> {
+    ...fakeShield(),
+    type: 'ARMOR'
+  }
+}
+
+export function fakeAccessory() {
+  return <Item> {
+    ...fakeItem(),
+    type: 'ACCESSORY'
   }
 }
 
