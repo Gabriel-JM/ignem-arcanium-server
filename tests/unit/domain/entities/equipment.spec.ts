@@ -1,6 +1,6 @@
 import { Equipment } from '@/domain/entities/index.js'
 import { InvalidEquipmentsError, TwoHandsInUseError } from '@/domain/errors/index.js'
-import { ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
+import { ShieldOrArmor } from '@/domain/interfaces/index.js'
 import { fakeItem, fakeArmor, fakeShield, fakeWeapon, fakeAccessory } from '@/tests/unit/mocks/items.js'
 
 const defaultProps = {
