@@ -32,19 +32,20 @@ const alchemicalItemsFields = ([
 ]).map(field => `alchemical_items.${field}`)
 
 export class KnexItemRepository implements ListAllCommonItemsRepository {
-  constructor(private readonly knexHelper: KnexHelper) {}
+  #knexHelper: KnexHelper
+
+  constructor(knexHelper: KnexHelper) {
+    this.#knexHelper = knexHelper
+  }
   
   async listAllCommon(): Promise<ListAllCommonItemsResult> {
-    const consumablesAndTools = await this.knexHelper
+    const consumablesAndTools = await this.#knexHelper
       .table('items')
       .whereIn('type', ['CONSUMABLE', 'TOOL'])
 
     const weapons = await this.#findAllCommonWeapons()
-
     const shieldsAndArmors = await this.#findAllCommonShieldsAndArmors()
-
     const alchemicalItems = await this.#findAllAlchemicalItems()
-
     const gems = await this.#findAllGems()
 
     return [
@@ -56,8 +57,15 @@ export class KnexItemRepository implements ListAllCommonItemsRepository {
     ]
   }
 
+  async findManyByInventoryId(inventoryId: string) {
+    await this.#knexHelper
+      .table('items')
+      .select('inventory_item.quantity', 'items.*')
+      .join('inventory_item', 'inventory_item.inventory_id', inventoryId)
+  }
+
   async #findAllCommonWeapons() {
-    const dbWeapons = await this.knexHelper
+    const dbWeapons = await this.#knexHelper
       .table('items')
       .select(
         ...itemsFields,
@@ -76,7 +84,7 @@ export class KnexItemRepository implements ListAllCommonItemsRepository {
   }
 
   async #findAllCommonShieldsAndArmors() {
-    const dbShieldsAndArmors = await this.knexHelper
+    const dbShieldsAndArmors = await this.#knexHelper
       .table('items')
       .select(
         ...itemsFields,
@@ -100,7 +108,7 @@ export class KnexItemRepository implements ListAllCommonItemsRepository {
   }
 
   async #findAllAlchemicalItems() {
-    const dbAlchemicalItems = await this.knexHelper
+    const dbAlchemicalItems = await this.#knexHelper
       .table('items')
       .select(
         ...itemsFields,
@@ -120,7 +128,7 @@ export class KnexItemRepository implements ListAllCommonItemsRepository {
   }
 
   async #findAllGems() {
-    const dbGems = await this.knexHelper
+    const dbGems = await this.#knexHelper
       .table('items')
       .select('gems.magic_tier', ...itemsFields)
       .join('gems', 'gems.item_id', 'items.id')
