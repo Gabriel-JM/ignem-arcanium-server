@@ -2,9 +2,13 @@ export interface UpdateCharacterParams {
   id: string
   accountId: string
   name?: string
+  alignment?: string
   icon?: string
   level?: number
   gold?: number
+  statusEffects?: string[]
+  experience?: number
+  characterPoints?: number
   hp?: number
   mp?: number
   strength?: number
@@ -12,7 +16,8 @@ export interface UpdateCharacterParams {
   constitution?: number
   intelligence?: number
   wisdom?: number
-  charism?: number
+  charisma?: number
+  description?: string
 }
 
 export interface UpdateCharacter {

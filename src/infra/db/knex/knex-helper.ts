@@ -4,7 +4,7 @@ import path from 'path'
 export function connect() : Knex {
   const connection = process.env.DB_URL
 
-  return knex.default({
+  return knex({
     client: 'pg',
     connection,
     migrations: {

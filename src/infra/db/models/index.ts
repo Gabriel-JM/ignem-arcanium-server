@@ -1,3 +1,4 @@
+export * from './creature.js'
 export * from './character.js'
 export * from './inventory.js'
 export * from './item.js'

@@ -3,6 +3,7 @@ import { CreateCharacterParams } from '@/domain/usecases/index.js'
 export type CreateCharacterRepositoryParams = CreateCharacterParams & {
   id: string
   inventoryId: string
+  statusEffects: string[]
   hp: number
   mp: number
 }
