@@ -3,6 +3,23 @@ import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
 import { fakeCharacter, fakeCreateCharacterParams, mockKnex, mockUniqueIdGenerator } from '@/tests/unit/mocks/index.js'
 import { Knex } from 'knex'
 
+const creaturesFields = ([
+  'name',
+  'icon',
+  'alignment',
+  'description',
+  'gold',
+  'status_effects',
+  'hp',
+  'mp',
+  'strength',
+  'dexterity',
+  'constitution',
+  'intelligence',
+  'wisdom',
+  'charisma',
+]).map(field => `creatures.${field}`)
+
 function makeSut() {
   const fakeKnex = mockKnex(
     'table',
@@ -11,6 +28,7 @@ function makeSut() {
     'where',
     'update',
     'raw',
+    'join',
     'first',
     'delete',
     'transacting',
@@ -25,7 +43,8 @@ function makeSut() {
   return {
     sut,
     knexHelper,
-    fakeKnex
+    fakeKnex,
+    uniqueIdGeneratorSpy
   }
 }
 
@@ -35,27 +54,25 @@ describe('KnexCharacterRepository', () => {
       ...fakeCreateCharacterParams(),
       id: 'any_id',
       inventoryId: 'any_inventory_id',
+      statusEffects: [],
       hp: 12,
       mp: 12
     }
 
     it('should call KnexHelper methods with correct values', async () => {
-      const { sut, fakeKnex } = makeSut()
+      const { sut, fakeKnex, uniqueIdGeneratorSpy } = makeSut()
 
       await sut.create(dummyCreateParams)
 
-      expect(fakeKnex.table).toHaveBeenNthCalledWith(1, sut.tableName)
+      expect(fakeKnex.table).toHaveBeenNthCalledWith(1, 'creatures')
       expect(fakeKnex.insert).toHaveBeenNthCalledWith(1, {
-        id: dummyCreateParams.id,
-        account_id: dummyCreateParams.accountId,
+        id: uniqueIdGeneratorSpy.result,
         name: dummyCreateParams.name,
         icon: dummyCreateParams.icon,
-        level: dummyCreateParams.level,
         alignment: dummyCreateParams.alignment,
-        character_points: dummyCreateParams.characterPoints,
-        experience: 0,
         description: dummyCreateParams.description,
         gold: dummyCreateParams.gold,
+        status_effects: [],
         hp: dummyCreateParams.hp,
         mp: dummyCreateParams.mp,
         strength: dummyCreateParams.strength,
@@ -65,8 +82,17 @@ describe('KnexCharacterRepository', () => {
         wisdom: dummyCreateParams.wisdom,
         charisma: dummyCreateParams.charisma
       })
-      expect(fakeKnex.table).toHaveBeenNthCalledWith(2, 'inventories')
+      expect(fakeKnex.table).toHaveBeenNthCalledWith(2, sut.tableName)
       expect(fakeKnex.insert).toHaveBeenNthCalledWith(2, {
+        id: dummyCreateParams.id,
+        account_id: dummyCreateParams.accountId,
+        creature_id: uniqueIdGeneratorSpy.result,
+        level: dummyCreateParams.level,
+        character_points: dummyCreateParams.characterPoints,
+        experience: 0
+      })
+      expect(fakeKnex.table).toHaveBeenNthCalledWith(3, 'inventories')
+      expect(fakeKnex.insert).toHaveBeenNthCalledWith(3, {
         id: dummyCreateParams.inventoryId,
         size: 200
       })
@@ -81,7 +107,10 @@ describe('KnexCharacterRepository', () => {
       await sut.findAll('any_account_id')
 
       expect(fakeKnex.table).toHaveBeenCalledWith(sut.tableName)
-      expect(fakeKnex.select).toHaveBeenCalledWith()
+      expect(fakeKnex.select).toHaveBeenCalledWith(
+        'characters.*',
+        ...creaturesFields
+      )
       expect(fakeKnex.where).toHaveBeenCalledWith({ account_id: 'any_account_id' })
     })
 

@@ -47,4 +47,13 @@ describe('Character', () => {
 
     expect(sut.status).toEqual([CharacterStatus.OVERLOADED])
   })
+
+  it('should return the hp and mp points value when requested', () => {
+    const sut = makeSut()
+
+    expect(sut.healthAndManaPoints).toEqual({
+      hp: 12,
+      mp: 11
+    })
+  })
 })

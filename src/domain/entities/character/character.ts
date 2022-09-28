@@ -52,8 +52,8 @@ export class Character {
 
   get healthAndManaPoints() {
     return {
-      hp: this.#hp,
-      mp: this.#mp
+      hp: this.#hp.value,
+      mp: this.#mp.value
     }
   }
 }

@@ -35,6 +35,7 @@ export class DbCreateCharacter implements CreateCharacter {
       level: params.level,
       characterPoints: params.characterPoints,
       gold: params.gold,
+      statusEffects: [],
       hp,
       mp,
       alignment: params.alignment,
