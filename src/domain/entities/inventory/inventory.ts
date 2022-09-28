@@ -1,6 +1,6 @@
-import { Item } from '@/domain/interfaces/index.js'
+import { InventoryItem } from '@/domain/interfaces/index.js'
 
-export type InventoryProps = Array<Item & { quantity: number }>
+export type InventoryProps = Array<InventoryItem>
 
 export class Inventory {
   #weight: number
