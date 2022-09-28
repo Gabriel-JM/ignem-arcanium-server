@@ -14,6 +14,10 @@ export function fakeItem() {
   }
 }
 
+export function fakeInventoryItem() {
+  return { ...fakeItem(), quantity: 1 }
+}
+
 export function fakeWeapon() {
   return <Weapon> {
     ...fakeItem(),

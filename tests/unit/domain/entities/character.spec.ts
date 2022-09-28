@@ -1,6 +1,6 @@
 import { CharacterStatus } from '@/domain/entities/character/status.js'
 import { Character, CharacterProps } from '@/domain/entities/index.js'
-import { fakeAccessory, fakeArmor, fakeItem, fakeShield, fakeWeapon } from '@/tests/unit/mocks/items.js'
+import { fakeAccessory, fakeArmor, fakeInventoryItem, fakeItem, fakeShield, fakeWeapon } from '@/tests/unit/mocks/items.js'
 
 const defaultLevel = 1
 const defaultAttributes = {
@@ -17,7 +17,7 @@ const defaultEquiments = {
   armor: fakeArmor(),
   accessory1: fakeAccessory()
 }
-const defaultInventoryItems = [fakeItem()]
+const defaultInventoryItems = [fakeInventoryItem()]
 
 
 function makeSut({
@@ -40,8 +40,8 @@ describe('Character', () => {
   it('should add Overloaded status if inventory weight exceed the limit', () => {
     const sut = makeSut({
       inventoryItems: [
-        fakeItem(),
-        { ...fakeItem(), weight: 200 }
+        fakeInventoryItem(),
+        { ...fakeItem(), weight: 200, quantity: 1 }
       ]
     })
 
