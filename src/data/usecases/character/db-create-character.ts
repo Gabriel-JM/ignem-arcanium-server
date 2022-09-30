@@ -17,7 +17,6 @@ export class DbCreateCharacter implements CreateCharacter {
   
   async create(params: CreateCharacterParams): Promise<CreateCharacterResult> {
     const id = this.#uniqueIdGenerator.generate()
-    const inventoryId = this.#uniqueIdGenerator.generate()
 
     const hp = new CharacterHealthPoints(
       params.level,
@@ -28,7 +27,6 @@ export class DbCreateCharacter implements CreateCharacter {
 
     await this.#createCharacterRepository.create({
       id,
-      inventoryId,
       accountId: params.accountId,
       name: params.name,
       icon: params.icon,

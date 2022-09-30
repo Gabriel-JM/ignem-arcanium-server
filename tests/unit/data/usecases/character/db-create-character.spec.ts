@@ -35,7 +35,6 @@ describe('DbCreateCharacter', () => {
 
     expect(createCharacterRepositorySpy.create).toHaveBeenCalledWith({
       id: uniqueIdGeneratorSpy.result,
-      inventoryId: uniqueIdGeneratorSpy.result,
       inventoryItems: undefined,
       statusEffects: [],
       hp: 12,

@@ -53,7 +53,6 @@ describe('KnexCharacterRepository', () => {
     const dummyCreateParams = {
       ...fakeCreateCharacterParams(),
       id: 'any_id',
-      inventoryId: 'any_inventory_id',
       statusEffects: [],
       hp: 12,
       mp: 12
@@ -93,7 +92,7 @@ describe('KnexCharacterRepository', () => {
       })
       expect(fakeKnex.table).toHaveBeenNthCalledWith(3, 'inventories')
       expect(fakeKnex.insert).toHaveBeenNthCalledWith(3, {
-        id: dummyCreateParams.inventoryId,
+        id: uniqueIdGeneratorSpy.result,
         size: 200
       })
     })

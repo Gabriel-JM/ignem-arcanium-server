@@ -120,10 +120,12 @@ export class KnexCharacterRepository implements Repository {
         })
         .transacting(trx)
 
+      const inventoryId = this.#uniqueIdGenerator.generate()
+
       await this.#knexHelper
         .table('inventories')
         .insert({
-          id: params.inventoryId,
+          id: inventoryId,
           size: 200
         })
         .transacting(trx)
@@ -134,7 +136,7 @@ export class KnexCharacterRepository implements Repository {
           .insert(params.inventoryItems.map(item => {
             return {
               id: this.#uniqueIdGenerator.generate(),
-              inventoryId: params.inventoryId,
+              inventoryId,
               itemId: item.itemId,
               quantity: item.quantity
             }
