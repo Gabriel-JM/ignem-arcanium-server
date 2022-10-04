@@ -1,4 +1,4 @@
-import { ListAllCommonItemsRepository } from '@/data/protocols/repository/index.js'
+import { FindManyItemsByInventoryRepositoryResult, FindSlotItemByIdRepository, FindSlotItemByIdRepositoryResult, InventoryItemsRepository, ListAllCommonItemsRepository } from '@/data/protocols/repository/index.js'
 import { ListAllCommonItemsResult } from '@/domain/usecases/index.js'
 import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
 
@@ -31,7 +31,11 @@ const alchemicalItemsFields = ([
   'effects'
 ]).map(field => `alchemical_items.${field}`)
 
-export class KnexItemRepository implements ListAllCommonItemsRepository {
+type ItemRepository = ListAllCommonItemsRepository
+  & InventoryItemsRepository
+  & FindSlotItemByIdRepository
+
+export class KnexItemRepository implements ItemRepository {
   #knexHelper: KnexHelper
 
   constructor(knexHelper: KnexHelper) {
@@ -57,8 +61,28 @@ export class KnexItemRepository implements ListAllCommonItemsRepository {
     ]
   }
 
+  async findSlotItemById<T extends Record<string, string>>(itemSlots: T) {
+    const items = await this.#knexHelper
+      .table('items')
+      .whereIn('id', Object.values(itemSlots))
+
+    const entries = Object.entries(itemSlots)
+
+    return items.reduce((acc, item) => {
+      const itemEntry = entries.find(
+        ([_, id]) => id === item.id
+      )
+
+      if (!itemEntry) {
+        return acc
+      }
+
+      return { ...acc, [itemEntry[0]]: item }
+    }, {})
+  }
+
   async findManyByInventoryId(inventoryId: string) {
-    await this.#knexHelper
+    return await this.#knexHelper
       .table('items')
       .select('inventory_item.quantity', 'items.*')
       .join('inventory_item', 'inventory_item.inventory_id', inventoryId)
