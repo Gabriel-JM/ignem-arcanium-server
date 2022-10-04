@@ -1,4 +1,10 @@
-import { FindManyItemsByInventoryRepositoryResult, FindSlotItemByIdRepository, FindSlotItemByIdRepositoryResult, InventoryItemsRepository, ListAllCommonItemsRepository } from '@/data/protocols/repository/index.js'
+import {
+  FindManyItemsRepository,
+  FindManyItemsRepositoryResult,
+  FindSlotItemByIdRepository,
+  InventoryItemsRepository,
+  ListAllCommonItemsRepository
+} from '@/data/protocols/repository/index.js'
 import { ListAllCommonItemsResult } from '@/domain/usecases/index.js'
 import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
 
@@ -34,6 +40,7 @@ const alchemicalItemsFields = ([
 type ItemRepository = ListAllCommonItemsRepository
   & InventoryItemsRepository
   & FindSlotItemByIdRepository
+  & FindManyItemsRepository
 
 export class KnexItemRepository implements ItemRepository {
   #knexHelper: KnexHelper
@@ -79,6 +86,14 @@ export class KnexItemRepository implements ItemRepository {
 
       return { ...acc, [itemEntry[0]]: item }
     }, {})
+  }
+
+  async findMany(ids: string[]): Promise<FindManyItemsRepositoryResult> {
+    const items = await this.#knexHelper
+      .table('items')
+      .whereIn('id', ids)
+
+    return items
   }
 
   async findManyByInventoryId(inventoryId: string) {
