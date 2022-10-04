@@ -15,7 +15,9 @@ export function fakeCreateCharacterParams() {
     constitution: 1,
     intelligence: 2,
     wisdom: 1,
-    charisma: 1
+    charisma: 1,
+    equipment: {},
+    inventoryItems: []
   }
 }
 

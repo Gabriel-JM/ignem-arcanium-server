@@ -62,3 +62,23 @@ export function mockListAllCommonItemsRepository() {
     listAllCommon: vi.fn(() => Promise.resolve(result))
   }
 }
+
+export function mockFindSlotItemByIdRepository() {
+  return {
+    findSlotItemById: vi.fn((params) => {
+      return Promise.resolve(Object.keys(params).reduce((acc, key) => {
+        return { ...acc, [key]: fakeItem() }
+      }, {}))
+    })
+  }
+}
+
+export function mockFindManyItemsRepository() {
+  return {
+    findMany: vi.fn((params) => {
+      return Promise.resolve(params.map((id: string) => {
+        return { ...fakeItem(), id }
+      }))
+    })
+  }
+}

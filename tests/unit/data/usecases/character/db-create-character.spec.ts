@@ -1,18 +1,39 @@
+import { FindSlotItemByIdRepository } from '@/data/protocols/repository/index.js'
 import { DbCreateCharacter } from '@/data/usecases/index.js'
 import {
+  fakeArmor,
   fakeCreateCharacterParams,
+  fakeWeapon,
   mockCreateCharacterRepository,
+  mockFindManyItemsRepository,
+  mockFindSlotItemByIdRepository,
   mockUniqueIdGenerator
 } from '@/tests/unit/mocks/index.js'
 
 function makeSut() {
   const uniqueIdGeneratorSpy = mockUniqueIdGenerator()
   const createCharacterRepositorySpy = mockCreateCharacterRepository()
-  const sut = new DbCreateCharacter(uniqueIdGeneratorSpy, createCharacterRepositorySpy)
+  const findSlotItemsRepositorySpy = mockFindSlotItemByIdRepository()
+  findSlotItemsRepositorySpy.findSlotItemById.mockImplementation((params) => {
+    return {
+      ...params.leftHand && { leftHand: fakeWeapon() },
+      ...params.rightHand && { rightHand: fakeWeapon() },
+      ...params.armor && { armor: fakeArmor() }
+    }
+  })
+  const findManyItemsRepositorySpy = mockFindManyItemsRepository()
+  const sut = new DbCreateCharacter(
+    uniqueIdGeneratorSpy,
+    findSlotItemsRepositorySpy as FindSlotItemByIdRepository,
+    findManyItemsRepositorySpy,
+    createCharacterRepositorySpy
+  )
 
   return {
     sut,
     uniqueIdGeneratorSpy,
+    findSlotItemsRepositorySpy,
+    findManyItemsRepositorySpy,
     createCharacterRepositorySpy
   }
 }
@@ -28,18 +49,57 @@ describe('DbCreateCharacter', () => {
     expect(uniqueIdGeneratorSpy.generate).toHaveBeenCalledWith()
   })
 
+  it('should call FindSlotItemByIdRepository with correct values', async () => {
+    const { sut, findSlotItemsRepositorySpy } = makeSut()
+    const fakeEquipment = {
+      leftHand: 'left_hand_id',
+      armor: 'armor_id'
+    }
+
+    await sut.create({
+      ...dummyCreateCharacterParams,
+      equipment: fakeEquipment
+    })
+
+    expect(findSlotItemsRepositorySpy.findSlotItemById)
+      .toHaveBeenCalledWith(fakeEquipment)
+  })
+
+  it('should call FindManyItemsRepository with correct values', async () => {
+    const { sut, findManyItemsRepositorySpy } = makeSut()
+
+    await sut.create({
+      ...dummyCreateCharacterParams,
+      inventoryItems: [
+        {
+          itemId: 'any_item_id_1',
+          quantity: 1
+        },
+        {
+          itemId: 'any_item_id_2',
+          quantity: 2
+        }
+      ]
+    })
+
+    expect(findManyItemsRepositorySpy.findMany).toHaveBeenCalledWith([
+      'any_item_id_1',
+      'any_item_id_2'
+    ])
+  })
+
   it('should call CreateCharacterRepository with correct values', async () => {
     const { sut, createCharacterRepositorySpy, uniqueIdGeneratorSpy } = makeSut()
 
     await sut.create(dummyCreateCharacterParams)
 
     expect(createCharacterRepositorySpy.create).toHaveBeenCalledWith({
+      ...dummyCreateCharacterParams,
       id: uniqueIdGeneratorSpy.result,
-      inventoryItems: undefined,
+      inventoryItems: [],
       statusEffects: [],
       hp: 12,
-      mp: 12,
-      ...dummyCreateCharacterParams
+      mp: 12
     })
   })
 
