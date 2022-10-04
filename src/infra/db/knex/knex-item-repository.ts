@@ -69,9 +69,11 @@ export class KnexItemRepository implements ItemRepository {
   }
 
   async findSlotItemById<T extends Record<string, string>>(itemSlots: T) {
-    const items = await this.#knexHelper
-      .table('items')
-      .whereIn('id', Object.values(itemSlots))
+    const itemIds = Object.values(itemSlots)
+
+    if (!itemIds.length) return null
+
+    const items = await this.#knexHelper.table('items').whereIn('id', itemIds)
 
     const entries = Object.entries(itemSlots)
 
@@ -89,11 +91,7 @@ export class KnexItemRepository implements ItemRepository {
   }
 
   async findMany(ids: string[]): Promise<FindManyItemsRepositoryResult> {
-    const items = await this.#knexHelper
-      .table('items')
-      .whereIn('id', ids)
-
-    return items
+    return await this.#knexHelper.table('items').whereIn('id', ids)
   }
 
   async findManyByInventoryId(inventoryId: string) {

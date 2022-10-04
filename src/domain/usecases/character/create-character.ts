@@ -18,7 +18,14 @@ export interface CreateCharacterParams {
   intelligence: number
   wisdom: number
   charisma: number
-  inventoryItems?: Array<CreateCharacterInventoryItem>
+  equipment: {
+    leftHand?: string
+    rightHand?: string
+    armor?: string
+    accessory1?: string
+    accessory2?: string
+  }
+  inventoryItems: Array<CreateCharacterInventoryItem>
 }
 
 export interface CreateCharacterResult {

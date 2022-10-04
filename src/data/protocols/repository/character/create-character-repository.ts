@@ -5,6 +5,13 @@ export type CreateCharacterRepositoryParams = CreateCharacterParams & {
   statusEffects: string[]
   hp: number
   mp: number
+  equipment: {
+    leftHand?: string
+    rightHand?: string
+    armor?: string
+    accessory1?: string
+    accessory2?: string
+  }
 }
 
 export interface CreateCharacterRepository {
