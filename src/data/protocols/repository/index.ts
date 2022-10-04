@@ -17,3 +17,5 @@ export * from './torch-registry/find-torch-registry-by-id-repository.js'
 
 export * from './item/list-all-common-items-repository.js'
 export * from './item/inventory-items-repository.js'
+export * from './item/find-slot-item-by-id-repository.js'
+export * from './item/find-many-items-repository.js'
