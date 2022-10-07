@@ -1,37 +1,19 @@
-import { ListValidationComposite, ValidatorComposite } from '@/validation/composites/index.js'
+import { FieldsValidationComposite, ListValidationComposite, ValidatorComposite } from '@/validation/composites/index.js'
 import {
   MinValueValidator,
   OneOfValuesValidator,
-  RequiredFieldsValidator,
-  TypeValidator
 } from '@/validation/validators/index.js'
 
 export function makeCreateCharacterValidator() {
   return new ValidatorComposite(
-    new RequiredFieldsValidator(
-      'name',
-      'icon',
-      'level',
-      'gold',
-      'alignment',
-      'characterPoints',
-      'hp',
-      'mp',
-      'strength',
-      'dexterity',
-      'constitution',
-      'intelligence',
-      'wisdom',
-      'charism'
-    ),
-    new TypeValidator({
+    new FieldsValidationComposite({
       name: 'string',
       icon: 'string',
       level: 'number',
       gold: 'number',
       alignment: 'string',
       characterPoints: 'number',
-      description: 'string',
+      description: 'string?',
       hp: 'number',
       mp: 'number',
       strength: 'number',
@@ -40,7 +22,8 @@ export function makeCreateCharacterValidator() {
       intelligence: 'number',
       wisdom: 'number',
       charism: 'number',
-      inventoryItems: 'array'
+      equipment: 'object?',
+      inventoryItems: 'array?'
     }),
     new MinValueValidator({
       level: 1,
@@ -69,8 +52,7 @@ export function makeCreateCharacterValidator() {
     }),
     new ListValidationComposite(
       'inventoryItems',
-      new RequiredFieldsValidator('itemId', 'quantity'),
-      new TypeValidator({ itemId: 'string', quantity: 'number' }),
+      new FieldsValidationComposite({ itemId: 'string', quantity: 'number' }),
       new MinValueValidator({ quantity: 1 })
     )
   )

@@ -5,7 +5,7 @@ import { applyErrorAndValidationDecorators, makeAuthDecorator } from '@/main/fac
 import { makeKnexCharacterRepository } from '@/main/factories/repositories/index.js'
 import { makeKnexRepository } from '@/main/factories/repositories/knex-repository.js'
 import { makeCreateCharacterValidator } from '@/main/factories/validators/index.js'
-import { GenericController } from '@/presentation/controllers/index.js'
+import { CreateCharacterController } from '@/presentation/controllers/index.js'
 
 export function makeCreateCharacterController() {
   const uniqueIdGenerator = new NanoIdUniqueIdGenerator()
@@ -19,9 +19,7 @@ export function makeCreateCharacterController() {
   )
 
   const controller = makeAuthDecorator(
-    new GenericController(
-      dbCreateCharacter.create.bind(dbCreateCharacter)
-    )
+    new CreateCharacterController(dbCreateCharacter)
   )
 
   return applyErrorAndValidationDecorators(

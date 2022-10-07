@@ -9,9 +9,11 @@ export class ListValidationComposite implements Validator {
     this.#validators = validators
   }
 
-  validate(inputs: any[]): string[] {
-    for (const inputIndex in inputs) {
-      const input = inputs[inputIndex]
+  validate(input: any): string[] {
+    const list = input[this.#listName]
+
+    for (const inputIndex in list) {
+      const input = list[inputIndex]
 
       const validationsResults = this.#validators.map(validator => {
         return validator.validate(input)
