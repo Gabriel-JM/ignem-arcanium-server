@@ -1,10 +1,10 @@
 import { FakeValidator } from '@/tests/unit/mocks/index.js'
-import { DeepObjectValidationComposite } from '@/validation/composites/index.js'
+import { NestedObjectValidationComposite } from '@/validation/composites/index.js'
 
 function makeSut() {
   const fakeValidator1 = new FakeValidator()
   const fakeValidator2 = new FakeValidator()
-  const sut = new DeepObjectValidationComposite(
+  const sut = new NestedObjectValidationComposite(
     'obj.nested',
     fakeValidator1,
     fakeValidator2

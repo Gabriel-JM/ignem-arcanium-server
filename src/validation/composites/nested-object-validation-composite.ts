@@ -1,7 +1,7 @@
 import { ValidatorComposite } from '@/validation/composites/validator-composite.js'
 import { Validator } from '@/validation/protocols/validator.js'
 
-export class DeepObjectValidationComposite implements Validator {
+export class NestedObjectValidationComposite implements Validator {
   #pathName: string
   #validators: Validator[]
 
