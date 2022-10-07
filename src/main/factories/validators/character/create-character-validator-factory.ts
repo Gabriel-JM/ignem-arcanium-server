@@ -1,4 +1,4 @@
-import { FieldsValidationComposite, ListValidationComposite, ValidatorComposite } from '@/validation/composites/index.js'
+import { FieldsValidationComposite, ListValidationComposite, NestedObjectValidationComposite, ValidatorComposite } from '@/validation/composites/index.js'
 import {
   MinValueValidator,
   OneOfValuesValidator,
@@ -50,6 +50,16 @@ export function makeCreateCharacterValidator() {
         'Chaotic Evil'
       ]
     }),
+    new NestedObjectValidationComposite(
+      'equipment',
+      new FieldsValidationComposite({
+        leftHand: 'string?',
+        rightHand: 'string?',
+        armor: 'string?',
+        accessory1: 'string?',
+        accessory2: 'string?'
+      })
+    ),
     new ListValidationComposite(
       'inventoryItems',
       new FieldsValidationComposite({ itemId: 'string', quantity: 'number' }),
