@@ -1,10 +1,5 @@
+import { FakeValidator } from '@/tests/unit/mocks/index.js'
 import { ListValidationComposite } from '@/validation/composites/index.js'
-import { Validator } from '@/validation/protocols/index.js'
-
-class FakeValidator implements Validator {
-  result: string[] = []
-  validate = vi.fn<[], string[]>(() => this.result)
-}
 
 function makeSut(path = 'list') {
   const validator1 = new FakeValidator()
