@@ -6,10 +6,10 @@ class FakeValidator implements Validator {
   validate = vi.fn<[], string[]>(() => this.result)
 }
 
-function makeSut() {
+function makeSut(path = 'list') {
   const validator1 = new FakeValidator()
   const validator2 = new FakeValidator()
-  const sut = new ListValidationComposite('list', validator1, validator2)
+  const sut = new ListValidationComposite(path, validator1, validator2)
 
   return {
     sut,
@@ -47,6 +47,26 @@ describe('ListValidationComposite', () => {
 
     expect(response).toEqual([
       'list[1].count must be of type number'
+    ])
+  })
+
+  it('should return the correct error message on nested objects', () => {
+    const { sut, validator1 } = makeSut('object.list')
+    validator1.validate
+      .mockReturnValueOnce(['count must be of type number'])
+
+    const response = sut.validate({
+      object: {
+        list: [
+          { count: '10' },
+          { count: 2 },
+          { count: 5 }
+        ]
+      }
+    })
+
+    expect(response).toEqual([
+      'object.list[0].count must be of type number'
     ])
   })
 })

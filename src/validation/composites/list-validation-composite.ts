@@ -10,7 +10,7 @@ export class ListValidationComposite implements Validator {
   }
 
   validate(input: any): string[] {
-    const list = input[this.#listName]
+    const list = this.getValueByPath(input, this.#listName)
 
     for (const inputIndex in list) {
       const input = list[inputIndex]
@@ -19,9 +19,9 @@ export class ListValidationComposite implements Validator {
         return validator.validate(input)
       }).flat()
   
-      const invalidFields = new Set(validationsResults.map(error => {
-        return error.split(' ')[0]
-      }))
+      const invalidFields = new Set(
+        validationsResults.map(error => error.split(' ')[0])
+      )
 
       if (invalidFields.size) {
         return [...invalidFields].map(key => {
@@ -37,5 +37,11 @@ export class ListValidationComposite implements Validator {
     }
 
     return []
+  }
+
+  getValueByPath(input: any, path: string) {
+    return path
+      .split('.')
+      .reduce((acc, value) => acc[value], input)
   }
 }
