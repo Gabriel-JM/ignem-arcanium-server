@@ -1,22 +1,11 @@
 import chai from 'chai'
-import chaiHttp from 'chai-http'
 import { server } from '@/main/server/app.js'
 import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { randomUUID } from 'crypto'
+import { testSetup } from '@/tests/integration/test-utils/test-setup.js'
 
 describe('Create account', () => {
-  beforeAll(() => {
-    chai.use(chaiHttp)
-  })
-
-  afterEach(async () => {
-    await testKnex.raw('delete from characters')
-    await testKnex.raw('delete from accounts')
-  })
-
-  afterAll(async () => {
-    await testKnex.destroy()
-  })
+  testSetup('characters', 'accounts')
 
   it('should return the accountId of created account', async () => {
     const response = await chai.request(server)

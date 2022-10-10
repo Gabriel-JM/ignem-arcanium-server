@@ -1,23 +1,12 @@
 import chai from 'chai'
-import chaiHttp from 'chai-http'
 import bcrypt from 'bcrypt'
 import { server } from '@/main/server/app.js'
 import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { randomUUID } from 'crypto'
+import { testSetup } from '@/tests/integration/test-utils/test-setup.js'
 
 describe('Create account', () => {
-  beforeAll(async () => {
-    chai.use(chaiHttp)
-  })
-
-  afterEach(async () => {
-    await testKnex.raw('delete from characters')
-    await testKnex.raw('delete from accounts')
-  })
-
-  afterAll(async () => {
-    await testKnex.destroy()
-  })
+  testSetup('characters', 'accounts')
 
   it('should return an account not found error if an unregistred email is provided', async () => {
     const response = await chai.request(server)
