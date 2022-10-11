@@ -21,7 +21,7 @@ export function makeCreateCharacterValidator() {
       constitution: 'number',
       intelligence: 'number',
       wisdom: 'number',
-      charism: 'number',
+      charisma: 'number',
       equipment: 'object?',
       inventoryItems: 'array?'
     }),

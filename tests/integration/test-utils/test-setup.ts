@@ -2,9 +2,7 @@ import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import chaiHttp from 'chai-http'
 
 export function testSetup(...tablesToClear: string[]) {
-  beforeAll(() => {
-    chai.use(chaiHttp)
-  })
+  setupTestRequest()
 
   afterEach(async () => {
     for (const table of tablesToClear) {
@@ -15,4 +13,8 @@ export function testSetup(...tablesToClear: string[]) {
   afterAll(async () => {
     await testKnex.destroy()
   })
+}
+
+export function setupTestRequest() {
+  beforeAll(() => void chai.use(chaiHttp))
 }

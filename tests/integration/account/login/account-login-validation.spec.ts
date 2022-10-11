@@ -1,21 +1,17 @@
-import { server } from '@/main/server/app.js'
-import chai from 'chai'
-import chaiHttp from 'chai-http'
+import { setupTestRequest, testRequest } from '@/tests/integration/test-utils/index.js'
 
 describe('Account login validation', () => {
-  beforeAll(() => {
-    chai.use(chaiHttp)
-  })
-  
-  test('required fields', async () => {
-    const response = await chai.request(server)
-      .post('/login')
-      .send({})
-      
-    const body = JSON.parse(response.text)
+  setupTestRequest()
 
+  test('required fields', async () => {
+    const response = await testRequest({
+      method: 'post',
+      path: '/login',
+      body: {}
+    })
+    
     expect(response.status).toBe(400)
-    expect(body).toEqual({
+    expect(response.body).toEqual({
       error: {
         name: 'Validation Error',
         details: [
@@ -30,17 +26,17 @@ describe('Account login validation', () => {
   })
 
   test('invalid email', async () => {
-    const response = await chai.request(server)
-      .post('/login')
-      .send({
+    const response = await testRequest({
+      method: 'post',
+      path: '/login',
+      body: {
         email: 'any_email',
         password: 'any_password'
-      })
-
-    const body = JSON.parse(response.text)
+      }
+    })
       
     expect(response.status).toBe(400)
-    expect(body).toEqual({
+    expect(response.body).toEqual({
       error: {
         name: 'Validation Error',
         details: [

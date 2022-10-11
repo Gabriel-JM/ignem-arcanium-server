@@ -19,7 +19,7 @@ export class FieldsValidationComposite implements Validator {
     )
 
     const fieldsTypes = Object.keys(this.#fields).reduce((acc, key) => {
-      if (this.#fields[key].endsWith('?') && !(key in input)) {
+      if (this.#fields[key].endsWith('?') && !(key?.[input])) {
         return { ...acc }
       }
 

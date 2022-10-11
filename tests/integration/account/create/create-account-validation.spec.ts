@@ -1,21 +1,17 @@
-import chai from 'chai'
-import chaiHttp from 'chai-http'
-import { server } from '@/main/server/app.js'
+import { setupTestRequest, testRequest } from '@/tests/integration/test-utils/index.js'
 
 describe('Create account validation', () => {
-  beforeAll(() => {
-    chai.use(chaiHttp)
-  })
+  setupTestRequest()
 
   test('required fields', async () => {
-    const response = await chai.request(server)
-      .post('/accounts')
-      .send({})
-      
-    const body = JSON.parse(response.text)
+    const response = await testRequest({
+      method: 'post',
+      path: '/accounts',
+      body: {}
+    })
       
     expect(response.status).toBe(400)
-    expect(body).toEqual({
+    expect(response.body).toEqual({
       error: {
         name: 'Validation Error',
         details: [
@@ -32,18 +28,18 @@ describe('Create account validation', () => {
   })
 
   test('name type', async () => {
-    const response = await chai.request(server)
-      .post('/accounts')
-      .send({
+    const response = await testRequest({
+      method: 'post',
+      path: '/accounts',
+      body: {
         name: 12,
         email: 'any@email.com',
         password: 'any_password'
-      })
-
-    const body = JSON.parse(response.text)
+      }
+    })
       
     expect(response.status).toBe(400)
-    expect(body).toEqual({
+    expect(response.body).toEqual({
       error: {
         name: 'Validation Error',
         details: [
@@ -54,18 +50,18 @@ describe('Create account validation', () => {
   })
 
   test('invalid email', async () => {
-    const response = await chai.request(server)
-      .post('/accounts')
-      .send({
+    const response = await testRequest({
+      method: 'post',
+      path: '/accounts',
+      body: {
         name: 'any_name',
         email: 'any_email',
         password: 'any_password'
-      })
-
-    const body = JSON.parse(response.text)
+      }
+    })
       
     expect(response.status).toBe(400)
-    expect(body).toEqual({
+    expect(response.body).toEqual({
       error: {
         name: 'Validation Error',
         details: [
