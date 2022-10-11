@@ -14,7 +14,7 @@
     "build:watch": "tsc -p ./tsconfig-build.json --watch",
     "test": "vitest",
     "test:unit": "npm test",
-    "test:int": "docker-compose -f docker-compose.test.yml up -d && sleep 10s && npm test -- -r='./tests/integration'",
+    "test:int": "docker-compose -f docker-compose.test.yml up -d && sleep 15s && npm test -- -r='./tests/integration'",
     "posttest:int": "docker-compose -f docker-compose.test.yml down",
     "test:cov": "vitest --run --coverage",
     "check": "ncu"
@@ -36,19 +36,19 @@
     "@types/bcrypt": "^5.0.0",
     "@types/dotenv-safe": "^8.1.2",
     "@types/jsonwebtoken": "^8.5.9",
-    "@types/node": "^18.7.23",
+    "@types/node": "^18.8.4",
     "@types/websocket": "^1.0.5",
-    "@vitest/coverage-c8": "^0.23.4",
+    "@vitest/coverage-c8": "^0.24.1",
     "c8": "^7.12.0",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
-    "npm-check-updates": "^16.3.4",
+    "npm-check-updates": "^16.3.11",
     "superwstest": "^2.0.3",
     "typescript": "^4.8.4",
-    "vitest": "^0.23.4"
+    "vitest": "^0.24.1"
   },
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcrypt": "^5.1.0",
     "dotenv-safe": "^8.2.0",
     "esm-module-alias": "^2.0.1",
     "jsonwebtoken": "^8.5.1",

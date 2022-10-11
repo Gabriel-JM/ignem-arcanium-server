@@ -6,7 +6,7 @@ export function testSetup(...tablesToClear: string[]) {
 
   afterEach(async () => {
     for (const table of tablesToClear) {
-      await testKnex.raw(`delete from ${table}`)
+      await testKnex.table(table).delete()
     }
   })
 

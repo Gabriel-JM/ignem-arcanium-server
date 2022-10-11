@@ -1,9 +1,9 @@
 import chai from 'chai'
-import chaiHttp from 'chai-http'
 import { server } from '@/main/server/app.js'
 import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
 import { JwtEncrypter } from '@/infra/cryptography/index.js'
+import { testSetup } from '@/tests/integration/test-utils/test-setup.js'
 
 async function setupSut() {
   const idGenerator = new NanoIdUniqueIdGenerator()
@@ -20,15 +20,16 @@ async function setupSut() {
     password: 'any_password'
   })
 
-  const character = {
+  const creature = {
     id: idGenerator.generate(),
-    accountId,
-    name: 'any_char_name',
+    name: 'any_name',
     icon: 'any_icon',
-    level: 1,
+    alignment: 'any_alignment',
     gold: 20,
-    hp: 10,
-    mp: 10,
+    statusEffects: [],
+    description: null,
+    hp: 12,
+    mp: 11,
     strength: 1,
     dexterity: 1,
     constitution: 1,
@@ -37,38 +38,49 @@ async function setupSut() {
     charisma: 1
   }
 
+  const dbCreature = {
+    ...creature,
+    status_effects: '[]'
+  }
+
+  Reflect.deleteProperty(dbCreature, 'statusEffects')
+
+  await testKnex.table('creatures').insert(dbCreature)
+
+  const character = {
+    id: idGenerator.generate(),
+    accountId,
+    creatureId: creature.id,
+    level: 1,
+    experience: 1,
+    characterPoints: 0
+  }
+
   const dbCharacter = {
     ...character,
-    account_id: accountId
+    account_id: accountId,
+    creature_id: creature.id,
+    character_points: character.characterPoints
   }
 
   Reflect.deleteProperty(dbCharacter, 'accountId')
+  Reflect.deleteProperty(dbCharacter, 'creatureId')
+  Reflect.deleteProperty(dbCharacter, 'characterPoints')
 
   await testKnex.table('characters').insert(dbCharacter)
 
   return {
     token,
-    character
+    character,
+    creature
   }
 }
 
 describe('Find all characters', () => {
-  beforeAll(async () => {
-    chai.use(chaiHttp)
-    await testKnex.migrate.latest()
-  })
-
-  afterEach(async () => {
-    await testKnex.raw('delete from characters')
-    await testKnex.raw('delete from accounts')
-  })
-
-  afterAll(async () => {
-    await testKnex.destroy()
-  })
+  testSetup('characters', 'accounts')
 
   it('should return all characters from the correct account', async () => {
-    const { token, character } = await setupSut()
+    const { token, creature, character } = await setupSut()
     
     const response = await chai.request(server)
       .get('/characters')
@@ -77,6 +89,9 @@ describe('Find all characters', () => {
     const body = JSON.parse(response.text)
 
     expect(response.status).toBe(200)
-    expect(body).toEqual([character])
+    expect(body).toEqual([{
+      ...creature,
+      ...character,
+    }])
   })
 })
