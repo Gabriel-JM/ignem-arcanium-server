@@ -41,4 +41,14 @@ describe('FieldsValidationComposite', () => {
 
     expect(response).toEqual([])
   })
+
+  it('should validate correctly optional fields', () => {
+    const sut = makeSut({
+      opt: 'number?'
+    })
+
+    const response = sut.validate({ opt: '1' })
+
+    expect(response).toEqual(['opt must be of type number'])
+  })
 })
