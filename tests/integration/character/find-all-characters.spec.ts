@@ -1,5 +1,3 @@
-import chai from 'chai'
-import { server } from '@/main/server/app.js'
 import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
 import { JwtEncrypter } from '@/infra/cryptography/index.js'
@@ -89,12 +87,12 @@ describe('Find all characters', () => {
 
   it('should return all characters from the correct account', async () => {
     const { token, creature, character } = await setupSut()
-    
-    const { status, text } = await chai.request(server)
-      .get('/characters')
-      .set('Authorization', 'Bearer ' + token)
-      
-    const body = JSON.parse(text)
+
+    const { status, body } = await testRequest({
+      method: 'get',
+      path: '/characters',
+      headers: { Authorization: `Bearer ${token}` }
+    })
 
     expect({ status, body }).toEqual({
       status: 200,

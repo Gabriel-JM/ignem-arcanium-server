@@ -20,7 +20,7 @@ describe('Create characters validation', () => {
       }
     })
 
-    expect({ status, body }).toBe({
+    expect({ status, body }).toEqual({
       status: 400,
       body: {
         error: {
