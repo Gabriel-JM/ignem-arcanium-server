@@ -3,21 +3,27 @@ import { server } from '@/main/server/app.js'
 import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
 import { JwtEncrypter } from '@/infra/cryptography/index.js'
-import { testSetup } from '@/tests/integration/test-utils/test-setup.js'
+import {
+  clearTables,
+  closeDbConnection,
+  setupTestRequest
+} from '@/tests/integration/test-utils/test-setup.js'
+import { testRequest } from '@/tests/integration/test-utils/test-request.js'
 
 async function setupSut() {
   const idGenerator = new NanoIdUniqueIdGenerator()
   const accountId = idGenerator.generate()
-  const token = await new JwtEncrypter(process.env.ENCRYPTER_SECRET).encrypt({
-    id: accountId,
-    name: 'any_name'
-  })
 
   await testKnex.table('accounts').insert({
     id: accountId,
     name: 'any_name',
     email: 'any-character@email.com',
     password: 'any_password'
+  })
+
+  const token = await new JwtEncrypter(process.env.ENCRYPTER_SECRET).encrypt({
+    id: accountId,
+    name: 'any_name'
   })
 
   const creature = {
@@ -77,21 +83,25 @@ async function setupSut() {
 }
 
 describe('Find all characters', () => {
-  testSetup('characters', 'accounts')
+  beforeAll(setupTestRequest)
+  beforeEach(clearTables('characters', 'creatures', 'accounts'))
+  afterAll(closeDbConnection)
 
   it('should return all characters from the correct account', async () => {
     const { token, creature, character } = await setupSut()
     
-    const response = await chai.request(server)
+    const { status, text } = await chai.request(server)
       .get('/characters')
       .set('Authorization', 'Bearer ' + token)
       
-    const body = JSON.parse(response.text)
+    const body = JSON.parse(text)
 
-    expect(response.status).toBe(200)
-    expect(body).toEqual([{
-      ...creature,
-      ...character,
-    }])
+    expect({ status, body }).toEqual({
+      status: 200,
+      body: [{
+        ...creature,
+        ...character,
+      }]
+    })
   })
 })

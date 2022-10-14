@@ -13,7 +13,7 @@ export class AuthControllerDecorator implements Controller {
   ) {}
 
   async handle(params: AuthControllerDecoratorParams): Promise<HTTPResponse> {
-    const { authorization } = params;
+    const { authorization } = params
 
     if (!authorization?.startsWith('Bearer ')) {
       throw new InvalidAccessTokenError()

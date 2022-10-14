@@ -12,7 +12,7 @@ describe('Create account', () => {
       .post('/accounts')
       .send({
         name: 'User',
-        email: 'user@email.com',
+        email: 'new-account@email.com',
         password: 'secret_password'
       })
       

@@ -19,7 +19,7 @@ export class FieldsValidationComposite implements Validator {
     )
 
     const fieldsTypes = Object.keys(this.#fields).reduce((acc, key) => {
-      if (this.#fields[key].endsWith('?') && !(input?.[key])) {
+      if (this.#fields[key].endsWith('?') && input?.[key] === undefined) {
         return { ...acc }
       }
 
@@ -31,13 +31,9 @@ export class FieldsValidationComposite implements Validator {
 
     const typeValidator = new TypeValidator(fieldsTypes)
 
-    const re = [
+    return [
       ...requiredFieldsValidator.validate(input),
       ...typeValidator.validate(input)
     ]
-
-    console.log({ input, fields: this.#fields, fieldsTypes, re })
-
-    return re
   }
 }
