@@ -17,6 +17,10 @@ export class TypeValidator implements Validator {
         if (type === 'array') {
           return !Array.isArray(value)
         }
+
+        if (type === 'object' && value === null) {
+          return true
+        }
   
         return !(typeof value === type)
       })

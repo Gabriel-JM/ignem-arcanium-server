@@ -68,4 +68,14 @@ describe('TypeValidator', () => {
       'value2 must be one of types: number, boolean'
     ])
   })
+
+  it('should not validate null values as objects', () => {
+    const sut = makeSut({
+      obj: 'object'
+    })
+
+    const response = sut.validate({ obj: null })
+
+    expect(response).toEqual(['obj must be of type object'])
+  })
 })
