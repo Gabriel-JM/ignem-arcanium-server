@@ -49,6 +49,7 @@ export class KnexCharacterRepository implements Repository {
   #mapFields(dbData: DbCharacter & DbCreature) {
     const {
       account_id: accountId,
+      creature_id: creatureId,
       character_points: characterPoints,
       status_effects: statusEffects,
       ...rest
@@ -56,6 +57,7 @@ export class KnexCharacterRepository implements Repository {
 
     return {
       ...rest,
+      creatureId,
       accountId,
       characterPoints,
       statusEffects

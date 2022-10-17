@@ -4,11 +4,14 @@ import { server } from '@/main/server/app.js'
 import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { randomUUID } from 'crypto'
 import { testSetup } from '@/tests/integration/test-utils/test-setup.js'
+import { setTimeout } from 'node:timers/promises'
 
 describe('Create account', () => {
   testSetup('characters', 'accounts')
 
   it('should return an account not found error if an unregistred email is provided', async () => {
+    await setTimeout(4000)
+
     const response = await chai.request(server)
       .post('/login')
       .send({

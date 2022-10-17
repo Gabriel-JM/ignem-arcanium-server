@@ -7,6 +7,7 @@ import {
   setupTestRequest
 } from '@/tests/integration/test-utils/test-setup.js'
 import { testRequest } from '@/tests/integration/test-utils/test-request.js'
+import { setTimeout } from 'node:timers/promises'
 
 async function setupSut() {
   const idGenerator = new NanoIdUniqueIdGenerator()
@@ -86,6 +87,8 @@ describe('Find all characters', () => {
   afterAll(closeDbConnection)
 
   it('should return all characters from the correct account', async () => {
+    await setTimeout(4000)
+
     const { token, creature, character } = await setupSut()
 
     const { status, body } = await testRequest({
