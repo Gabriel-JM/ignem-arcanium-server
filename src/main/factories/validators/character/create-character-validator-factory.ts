@@ -14,8 +14,6 @@ export function makeCreateCharacterValidator() {
       alignment: 'string',
       characterPoints: 'number',
       description: 'string?',
-      hp: 'number',
-      mp: 'number',
       strength: 'number',
       dexterity: 'number',
       constitution: 'number',
@@ -28,8 +26,6 @@ export function makeCreateCharacterValidator() {
     new MinValueValidator({
       level: 1,
       gold: 0,
-      hp: 10,
-      mp: 10,
       strength: 1,
       dexterity: 1,
       constitution: 1,

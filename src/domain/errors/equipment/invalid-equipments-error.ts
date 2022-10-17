@@ -8,7 +8,7 @@ export class InvalidEquipmentsError extends Error {
   constructor(equipmentErrors: EquipementSlotErrors) {
     super('Invalid equipments')
     this.details = equipmentErrors.map(err => {
-      return `Item ${err.item.name} cannot be equipped in ${err.slot}`
+      return `'${err.item.name}' cannot be equipped in ${err.slot}`
     })
   }
 }

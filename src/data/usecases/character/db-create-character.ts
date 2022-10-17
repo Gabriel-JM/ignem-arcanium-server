@@ -28,9 +28,10 @@ export class DbCreateCharacter implements CreateCharacter {
     const equipmentItems = await this.#findSlotItemsRepository.findSlotItemById(
       { ...params.equipment }
     )
-    const items = await this.#findManyItemsRepository.findMany(
-      params.inventoryItems.map(inventoryItem => inventoryItem.itemId)
-    )
+    const items = await this.#findManyItemsRepository
+      .findMany(params.inventoryItems
+        .map(inventoryItem => inventoryItem.itemId)
+      )
 
     const character = new Character({
       level: params.level,

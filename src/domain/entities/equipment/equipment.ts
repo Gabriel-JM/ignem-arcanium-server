@@ -109,7 +109,7 @@ export class Equipment {
     extraWeapon?: Weapon
   ) {
     if (
-      twoHandsWeapon?.properties.includes('TWO_HANDS')
+      twoHandsWeapon?.properties?.includes('TWO_HANDS')
       && extraWeapon
     ) {
       throw new TwoHandsInUseError({

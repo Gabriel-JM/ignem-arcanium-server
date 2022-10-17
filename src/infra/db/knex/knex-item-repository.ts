@@ -71,9 +71,11 @@ export class KnexItemRepository implements ItemRepository {
   async findSlotItemById<T extends Record<string, string>>(itemSlots: T) {
     const itemIds = Object.values(itemSlots)
 
-    if (!itemIds.length) return null
+    if (!itemIds.length) return {}
 
-    const items = await this.#knexHelper.table('items').whereIn('id', itemIds)
+    const items = await this.#knexHelper
+      .table('items')
+      .whereIn('id', itemIds)
 
     const entries = Object.entries(itemSlots)
 

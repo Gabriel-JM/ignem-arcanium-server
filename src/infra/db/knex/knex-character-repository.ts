@@ -132,7 +132,7 @@ export class KnexCharacterRepository implements Repository {
         })
         .transacting(trx)
 
-      if (params.inventoryItems) {
+      if (params.inventoryItems.length) {
         await this.#knexHelper
           .table('inventory_item')
           .insert(params.inventoryItems.map(item => {

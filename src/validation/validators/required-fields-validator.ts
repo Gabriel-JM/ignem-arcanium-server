@@ -9,7 +9,7 @@ export class RequiredFieldsValidator implements Validator {
   
   validate(input: any): string[] {
     const missingFields = this.#fields.filter(
-      field => !(input?.[field])
+      field => input?.[field] === undefined
     )
     
     return missingFields.map(field => `${field} is required`)
