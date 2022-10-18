@@ -23,7 +23,7 @@ export class DbCreateCharacter implements CreateCharacter {
   }
   
   async create(params: CreateCharacterParams): Promise<CreateCharacterResult> {
-    const id = this.#uniqueIdGenerator.generate()
+    const id = this.#uniqueIdGenerator.generate('characters')
 
     const equipmentItems = await this.#findSlotItemsRepository.findSlotItemById(
       { ...params.equipment }

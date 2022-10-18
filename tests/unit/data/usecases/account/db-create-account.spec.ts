@@ -62,7 +62,7 @@ describe('DbCreateAccount', () => {
 
     await sut.create(dummyCreateParams)
 
-    expect(uniqueIdGeneratorSpy.generate).toHaveBeenCalledWith()
+    expect(uniqueIdGeneratorSpy.generate).toHaveBeenCalledWith('accounts')
   })
 
   it('should call TextHasher with correct values', async () => {

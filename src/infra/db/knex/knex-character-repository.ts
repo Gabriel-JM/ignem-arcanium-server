@@ -89,7 +89,7 @@ export class KnexCharacterRepository implements Repository {
 
   async create(params: CreateCharacterRepositoryParams): Promise<void> {
     await this.#knexHelper.transaction(async trx => {
-      const creatureId = this.#uniqueIdGenerator.generate()
+      const creatureId = this.#uniqueIdGenerator.generate('creatures')
       await this.#knexHelper
         .table('creatures')
         .insert({
@@ -122,7 +122,7 @@ export class KnexCharacterRepository implements Repository {
         })
         .transacting(trx)
 
-      const inventoryId = this.#uniqueIdGenerator.generate()
+      const inventoryId = this.#uniqueIdGenerator.generate('inventories')
 
       await this.#knexHelper
         .table('inventories')
@@ -137,7 +137,7 @@ export class KnexCharacterRepository implements Repository {
           .table('inventory_item')
           .insert(params.inventoryItems.map(item => {
             return {
-              id: this.#uniqueIdGenerator.generate(),
+              id: this.#uniqueIdGenerator.generate('inventory_item'),
               inventoryId,
               itemId: item.itemId,
               quantity: item.quantity

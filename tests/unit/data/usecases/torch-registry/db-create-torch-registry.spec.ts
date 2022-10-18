@@ -41,7 +41,7 @@ describe('DbCreateTorchRegistry', () => {
 
     await sut.create(dummyCreateTorchRegistryParams)
 
-    expect(uniqueIdGeneratorSpy.generate).toHaveBeenCalledWith()
+    expect(uniqueIdGeneratorSpy.generate).toHaveBeenCalledWith('torch_registries')
   })
   
   it('should call CreateTorchRegistryRepository with correct values', async () => {

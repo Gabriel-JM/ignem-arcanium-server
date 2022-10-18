@@ -23,7 +23,7 @@ export class DbCreateTorchRegistry implements CreateTorchRegistry {
       throw new NoTorchToBeLitError(params)
     }
 
-    const torchRegistryId = this.#uniqueIdGenerator.generate()
+    const torchRegistryId = this.#uniqueIdGenerator.generate('torch_registries')
 
     await this.#createTorchRegistryRepository.create({
       id: torchRegistryId,

@@ -32,7 +32,7 @@ export class DbCreateAccount implements CreateAccount {
       throw new EmailAlreadyInUseError()
     }
 
-    const id = this.#uniqueIdGenerator.generate()
+    const id = this.#uniqueIdGenerator.generate('accounts')
 
     const hashedPassword = await this.#textHasher.hash(params.password)
 

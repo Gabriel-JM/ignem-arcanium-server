@@ -46,7 +46,7 @@ describe('DbCreateCharacter', () => {
 
     await sut.create(dummyCreateCharacterParams)
 
-    expect(uniqueIdGeneratorSpy.generate).toHaveBeenCalledWith()
+    expect(uniqueIdGeneratorSpy.generate).toHaveBeenCalledWith('characters')
   })
 
   it('should call FindSlotItemByIdRepository with correct values', async () => {
