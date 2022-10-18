@@ -9,8 +9,8 @@ function generateDamageReduction(value: string) {
 export function makeShieldsAndArmors() {
   return [
     {
-      itemId: 'JV8iZQJdMmJby0tL7BeNR',
-      shieldArmorId: 'DCB7QZBz9vYshdHYrKMkh',
+      itemId: 'ite_JV8iZQJdMmJby0tL7BeNR',
+      shieldArmorId: 'sha_DCB7QZBz9vYshdHYrKMkh',
       name: 'Cloth',
       type: 'ARMOR',
       description: 'Simple cloths not made to be protective',
@@ -21,8 +21,8 @@ export function makeShieldsAndArmors() {
       weight: 5
     },
     {
-      itemId: '8twjG-MtlmO3HR0nnzzKM',
-      shieldArmorId: '5VNaHOhpluPnWQ363KeZH',
+      itemId: 'ite_8twjG-MtlmO3HR0nnzzKM',
+      shieldArmorId: 'sha_5VNaHOhpluPnWQ363KeZH',
       name: 'Leather Armor',
       type: 'ARMOR',
       description: 'Light weight armor made of animal leather',
@@ -33,8 +33,8 @@ export function makeShieldsAndArmors() {
       weight: 50
     },
     {
-      itemId: '8U_lwxzl_8tM6YG3K_ieM',
-      shieldArmorId: 'GPZlWtN78VlM2ZUUI1DXh',
+      itemId: 'ite_8U_lwxzl_8tM6YG3K_ieM',
+      shieldArmorId: 'sha_GPZlWtN78VlM2ZUUI1DXh',
       name: 'Light Scale Armor',
       type: 'ARMOR',
       description: 'Light weight armor made of criatures hard scales',
@@ -45,8 +45,8 @@ export function makeShieldsAndArmors() {
       weight: 65
     },
     {
-      itemId: 'Gxu930pPr0rtMUPQynAJJ',
-      shieldArmorId: '4cGqVz-OVgpRStQAxDgNk',
+      itemId: 'ite_Gxu930pPr0rtMUPQynAJJ',
+      shieldArmorId: 'sha_4cGqVz-OVgpRStQAxDgNk',
       name: 'Bronze Breastplate',
       type: 'ARMOR',
       description: 'A breastplate armor made of bronze',
@@ -57,8 +57,8 @@ export function makeShieldsAndArmors() {
       weight: 80
     },
     {
-      itemId: 'fz95ObDXAltpuMVdnZVVM',
-      shieldArmorId: 'iSUlnXDTEejN55jtXOyCI',
+      itemId: 'ite_fz95ObDXAltpuMVdnZVVM',
+      shieldArmorId: 'sha_iSUlnXDTEejN55jtXOyCI',
       name: 'Chain Mail',
       type: 'ARMOR',
       description: 'An armor made of small circles of metal',
@@ -69,8 +69,8 @@ export function makeShieldsAndArmors() {
       weight: 100
     },
     {
-      itemId: 'mKomcIeswDG-do1VeI8cd',
-      shieldArmorId: '-Km1dyRk6Qq1bIrfL4NdH',
+      itemId: 'ite_mKomcIeswDG-do1VeI8cd',
+      shieldArmorId: 'sha_-Km1dyRk6Qq1bIrfL4NdH',
       name: 'Iron Armor',
       type: 'ARMOR',
       description: 'A classic armor for good defense in combat',
@@ -81,8 +81,8 @@ export function makeShieldsAndArmors() {
       weight: 110
     },
     {
-      itemId: 'gOTWaPBqho1DSQJ3O2bfw',
-      shieldArmorId: 'Gonb3ZenznaSgLvnVhcjg',
+      itemId: 'ite_gOTWaPBqho1DSQJ3O2bfw',
+      shieldArmorId: 'sha_Gonb3ZenznaSgLvnVhcjg',
       name: 'Steel Armor',
       type: 'ARMOR',
       description: 'A full plate armor made of steel',
@@ -93,8 +93,8 @@ export function makeShieldsAndArmors() {
       weight: 125
     },
     {
-      itemId: 'V1XSADM4r-bpZlePcafIG',
-      shieldArmorId: 'O64ljgAcrBsg9WMz2lPeu',
+      itemId: 'ite_V1XSADM4r-bpZlePcafIG',
+      shieldArmorId: 'sha_O64ljgAcrBsg9WMz2lPeu',
       name: 'Steel Laminated Armor',
       type: 'ARMOR',
       description: 'A really well made and strutured laminated steel armor',
@@ -105,8 +105,8 @@ export function makeShieldsAndArmors() {
       weight: 140
     },
     {
-      itemId: 'Lbnjq6LwAdekbtEvSu1Ke',
-      shieldArmorId: 'hU3x0Ctlb4_L0vd-ytl4l',
+      itemId: 'ite_Lbnjq6LwAdekbtEvSu1Ke',
+      shieldArmorId: 'sha_hU3x0Ctlb4_L0vd-ytl4l',
       name: 'Buckler',
       type: 'SHIELD',
       description: 'A small shield made of leather and/or wood good for parrying',
@@ -117,8 +117,8 @@ export function makeShieldsAndArmors() {
       weight: 30
     },
     {
-      itemId: '_-V-OtKEEhTGBJ0gtR61Y',
-      shieldArmorId: 'XPQtZjpxkxjl_fric7TH9',
+      itemId: 'ite__-V-OtKEEhTGBJ0gtR61Y',
+      shieldArmorId: 'sha_XPQtZjpxkxjl_fric7TH9',
       name: 'Round Shield',
       type: 'SHIELD',
       description: 'A classic shield used by light weight warriors',
@@ -129,8 +129,8 @@ export function makeShieldsAndArmors() {
       weight: 50
     },
     {
-      itemId: 'cA0qYnUR1YiLUiTub0Uav',
-      shieldArmorId: '-K5v6OXFhEiruy6Y5ShQ3',
+      itemId: 'ite_cA0qYnUR1YiLUiTub0Uav',
+      shieldArmorId: 'sha_-K5v6OXFhEiruy6Y5ShQ3',
       name: 'Medium Shield',
       type: 'SHIELD',
       description: 'Shield used by knights and front line warriors',
@@ -141,8 +141,8 @@ export function makeShieldsAndArmors() {
       weight: 80
     },
     {
-      itemId: '3ewCFUioD0q6V7O8ZqK6d',
-      shieldArmorId: 'LapqUdL0lHd2uFfGjtM91',
+      itemId: 'ite_3ewCFUioD0q6V7O8ZqK6d',
+      shieldArmorId: 'sha_LapqUdL0lHd2uFfGjtM91',
       name: 'Greatshield',
       type: 'SHIELD',
       description: 'Shields that are so big that can cover a person and be used as wall',

@@ -1,8 +1,8 @@
 export function makeAlchemicalItems() {
   return [
     {
-      itemId: 'sHU3r-vjZJfR0z-m0wCyk',
-      alchemicalItemId: '4r9Z1BkyB7PbVdNbnsDpj',
+      itemId: 'ite_sHU3r-vjZJfR0z-m0wCyk',
+      alchemicalItemId: 'alc_4r9Z1BkyB7PbVdNbnsDpj',
       name: 'Simple Healing Ointment',
       type: 'OINTMENT',
       rarity: 'UNCOMMON',
@@ -15,8 +15,8 @@ export function makeAlchemicalItems() {
       weight: 2
     },
     {
-      itemId: 'mSOJrZMKi3aLezd2Icj6I',
-      alchemicalItemId: '8wIpwzcq47j14ASjIWQ6z',
+      itemId: 'ite_mSOJrZMKi3aLezd2Icj6I',
+      alchemicalItemId: 'alc_8wIpwzcq47j14ASjIWQ6z',
       name: 'Weak Arcane Oil',
       type: 'OIL',
       rarity: 'UNCOMMON',
@@ -30,8 +30,8 @@ export function makeAlchemicalItems() {
       weight: 2
     },
     {
-      itemId: 'M59NVQzkPY3bFvTkk8E3d',
-      alchemicalItemId: 'ihdxTdFT2a8dn48Cruglx',
+      itemId: 'ite_M59NVQzkPY3bFvTkk8E3d',
+      alchemicalItemId: 'alc_ihdxTdFT2a8dn48Cruglx',
       name: 'Weak Poisonous Oil',
       type: 'OIL',
       rarity: 'UNCOMMON',

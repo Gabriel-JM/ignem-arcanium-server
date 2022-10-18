@@ -1,7 +1,7 @@
 export function makeTools() {
   return [
     {
-      itemId: 'EKOOt0rlUHaejgWEZZNwY',
+      itemId: 'ite_EKOOt0rlUHaejgWEZZNwY',
       name: 'Simple Alchemical Kit',
       description: 'A kit containing tools for simpler alchemy work. This kit'
         + ' contains items such as: tweezers, pliers, preparation pots, glass'

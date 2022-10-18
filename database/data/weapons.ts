@@ -9,8 +9,8 @@ function generateDamage(damage: string, ...types: string[]) {
 export function makeWeapons() {
   return [
     {
-      itemId: '4aO5DzTD_phJDk885XjUt',
-      weaponId: 'R6lkk2GI7OhGnVQInAkWD',
+      itemId: 'ite_4aO5DzTD_phJDk885XjUt',
+      weaponId: 'wea_R6lkk2GI7OhGnVQInAkWD',
       name: 'Dagger',
       description: 'Deadly short range blade',
       damage: generateDamage('STR/DEX+1', 'slash', 'pierce'),
@@ -21,8 +21,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'vu14yrNkknYUlcu1I80yE',
-      weaponId: 'BEN7Mp1XWEkwh5HLU6sV8',
+      itemId: 'ite_vu14yrNkknYUlcu1I80yE',
+      weaponId: 'wea_BEN7Mp1XWEkwh5HLU6sV8',
       name: 'Wood Staff',
       description: 'A wood made combat staff',
       damage: generateDamage('STR+2', 'strike'),
@@ -33,8 +33,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'uEiLvsFkKLy1ud7d3KSmn',
-      weaponId: 'qr-qLO29Y0is_PpFQEGVZ',
+      itemId: 'ite_uEiLvsFkKLy1ud7d3KSmn',
+      weaponId: 'wea_qr-qLO29Y0is_PpFQEGVZ',
       name: 'Short Sword',
       description: 'A short and light weight combat sword',
       damage: generateDamage('STR/DEX+2', 'slash', 'pierce'),
@@ -45,8 +45,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'WGunVWuKbPwT-pYCgRJZ2',
-      weaponId: 'fO_tfw2OXR_SpujyWqSz3',
+      itemId: 'ite_WGunVWuKbPwT-pYCgRJZ2',
+      weaponId: 'wea_fO_tfw2OXR_SpujyWqSz3',
       name: 'Long Sword',
       description: 'Most common and versatile sword used by warriors and kings',
       damage: generateDamage('STR+3', 'slash', 'pierce'),
@@ -57,8 +57,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'HI2_jiPj0cCybKvSzHv8v',
-      weaponId: 'PTV9yePZfescBFYbO1jQW',
+      itemId: 'ite_HI2_jiPj0cCybKvSzHv8v',
+      weaponId: 'wea_PTV9yePZfescBFYbO1jQW',
       name: 'Great Sword',
       description: 'A really long blade sword, that most be used with two hands and sometimes',
       damage: generateDamage('STR+4', 'slash', 'pierce'),
@@ -69,8 +69,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'ri9hEbHYbaO9i-aOI6ZAP',
-      weaponId: '7gfS6AO655jqwbRn07C18',
+      itemId: 'ite_ri9hEbHYbaO9i-aOI6ZAP',
+      weaponId: 'wea_7gfS6AO655jqwbRn07C18',
       name: 'Rapier',
       description: 'A straight sword with a narrow pointed blade',
       damage: generateDamage('STR/DEX+2', 'pierce'),
@@ -81,8 +81,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'kWcr2KRNlPAfqbm684_LH',
-      weaponId: '0HcyBMlT30HXc1NRazxme',
+      itemId: 'ite_kWcr2KRNlPAfqbm684_LH',
+      weaponId: 'wea_0HcyBMlT30HXc1NRazxme',
       name: 'Axe',
       description: 'A combat designed hand axe',
       damage: generateDamage('STR+3', 'slash'),
@@ -93,8 +93,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'bAJQftjiYvxJiDMuAESIm',
-      weaponId: 'tggSQqMBSUGNXydywpNxd',
+      itemId: 'ite_bAJQftjiYvxJiDMuAESIm',
+      weaponId: 'wea_tggSQqMBSUGNXydywpNxd',
       name: 'War Axe',
       description: 'A two hands great axe used in wars',
       damage: generateDamage('STR+4', 'slash'),
@@ -105,8 +105,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'sWhrH2WXRD1Bdl5RWQr_u',
-      weaponId: 'iG-G6qtDbbGK8gvto89FK',
+      itemId: 'ite_sWhrH2WXRD1Bdl5RWQr_u',
+      weaponId: 'wea_iG-G6qtDbbGK8gvto89FK',
       name: 'Hammer',
       description: 'A combat designed Hammer',
       damage: generateDamage('STR+3', 'strike'),
@@ -117,8 +117,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'sPo7kBX0b2P-w3fyexzLN',
-      weaponId: 'xojg-Npnq12sxzqzvemNM',
+      itemId: 'ite_sPo7kBX0b2P-w3fyexzLN',
+      weaponId: 'wea_xojg-Npnq12sxzqzvemNM',
       name: 'Warhammer',
       description: 'A really heavy and powerful hammer',
       damage: generateDamage('STR+4', 'strike'),
@@ -129,8 +129,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: '1kcSBgkE2qJ3kJNPrE989',
-      weaponId: 'V2IeVbSNEduEe1QeHveU5',
+      itemId: 'ite_1kcSBgkE2qJ3kJNPrE989',
+      weaponId: 'wea_V2IeVbSNEduEe1QeHveU5',
       name: 'Short Bow',
       description: 'A light and small bow',
       damage: generateDamage('1D6', 'pierce'),
@@ -141,8 +141,8 @@ export function makeWeapons() {
       distance: 35
     },
     {
-      itemId: '8SUZ0Uvkx4oDS0KkdyUe7',
-      weaponId: 'rXWzgxjIl8s5itFGiO22E',
+      itemId: 'ite_8SUZ0Uvkx4oDS0KkdyUe7',
+      weaponId: 'wea_rXWzgxjIl8s5itFGiO22E',
       name: 'Normal Bow',
       description: 'Common bow made for combat',
       damage: generateDamage('1D6+2', 'pierce'),
@@ -153,8 +153,8 @@ export function makeWeapons() {
       distance: 40
     },
     {
-      itemId: '056iamptUme3kQm2UTiai',
-      weaponId: 'fNVtBullwitPNZ0OveIC3',
+      itemId: 'ite_056iamptUme3kQm2UTiai',
+      weaponId: 'wea_fNVtBullwitPNZ0OveIC3',
       name: 'Long Bow',
       description: 'A great, more powerful and difficult to use bow',
       damage: generateDamage('2D6', 'pierce'),
@@ -165,8 +165,8 @@ export function makeWeapons() {
       distance: 45
     },
     {
-      itemId: 'IhnI2xkh5Dmv1Ml-K0bVM',
-      weaponId: 'QsLlpn9VYVnInU3oElLbg',
+      itemId: 'ite_IhnI2xkh5Dmv1Ml-K0bVM',
+      weaponId: 'wea_QsLlpn9VYVnInU3oElLbg',
       name: 'Hand Crossbow',
       description: 'A small crossbow that can be used with a single hand',
       damage: generateDamage('1D6+2', 'pierce'),
@@ -177,8 +177,8 @@ export function makeWeapons() {
       distance: 40
     },
     {
-      itemId: '-2GE7X9b57OLWI-Jtn91X',
-      weaponId: '8OURUnwUh-7nCtDDxGko4',
+      itemId: 'ite_-2GE7X9b57OLWI-Jtn91X',
+      weaponId: 'wea_8OURUnwUh-7nCtDDxGko4',
       name: 'Crossbow',
       description: 'Classic and powerful crossbow',
       damage: generateDamage('1D6+4', 'pierce'),
