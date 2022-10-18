@@ -1,3 +1,3 @@
 export interface UniqueIdGenerator {
-  generate(): string
+  generate(prefixSubject: string): string
 }

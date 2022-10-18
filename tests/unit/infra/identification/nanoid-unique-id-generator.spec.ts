@@ -2,23 +2,38 @@ vi.mock('nanoid', () => {
   return { nanoid: vi.fn(() => 'any_id') }
 })
 
+vi.mock('@/infra/identification/id-prefixes.js', () => {
+  return {
+    IDPrefixes: {
+      subject: 'sub_'
+    }
+  }
+})
+
 import { nanoid } from 'nanoid'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
+import { InvalidIDPrefixSubject } from '@/infra/errors/index.js'
 
 describe('NanoIdUniqueIdGenerator', () => {
   it('should call nanoid function', () => {
     const sut = new NanoIdUniqueIdGenerator()
 
-    sut.generate()
+    sut.generate('subject')
 
     expect(nanoid).toHaveBeenCalledWith()
+  })
+
+  it('should throw an InvalidIDPrefixSubject if an invalid prefix subject is provided', () => {
+    const sut = new NanoIdUniqueIdGenerator()
+
+    expect(() => sut.generate('invalid')).toThrowError(new InvalidIDPrefixSubject('invalid'))
   })
 
   it('should return a random string', () => {
     const sut = new NanoIdUniqueIdGenerator()
 
-    const response = sut.generate()
+    const response = sut.generate('subject')
 
-    expect(typeof response).toBe('string')
+    expect(response).toBe('sub_any_id')
   })
 })
