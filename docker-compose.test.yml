@@ -1,3 +1,5 @@
+name: ignem-arcanium-test
+
 services:
   pg-tests:
     image: postgres:latest
