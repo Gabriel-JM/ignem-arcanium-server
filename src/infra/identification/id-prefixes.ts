@@ -4,7 +4,7 @@ export enum IDPrefixes {
   characters = 'cha_',
   inventories = 'inv_',
   items = 'ite_',
-  inventoy_item = 'ivt_',
+  inventory_item = 'ivt_',
   weapons = 'wea_',
   shields_armors = 'sha_',
   alchemical_items = 'alc_',
