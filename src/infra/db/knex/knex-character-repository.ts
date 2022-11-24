@@ -138,8 +138,8 @@ export class KnexCharacterRepository implements Repository {
           .insert(params.inventoryItems.map(item => {
             return {
               id: this.#uniqueIdGenerator.generate('inventory_item'),
-              inventoryId,
-              itemId: item.itemId,
+              inventory_id: inventoryId,
+              item_id: item.itemId,
               quantity: item.quantity
             }
           }))
