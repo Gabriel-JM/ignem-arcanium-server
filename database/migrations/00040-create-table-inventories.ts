@@ -5,6 +5,11 @@ export async function up(knex: Knex) {
     tableBuilder.string('id').primary().notNullable()
     tableBuilder.integer('size').notNullable()
     tableBuilder.integer('space_in_use').defaultTo(0)
+    tableBuilder
+      .string('creature_id')
+      .notNullable()
+      .references('id')
+      .inTable('creatures')
   })
 }
 
