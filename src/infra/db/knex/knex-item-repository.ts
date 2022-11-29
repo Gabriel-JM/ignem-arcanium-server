@@ -15,7 +15,8 @@ const itemsFields = ([
   'rarity',
   'description',
   'price',
-  'weight'
+  'weight',
+  'requirements'
 ]).map(field => `items.${field}`)
 
 const weaponsFields = ([

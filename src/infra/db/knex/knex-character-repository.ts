@@ -11,7 +11,7 @@ import {
   UpdateCharacterRepositoryParams
 } from '@/data/protocols/repository/index.js'
 import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
-import { DbCharacter, DbCreature } from '@/infra/db/models/index.js'
+import { DbCharacter, DbCreature, DbEquipment, DbInventory, DbItem } from '@/infra/db/models/index.js'
 
 const creaturesFields = ([
   'name',
@@ -30,11 +30,27 @@ const creaturesFields = ([
   'charisma',
 ]).map(field => `creatures.${field}`)
 
+const itemsFields = ([
+  'id',
+  'name',
+  'type',
+  'rarity',
+  'description',
+  'price',
+  'weight',
+  'requirements'
+]).map(field => `items.${field}`)
+
 type Repository = CreateCharacterRepository
   & FindAllCharactersRepository
   & CheckCharacterRepository
   & DeleteCharacterRepository
   & UpdateCharacterRepository
+
+type DbCharacterWithData = DbCharacter & DbCreature & DbInventory & {
+  inventory_id: string
+  items: Array<DbItem & { quantity: number, inventory_id: string }>
+}
 
 export class KnexCharacterRepository implements Repository {
   tableName = 'characters'
@@ -46,21 +62,37 @@ export class KnexCharacterRepository implements Repository {
     this.#uniqueIdGenerator = uniqueIdGenerator
   }
 
-  #mapFields(dbData: DbCharacter & DbCreature) {
+  #mapFields(dbData: DbCharacterWithData) {
     const {
       account_id: accountId,
       creature_id: creatureId,
       character_points: characterPoints,
       status_effects: statusEffects,
+      inventory_id: inventoryId,
+      size,
+      space_in_use: spaceInUse,
+      items,
       ...rest
     } = dbData
+
+    const itemsList = items.map(item => {
+      if (item.inventory_id === inventoryId) {
+        return item
+      }
+    }).filter(Boolean)
 
     return {
       ...rest,
       creatureId,
       accountId,
       characterPoints,
-      statusEffects
+      statusEffects,
+      inventory: {
+        id: inventoryId,
+        size,
+        spaceInUse,
+        items: itemsList
+      }
     }
   }
 
@@ -77,14 +109,28 @@ export class KnexCharacterRepository implements Repository {
   async findAll(accountId: string) {
     const characters = await this.#knexHelper
       .table(this.tableName)
-      .select<(DbCharacter & DbCreature)[]>(
+      .select<DbCharacterWithData[]>(
         'characters.*',
-        ...creaturesFields
+        ...creaturesFields,
+        'inventories.id as inventory_id',
+        'inventories.size',
+        'inventories.space_in_use'
       )
       .join('creatures', 'creatures.id', 'characters.creature_id')
       .where({ account_id: accountId })
 
-    return characters.map(this.#mapFields)
+    const charactersInventoryIds = characters.map(character => character.inventory_id)
+    const items = await this.#knexHelper
+      .table('inventory_item')
+      .select(
+        'inventory_item.inventory_id',
+        'inventory_item.quantity',
+        ...itemsFields
+      )
+      .whereIn('inventory_id', charactersInventoryIds)
+      .join('items', 'items.id', 'inventory_item.item_id')
+
+    return ({ ...characters, items }).map(this.#mapFields)
   }
 
   async create(params: CreateCharacterRepositoryParams): Promise<void> {
@@ -92,7 +138,7 @@ export class KnexCharacterRepository implements Repository {
       const creatureId = this.#uniqueIdGenerator.generate('creatures')
       await this.#knexHelper
         .table('creatures')
-        .insert({
+        .insert(<DbCreature> {
           id: creatureId,
           name: params.name,
           icon: params.icon,
@@ -112,7 +158,7 @@ export class KnexCharacterRepository implements Repository {
 
       await this.#knexHelper
         .table(this.tableName)
-        .insert({
+        .insert(<DbCharacter> {
           id: params.id,
           account_id: params.accountId,
           creature_id: creatureId,
@@ -122,13 +168,28 @@ export class KnexCharacterRepository implements Repository {
         })
         .transacting(trx)
 
+      const { equipment } = params
+    
+      await this.#knexHelper
+        .table('equipments')
+        .insert(<DbEquipment> {
+          id: this.#uniqueIdGenerator.generate('equipments'),
+          creature_id: creatureId,
+          right_hand_item_id: equipment.rightHand ?? null,
+          left_hand_item_id: equipment.leftHand ?? null,
+          armor_id: equipment.armor ?? null,
+          first_accessory_id: equipment.accessory1 ?? null,
+          second_accessory_id: equipment.accessory2 ?? null
+        })
+
       const inventoryId = this.#uniqueIdGenerator.generate('inventories')
 
       await this.#knexHelper
         .table('inventories')
-        .insert({
+        .insert(<DbInventory> {
           id: inventoryId,
-          size: 200
+          size: 200,
+          creature_id: creatureId
         })
         .transacting(trx)
 
@@ -145,6 +206,8 @@ export class KnexCharacterRepository implements Repository {
           }))
           .transacting(trx)
       }
+
+      
     })
   }
 
