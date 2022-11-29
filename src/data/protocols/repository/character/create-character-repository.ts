@@ -5,6 +5,7 @@ export type CreateCharacterRepositoryParams = CreateCharacterParams & {
   statusEffects: string[]
   hp: number
   mp: number
+  inventorySpaceInUse: number
   equipment: {
     leftHand?: string
     rightHand?: string

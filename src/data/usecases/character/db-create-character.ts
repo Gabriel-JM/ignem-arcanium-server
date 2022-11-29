@@ -91,7 +91,8 @@ export class DbCreateCharacter implements CreateCharacter {
         accessory1: equipmentItems.accessory1?.id,
         accessory2: equipmentItems.accessory2?.id
       },
-      inventoryItems: params.inventoryItems
+      inventoryItems: params.inventoryItems,
+      inventorySpaceInUse: character.inventory.weight
     })
 
     return { id }

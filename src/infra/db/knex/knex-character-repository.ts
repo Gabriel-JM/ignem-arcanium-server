@@ -75,12 +75,6 @@ export class KnexCharacterRepository implements Repository {
       ...rest
     } = dbData
 
-    const itemsList = items.map(item => {
-      if (item.inventory_id === inventoryId) {
-        return item
-      }
-    }).filter(Boolean)
-
     return {
       ...rest,
       creatureId,
@@ -91,7 +85,7 @@ export class KnexCharacterRepository implements Repository {
         id: inventoryId,
         size,
         spaceInUse,
-        items: itemsList
+        items
       }
     }
   }
@@ -117,6 +111,7 @@ export class KnexCharacterRepository implements Repository {
         'inventories.space_in_use'
       )
       .join('creatures', 'creatures.id', 'characters.creature_id')
+      .join('inventories', 'inventories.creature_id', 'creatures.id')
       .where({ account_id: accountId })
 
     const charactersInventoryIds = characters.map(character => character.inventory_id)
@@ -130,7 +125,16 @@ export class KnexCharacterRepository implements Repository {
       .whereIn('inventory_id', charactersInventoryIds)
       .join('items', 'items.id', 'inventory_item.item_id')
 
-    return ({ ...characters, items }).map(this.#mapFields)
+    return characters
+      .map(character => ({
+        ...character,
+        items: items.map(item => {
+          if (item.inventory_id === character.inventory_id) {
+            return item
+          }
+        }).filter(Boolean)
+      }))
+      .map(this.#mapFields)
   }
 
   async create(params: CreateCharacterRepositoryParams): Promise<void> {
@@ -188,8 +192,9 @@ export class KnexCharacterRepository implements Repository {
         .table('inventories')
         .insert(<DbInventory> {
           id: inventoryId,
+          creature_id: creatureId,
           size: 200,
-          creature_id: creatureId
+          space_in_use: params.inventorySpaceInUse
         })
         .transacting(trx)
 

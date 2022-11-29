@@ -46,6 +46,10 @@ export class Character {
     }
   }
 
+  get inventory() {
+    return this.#inventory
+  }
+
   get status() {
     return this.#status
   }
