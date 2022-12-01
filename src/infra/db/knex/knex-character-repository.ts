@@ -176,15 +176,38 @@ export class KnexCharacterRepository implements Repository {
     
       await this.#knexHelper
         .table('equipments')
-        .insert(<DbEquipment> {
-          id: this.#uniqueIdGenerator.generate('equipments'),
-          creature_id: creatureId,
-          right_hand_item_id: equipment.rightHand ?? null,
-          left_hand_item_id: equipment.leftHand ?? null,
-          armor_id: equipment.armor ?? null,
-          first_accessory_id: equipment.accessory1 ?? null,
-          second_accessory_id: equipment.accessory2 ?? null
-        })
+        .insert(<DbEquipment[]> [
+          {
+            id: this.#uniqueIdGenerator.generate('equipments'),
+            creature_id: creatureId,
+            slot_name: 'rightHand',
+            item_id: equipment.rightHand ?? null,
+          },
+          {
+            id: this.#uniqueIdGenerator.generate('equipments'),
+            creature_id: creatureId,
+            slot_name: 'leftHand',
+            item_id: equipment.leftHand ?? null,
+          },
+          {
+            id: this.#uniqueIdGenerator.generate('equipments'),
+            creature_id: creatureId,
+            slot_name: 'armor',
+            item_id: equipment.armor ?? null,
+          },
+          {
+            id: this.#uniqueIdGenerator.generate('equipments'),
+            creature_id: creatureId,
+            slot_name: 'firstAccessory',
+            item_id: equipment.accessory1 ?? null,
+          },
+          {
+            id: this.#uniqueIdGenerator.generate('equipments'),
+            creature_id: creatureId,
+            slot_name: 'secondAccessory',
+            item_id: equipment.accessory2 ?? null,
+          }
+        ])
 
       const inventoryId = this.#uniqueIdGenerator.generate('inventories')
 
