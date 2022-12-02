@@ -2,7 +2,6 @@ import { UniqueIdGenerator } from '@/data/protocols/identification/index.js'
 import {
   CheckCharacterRepository,
   CheckCharacterRepositoryParams,
-  CreateCharacterRepository,
   CreateCharacterRepositoryParams,
   DeleteCharacterRepository,
   DeleteCharacterRepositoryParams,
@@ -21,8 +20,7 @@ import {
   itemsFields
 } from '@/infra/db/models/index.js'
 
-type Repository = CreateCharacterRepository
-  & FindAllCharactersRepository
+type Repository = FindAllCharactersRepository
   & CheckCharacterRepository
   & DeleteCharacterRepository
   & UpdateCharacterRepository
@@ -35,11 +33,9 @@ type DbCharacterWithData = DbCharacter & DbCreature & DbInventory & {
 export class KnexCharacterRepository implements Repository {
   tableName = 'characters'
   #knexHelper: KnexHelper
-  #uniqueIdGenerator: UniqueIdGenerator
 
-  constructor(knexHelper: KnexHelper, uniqueIdGenerator: UniqueIdGenerator) {
+  constructor(knexHelper: KnexHelper) {
     this.#knexHelper = knexHelper
-    this.#uniqueIdGenerator = uniqueIdGenerator
   }
 
   #mapFields(dbData: DbCharacterWithData) {
@@ -142,108 +138,6 @@ export class KnexCharacterRepository implements Repository {
         }, {})
       }))
       .map(this.#mapFields)
-  }
-
-  async create(params: CreateCharacterRepositoryParams): Promise<void> {
-    await this.#knexHelper.transaction(async trx => {
-      const creatureId = this.#uniqueIdGenerator.generate('creatures')
-      await this.#knexHelper
-        .table('creatures')
-        .insert(<DbCreature> {
-          id: creatureId,
-          name: params.name,
-          icon: params.icon,
-          status_effects: params.statusEffects,
-          alignment: params.alignment,
-          gold: params.gold,
-          hp: params.hp,
-          mp: params.mp,
-          strength: params.strength,
-          dexterity: params.dexterity,
-          constitution: params.constitution,
-          intelligence: params.intelligence,
-          wisdom: params.wisdom,
-          charisma: params.charisma,
-          ...params.description && { description: params.description }
-        })
-
-      await this.#knexHelper
-        .table(this.tableName)
-        .insert(<DbCharacter> {
-          id: params.id,
-          account_id: params.accountId,
-          creature_id: creatureId,
-          level: params.level,
-          experience: 0,
-          character_points: params.characterPoints,
-        })
-        .transacting(trx)
-
-      const { equipment } = params
-    
-      await this.#knexHelper
-        .table('equipments')
-        .insert(<DbEquipment[]> [
-          {
-            id: this.#uniqueIdGenerator.generate('equipments'),
-            creature_id: creatureId,
-            slot_name: 'rightHand',
-            item_id: equipment.rightHand ?? null,
-          },
-          {
-            id: this.#uniqueIdGenerator.generate('equipments'),
-            creature_id: creatureId,
-            slot_name: 'leftHand',
-            item_id: equipment.leftHand ?? null,
-          },
-          {
-            id: this.#uniqueIdGenerator.generate('equipments'),
-            creature_id: creatureId,
-            slot_name: 'armor',
-            item_id: equipment.armor ?? null,
-          },
-          {
-            id: this.#uniqueIdGenerator.generate('equipments'),
-            creature_id: creatureId,
-            slot_name: 'firstAccessory',
-            item_id: equipment.accessory1 ?? null,
-          },
-          {
-            id: this.#uniqueIdGenerator.generate('equipments'),
-            creature_id: creatureId,
-            slot_name: 'secondAccessory',
-            item_id: equipment.accessory2 ?? null,
-          }
-        ])
-
-      const inventoryId = this.#uniqueIdGenerator.generate('inventories')
-
-      await this.#knexHelper
-        .table('inventories')
-        .insert(<DbInventory> {
-          id: inventoryId,
-          creature_id: creatureId,
-          size: 200,
-          space_in_use: params.inventorySpaceInUse
-        })
-        .transacting(trx)
-
-      if (params.inventoryItems.length) {
-        await this.#knexHelper
-          .table('inventory_item')
-          .insert(params.inventoryItems.map(item => {
-            return {
-              id: this.#uniqueIdGenerator.generate('inventory_item'),
-              inventory_id: inventoryId,
-              item_id: item.itemId,
-              quantity: item.quantity
-            }
-          }))
-          .transacting(trx)
-      }
-
-      
-    })
   }
 
   async delete(params: DeleteCharacterRepositoryParams) {
