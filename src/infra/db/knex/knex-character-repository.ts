@@ -11,35 +11,15 @@ import {
   UpdateCharacterRepositoryParams
 } from '@/data/protocols/repository/index.js'
 import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
-import { DbCharacter, DbCreature, DbEquipment, DbInventory, DbItem } from '@/infra/db/models/index.js'
-
-const creaturesFields = ([
-  'name',
-  'icon',
-  'alignment',
-  'description',
-  'gold',
-  'status_effects',
-  'hp',
-  'mp',
-  'strength',
-  'dexterity',
-  'constitution',
-  'intelligence',
-  'wisdom',
-  'charisma',
-]).map(field => `creatures.${field}`)
-
-const itemsFields = ([
-  'id',
-  'name',
-  'type',
-  'rarity',
-  'description',
-  'price',
-  'weight',
-  'requirements'
-]).map(field => `items.${field}`)
+import {
+  creaturesFields,
+  DbCharacter,
+  DbCreature,
+  DbEquipment,
+  DbInventory,
+  DbItem,
+  itemsFields
+} from '@/infra/db/models/index.js'
 
 type Repository = CreateCharacterRepository
   & FindAllCharactersRepository
@@ -114,7 +94,15 @@ export class KnexCharacterRepository implements Repository {
       .join('inventories', 'inventories.creature_id', 'creatures.id')
       .where({ account_id: accountId })
 
-    const charactersInventoryIds = characters.map(character => character.inventory_id)
+    const equipments = await this.#knexHelper
+      .table('equipments')
+      .select(
+        'equipments.*',
+        ...itemsFields
+      )
+      .whereIn('creature_id', characters.map(char => char.creature_id))
+      .join('items', 'items.id', 'equipments.item_id')
+
     const items = await this.#knexHelper
       .table('inventory_item')
       .select(
@@ -122,7 +110,7 @@ export class KnexCharacterRepository implements Repository {
         'inventory_item.quantity',
         ...itemsFields
       )
-      .whereIn('inventory_id', charactersInventoryIds)
+      .whereIn('inventory_id', characters.map(char => char.inventory_id))
       .join('items', 'items.id', 'inventory_item.item_id')
 
     return characters
@@ -132,7 +120,26 @@ export class KnexCharacterRepository implements Repository {
           if (item.inventory_id === character.inventory_id) {
             return item
           }
-        }).filter(Boolean)
+        }).filter(Boolean),
+        equipments: equipments.reduce((acc, equip) => {
+          if (equip.creature_id !== character.creature_id) {
+            return acc
+          }
+
+          return {
+            ...acc,
+            [equip.slot_name]: {
+              id: equip.item_id,
+              name: equip.name,
+              type: equip.type,
+              rarity: equip.rarity,
+              description: equip.description,
+              price: equip.price,
+              weight: equip.weight,
+              requirements: equip.requirements
+            }
+          }
+        }, {})
       }))
       .map(this.#mapFields)
   }

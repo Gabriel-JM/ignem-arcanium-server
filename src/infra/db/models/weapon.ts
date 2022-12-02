@@ -6,3 +6,11 @@ export interface DbWeapon {
   initiative_modifier: number
   distance: number
 }
+
+export const weaponsFields = ([
+  'item_id',
+  'damage',
+  'properties',
+  'initiative_modifier',
+  'distance'
+]).map(field => `weapons.${field}`)

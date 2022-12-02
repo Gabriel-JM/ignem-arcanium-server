@@ -15,3 +15,20 @@ export interface DbCreature {
   wisdom: number
   charisma: number
 }
+
+export const creaturesFields = ([
+  'name',
+  'icon',
+  'alignment',
+  'description',
+  'gold',
+  'status_effects',
+  'hp',
+  'mp',
+  'strength',
+  'dexterity',
+  'constitution',
+  'intelligence',
+  'wisdom',
+  'charisma',
+]).map(field => `creatures.${field}`)

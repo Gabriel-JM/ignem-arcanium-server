@@ -7,36 +7,10 @@ import {
 } from '@/data/protocols/repository/index.js'
 import { ListAllCommonItemsResult } from '@/domain/usecases/index.js'
 import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
-
-const itemsFields = ([
-  'id',
-  'name',
-  'type',
-  'rarity',
-  'description',
-  'price',
-  'weight',
-  'requirements'
-]).map(field => `items.${field}`)
-
-const weaponsFields = ([
-  'damage',
-  'properties',
-  'initiative_modifier',
-  'distance'
-]).map(field => `weapons.${field}`)
-
-const shieldsAndArmorsFields = ([
-  'damage_reduction',
-  'properties',
-  'initiative_modifier'
-]).map(field => `shields_armors.${field}`)
-
-const alchemicalItemsFields = ([
-  'brew_price',
-  'brew_time',
-  'effects'
-]).map(field => `alchemical_items.${field}`)
+import { alchemicalItemsFields } from '@/infra/db/models/alchemical-item.js'
+import { itemsFields } from '@/infra/db/models/item.js'
+import { shieldsAndArmorsFields } from '@/infra/db/models/shield-and-armor.js'
+import { weaponsFields } from '@/infra/db/models/weapon.js'
 
 type ItemRepository = ListAllCommonItemsRepository
   & InventoryItemsRepository
@@ -151,6 +125,7 @@ export class KnexItemRepository implements ItemRepository {
     const dbAlchemicalItems = await this.#knexHelper
       .table('items')
       .select(
+        'items.id',
         ...itemsFields,
         ...alchemicalItemsFields
       )
@@ -170,7 +145,7 @@ export class KnexItemRepository implements ItemRepository {
   async #findAllGems() {
     const dbGems = await this.#knexHelper
       .table('items')
-      .select('gems.magic_tier', ...itemsFields)
+      .select('gems.magic_tier', 'items.id', ...itemsFields)
       .join('gems', 'gems.item_id', 'items.id')
 
     return dbGems.map(gem => {

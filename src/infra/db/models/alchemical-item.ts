@@ -5,3 +5,10 @@ export interface DbAlchemicalItem {
   brew_time: number
   effects: string
 }
+
+export const alchemicalItemsFields = ([
+  'item_id',
+  'brew_price',
+  'brew_time',
+  'effects'
+]).map(field => `alchemical_items.${field}`)
