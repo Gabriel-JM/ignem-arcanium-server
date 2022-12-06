@@ -5,6 +5,7 @@ export async function up(knex: Knex) {
     tableBuilder.string('id').primary().notNullable()
     tableBuilder.string('name').notNullable()
     tableBuilder.string('type').notNullable()
+    tableBuilder.string('sub_type')
     tableBuilder.text('description').notNullable()
     tableBuilder.integer('price').notNullable()
     tableBuilder.integer('weight').notNullable()
