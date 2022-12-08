@@ -1,11 +1,14 @@
+import { AlchemicalItemSubTypes, ItemRarities, ItemTypes } from '../constants/items.js'
+
 export function makeAlchemicalItems() {
   return [
     {
       itemId: 'ite_sHU3r-vjZJfR0z-m0wCyk',
       alchemicalItemId: 'alc_4r9Z1BkyB7PbVdNbnsDpj',
       name: 'Simple Healing Ointment',
-      type: 'OINTMENT',
-      rarity: 'UNCOMMON',
+      type: ItemTypes.alchemicalItem,
+      subType: AlchemicalItemSubTypes.ointment,
+      rarity: ItemRarities.uncommon,
       description: 'A very light pink ointment with yellowish traces,'
         + ' which has a lighter regenerative effect and is simpler to produce.',
       effects: '2/3 turn regeneration.',
@@ -18,8 +21,9 @@ export function makeAlchemicalItems() {
       itemId: 'ite_mSOJrZMKi3aLezd2Icj6I',
       alchemicalItemId: 'alc_8wIpwzcq47j14ASjIWQ6z',
       name: 'Weak Arcane Oil',
-      type: 'OIL',
-      rarity: 'UNCOMMON',
+      type: ItemTypes.alchemicalItem,
+      subType: AlchemicalItemSubTypes.oil,
+      rarity: ItemRarities.uncommon,
       description: 'A vial of a dark purple oil with dark blue stains, which has'
         + ' an aggressive (non-elemental) magical effect that reflects on the'
         + ' target when hit.',
@@ -33,8 +37,9 @@ export function makeAlchemicalItems() {
       itemId: 'ite_M59NVQzkPY3bFvTkk8E3d',
       alchemicalItemId: 'alc_ihdxTdFT2a8dn48Cruglx',
       name: 'Weak Poisonous Oil',
-      type: 'OIL',
-      rarity: 'UNCOMMON',
+      type: ItemTypes.alchemicalItem,
+      subType: AlchemicalItemSubTypes.oil,
+      rarity: ItemRarities.uncommon,
       description: 'A vial of a weapon-specific oil mixed with a weaker poison,'
         + ' this oil has a gray, almost black color with light green flecks.'
         + ' The poison does not have an effect just by having contact with the'

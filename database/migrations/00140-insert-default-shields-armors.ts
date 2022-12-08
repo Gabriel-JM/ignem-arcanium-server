@@ -1,4 +1,5 @@
 import { Knex } from 'knex'
+import { ItemRarities } from '../constants/items.js'
 import { makeShieldsAndArmors } from '../data/shields-and-armors.js'
 
 const shieldsAndArmors = makeShieldsAndArmors()
@@ -9,10 +10,11 @@ export async function up(knex: Knex) {
       id: data.itemId,
       name: data.name,
       type: data.type,
+      sub_type: data.subType,
       description: data.description,
       price: data.price,
       weight: data.weight,
-      rarity: 'COMMON'
+      rarity: ItemRarities.common
     })
   
     await knex('shields_armors').insert({
