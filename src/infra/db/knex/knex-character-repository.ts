@@ -2,19 +2,18 @@ import { UniqueIdGenerator } from '@/data/protocols/identification/index.js'
 import {
   CheckCharacterRepository,
   CheckCharacterRepositoryParams,
-  CreateCharacterRepositoryParams,
   DeleteCharacterRepository,
   DeleteCharacterRepositoryParams,
   FindAllCharactersRepository,
   UpdateCharacterRepository,
   UpdateCharacterRepositoryParams
 } from '@/data/protocols/repository/index.js'
+import { KnexEquipmentsRepository } from '@/infra/db/knex/equipments/knex-equipments-repository.js'
 import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
 import {
   creaturesFields,
   DbCharacter,
   DbCreature,
-  DbEquipment,
   DbInventory,
   DbItem,
   itemsFields
@@ -33,9 +32,11 @@ type DbCharacterWithData = DbCharacter & DbCreature & DbInventory & {
 export class KnexCharacterRepository implements Repository {
   tableName = 'characters'
   #knexHelper: KnexHelper
+  #idGenerator: UniqueIdGenerator
 
-  constructor(knexHelper: KnexHelper) {
+  constructor(knexHelper: KnexHelper, idGenerator: UniqueIdGenerator) {
     this.#knexHelper = knexHelper
+    this.#idGenerator = idGenerator
   }
 
   #mapFields(dbData: DbCharacterWithData) {
@@ -90,14 +91,8 @@ export class KnexCharacterRepository implements Repository {
       .join('inventories', 'inventories.creature_id', 'creatures.id')
       .where({ account_id: accountId })
 
-    const equipments = await this.#knexHelper
-      .table('equipments')
-      .select(
-        'equipments.*',
-        ...itemsFields
-      )
-      .whereIn('creature_id', characters.map(char => char.creature_id))
-      .join('items', 'items.id', 'equipments.item_id')
+    const equipments = await new KnexEquipmentsRepository(this.#knexHelper, this.#idGenerator)
+      .findByCreatureIds(characters.map(char => char.creature_id))
 
     const items = await this.#knexHelper
       .table('inventory_item')
@@ -109,7 +104,7 @@ export class KnexCharacterRepository implements Repository {
       .whereIn('inventory_id', characters.map(char => char.inventory_id))
       .join('items', 'items.id', 'inventory_item.item_id')
 
-    return characters
+    const a = characters
       .map(character => ({
         ...character,
         items: items.map(item => {
@@ -118,26 +113,20 @@ export class KnexCharacterRepository implements Repository {
           }
         }).filter(Boolean),
         equipments: equipments.reduce((acc, equip) => {
-          if (equip.creature_id !== character.creature_id) {
+          console.log(equip)
+          if (equip.creatureId !== character.creature_id) {
             return acc
           }
 
           return {
             ...acc,
-            [equip.slot_name]: {
-              id: equip.item_id,
-              name: equip.name,
-              type: equip.type,
-              rarity: equip.rarity,
-              description: equip.description,
-              price: equip.price,
-              weight: equip.weight,
-              requirements: equip.requirements
-            }
+            [equip.slotName]: equip
           }
         }, {})
       }))
       .map(this.#mapFields)
+
+    return a
   }
 
   async delete(params: DeleteCharacterRepositoryParams) {

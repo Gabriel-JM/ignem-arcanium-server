@@ -6,11 +6,13 @@ import {
   ListAllCommonItemsRepository
 } from '@/data/protocols/repository/index.js'
 import { ListAllCommonItemsResult } from '@/domain/usecases/index.js'
+import { ItemTypes } from '@/domain/constants/items.js'
 import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
 import { alchemicalItemsFields } from '@/infra/db/models/alchemical-item.js'
 import { itemsFields } from '@/infra/db/models/item.js'
 import { shieldsAndArmorsFields } from '@/infra/db/models/shield-and-armor.js'
 import { weaponsFields } from '@/infra/db/models/weapon.js'
+import { sneakObjectToCamel } from '@/infra/utils/snake-case-to-camel-case.js'
 
 type ItemRepository = ListAllCommonItemsRepository
   & InventoryItemsRepository
@@ -27,7 +29,7 @@ export class KnexItemRepository implements ItemRepository {
   async listAllCommon(): Promise<ListAllCommonItemsResult> {
     const consumablesAndTools = await this.#knexHelper
       .table('items')
-      .whereIn('type', ['CONSUMABLE', 'TOOL'])
+      .whereIn('type', [ItemTypes.consumable, ItemTypes.tool])
 
     const weapons = await this.#findAllCommonWeapons()
     const shieldsAndArmors = await this.#findAllCommonShieldsAndArmors()
@@ -50,6 +52,7 @@ export class KnexItemRepository implements ItemRepository {
 
     const items = await this.#knexHelper
       .table('items')
+      .select<any[]>()
       .whereIn('id', itemIds)
 
     const entries = Object.entries(itemSlots)
@@ -83,18 +86,12 @@ export class KnexItemRepository implements ItemRepository {
       .table('items')
       .select(
         ...itemsFields,
+        'weapons.id',
         ...weaponsFields
       )
       .join('weapons', 'weapons.item_id', 'items.id')
 
-    return dbWeapons.map(weapon => {
-      const { initiative_modifier: initiativeModifier, ...rest } = weapon
-
-      return {
-        ...rest,
-        initiativeModifier
-      }
-    })
+    return dbWeapons.map(sneakObjectToCamel)
   }
 
   async #findAllCommonShieldsAndArmors() {
@@ -102,56 +99,33 @@ export class KnexItemRepository implements ItemRepository {
       .table('items')
       .select(
         ...itemsFields,
+        'shields_armors.id',
         ...shieldsAndArmorsFields
       )
       .join('shields_armors', 'shields_armors.item_id', 'items.id')
     
-    return dbShieldsAndArmors.map(shieldOrArmor => {
-      const {
-        damage_reduction: damageReduction,
-        initiative_modifier: initiativeModifier,
-        ...rest
-      } = shieldOrArmor
-
-      return {
-        ...rest,
-        damageReduction,
-        initiativeModifier
-      }
-    })
+    return dbShieldsAndArmors.map(sneakObjectToCamel)
   }
 
   async #findAllAlchemicalItems() {
     const dbAlchemicalItems = await this.#knexHelper
       .table('items')
       .select(
-        'items.id',
         ...itemsFields,
+        'alchemical_items.id',
         ...alchemicalItemsFields
       )
       .join('alchemical_items', 'alchemical_items.item_id', 'items.id')
 
-    return dbAlchemicalItems.map(alchemicalItem => {
-      const { brew_price: brewPrice, brew_time: brewTime, ...rest } = alchemicalItem
-      
-      return {
-        ...rest,
-        brewPrice,
-        brewTime
-      }
-    })
+    return dbAlchemicalItems.map(sneakObjectToCamel)
   }
 
   async #findAllGems() {
     const dbGems = await this.#knexHelper
       .table('items')
-      .select('gems.magic_tier', 'items.id', ...itemsFields)
+      .select(...itemsFields, 'gems.magic_tier', 'gems.id')
       .join('gems', 'gems.item_id', 'items.id')
 
-    return dbGems.map(gem => {
-      const { magic_tier: magicTier, ...rest } = gem
-
-      return { ...rest, magicTier }
-    })
+    return dbGems.map(sneakObjectToCamel)
   }
 }

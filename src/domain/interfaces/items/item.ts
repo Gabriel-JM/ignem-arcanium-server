@@ -1,18 +1,7 @@
-export type ItemTypes = (
-  | 'CONSUMABLE'
-  | 'WEAPON'
-  | 'SHIELD'
-  | 'ARMOR'
-  | 'ACCESSORY'
-  | 'OIL'
-  | 'OINTMENT'
-  | 'POTION'
-)
-
 export interface Item {
   id: string
   name: string
-  type: ItemTypes
+  type: string
   description: string
   price: number
   weight: number

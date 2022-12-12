@@ -1,5 +1,5 @@
 import { Knex } from 'knex'
-import { ItemRarities } from '../constants/items.js'
+import { ItemRarities } from '../../src/domain/constants/index.js'
 import { makeShieldsAndArmors } from '../data/shields-and-armors.js'
 
 const shieldsAndArmors = makeShieldsAndArmors()

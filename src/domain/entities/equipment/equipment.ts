@@ -1,3 +1,4 @@
+import { ItemTypes } from '@/domain/constants/items.js'
 import { InvalidEquipmentsError } from '@/domain/errors/equipment/invalid-equipments-error.js'
 import { TwoHandsInUseError } from '@/domain/errors/index.js'
 import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
@@ -41,10 +42,12 @@ export class Equipment {
 
   #validateEquipment() {
     const errors: EquipementSlotErrors = []
-    const validHandItemTypes = ['WEAPON', 'SHIELD']
+    const validHandItemTypes = [ItemTypes.weapon, ItemTypes.shield]
 
     if (this.#leftHand) {
-      const invalidLeftHandItem = !validHandItemTypes.includes(this.#leftHand?.type)
+      const invalidLeftHandItem = !validHandItemTypes.includes(
+        this.#leftHand?.type as typeof validHandItemTypes[number]
+      )
       
       invalidLeftHandItem && errors.push({
         slot: 'Left Hand',
@@ -54,7 +57,9 @@ export class Equipment {
     }
     
     if (this.#rightHand) {
-      const invalidRightHandItem = !validHandItemTypes.includes(this.#rightHand?.type)
+      const invalidRightHandItem = !validHandItemTypes.includes(
+        this.#rightHand?.type as typeof validHandItemTypes[number]
+      )
       
       invalidRightHandItem && errors.push({
         slot: 'Right Hand',
@@ -64,7 +69,7 @@ export class Equipment {
     }
 
     if (this.#armor) {
-      this.#armor.type !== 'ARMOR' && errors.push({
+      this.#armor.type !== ItemTypes.armor && errors.push({
         slot: 'Armor',
         field: 'armor',
         item: this.#armor
@@ -72,7 +77,7 @@ export class Equipment {
     }
 
     if (this.#accessory1) {
-      this.#accessory1.type !== 'ACCESSORY' && errors.push({
+      this.#accessory1.type !== ItemTypes.accessory && errors.push({
         slot: 'Accessory 1',
         field: 'accessory1',
         item: this.#accessory1
@@ -80,7 +85,7 @@ export class Equipment {
     }
 
     if (this.#accessory2) {
-      this.#accessory2.type !== 'ACCESSORY' && errors.push({
+      this.#accessory2.type !== ItemTypes.accessory && errors.push({
         slot: 'Accessory 2',
         field: 'accessory2',
         item: this.#accessory2

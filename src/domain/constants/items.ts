@@ -5,7 +5,8 @@ export const ItemTypes = {
   alchemicalItem: 'alchemicalItem',
   gem: 'gem',
   consumable: 'consumable',
-  tool: 'tool'
+  tool: 'tool',
+  accessory: 'accessory'
 } as const
 
 export const ItemRarities = {

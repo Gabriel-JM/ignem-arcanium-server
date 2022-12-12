@@ -4,7 +4,7 @@ export function fakeItem() {
   return <Item> {
     id: 'any_id',
     name: 'any_name',
-    type: 'CONSUMABLE',
+    type: 'consumable',
     description: 'any_description',
     rarity: 'any_rarity',
     charges: 0,
@@ -21,7 +21,7 @@ export function fakeInventoryItem() {
 export function fakeWeapon() {
   return <Weapon> {
     ...fakeItem(),
-    type: 'WEAPON',
+    type: 'weapon',
     damage: { slash: '1D6' },
     distance: 0,
     initiativeModifier: 0,
@@ -32,7 +32,7 @@ export function fakeWeapon() {
 export function fakeShield() {
   return <ShieldOrArmor> {
     ...fakeItem(),
-    type: 'SHIELD',
+    type: 'shield',
     damageReduction: { slash: '1' },
     distance: 0,
     initiativeModifier: 0,
@@ -43,14 +43,14 @@ export function fakeShield() {
 export function fakeArmor() {
   return <ShieldOrArmor> {
     ...fakeShield(),
-    type: 'ARMOR'
+    type: 'armor'
   }
 }
 
 export function fakeAccessory() {
   return <Item> {
     ...fakeItem(),
-    type: 'ACCESSORY'
+    type: 'accessory'
   }
 }
 
