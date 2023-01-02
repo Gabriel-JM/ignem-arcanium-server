@@ -64,15 +64,11 @@ export class KnexEquipmentsRepository {
       .whereIn('equipments.creature_id', creatureIds)
       .join('items', 'items.id', 'equipments.item_id')
 
-    console.log({ foundEquipments })
-
     const detailedEquipments = await Promise.all(foundEquipments
       .map(async equipment => {
         const table = itemTypesToTables[equipment.type]
 
         if (!table) return equipment
-
-        console.log({ equipment })
 
         const itemDetails = await this.#knexHelper
           .table(table)
