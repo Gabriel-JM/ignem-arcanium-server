@@ -37,11 +37,11 @@ const itemTypesToTables = <Record<string, string>> {
 }
 
 const itemFieldsByType = <Record<string, string[]>> {
-  weapon: ['weapons.id as weapon_id', ...weaponsFields],
-  shield: ['shields_armors.id as shield_id', ...shieldsAndArmorsFields],
-  armor: ['shields_armors.id as armor_id', ...shieldsAndArmorsFields],
-  alchemicalItem: ['alchemical_items.id as alchemical_item_id', ...alchemicalItemsFields],
-  gem: ['gems.id as gem_id', ...gemsFields]
+  weapon: ['weapons.id', 'weapons.id as weapon_id', ...weaponsFields],
+  shield: ['shields_armors.id', 'shields_armors.id as shield_id', ...shieldsAndArmorsFields],
+  armor: ['shields_armors.id', 'shields_armors.id as armor_id', ...shieldsAndArmorsFields],
+  alchemicalItem: ['alchemical_items.id', 'alchemical_items.id as alchemical_item_id', ...alchemicalItemsFields],
+  gem: ['gems.id', 'gems.id as gem_id', ...gemsFields]
 }
 
 export class KnexEquipmentsRepository {

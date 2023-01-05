@@ -112,7 +112,7 @@ export class KnexCharacterRepository implements Repository {
             return item
           }
         }).filter(Boolean),
-        equipments: equipments.reduce((acc, equip) => {
+        equipment: equipments.reduce((acc, equip) => {
           if (equip.creatureId !== character.creature_id) {
             return acc
           }
