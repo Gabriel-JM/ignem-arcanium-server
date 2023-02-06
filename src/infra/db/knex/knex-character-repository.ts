@@ -136,6 +136,32 @@ export class KnexCharacterRepository implements Repository {
         .where({ id: params.id })
         .first<DbCharacter>()
 
+      const inventory = await this.#knexHelper
+        .table('inventories')
+        .select('id as inventoryId')
+        .where({ creature_id })
+        .first()
+
+      if (inventory) {
+        await this.#knexHelper
+          .table('inventory_item')
+          .where({ inventory_id: inventory.inventoryId })
+          .delete()
+          .transacting(trx)
+
+        await this.#knexHelper
+          .table('inventories')
+          .where({ id: inventory.inventoryId })
+          .delete()
+          .transacting(trx)
+      }
+
+      await this.#knexHelper
+        .table('equipments')
+        .where({ creature_id })
+        .delete()
+        .transacting(trx)
+
       await this.#knexHelper
         .table(this.tableName)
         .where({ id: params.id, account_id: params.accountId })
