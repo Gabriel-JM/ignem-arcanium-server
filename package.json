@@ -10,7 +10,7 @@
     "start": "node --loader=esm-module-alias/loader ./dist/src/main/index.js",
     "predev": "npm run build",
     "dev": "npm start",
-    "build": "rm -r dist && tsc -p ./tsconfig-build.json",
+    "build": "rm -rfd dist && tsc -p ./tsconfig-build.json",
     "build:watch": "tsc -p ./tsconfig-build.json --watch",
     "test": "vitest",
     "test:unit": "npm test",
