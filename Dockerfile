@@ -1,15 +1,15 @@
-FROM node:lts-alpine3.16 AS build
+FROM node:lts-alpine3.17 AS build
 WORKDIR /app
 COPY . /app
 RUN npm install --quiet
 RUN npm run build
 
-FROM node:lts-alpine3.16 AS release
+FROM node:lts-alpine3.17 AS release
 WORKDIR /release
 COPY --from=build /build/package*.json ./
 RUN npm ci --only=production
 
-FROM node:lts-alpine3.16
+FROM node:lts-alpine3.17
 WORKDIR /app
 COPY --from=release /release/node_modules ./node_modules
 COPY --from=release /release/package.json .
