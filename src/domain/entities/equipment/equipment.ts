@@ -44,9 +44,11 @@ export class Equipment {
     const errors: EquipementSlotErrors = []
     const validHandItemTypes = [ItemTypes.weapon, ItemTypes.shield]
 
+    console.log({ rightHand: this.#rightHand })
+
     if (this.#leftHand) {
       const invalidLeftHandItem = !validHandItemTypes.includes(
-        this.#leftHand?.type as typeof validHandItemTypes[number]
+        this.#leftHand?.type.toLowerCase() as typeof validHandItemTypes[number]
       )
       
       invalidLeftHandItem && errors.push({
@@ -58,7 +60,7 @@ export class Equipment {
     
     if (this.#rightHand) {
       const invalidRightHandItem = !validHandItemTypes.includes(
-        this.#rightHand?.type as typeof validHandItemTypes[number]
+        this.#rightHand?.type.toLowerCase() as typeof validHandItemTypes[number]
       )
       
       invalidRightHandItem && errors.push({
@@ -69,7 +71,7 @@ export class Equipment {
     }
 
     if (this.#armor) {
-      this.#armor.type !== ItemTypes.armor && errors.push({
+      this.#armor.type.toString() !== ItemTypes.armor && errors.push({
         slot: 'Armor',
         field: 'armor',
         item: this.#armor
@@ -77,7 +79,7 @@ export class Equipment {
     }
 
     if (this.#accessory1) {
-      this.#accessory1.type !== ItemTypes.accessory && errors.push({
+      this.#accessory1.type.toString() !== ItemTypes.accessory && errors.push({
         slot: 'Accessory 1',
         field: 'accessory1',
         item: this.#accessory1
@@ -85,7 +87,7 @@ export class Equipment {
     }
 
     if (this.#accessory2) {
-      this.#accessory2.type !== ItemTypes.accessory && errors.push({
+      this.#accessory2.type.toString() !== ItemTypes.accessory && errors.push({
         slot: 'Accessory 2',
         field: 'accessory2',
         item: this.#accessory2
