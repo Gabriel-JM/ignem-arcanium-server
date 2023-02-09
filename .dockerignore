@@ -1,0 +1,6 @@
+coverage
+db-data
+.vscode
+node_modules
+.git
+dist
