@@ -44,8 +44,6 @@ export class Equipment {
     const errors: EquipementSlotErrors = []
     const validHandItemTypes = [ItemTypes.weapon, ItemTypes.shield]
 
-    console.log({ rightHand: this.#rightHand })
-
     if (this.#leftHand) {
       const invalidLeftHandItem = !validHandItemTypes.includes(
         this.#leftHand?.type.toLowerCase() as typeof validHandItemTypes[number]
