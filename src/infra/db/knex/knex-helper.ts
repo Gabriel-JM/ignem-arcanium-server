@@ -2,7 +2,7 @@ import knex, { Knex } from 'knex'
 import path from 'path'
 
 export function connect() : Knex {
-  const connection = process.env.DB_URL
+  const connection = process.env.DATABASE_URL
 
   return knex({
     client: 'pg',
