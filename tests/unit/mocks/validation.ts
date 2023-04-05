@@ -1,4 +1,4 @@
-import { Validator } from '@/validation/protocols/index.js'
+import { Validator } from '@/common/validation/protocols/index.js'
 
 export class FakeValidator implements Validator {
   result: string[] = []

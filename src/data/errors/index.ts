@@ -1,4 +1,3 @@
-export * from './no-torch-to-be-lit-error.js'
 export * from './invalid-torch-addition-value-error.js'
 export * from './torch-registry-not-found-error.js'
 export * from './account-not-found-error.js'

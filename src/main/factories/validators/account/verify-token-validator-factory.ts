@@ -1,4 +1,4 @@
-import { FieldsValidationComposite, ValidatorComposite } from '@/validation/composites/index.js'
+import { FieldsValidationComposite, ValidatorComposite } from '@/common/validation/composites/index.js'
 
 export function makeVerifyTokenValidator() {
   return new ValidatorComposite(

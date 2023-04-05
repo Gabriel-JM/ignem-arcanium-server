@@ -1,5 +1,9 @@
-import { ValidatorComposite } from '@/validation/composites/index.js'
-import { MinValueValidator, RequiredFieldsValidator, TypeValidator } from '@/validation/validators/index.js'
+import { ValidatorComposite } from '@/common/validation/composites/index.js'
+import {
+  MinValueValidator,
+  RequiredFieldsValidator,
+  TypeValidator
+} from '@/common/validation/validators/index.js'
 
 export function makeUpdateCharacterValidator() {
   return new ValidatorComposite(
