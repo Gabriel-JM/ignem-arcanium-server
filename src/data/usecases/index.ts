@@ -1,4 +1,3 @@
-export * from './account/db-create-account.js'
 export * from './account/db-account-login.js'
 export * from './account/local-verify-token.js'
 export * from './account/db-load-account-by-token.js'

@@ -2,14 +2,21 @@ import { EmailAlreadyInUseError } from '@/data/errors/index.js'
 import { Encrypter, TextHasher } from '@/data/protocols/cryptography/index.js'
 import { UniqueIdGenerator } from '@/data/protocols/identification/index.js'
 import { CheckAccountByEmailRepository, CreateAccountRepository } from '@/data/protocols/repository/index.js'
-import { CreateAccount, CreateAccountParams, CreateAccountResult } from '@/domain/usecases/index.js'
+import { created } from '@/presentation/helpers/http.js'
+import { Controller } from '@/presentation/protocols/index.js'
 
-export class DbCreateAccount implements CreateAccount {
+export interface CreateAccountParams {
+  name: string
+  email: string
+  password: string
+}
+
+export class CreateAccountController implements Controller {
   #checkAccountByEmailRepository: CheckAccountByEmailRepository
   #uniqueIdGenerator: UniqueIdGenerator
   #textHasher: TextHasher
   #createAccountRepository: CreateAccountRepository
-  #encrypter: Encrypter  
+  #encrypter: Encrypter
   
   constructor(
     checkAccountByEmailRepository: CheckAccountByEmailRepository,
@@ -25,7 +32,7 @@ export class DbCreateAccount implements CreateAccount {
     this.#encrypter = encrypter
   }
   
-  async create(params: CreateAccountParams): Promise<CreateAccountResult> {
+  async handle(params: CreateAccountParams) {
     const exists = await this.#checkAccountByEmailRepository.checkByEmail(params.email)
 
     if (exists) {
@@ -45,9 +52,9 @@ export class DbCreateAccount implements CreateAccount {
 
     const token = await this.#encrypter.encrypt({ id, name: params.name })
 
-    return {
+    return created({
       name: params.name,
       token
-    }
+    })
   }
 }
