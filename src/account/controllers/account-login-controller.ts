@@ -1,9 +1,15 @@
 import { AccountNotFoundError } from '@/data/errors/index.js'
 import { Encrypter, HashComparer } from '@/data/protocols/cryptography/index.js'
 import { FindAccountByEmailRepository } from '@/data/protocols/repository/index.js'
-import { AccountLogin, AccountLoginParams, AccountLoginResult } from '@/domain/usecases/index.js'
+import { ok } from '@/presentation/helpers/http.js'
+import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
 
-export class DbAccountLogin implements AccountLogin {
+export interface AccountLoginParams {
+  email: string
+  password: string
+}
+
+export class AccountLoginController implements Controller {
   #findAccountByEmailRepository: FindAccountByEmailRepository
   #hashComparer: HashComparer
   #encrypter: Encrypter
@@ -18,7 +24,7 @@ export class DbAccountLogin implements AccountLogin {
     this.#encrypter = encrypter
   }
   
-  async login(params: AccountLoginParams): Promise<AccountLoginResult> {
+  async handle(params: AccountLoginParams) {
     const account = await this.#findAccountByEmailRepository.findByEmail(params.email)
 
     if (!account) {
@@ -36,9 +42,10 @@ export class DbAccountLogin implements AccountLogin {
       name: account.name
     })
 
-    return {
+    return ok({
       name: account.name,
       token
-    }
+    })
   }
+
 }
