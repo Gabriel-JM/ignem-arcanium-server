@@ -1,7 +1,9 @@
-import { makeAccountLoginController } from '@/account/main/factories/index.js'
+import {
+  makeAccountLoginController,
+  makeCreateAccountController
+} from '@/account/main/factories/index.js'
 import { adaptRoute } from '@/main/adapters/index.js'
 import {
-  makeCreateAccountController,
   makeVerifyTokenController
 } from '@/main/factories/controllers/index.js'
 import { Router } from '@/main/server/router.js'

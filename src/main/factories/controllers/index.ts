@@ -1,4 +1,3 @@
-export * from './account/create-account-controller-factory.js'
 export * from './account/verify-token-controller-factory.js'
 
 export * from './character/create-character-controller-factory.js'
