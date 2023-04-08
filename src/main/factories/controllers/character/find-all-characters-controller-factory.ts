@@ -1,6 +1,6 @@
+import { makeAuthDecorator } from '@/account/main/factories/index.js'
 import { DbFindAllCharacters } from '@/data/usecases/index.js'
 import { ErrorHandlerControllerDecorator } from '@/main/decorators/index.js'
-import { makeAuthDecorator } from '@/main/factories/decorators/index.js'
 import { makeKnexCharacterRepository } from '@/main/factories/repositories/index.js'
 import { GenericController } from '@/presentation/controllers/index.js'
 

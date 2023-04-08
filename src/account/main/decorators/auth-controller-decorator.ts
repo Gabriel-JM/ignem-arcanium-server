@@ -1,5 +1,5 @@
+import { LoadAccountByTokenController } from '@/account/controllers/index.js'
 import { InvalidAccessTokenError } from '@/data/errors/index.js'
-import { LoadAccountByToken } from '@/domain/usecases/index.js'
 import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
 
 interface AuthControllerDecoratorParams {
@@ -8,7 +8,7 @@ interface AuthControllerDecoratorParams {
 
 export class AuthControllerDecorator implements Controller {
   constructor(
-    private readonly loadAccountByToken: LoadAccountByToken,
+    private readonly loadAccountByToken: LoadAccountByTokenController,
     private readonly controller: Controller
   ) {}
 
@@ -21,7 +21,7 @@ export class AuthControllerDecorator implements Controller {
 
     const token = authorization.substring('Bearer '.length)
 
-    const account = await this.loadAccountByToken.load(token)
+    const { body: account } = await this.loadAccountByToken.handle(token)
 
     return await this.controller.handle({
       ...params,

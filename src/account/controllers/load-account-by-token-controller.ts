@@ -1,9 +1,10 @@
 import { InvalidAccessTokenError } from '@/data/errors/index.js'
 import { Decrypter } from '@/data/protocols/cryptography/index.js'
 import { FindAccountByIdRepository } from '@/data/protocols/repository/index.js'
-import { LoadAccountByToken, LoadAccountByTokenResult } from '@/domain/usecases/index.js'
+import { ok } from '@/presentation/helpers/index.js'
+import { Controller } from '@/presentation/protocols/index.js'
 
-export class DbLoadAccountByToken implements LoadAccountByToken {
+export class LoadAccountByTokenController implements Controller {
   #decrypter: Decrypter
   #findAccountByIdRepository: FindAccountByIdRepository
 
@@ -15,7 +16,7 @@ export class DbLoadAccountByToken implements LoadAccountByToken {
     this.#findAccountByIdRepository = findAccountByIdRepository
   }
   
-  async load(token: string): Promise<LoadAccountByTokenResult> {
+  async handle(token: string) {
     const accountData = await this.#decrypter.decrypt<Record<'id', string>>(token)
 
     if (!accountData) {
@@ -28,6 +29,6 @@ export class DbLoadAccountByToken implements LoadAccountByToken {
       throw new InvalidAccessTokenError()
     }
 
-    return account
+    return ok(account)
   }
 }

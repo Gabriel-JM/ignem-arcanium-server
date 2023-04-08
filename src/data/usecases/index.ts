@@ -1,5 +1,4 @@
 export * from './account/local-verify-token.js'
-export * from './account/db-load-account-by-token.js'
 
 export * from './character/db-create-character.js'
 export * from './character/db-find-all-characters.js'
