@@ -11,7 +11,7 @@ function generateDamage(damage: string, ...types: string[]) {
 export function makeWeapons() {
   return [
     {
-      itemId: 'ite_4aO5DzTD_phJDk885XjUt',
+      itemId: 'ite_4aO5DzTD9phJDk885XjUt',
       weaponId: 'wea_R6lkk2GI7OhGnVQInAkWD',
       name: 'Dagger',
       subType: WeaponSubTypes.dagger,
@@ -38,7 +38,7 @@ export function makeWeapons() {
     },
     {
       itemId: 'ite_uEiLvsFkKLy1ud7d3KSmn',
-      weaponId: 'wea_qr-qLO29Y0is_PpFQEGVZ',
+      weaponId: 'wea_qr0qLO29Y0isrPpFQEGVZ',
       name: 'Short Sword',
       subType: WeaponSubTypes.shortSword,
       description: 'A short and light weight combat sword',
@@ -50,8 +50,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'ite_WGunVWuKbPwT-pYCgRJZ2',
-      weaponId: 'wea_fO_tfw2OXR_SpujyWqSz3',
+      itemId: 'ite_WGunVWuKbPwT3pYCgRJZ2',
+      weaponId: 'wea_fODtfw2OXR0SpujyWqSz3',
       name: 'Long Sword',
       subType: WeaponSubTypes.longSword,
       description: 'Most common and versatile sword used by warriors and kings',
@@ -63,7 +63,7 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'ite_HI2_jiPj0cCybKvSzHv8v',
+      itemId: 'ite_HI22jiPj0cCybKvSzHv8v',
       weaponId: 'wea_PTV9yePZfescBFYbO1jQW',
       name: 'Great Sword',
       subType: WeaponSubTypes.greatSword,
@@ -76,7 +76,7 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'ite_ri9hEbHYbaO9i-aOI6ZAP',
+      itemId: 'ite_ri9hEbHYbaO9i1aOI6ZAP',
       weaponId: 'wea_7gfS6AO655jqwbRn07C18',
       name: 'Rapier',
       subType: WeaponSubTypes.rapier,
@@ -89,7 +89,7 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'ite_kWcr2KRNlPAfqbm684_LH',
+      itemId: 'ite_kWcr2KRNlPAfqbm684DLH',
       weaponId: 'wea_0HcyBMlT30HXc1NRazxme',
       name: 'Axe',
       subType: WeaponSubTypes.axe,
@@ -115,7 +115,7 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'ite_sWhrH2WXRD1Bdl5RWQr_u',
+      itemId: 'ite_sWhrH2WXRD1Bdl5RWQrLu',
       weaponId: 'wea_iG-G6qtDbbGK8gvto89FK',
       name: 'Hammer',
       subType: WeaponSubTypes.hammer,
@@ -128,8 +128,8 @@ export function makeWeapons() {
       distance: 0
     },
     {
-      itemId: 'ite_sPo7kBX0b2P-w3fyexzLN',
-      weaponId: 'wea_xojg-Npnq12sxzqzvemNM',
+      itemId: 'ite_sPo7kBX0b2P0w3fyexzLN',
+      weaponId: 'wea_xojg0Npnq12sxzqzvemNM',
       name: 'Warhammer',
       subType: WeaponSubTypes.greatHammer,
       description: 'A really heavy and powerful hammer',
@@ -180,7 +180,7 @@ export function makeWeapons() {
       distance: 45
     },
     {
-      itemId: 'ite_IhnI2xkh5Dmv1Ml-K0bVM',
+      itemId: 'ite_IhnI2xkh5Dmv1MlPK0bVM',
       weaponId: 'wea_QsLlpn9VYVnInU3oElLbg',
       name: 'Hand Crossbow',
       subType: WeaponSubTypes.handCrossbow,
@@ -193,8 +193,8 @@ export function makeWeapons() {
       distance: 40
     },
     {
-      itemId: 'ite_-2GE7X9b57OLWI-Jtn91X',
-      weaponId: 'wea_8OURUnwUh-7nCtDDxGko4',
+      itemId: 'ite_B2GE7X9b57OLWI3Jtn91X',
+      weaponId: 'wea_8OURUnwUh47nCtDDxGko4',
       name: 'Crossbow',
       subType: WeaponSubTypes.crossbow,
       description: 'Classic and powerful crossbow',

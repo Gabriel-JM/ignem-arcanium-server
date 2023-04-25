@@ -24,7 +24,7 @@ export function makeShieldsAndArmors() {
       weight: 5
     },
     {
-      itemId: 'ite_8twjG-MtlmO3HR0nnzzKM',
+      itemId: 'ite_8twjGrMtlmO3HR0nnzzKM',
       shieldArmorId: 'sha_5VNaHOhpluPnWQ363KeZH',
       name: 'Leather Armor',
       type: ItemTypes.armor,
@@ -37,7 +37,7 @@ export function makeShieldsAndArmors() {
       weight: 50
     },
     {
-      itemId: 'ite_8U_lwxzl_8tM6YG3K_ieM',
+      itemId: 'ite_8U4lwxzlF8tM6YG3KoieM',
       shieldArmorId: 'sha_GPZlWtN78VlM2ZUUI1DXh',
       name: 'Light Scale Armor',
       type: ItemTypes.armor,
@@ -51,7 +51,7 @@ export function makeShieldsAndArmors() {
     },
     {
       itemId: 'ite_Gxu930pPr0rtMUPQynAJJ',
-      shieldArmorId: 'sha_4cGqVz-OVgpRStQAxDgNk',
+      shieldArmorId: 'sha_4cGqVz8OVgpRStQAxDgNk',
       name: 'Bronze Breastplate',
       type: ItemTypes.armor,
       subType: ArmorSubTypes.mediumArmor,
@@ -76,8 +76,8 @@ export function makeShieldsAndArmors() {
       weight: 100
     },
     {
-      itemId: 'ite_mKomcIeswDG-do1VeI8cd',
-      shieldArmorId: 'sha_-Km1dyRk6Qq1bIrfL4NdH',
+      itemId: 'ite_mKomcIeswDGpdo1VeI8cd',
+      shieldArmorId: 'sha_0Km1dyRk6Qq1bIrfL4NdH',
       name: 'Iron Armor',
       type: ItemTypes.armor,
       subType: ArmorSubTypes.heavyArmor,
@@ -102,7 +102,7 @@ export function makeShieldsAndArmors() {
       weight: 125
     },
     {
-      itemId: 'ite_V1XSADM4r-bpZlePcafIG',
+      itemId: 'ite_V1XSADM4r1bpZlePcafIG',
       shieldArmorId: 'sha_O64ljgAcrBsg9WMz2lPeu',
       name: 'Steel Laminated Armor',
       type: ItemTypes.armor,
@@ -116,7 +116,7 @@ export function makeShieldsAndArmors() {
     },
     {
       itemId: 'ite_Lbnjq6LwAdekbtEvSu1Ke',
-      shieldArmorId: 'sha_hU3x0Ctlb4_L0vd-ytl4l',
+      shieldArmorId: 'sha_hU3x0Ctlb4tL0vd4ytl4l',
       name: 'Buckler',
       type: ItemTypes.shield,
       subType: ShieldSubTypes.buckler,
@@ -128,8 +128,8 @@ export function makeShieldsAndArmors() {
       weight: 30
     },
     {
-      itemId: 'ite__-V-OtKEEhTGBJ0gtR61Y',
-      shieldArmorId: 'sha_XPQtZjpxkxjl_fric7TH9',
+      itemId: 'ite_E5V4OtKEEhTGBJ0gtR61Y',
+      shieldArmorId: 'sha_XPQtZjpxkxjlBfric7TH9',
       name: 'Round Shield',
       type: ItemTypes.shield,
       subType: ShieldSubTypes.lightShield,
@@ -142,7 +142,7 @@ export function makeShieldsAndArmors() {
     },
     {
       itemId: 'ite_cA0qYnUR1YiLUiTub0Uav',
-      shieldArmorId: 'sha_-K5v6OXFhEiruy6Y5ShQ3',
+      shieldArmorId: 'sha_PK5v6OXFhEiruy6Y5ShQ3',
       name: 'Medium Shield',
       type: ItemTypes.shield,
       subType: ShieldSubTypes.mediumShield,

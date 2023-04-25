@@ -1,14 +1,14 @@
 export function makeConsumableItems() {
   return [
     {
-      itemId: 'ite_Oph1O_HBecmd6VdEZLGB7',
+      itemId: 'ite_Oph1O0HBecmd6VdEZLGB7',
       name: 'Tent',
       description: 'A simple and portable shelter that sleeps four people',
       price: 12,
       weight: 35
     },
     {
-      itemId: 'ite_0M6FEfl6w95w6ot_hk8j8',
+      itemId: 'ite_0M6FEfl6w95w6otdhk8j8',
       name: 'Rope',
       description: 'The rope is made of hemp, cotton, linen or silk, it has 2HP and can be'
         + ' broken with a success strength test CD 11. Its imune to strike damage',
@@ -16,7 +16,7 @@ export function makeConsumableItems() {
       weight: 5
     },
     {
-      itemId: 'ite_c7KSjlPy4ga_kAlF9umcu',
+      itemId: 'ite_c7KSjlPy4gagkAlF9umcu',
       name: 'Oil',
       description: 'It usually comes in a glass or clay bottle that contains 500ml.'
         + ' This item can be thrown at a target, scattered on the ground, used as'
@@ -31,7 +31,7 @@ export function makeConsumableItems() {
       weight: 10
     },
     {
-      itemId: 'ite_kYRdbBnh3j3jCeRu-WZW5',
+      itemId: 'ite_kYRdbBnh3j3jCeRufWZW5',
       name: 'Crowbar',
       description: 'Using a crowbar grants a +4 advantage on Strength checks where'
         + ' it makes sense to apply it.',
@@ -46,7 +46,7 @@ export function makeConsumableItems() {
       weight: 1
     },
     {
-      itemId: 'ite_V7Y93ZTbculsVuQ2nEim-',
+      itemId: 'ite_V7Y93ZTbculsVuQ2nEimo',
       name: 'Travel Rations',
       description: 'A pack of various travel-friendly dehydrated foods, including jerky,'
         + ' dried fruit, crackers and nuts. On average 2 is used a day.',
@@ -54,14 +54,14 @@ export function makeConsumableItems() {
       weight: 10
     },
     {
-      itemId: 'ite_A5i_xfOAGVi_YSLZNatw6',
+      itemId: 'ite_A5iCxfOAGVi2YSLZNatw6',
       name: 'Throwing Dagger',
       description: 'Small daggers specifically for throwing, deal 1d6+(Dexterity) damage.',
       price: 1,
       weight: 3
     },
     {
-      itemId: 'ite_YkbO-kPebT7tgnvhzqm11',
+      itemId: 'ite_YkbOKkPebT7tgnvhzqm11',
       name: 'Torch',
       description: 'The torch burns for 2 hours providing light. If you hit a melee attack'
         + ' with a torch, it deals 1 fire damage. If the torch falls to the ground, make a'
@@ -79,7 +79,7 @@ export function makeConsumableItems() {
       weight: 5
     },
     {
-      itemId: 'ite_hhoZ3wO-vEF3SvYHiI_m7',
+      itemId: 'ite_hhoZ3wOfvEF3SvYHiI7m7',
       name: 'Lockpicks',
       description: 'Small shank tool, usually made of iron, that can be used to carry'
         + ' out work in small spaces such as locks.',

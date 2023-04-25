@@ -3,7 +3,7 @@ import { AlchemicalItemSubTypes, ItemRarities, ItemTypes } from '../../src/domai
 export function makeAlchemicalItems() {
   return [
     {
-      itemId: 'ite_sHU3r-vjZJfR0z-m0wCyk',
+      itemId: 'ite_sHU3r0vjZJfR0zam0wCyk',
       alchemicalItemId: 'alc_4r9Z1BkyB7PbVdNbnsDpj',
       name: 'Simple Healing Ointment',
       type: ItemTypes.alchemicalItem,
