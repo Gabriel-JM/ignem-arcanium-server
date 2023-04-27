@@ -4,6 +4,8 @@ export async function up(knex: Knex) {
   await knex.schema.createTable('contents', tableBuilder => {
     tableBuilder.string('id').primary().notNullable()
     tableBuilder.string('ownerId').notNullable()
+    tableBuilder.string('type').notNullable()
+    tableBuilder.string('title').notNullable()
     tableBuilder.string('icon')
     tableBuilder.string('cover')
     tableBuilder.string('name').notNullable()
