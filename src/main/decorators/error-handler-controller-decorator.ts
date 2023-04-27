@@ -1,5 +1,5 @@
 import { badRequest, notFound, serverError } from '@/presentation/helpers/index.js'
-import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
+import { Controller, ControllerFN, HTTPResponse } from '@/presentation/protocols/index.js'
 
 interface ApplicationError extends Error {
   type: string
@@ -71,4 +71,10 @@ export class ErrorHandlerControllerDecorator implements Controller {
     console.log(`[${className}]`, message)
     console.log(` ${at}`, errData)
   }
+}
+
+export function errorHandlerControllerFNDecorator(controllerFn: ControllerFN) {
+  return new ErrorHandlerControllerDecorator({
+    handle: controllerFn
+  })
 }

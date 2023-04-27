@@ -1,9 +1,10 @@
 import { Validator } from '@/common/validation/protocols/validator.js'
 import {
   ErrorHandlerControllerDecorator,
-  ValidationControllerDecorator
+  ValidationControllerDecorator,
+  validationControllerFNDecorator
 } from '@/main/decorators/index.js'
-import { Controller } from '@/presentation/protocols/index.js'
+import { Controller, ControllerFN } from '@/presentation/protocols/index.js'
 
 export function applyErrorAndValidationDecorators(
   controller: Controller,
@@ -11,5 +12,14 @@ export function applyErrorAndValidationDecorators(
 ) {
   return new ErrorHandlerControllerDecorator(
     new ValidationControllerDecorator(validator, controller)
+  )
+}
+
+export function applyErrorAndValidationFNDecorators(
+  controller: ControllerFN,
+  validator: Validator
+) {
+  return new ErrorHandlerControllerDecorator(
+    validationControllerFNDecorator(controller, validator)
   )
 }

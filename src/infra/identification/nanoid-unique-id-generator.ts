@@ -7,11 +7,10 @@ export class NanoIdUniqueIdGenerator implements UniqueIdGenerator {
   static alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
   static nanoId = customAlphabet(NanoIdUniqueIdGenerator.alphabet)
 
-  generate(prefixSubject: string) {
-    const key = prefixSubject as keyof typeof IDPrefixes
+  generate(key: keyof typeof IDPrefixes) {
 
     if (!IDPrefixes[key]) {
-      throw new InvalidIDPrefixSubject(prefixSubject)
+      throw new InvalidIDPrefixSubject(key)
     }
 
     return IDPrefixes[key] + NanoIdUniqueIdGenerator.nanoId()
