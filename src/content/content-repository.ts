@@ -13,6 +13,29 @@ export class ContentRepository {
     this.#idGenerator = idGenerator
   }
 
+  async findByAccountId(accountId: string) {
+    const contentList = await this.#knex
+      .table('contents')
+      .where({ ownerId: accountId, type: 'MainPage' })
+
+    const contents = contentList.map(async content => {
+      const contentChildren = await this.#knex
+        .table('content_children')
+        .select('childId')
+        .where({ parentId: content.id })
+
+      const children = await this.#knex
+        .table('content')
+        .whereIn('id', contentChildren)
+
+      content.children = children
+
+      return content
+    })
+
+    return contents
+  }
+
   async create(data: CreateContent) {
     return await this.#knex
       .table('contents')
