@@ -8,7 +8,6 @@ export async function up(knex: Knex) {
     tableBuilder.string('title').notNullable()
     tableBuilder.string('icon')
     tableBuilder.string('cover')
-    tableBuilder.string('name').notNullable()
     tableBuilder.jsonb('properties').notNullable()
     tableBuilder.text('value').notNullable()
   })
