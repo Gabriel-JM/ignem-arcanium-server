@@ -8,11 +8,12 @@ import { FieldsValidationComposite } from '@/common/validation/composites/fields
 import { RegexValidator } from '@/common/validation/validators/regex-validator.js'
 import { makeAuthDecorator } from '@/account/main/factories/auth.js'
 import { ErrorHandlerControllerDecorator } from '@/main/decorators/error-handler-controller-decorator.js'
+import { prisma } from '@/main/config/prisma.js'
 
 export function makeContentController() {
   const contentController = new ContentController(
     new ContentRepository(
-      makeKnexHelper(),
+      prisma,
       new NanoIdUniqueIdGenerator()
     )
   )
