@@ -15,8 +15,16 @@ export class ContentController {
     return ok(contents)
   }
   
-  async create(data: Content) {
-    const content = await this.#repository.create(data)
+  async create(data: Content & { accountId: string }) {
+    const content = await this.#repository.create({
+      ownerId: data.accountId,
+      properties: data.properties,
+      title: data.title,
+      type: data.type,
+      value: data.value,
+      icon: data.icon,
+      cover: data.cover
+    })
 
     return ok(content)
   }
