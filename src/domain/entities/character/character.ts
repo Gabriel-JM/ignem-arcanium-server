@@ -12,11 +12,11 @@ export interface CharacterProps {
 
 export class Character {
   #status: Array<CharacterStatus> = []
-  #attributes: Attributes
-  #level: number
+  // #attributes: Attributes
+  // #level: number
   #hp: CharacterHealthPoints
   #mp: CharacterManaPoints
-  #equipment: Equipment
+  // #equipment: Equipment
   #inventory: Inventory
   #maxInventoryWeight = 200
 
@@ -26,8 +26,8 @@ export class Character {
     equipments,
     inventoryItems
   }: CharacterProps) {
-    this.#level = level
-    this.#attributes = attributes
+    // this.#level = level
+    // this.#attributes = attributes
     this.#hp = new CharacterHealthPoints(
       level,
       attributes.strength,
@@ -38,7 +38,7 @@ export class Character {
       attributes.intelligence
     )
 
-    this.#equipment = new Equipment(equipments ?? {})
+    new Equipment(equipments ?? {})
     this.#inventory = new Inventory(inventoryItems ?? [])
 
     if (this.#inventory.weight > this.#maxInventoryWeight) {
