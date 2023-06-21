@@ -8,10 +8,11 @@
   "type": "module",
   "scripts": {
     "start": "node --loader=esm-module-alias/loader ./dist/src/main/index.js",
-    "predev": "npm run build",
+    "predev": "npm run build && npm run migrate",
     "dev": "npm start",
     "build": "rm -rf dist && tsc -p ./tsconfig-build.json",
     "build:watch": "tsc -p ./tsconfig-build.json --watch",
+    "migrate": "npx prisma migrate dev",
     "test": "vitest",
     "test:unit": "npm test",
     "test:int": "docker-compose -f docker-compose.test.yml up -d && sleep 15s && npm test -- -r='./tests/integration'",
