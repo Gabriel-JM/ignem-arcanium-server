@@ -1,10 +1,10 @@
-import { Validator } from '@/common/validation/protocols/validator.js'
+import { Validator } from '@/common/validation/protocols/validator.ts'
 import {
   ErrorHandlerControllerDecorator,
   ValidationControllerDecorator,
   validationControllerFNDecorator
-} from '@/main/decorators/index.js'
-import { Controller, ControllerFN } from '@/presentation/protocols/index.js'
+} from '@/main/decorators/index.ts'
+import { Controller, ControllerFN } from '@/presentation/protocols/index.ts'
 
 export function applyErrorAndValidationDecorators(
   controller: Controller,

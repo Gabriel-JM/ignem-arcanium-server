@@ -1,4 +1,4 @@
-import { RegexValidator } from '@/validation/validators/index.js'
+import { RegexValidator } from '@/validation/validators/index.ts'
 
 function makeSut(fields: Record<string, RegExp>) {
   return new RegexValidator(fields)

@@ -1,6 +1,6 @@
-import { CreateAccountController } from '@/presentation/controllers/index.js'
-import { created } from '@/presentation/helpers/index.js'
-import { mockCreateAccount } from '@/tests/unit/mocks/index.js'
+import { CreateAccountController } from '@/presentation/controllers/index.ts'
+import { created } from '@/presentation/helpers/index.ts'
+import { mockCreateAccount } from '@/tests/unit/mocks/index.ts'
 
 function makeSut() {
   const createAccountSpy = mockCreateAccount()

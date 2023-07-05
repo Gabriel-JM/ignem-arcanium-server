@@ -1,6 +1,6 @@
-import { NotFoundError } from '@/data/errors/index.js'
-import { CheckCharacterRepository, DeleteCharacterRepository } from '@/data/protocols/repository/index.js'
-import { DeleteCharacter, DeleteCharacterParams } from '@/domain/usecases/index.js'
+import { NotFoundError } from '@/data/errors/index.ts'
+import { CheckCharacterRepository, DeleteCharacterRepository } from '@/data/protocols/repository/index.ts'
+import { DeleteCharacter, DeleteCharacterParams } from '@/domain/usecases/index.ts'
 
 export class DbDeleteCharacter implements DeleteCharacter {
   #checkCharacterRepository: CheckCharacterRepository

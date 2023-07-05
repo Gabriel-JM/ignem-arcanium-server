@@ -1,4 +1,4 @@
-import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.ts'
 import chaiHttp from 'chai-http'
 
 export function testSetup(...tablesToClear: string[]) {

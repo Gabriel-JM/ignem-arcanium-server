@@ -1,4 +1,4 @@
-import { setupTestRequest, testRequest } from '@/tests/integration/test-utils/index.js'
+import { setupTestRequest, testRequest } from '@/tests/integration/test-utils/index.ts'
 
 describe('Account login validation', () => {
   setupTestRequest()

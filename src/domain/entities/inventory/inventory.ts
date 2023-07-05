@@ -1,4 +1,4 @@
-import { InventoryItem } from '@/domain/interfaces/index.js'
+import { InventoryItem } from '@/domain/interfaces/index.ts'
 
 export type InventoryProps = Array<InventoryItem>
 

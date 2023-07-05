@@ -1,6 +1,6 @@
-import { Validator } from '../protocols/validator.js'
-import { RequiredFieldsValidator } from '../validators/required-fields-validator.js'
-import { TypeValidator } from '../validators/type-validator.js'
+import { Validator } from '../protocols/validator.ts'
+import { RequiredFieldsValidator } from '../validators/required-fields-validator.ts'
+import { TypeValidator } from '../validators/type-validator.ts'
 
 export class FieldsValidationComposite implements Validator {
   #fields: Record<string, string>

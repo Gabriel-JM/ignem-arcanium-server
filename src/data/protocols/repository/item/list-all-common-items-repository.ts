@@ -1,4 +1,4 @@
-import { ListAllCommonItemsResult } from '@/domain/usecases/index.js'
+import { ListAllCommonItemsResult } from '@/domain/usecases/index.ts'
 
 export type ListAllCommonItemsRepositoryResult = ListAllCommonItemsResult
 

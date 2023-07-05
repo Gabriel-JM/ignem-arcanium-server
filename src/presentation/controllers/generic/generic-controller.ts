@@ -1,5 +1,5 @@
-import { ok } from '@/presentation/helpers/index.js'
-import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
+import { ok } from '@/presentation/helpers/index.ts'
+import { Controller, HTTPResponse } from '@/presentation/protocols/index.ts'
 
 export class GenericController implements Controller {
   #usecaseMethod: (...args: any[]) => Promise<unknown>

@@ -1,12 +1,12 @@
-import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
-import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
-import { JwtEncrypter } from '@/infra/cryptography/index.js'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.ts'
+import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.ts'
+import { JwtEncrypter } from '@/infra/cryptography/index.ts'
 import {
   clearTables,
   closeDbConnection,
   setupTestRequest
-} from '@/tests/integration/test-utils/test-setup.js'
-import { testRequest } from '@/tests/integration/test-utils/test-request.js'
+} from '@/tests/integration/test-utils/test-setup.ts'
+import { testRequest } from '@/tests/integration/test-utils/test-request.ts'
 import { setTimeout } from 'node:timers/promises'
 
 async function setupSut() {

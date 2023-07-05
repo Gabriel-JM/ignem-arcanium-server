@@ -1,1 +1,1 @@
-export * from './id/invalid-id-prefix-subject.js'
+export * from './id/invalid-id-prefix-subject.ts'

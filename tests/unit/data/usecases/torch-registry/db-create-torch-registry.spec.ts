@@ -1,6 +1,6 @@
-import { NoTorchToBeLitError } from '@/data/errors/index.js'
-import { DbCreateTorchRegistry } from '@/data/usecases/index.js'
-import { mockCreateTorchRegistryRepository, mockUniqueIdGenerator } from '@/tests/unit/mocks/index.js'
+import { NoTorchToBeLitError } from '@/data/errors/index.ts'
+import { DbCreateTorchRegistry } from '@/data/usecases/index.ts'
+import { mockCreateTorchRegistryRepository, mockUniqueIdGenerator } from '@/tests/unit/mocks/index.ts'
 
 function makeSut() {
   const uniqueIdGeneratorSpy = mockUniqueIdGenerator()

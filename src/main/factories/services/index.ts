@@ -1,2 +1,2 @@
-export * from './bcrypt-hasher-factory.js'
-export * from './jwt-encrypter-factory.js'
+export * from './bcrypt-hasher-factory.ts'
+export * from './jwt-encrypter-factory.ts'

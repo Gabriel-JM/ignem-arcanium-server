@@ -1,4 +1,4 @@
-import { FindAccountByEmailRepositoryResult } from '@/data/protocols/repository/index.js'
+import { FindAccountByEmailRepositoryResult } from '@/data/protocols/repository/index.ts'
 
 export function fakeAccount() {
   return {

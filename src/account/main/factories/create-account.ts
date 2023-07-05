@@ -1,10 +1,10 @@
-import { CreateAccountController } from '@/account/controllers/index.js'
-import { JwtEncrypter } from '@/infra/cryptography/index.js'
-import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
-import { applyErrorAndValidationDecorators } from '@/main/factories/decorators/index.js'
-import { makeKnexAccountRepository } from '@/main/factories/repositories/index.js'
-import { makeBcryptHasher } from '@/main/factories/services/index.js'
-import { makeCreateAccountValidator } from '@/main/factories/validators/index.js'
+import { CreateAccountController } from '@/account/controllers/index.ts'
+import { JwtEncrypter } from '@/infra/cryptography/index.ts'
+import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.ts'
+import { applyErrorAndValidationDecorators } from '@/main/factories/decorators/index.ts'
+import { makeKnexAccountRepository } from '@/main/factories/repositories/index.ts'
+import { makeBcryptHasher } from '@/main/factories/services/index.ts'
+import { makeCreateAccountValidator } from '@/main/factories/validators/index.ts'
 
 export function makeCreateAccountController() {
   const jwtEncrypter = new JwtEncrypter(process.env.ENCRYPTER_SECRET)

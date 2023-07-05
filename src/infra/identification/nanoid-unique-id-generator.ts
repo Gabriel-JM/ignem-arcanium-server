@@ -1,7 +1,7 @@
 import { customAlphabet } from 'nanoid'
-import { UniqueIdGenerator } from '@/data/protocols/identification/index.js'
-import { IDPrefixes } from '@/infra/identification/id-prefixes.js'
-import { InvalidIDPrefixSubject } from '@/infra/errors/index.js'
+import { UniqueIdGenerator } from '@/data/protocols/identification/index.ts'
+import { IDPrefixes } from '@/infra/identification/id-prefixes.ts'
+import { InvalidIDPrefixSubject } from '@/infra/errors/index.ts'
 
 export class NanoIdUniqueIdGenerator implements UniqueIdGenerator {
   static alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'

@@ -2,7 +2,7 @@ vi.mock('nanoid', () => {
   return { nanoid: vi.fn(() => 'any_id') }
 })
 
-vi.mock('@/infra/identification/id-prefixes.js', () => {
+vi.mock('@/infra/identification/id-prefixes.ts', () => {
   return {
     IDPrefixes: {
       subject: 'sub_'
@@ -11,8 +11,8 @@ vi.mock('@/infra/identification/id-prefixes.js', () => {
 })
 
 import { nanoid } from 'nanoid'
-import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
-import { InvalidIDPrefixSubject } from '@/infra/errors/index.js'
+import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.ts'
+import { InvalidIDPrefixSubject } from '@/infra/errors/index.ts'
 
 describe('NanoIdUniqueIdGenerator', () => {
   it('should call nanoid function', () => {

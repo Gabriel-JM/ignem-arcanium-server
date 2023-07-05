@@ -1,5 +1,5 @@
-import { badRequest, notFound, serverError } from '@/presentation/helpers/index.js'
-import { Controller, ControllerFN, HTTPResponse } from '@/presentation/protocols/index.js'
+import { badRequest, notFound, serverError } from '@/presentation/helpers/index.ts'
+import { Controller, ControllerFN, HTTPResponse } from '@/presentation/protocols/index.ts'
 
 interface ApplicationError extends Error {
   type: string

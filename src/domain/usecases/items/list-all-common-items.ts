@@ -1,4 +1,4 @@
-import { AlchemicalItem, Gem, Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
+import { AlchemicalItem, Gem, Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.ts'
 
 export type ListAllCommonItemsResult = Array<
   | Item

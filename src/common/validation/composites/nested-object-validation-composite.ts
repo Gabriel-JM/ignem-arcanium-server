@@ -1,5 +1,5 @@
-import { Validator } from '../protocols/validator.js'
-import { ValidatorComposite } from './validator-composite.js'
+import { Validator } from '../protocols/validator.ts'
+import { ValidatorComposite } from './validator-composite.ts'
 
 export class NestedObjectValidationComposite implements Validator {
   #pathName: string

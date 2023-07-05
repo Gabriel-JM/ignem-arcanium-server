@@ -1,5 +1,5 @@
-import { ok, text } from '@/presentation/helpers/index.js'
-import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
+import { ok, text } from '@/presentation/helpers/index.ts'
+import { Controller, HTTPResponse } from '@/presentation/protocols/index.ts'
 
 export class AttributesDetailsController implements Controller {
   attributesDetails = {

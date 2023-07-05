@@ -1,4 +1,4 @@
-import { UniqueIdGenerator } from '@/data/protocols/identification/index.js'
+import { UniqueIdGenerator } from '@/data/protocols/identification/index.ts'
 import {
   CheckCharacterRepository,
   CheckCharacterRepositoryParams,
@@ -7,9 +7,9 @@ import {
   FindAllCharactersRepository,
   UpdateCharacterRepository,
   UpdateCharacterRepositoryParams
-} from '@/data/protocols/repository/index.js'
-import { KnexEquipmentsRepository } from '@/infra/db/knex/equipments/knex-equipments-repository.js'
-import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
+} from '@/data/protocols/repository/index.ts'
+import { KnexEquipmentsRepository } from '@/infra/db/knex/equipments/knex-equipments-repository.ts'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.ts'
 import {
   creaturesFields,
   DbCharacter,
@@ -17,7 +17,7 @@ import {
   DbInventory,
   DbItem,
   itemsFields
-} from '@/infra/db/models/index.js'
+} from '@/infra/db/models/index.ts'
 
 type Repository = FindAllCharactersRepository
   & CheckCharacterRepository

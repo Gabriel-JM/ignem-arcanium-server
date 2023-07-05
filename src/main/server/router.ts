@@ -1,6 +1,6 @@
 import { connection } from 'websocket'
 import { ServerResponse } from 'node:http'
-import { findPathMatch } from '@/main/server/find-path-match.js'
+import { findPathMatch } from '@/main/server/find-path-match.ts'
 
 export interface RouteContext {
   event: string

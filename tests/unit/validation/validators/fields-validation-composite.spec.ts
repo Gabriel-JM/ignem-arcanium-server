@@ -1,4 +1,4 @@
-import { FieldsValidationComposite } from '@/validation/composites/index.js'
+import { FieldsValidationComposite } from '@/validation/composites/index.ts'
 
 function makeSut(fields: Record<string, string>) {
   return new FieldsValidationComposite(fields)

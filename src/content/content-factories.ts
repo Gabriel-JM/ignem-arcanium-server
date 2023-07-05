@@ -1,12 +1,12 @@
-import { applyErrorAndValidationDecorators } from '@/main/factories/decorators/error-and-validation-decorators-factory.js'
-import { ContentController } from './content-controller.js'
-import { ContentRepository } from './content-repository.js'
-import { NanoIdUniqueIdGenerator } from '@/infra/identification/nanoid-unique-id-generator.js'
-import { ValidatorComposite } from '@/common/validation/composites/validator-composite.js'
-import { FieldsValidationComposite } from '@/common/validation/composites/fields-validation-composite.js'
-import { makeAuthDecorator } from '@/account/main/factories/auth.js'
-import { ErrorHandlerControllerDecorator } from '@/main/decorators/error-handler-controller-decorator.js'
-import { prisma } from '@/main/config/prisma.js'
+import { applyErrorAndValidationDecorators } from '@/main/factories/decorators/error-and-validation-decorators-factory.ts'
+import { ContentController } from './content-controller.ts'
+import { ContentRepository } from './content-repository.ts'
+import { NanoIdUniqueIdGenerator } from '@/infra/identification/nanoid-unique-id-generator.ts'
+import { ValidatorComposite } from '@/common/validation/composites/validator-composite.ts'
+import { FieldsValidationComposite } from '@/common/validation/composites/fields-validation-composite.ts'
+import { makeAuthDecorator } from '@/account/main/factories/auth.ts'
+import { ErrorHandlerControllerDecorator } from '@/main/decorators/error-handler-controller-decorator.ts'
+import { prisma } from '@/main/config/prisma.ts'
 
 export function makeContentController() {
   const contentController = new ContentController(

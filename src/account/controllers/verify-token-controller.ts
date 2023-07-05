@@ -1,7 +1,7 @@
-import { InvalidAccessTokenError } from '@/data/errors/index.js'
-import { EncryptionVerifier } from '@/data/protocols/cryptography/index.js'
-import { noContent } from '@/presentation/helpers/index.js'
-import { Controller } from '@/presentation/protocols/index.js'
+import { InvalidAccessTokenError } from '@/data/errors/index.ts'
+import { EncryptionVerifier } from '@/data/protocols/cryptography/index.ts'
+import { noContent } from '@/presentation/helpers/index.ts'
+import { Controller } from '@/presentation/protocols/index.ts'
 
 export interface VerifyTokenParams {
   token: string

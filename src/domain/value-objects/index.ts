@@ -1,2 +1,2 @@
-export * from './character/character-health-points.js'
-export * from './character/character-mana-points.js'
+export * from './character/character-health-points.ts'
+export * from './character/character-mana-points.ts'

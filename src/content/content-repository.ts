@@ -1,5 +1,5 @@
-import { UniqueIdGenerator } from '@/data/protocols/identification/unique-id-generator.js'
-import { Content } from './content.js'
+import { UniqueIdGenerator } from '@/data/protocols/identification/unique-id-generator.ts'
+import { Content } from './content.ts'
 import { PrismaClient } from '@prisma/client'
 
 type CreateContent = Omit<Content, 'id'>

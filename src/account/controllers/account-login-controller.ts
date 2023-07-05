@@ -1,8 +1,8 @@
-import { AccountNotFoundError } from '@/data/errors/index.js'
-import { Encrypter, HashComparer } from '@/data/protocols/cryptography/index.js'
-import { FindAccountByEmailRepository } from '@/data/protocols/repository/index.js'
-import { ok } from '@/presentation/helpers/http.js'
-import { Controller } from '@/presentation/protocols/index.js'
+import { AccountNotFoundError } from '@/data/errors/index.ts'
+import { Encrypter, HashComparer } from '@/data/protocols/cryptography/index.ts'
+import { FindAccountByEmailRepository } from '@/data/protocols/repository/index.ts'
+import { ok } from '@/presentation/helpers/http.ts'
+import { Controller } from '@/presentation/protocols/index.ts'
 
 export interface AccountLoginParams {
   email: string

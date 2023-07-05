@@ -1,4 +1,4 @@
-import { Item } from '@/domain/interfaces/index.js'
+import { Item } from '@/domain/interfaces/index.ts'
 
 export type FindSlotItemByIdRepositoryResult<T> = Record<keyof T, Item>
 

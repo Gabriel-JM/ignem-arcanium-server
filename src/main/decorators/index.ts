@@ -1,2 +1,2 @@
-export * from './validation-controller-decorator.js'
-export * from './error-handler-controller-decorator.js'
+export * from './validation-controller-decorator.ts'
+export * from './error-handler-controller-decorator.ts'

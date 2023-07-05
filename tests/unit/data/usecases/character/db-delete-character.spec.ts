@@ -1,6 +1,6 @@
-import { NotFoundError } from '@/data/errors/index.js'
-import { DbDeleteCharacter } from '@/data/usecases/index.js'
-import { mockCheckCharacterRepository, mockDeleteCharacterRepository } from '@/tests/unit/mocks/index.js'
+import { NotFoundError } from '@/data/errors/index.ts'
+import { DbDeleteCharacter } from '@/data/usecases/index.ts'
+import { mockCheckCharacterRepository, mockDeleteCharacterRepository } from '@/tests/unit/mocks/index.ts'
 
 function makeSut() {
   const checkCharacterRepositorySpy = mockCheckCharacterRepository()

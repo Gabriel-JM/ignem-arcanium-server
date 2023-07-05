@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { HashComparer, TextHasher } from '@/data/protocols/cryptography/index.js'
+import { HashComparer, TextHasher } from '@/data/protocols/cryptography/index.ts'
 
 export class BcryptHasher implements TextHasher, HashComparer {
   #salt: number

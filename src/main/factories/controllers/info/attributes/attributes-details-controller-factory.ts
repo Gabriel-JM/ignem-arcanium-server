@@ -1,4 +1,4 @@
-import { AttributesDetailsController } from '@/presentation/controllers/index.js'
+import { AttributesDetailsController } from '@/presentation/controllers/index.ts'
 
 export function makeAttributesDetailsController() {
   return new AttributesDetailsController()

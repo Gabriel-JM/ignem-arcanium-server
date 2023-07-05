@@ -3,7 +3,7 @@ import {
   closeDbConnection,
   setupTestRequest,
   testRequest
-} from '@/tests/integration/test-utils/index.js'
+} from '@/tests/integration/test-utils/index.ts'
 
 describe('Create characters validation', () => {
   beforeAll(setupTestRequest)

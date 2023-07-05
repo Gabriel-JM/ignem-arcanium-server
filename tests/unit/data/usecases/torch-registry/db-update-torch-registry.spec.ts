@@ -1,9 +1,9 @@
-import { InvalidTorchAdditionValueError, TorchRegistryNotFoundError } from '@/data/errors/index.js'
-import { DbUpdateTorchRegistry } from '@/data/usecases/index.js'
+import { InvalidTorchAdditionValueError, TorchRegistryNotFoundError } from '@/data/errors/index.ts'
+import { DbUpdateTorchRegistry } from '@/data/usecases/index.ts'
 import {
   mockFindTorchRegistryByIdRepository,
   mockUpdateTorchRegistryRepository
-} from '@/tests/unit/mocks/index.js'
+} from '@/tests/unit/mocks/index.ts'
 
 function makeSut() {
   const updateTorchRegistryRepositorySpy = mockUpdateTorchRegistryRepository()

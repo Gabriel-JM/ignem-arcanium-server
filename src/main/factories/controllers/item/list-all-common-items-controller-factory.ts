@@ -1,9 +1,9 @@
-import { DbListAllCommonItems } from '@/data/usecases/index.js'
-import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
-import { KnexItemRepository } from '@/infra/db/knex/knex-item-repository.js'
-import { ErrorHandlerControllerDecorator } from '@/main/decorators/index.js'
-import { knexConnection } from '@/main/factories/repositories/index.js'
-import { GenericController } from '@/presentation/controllers/index.js'
+import { DbListAllCommonItems } from '@/data/usecases/index.ts'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.ts'
+import { KnexItemRepository } from '@/infra/db/knex/knex-item-repository.ts'
+import { ErrorHandlerControllerDecorator } from '@/main/decorators/index.ts'
+import { knexConnection } from '@/main/factories/repositories/index.ts'
+import { GenericController } from '@/presentation/controllers/index.ts'
 
 export function makeListAllCommonItemsController() {
   const knexHelper = new KnexHelper(knexConnection)

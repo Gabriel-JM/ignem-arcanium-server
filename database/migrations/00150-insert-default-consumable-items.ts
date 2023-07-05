@@ -1,6 +1,6 @@
 import { Knex } from 'knex'
-import { ItemRarities, ItemTypes } from '../../src/domain/constants/index.js'
-import { makeConsumableItems } from '../data/consumable-items.js'
+import { ItemRarities, ItemTypes } from '../../src/domain/constants/index.ts'
+import { makeConsumableItems } from '../data/consumable-items.ts'
 
 const consumables = makeConsumableItems()
 

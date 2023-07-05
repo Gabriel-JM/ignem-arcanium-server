@@ -1,6 +1,6 @@
-import { Validator } from '@/common/validation/protocols/validator.js'
-import { badRequest } from '@/presentation/helpers/index.js'
-import { Controller, ControllerFN, HTTPResponse } from '@/presentation/protocols/index.js'
+import { Validator } from '@/common/validation/protocols/validator.ts'
+import { badRequest } from '@/presentation/helpers/index.ts'
+import { Controller, ControllerFN, HTTPResponse } from '@/presentation/protocols/index.ts'
 
 export class ValidationControllerDecorator implements Controller {
   constructor(

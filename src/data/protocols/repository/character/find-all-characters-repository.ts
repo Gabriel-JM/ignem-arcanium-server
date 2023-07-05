@@ -1,4 +1,4 @@
-import { FindAllCharactersResult } from '@/domain/usecases/index.js'
+import { FindAllCharactersResult } from '@/domain/usecases/index.ts'
 
 export type FindAllCharactersRepositoryResult = FindAllCharactersResult
 

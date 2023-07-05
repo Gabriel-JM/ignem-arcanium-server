@@ -1,6 +1,6 @@
 import { Knex } from 'knex'
-import { ItemRarities, ItemTypes } from '../../src/domain/constants/index.js'
-import { makeTools } from '../data/tools.js'
+import { ItemRarities, ItemTypes } from '../../src/domain/constants/index.ts'
+import { makeTools } from '../data/tools.ts'
 
 const tools = makeTools()
 

@@ -1,6 +1,6 @@
-import { CreateCharacter, CreateCharacterInventoryItem } from '@/domain/usecases/index.js'
-import { created } from '@/presentation/helpers/index.js'
-import { Controller } from '@/presentation/protocols/controller.js'
+import { CreateCharacter, CreateCharacterInventoryItem } from '@/domain/usecases/index.ts'
+import { created } from '@/presentation/helpers/index.ts'
+import { Controller } from '@/presentation/protocols/controller.ts'
 
 interface CreateCharacterControllerParams {
   accountId: string

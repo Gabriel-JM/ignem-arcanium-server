@@ -1,1 +1,1 @@
-export * from './error-and-validation-decorators-factory.js'
+export * from './error-and-validation-decorators-factory.ts'

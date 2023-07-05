@@ -1,6 +1,6 @@
-import { ok } from '@/presentation/helpers/http.js'
-import { ContentRepository } from './content-repository.js'
-import { Content } from './content.js'
+import { ok } from '@/presentation/helpers/http.ts'
+import { ContentRepository } from './content-repository.ts'
+import { Content } from './content.ts'
 
 export class ContentController {
   #repository: ContentRepository

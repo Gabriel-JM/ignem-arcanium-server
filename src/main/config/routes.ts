@@ -1,6 +1,6 @@
-import { contentRoutes } from '@/content/content-routes.js'
-import { accountRoutes } from '@/main/routes/account.js'
-import { Router } from '@/main/server/router.js'
+import { contentRoutes } from '@/content/content-routes.ts'
+import { accountRoutes } from '@/main/routes/account.ts'
+import { Router } from '@/main/server/router.ts'
 
 export function defineRoutes(router: Router) {
   accountRoutes(router)

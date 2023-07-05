@@ -1,6 +1,6 @@
-import { InvalidAccessTokenError } from '@/data/errors/index.js'
-import { DbLoadAccountByToken } from '@/data/usecases/index.js'
-import { fakeAccount, mockDecrypter, mockFindAccountByIdRepository } from '@/tests/unit/mocks/index.js'
+import { InvalidAccessTokenError } from '@/data/errors/index.ts'
+import { DbLoadAccountByToken } from '@/data/usecases/index.ts'
+import { fakeAccount, mockDecrypter, mockFindAccountByIdRepository } from '@/tests/unit/mocks/index.ts'
 
 function makeSut() {
   const decrypterSpy = mockDecrypter()

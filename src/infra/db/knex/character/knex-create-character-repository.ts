@@ -1,8 +1,8 @@
-import { UniqueIdGenerator } from '@/data/protocols/identification/unique-id-generator.js'
-import { CreateCharacterRepository, CreateCharacterRepositoryParams } from '@/data/protocols/repository/index.js'
-import { KnexEquipmentsRepository } from '@/infra/db/knex/equipments/knex-equipments-repository.js'
-import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
-import { DbCharacter, DbCreature, DbInventory } from '@/infra/db/models/index.js'
+import { UniqueIdGenerator } from '@/data/protocols/identification/unique-id-generator.ts'
+import { CreateCharacterRepository, CreateCharacterRepositoryParams } from '@/data/protocols/repository/index.ts'
+import { KnexEquipmentsRepository } from '@/infra/db/knex/equipments/knex-equipments-repository.ts'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.ts'
+import { DbCharacter, DbCreature, DbInventory } from '@/infra/db/models/index.ts'
 
 export class KnexCreateCharacterRepository implements CreateCharacterRepository {
   tableName = 'characters'

@@ -1,2 +1,2 @@
-export * from './invalid-equipments-error.js'
-export * from './two-hands-in-use-error.js'
+export * from './invalid-equipments-error.ts'
+export * from './two-hands-in-use-error.ts'

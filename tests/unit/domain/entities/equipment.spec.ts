@@ -1,7 +1,7 @@
-import { Equipment } from '@/domain/entities/index.js'
-import { InvalidEquipmentsError, TwoHandsInUseError } from '@/domain/errors/index.js'
-import { ShieldOrArmor } from '@/domain/interfaces/index.js'
-import { fakeItem, fakeArmor, fakeShield, fakeWeapon, fakeAccessory } from '@/tests/unit/mocks/items.js'
+import { Equipment } from '@/domain/entities/index.ts'
+import { InvalidEquipmentsError, TwoHandsInUseError } from '@/domain/errors/index.ts'
+import { ShieldOrArmor } from '@/domain/interfaces/index.ts'
+import { fakeItem, fakeArmor, fakeShield, fakeWeapon, fakeAccessory } from '@/tests/unit/mocks/items.ts'
 
 const defaultProps = {
   leftHand: fakeWeapon(),

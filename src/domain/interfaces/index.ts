@@ -1,2 +1,2 @@
-export * from './items/index.js'
-export * from './character/index.js'
+export * from './items/index.ts'
+export * from './character/index.ts'

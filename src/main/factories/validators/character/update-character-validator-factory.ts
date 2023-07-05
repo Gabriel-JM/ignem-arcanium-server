@@ -1,9 +1,9 @@
-import { ValidatorComposite } from '@/common/validation/composites/index.js'
+import { ValidatorComposite } from '@/common/validation/composites/index.ts'
 import {
   MinValueValidator,
   RequiredFieldsValidator,
   TypeValidator
-} from '@/common/validation/validators/index.js'
+} from '@/common/validation/validators/index.ts'
 
 export function makeUpdateCharacterValidator() {
   return new ValidatorComposite(

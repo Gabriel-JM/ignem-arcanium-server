@@ -1,5 +1,5 @@
-import { FakeValidator } from '@/tests/unit/mocks/index.js'
-import { ListValidationComposite } from '@/validation/composites/index.js'
+import { FakeValidator } from '@/tests/unit/mocks/index.ts'
+import { ListValidationComposite } from '@/validation/composites/index.ts'
 
 function makeSut(path = 'list') {
   const validator1 = new FakeValidator()

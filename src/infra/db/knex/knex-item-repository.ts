@@ -4,15 +4,15 @@ import {
   FindSlotItemByIdRepository,
   InventoryItemsRepository,
   ListAllCommonItemsRepository
-} from '@/data/protocols/repository/index.js'
-import { ListAllCommonItemsResult } from '@/domain/usecases/index.js'
-import { ItemTypes } from '@/domain/constants/items.js'
-import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
-import { alchemicalItemsFields } from '@/infra/db/models/alchemical-item.js'
-import { itemsFields } from '@/infra/db/models/item.js'
-import { shieldsAndArmorsFields } from '@/infra/db/models/shield-and-armor.js'
-import { weaponsFields } from '@/infra/db/models/weapon.js'
-import { sneakObjectToCamel } from '@/infra/utils/snake-case-to-camel-case.js'
+} from '@/data/protocols/repository/index.ts'
+import { ListAllCommonItemsResult } from '@/domain/usecases/index.ts'
+import { ItemTypes } from '@/domain/constants/items.ts'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.ts'
+import { alchemicalItemsFields } from '@/infra/db/models/alchemical-item.ts'
+import { itemsFields } from '@/infra/db/models/item.ts'
+import { shieldsAndArmorsFields } from '@/infra/db/models/shield-and-armor.ts'
+import { weaponsFields } from '@/infra/db/models/weapon.ts'
+import { sneakObjectToCamel } from '@/infra/utils/snake-case-to-camel-case.ts'
 
 type ItemRepository = ListAllCommonItemsRepository
   & InventoryItemsRepository

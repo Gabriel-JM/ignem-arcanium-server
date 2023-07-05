@@ -1,7 +1,7 @@
-import { CreateCharacterController } from '@/presentation/controllers/index.js'
-import { created } from '@/presentation/helpers/http.js'
-import { fakeCreateCharacterParams } from '@/tests/unit/mocks/character.js'
-import { fakeArmor, fakeItem, fakeWeapon } from '@/tests/unit/mocks/items.js'
+import { CreateCharacterController } from '@/presentation/controllers/index.ts'
+import { created } from '@/presentation/helpers/http.ts'
+import { fakeCreateCharacterParams } from '@/tests/unit/mocks/character.ts'
+import { fakeArmor, fakeItem, fakeWeapon } from '@/tests/unit/mocks/items.ts'
 
 function makeSut() {
   const createCharacterSpy = {

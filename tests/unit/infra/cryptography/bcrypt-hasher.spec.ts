@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { BcryptHasher } from '@/infra/cryptography/index.js'
+import { BcryptHasher } from '@/infra/cryptography/index.ts'
 
 const hashSpy = vi.spyOn(bcrypt, 'hash')
 

@@ -1,7 +1,7 @@
-import { ItemTypes } from '@/domain/constants/items.js'
-import { InvalidEquipmentsError } from '@/domain/errors/equipment/invalid-equipments-error.js'
-import { TwoHandsInUseError } from '@/domain/errors/index.js'
-import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
+import { ItemTypes } from '@/domain/constants/items.ts'
+import { InvalidEquipmentsError } from '@/domain/errors/equipment/invalid-equipments-error.ts'
+import { TwoHandsInUseError } from '@/domain/errors/index.ts'
+import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.ts'
 
 export type EquipementSlotErrors = Array<{
   slot: string

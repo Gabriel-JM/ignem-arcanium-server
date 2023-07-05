@@ -1,4 +1,4 @@
-import { EquipementSlotErrors } from '@/domain/entities/index.js'
+import { EquipementSlotErrors } from '@/domain/entities/index.ts'
 
 export class InvalidEquipmentsError extends Error {
   name = 'InvalidEquipmentError'

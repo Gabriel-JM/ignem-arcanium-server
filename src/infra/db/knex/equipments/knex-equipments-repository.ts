@@ -1,14 +1,14 @@
-import { UniqueIdGenerator } from '@/data/protocols/identification/unique-id-generator.js'
-import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
+import { UniqueIdGenerator } from '@/data/protocols/identification/unique-id-generator.ts'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.ts'
 import {
   alchemicalItemsFields,
   gemsFields,
   itemsFields,
   shieldsAndArmorsFields,
   weaponsFields
-} from '@/infra/db/models/index.js'
-import { DbEquipment } from '@/infra/db/models/equipment.js'
-import { sneakObjectToCamel } from '@/infra/utils/snake-case-to-camel-case.js'
+} from '@/infra/db/models/index.ts'
+import { DbEquipment } from '@/infra/db/models/equipment.ts'
+import { sneakObjectToCamel } from '@/infra/utils/snake-case-to-camel-case.ts'
 
 interface Equipment {
   id: string

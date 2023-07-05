@@ -1,7 +1,7 @@
-import { Equipment, EquipmentProps, Inventory, InventoryProps } from '@/domain/entities/index.js'
-import { Attributes } from '@/domain/interfaces/index.js'
-import { CharacterHealthPoints, CharacterManaPoints } from '@/domain/value-objects/index.js'
-import { CharacterStatus } from './status.js'
+import { Equipment, EquipmentProps, Inventory, InventoryProps } from '@/domain/entities/index.ts'
+import { Attributes } from '@/domain/interfaces/index.ts'
+import { CharacterHealthPoints, CharacterManaPoints } from '@/domain/value-objects/index.ts'
+import { CharacterStatus } from './status.ts'
 
 export interface CharacterProps {
   level: number

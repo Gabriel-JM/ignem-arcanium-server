@@ -1,4 +1,4 @@
-import { ValueInBetweenValidator } from '@/validation/validators/index.js'
+import { ValueInBetweenValidator } from '@/validation/validators/index.ts'
 
 function makeSut(fields: Record<string, [number, number]>) {
   const sut = new ValueInBetweenValidator(fields)

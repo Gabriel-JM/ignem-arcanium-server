@@ -1,6 +1,6 @@
-import { CharacterStatus } from '@/domain/entities/character/status.js'
-import { Character, CharacterProps } from '@/domain/entities/index.js'
-import { fakeAccessory, fakeArmor, fakeInventoryItem, fakeItem, fakeShield, fakeWeapon } from '@/tests/unit/mocks/items.js'
+import { CharacterStatus } from '@/domain/entities/character/status.ts'
+import { Character, CharacterProps } from '@/domain/entities/index.ts'
+import { fakeAccessory, fakeArmor, fakeInventoryItem, fakeItem, fakeShield, fakeWeapon } from '@/tests/unit/mocks/items.ts'
 
 const defaultLevel = 1
 const defaultAttributes = {

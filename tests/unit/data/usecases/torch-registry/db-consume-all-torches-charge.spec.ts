@@ -1,8 +1,8 @@
-import { DbConsumeAllTorchesCharge } from '@/data/usecases/index.js'
+import { DbConsumeAllTorchesCharge } from '@/data/usecases/index.ts'
 import {
   mockfindAllTorchRegistriesRepository,
   mockUpdateManyTorchRegistriesRepository
-} from '@/tests/unit/mocks/index.js'
+} from '@/tests/unit/mocks/index.ts'
 
 function makeSut() {
   const findAllTorchRegistriesRepositorySpy = mockfindAllTorchRegistriesRepository()

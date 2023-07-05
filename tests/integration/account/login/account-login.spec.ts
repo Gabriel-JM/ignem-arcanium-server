@@ -1,9 +1,9 @@
 import chai from 'chai'
 import bcrypt from 'bcrypt'
-import { server } from '@/main/server/app.js'
-import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
+import { server } from '@/main/server/app.ts'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.ts'
 import { randomUUID } from 'crypto'
-import { testSetup } from '@/tests/integration/test-utils/test-setup.js'
+import { testSetup } from '@/tests/integration/test-utils/test-setup.ts'
 import { setTimeout } from 'node:timers/promises'
 
 describe('Create account', () => {

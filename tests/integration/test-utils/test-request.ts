@@ -1,5 +1,5 @@
 import chai from 'chai'
-import { server } from '@/main/server/app.js'
+import { server } from '@/main/server/app.ts'
 
 export interface TestRequestParams {
   method: string

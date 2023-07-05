@@ -1,6 +1,6 @@
-import { CreateTorchRegistryController } from '@/presentation/controllers/index.js'
-import { ok } from '@/presentation/helpers/index.js'
-import { mockCreateTorchRegistry } from '@/tests/unit/mocks/index.js'
+import { CreateTorchRegistryController } from '@/presentation/controllers/index.ts'
+import { ok } from '@/presentation/helpers/index.ts'
+import { mockCreateTorchRegistry } from '@/tests/unit/mocks/index.ts'
 
 function makeSut() {
   const createTorchRegistrySpy = mockCreateTorchRegistry()

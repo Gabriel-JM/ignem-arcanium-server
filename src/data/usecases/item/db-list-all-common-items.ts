@@ -1,5 +1,5 @@
-import { ListAllCommonItemsRepository } from '@/data/protocols/repository/index.js'
-import { ListAllCommonItems, ListAllCommonItemsResult } from '@/domain/usecases/index.js'
+import { ListAllCommonItemsRepository } from '@/data/protocols/repository/index.ts'
+import { ListAllCommonItems, ListAllCommonItemsResult } from '@/domain/usecases/index.ts'
 
 export class DbListAllCommonItems implements ListAllCommonItems {
   #listAllCommonItemsRepository: ListAllCommonItemsRepository

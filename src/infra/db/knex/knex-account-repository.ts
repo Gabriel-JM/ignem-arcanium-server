@@ -6,8 +6,8 @@ import {
   FindAccountByEmailRepositoryResult,
   FindAccountByIdRepository,
   FindAccountByIdRepositoryResult
-} from '@/data/protocols/repository/index.js'
-import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
+} from '@/data/protocols/repository/index.ts'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.ts'
 
 type Repository = CreateAccountRepository
   & FindAccountByEmailRepository

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { Decrypter, Encrypter, EncryptionVerifier } from '@/data/protocols/cryptography/index.js'
+import { Decrypter, Encrypter, EncryptionVerifier } from '@/data/protocols/cryptography/index.ts'
 
 export class JwtEncrypter implements Encrypter, EncryptionVerifier, Decrypter {
   #secret: string

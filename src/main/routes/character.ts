@@ -1,11 +1,11 @@
-import { adaptRoute } from '@/main/adapters/index.js'
+import { adaptRoute } from '@/main/adapters/index.ts'
 import {
   makeCreateCharacterController,
   makeDeleteCharacterController,
   makeFindAllCharactersController,
   makeUpdateCharacterController
-} from '@/main/factories/controllers/index.js'
-import { Router } from '@/main/server/router.js'
+} from '@/main/factories/controllers/index.ts'
+import { Router } from '@/main/server/router.ts'
 
 export function characterRoutes(router: Router) {
   router.http('get', '/characters', adaptRoute(makeFindAllCharactersController()))

@@ -1,4 +1,4 @@
-import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
+import { Item, ShieldOrArmor, Weapon } from '@/domain/interfaces/index.ts'
 
 export function fakeItem() {
   return <Item> {

@@ -1,4 +1,4 @@
-import { ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
+import { ShieldOrArmor, Weapon } from '@/domain/interfaces/index.ts'
 
 interface TwoHandsInUseErrorProps {
   field: string

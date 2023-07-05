@@ -1,2 +1,2 @@
-export * from './create-connection-validation.js'
-export * from './init-server-and-test-db.js'
+export * from './create-connection-validation.ts'
+export * from './init-server-and-test-db.ts'

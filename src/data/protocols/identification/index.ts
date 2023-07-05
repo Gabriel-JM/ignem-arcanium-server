@@ -1,1 +1,1 @@
-export * from './unique-id-generator.js'
+export * from './unique-id-generator.ts'

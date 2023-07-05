@@ -1,4 +1,4 @@
-import { AlchemicalItemSubTypes, ItemRarities, ItemTypes } from '../../src/domain/constants/index.js'
+import { AlchemicalItemSubTypes, ItemRarities, ItemTypes } from '../../src/domain/constants/index.ts'
 
 export function makeAlchemicalItems() {
   return [

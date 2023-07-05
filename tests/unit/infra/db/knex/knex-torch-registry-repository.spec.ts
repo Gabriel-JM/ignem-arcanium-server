@@ -1,6 +1,6 @@
-import { KnexTorchRegistryRepository } from '@/infra/db/index.js'
-import { KnexHelper } from '@/infra/db/knex/knex-helper.js'
-import { mockKnex } from '@/tests/unit/mocks/index.js'
+import { KnexTorchRegistryRepository } from '@/infra/db/index.ts'
+import { KnexHelper } from '@/infra/db/knex/knex-helper.ts'
+import { mockKnex } from '@/tests/unit/mocks/index.ts'
 import { Knex } from 'knex'
 
 function makeSut() {

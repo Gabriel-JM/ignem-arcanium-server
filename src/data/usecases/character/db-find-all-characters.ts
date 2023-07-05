@@ -1,9 +1,9 @@
-import { FindAllCharactersRepository } from '@/data/protocols/repository/index.js'
+import { FindAllCharactersRepository } from '@/data/protocols/repository/index.ts'
 import {
   FindAllCharacters,
   FindAllCharactersParams,
   FindAllCharactersResult
-} from '@/domain/usecases/index.js'
+} from '@/domain/usecases/index.ts'
 
 export class DbFindAllCharacters implements FindAllCharacters {
   #findAllCharactersRepository: FindAllCharactersRepository

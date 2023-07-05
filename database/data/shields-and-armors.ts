@@ -1,4 +1,4 @@
-import { ArmorSubTypes, ItemTypes, ShieldSubTypes } from '../../src/domain/constants/index.js'
+import { ArmorSubTypes, ItemTypes, ShieldSubTypes } from '../../src/domain/constants/index.ts'
 
 function generateDamageReduction(value: string) {
   return {

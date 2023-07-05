@@ -1,5 +1,5 @@
-import { ValidatorComposite } from '@/validation/composites/index.js'
-import { Validator } from '@/common/validation/protocols/index.js'
+import { ValidatorComposite } from '@/validation/composites/index.ts'
+import { Validator } from '@/common/validation/protocols/index.ts'
 
 class FakeValidator implements Validator {
   result: string[] = []

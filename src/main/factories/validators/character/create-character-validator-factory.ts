@@ -1,10 +1,10 @@
-import { MinValueValidator, OneOfValuesValidator } from '@/common/validation/validators/index.js'
+import { MinValueValidator, OneOfValuesValidator } from '@/common/validation/validators/index.ts'
 import {
   FieldsValidationComposite,
   ListValidationComposite,
   NestedObjectValidationComposite,
   ValidatorComposite
-} from '@/common/validation/composites/index.js'
+} from '@/common/validation/composites/index.ts'
 
 export function makeCreateCharacterValidator() {
   return new ValidatorComposite(

@@ -1,0 +1,16 @@
+{
+  "tasks": {
+    "start": "deno run src/main/index.ts"
+  },
+  "imports": {
+    "@/": "./src/",
+    "vitest": "npm:vitest",
+    "@prisma/client": "npm:@prisma/client@4.13.0",
+    "bcrypt": "npm:bcrypt@5.1.0",
+    "dotenv-safe": "npm:dotenv-safe@8.2.0",
+    "jsonwebtoken": "npm:jsonwebtoken@9.0.0",
+    "nanoid": "npm:nanoid@4.0.2",
+    "websocket": "npm:websocket@1.0.34",
+    "knex": "npm:knex"
+  }
+}

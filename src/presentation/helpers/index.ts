@@ -1,2 +1,2 @@
-export * from './http.js'
-export * from './text-tag-function.js'
+export * from './http.ts'
+export * from './text-tag-function.ts'

@@ -1,8 +1,8 @@
-import { server } from '@/main/server/app.js'
-import { createConnectionValidation, initServerAndDb } from '@/tests/integration/connection/index.js'
+import { server } from '@/main/server/app.ts'
+import { createConnectionValidation, initServerAndDb } from '@/tests/integration/connection/index.ts'
 import request from 'superwstest'
 import { randomUUID } from 'crypto'
-import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.ts'
 
 describe('Update torch registry', () => {
   initServerAndDb(server, testKnex, 'torch_registries')

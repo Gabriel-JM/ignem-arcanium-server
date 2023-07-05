@@ -1,4 +1,4 @@
-import { CreateCharacterParams } from '@/domain/usecases/index.js'
+import { CreateCharacterParams } from '@/domain/usecases/index.ts'
 
 export function fakeCreateCharacterParams() {
   return <CreateCharacterParams> {

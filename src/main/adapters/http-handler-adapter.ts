@@ -1,7 +1,7 @@
-import { ServerResponse } from 'http'
-import { RequestData } from '@/main/server/router.js'
-import { Controller, ControllerFN } from '@/presentation/protocols/index.js'
-import { cors } from '@/main/server/cors.js'
+import { ServerResponse } from 'node:http'
+import { RequestData } from '@/main/server/router.ts'
+import { Controller, ControllerFN } from '@/presentation/protocols/index.ts'
+import { cors } from '@/main/server/cors.ts'
 
 export function adaptRoute(controller: Controller) {
   return async (req: RequestData, res: ServerResponse) => {

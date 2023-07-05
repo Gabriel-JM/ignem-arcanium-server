@@ -1,5 +1,5 @@
-import { DbUpdateCharacter } from '@/data/usecases/index.js'
-import { fakeCharacter, mockUpdateCharacterRepository } from '@/tests/unit/mocks/index.js'
+import { DbUpdateCharacter } from '@/data/usecases/index.ts'
+import { fakeCharacter, mockUpdateCharacterRepository } from '@/tests/unit/mocks/index.ts'
 
 function makeSut() {
   const updateCharacterRepositorySpy = mockUpdateCharacterRepository()

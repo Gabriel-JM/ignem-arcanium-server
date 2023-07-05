@@ -1,5 +1,5 @@
-import { UpdateCharacterRepository } from '@/data/protocols/repository/index.js'
-import { UpdateCharacter, UpdateCharacterParams } from '@/domain/usecases/index.js'
+import { UpdateCharacterRepository } from '@/data/protocols/repository/index.ts'
+import { UpdateCharacter, UpdateCharacterParams } from '@/domain/usecases/index.ts'
 
 export class DbUpdateCharacter implements UpdateCharacter {
   #updateCharacterRepository: UpdateCharacterRepository

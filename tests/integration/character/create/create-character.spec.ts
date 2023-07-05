@@ -1,7 +1,7 @@
-import { JwtEncrypter } from '@/infra/cryptography/index.js'
-import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
-import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
-import { clearTables, closeDbConnection, setupTestRequest, testRequest } from '@/tests/integration/test-utils/index.js'
+import { JwtEncrypter } from '@/infra/cryptography/index.ts'
+import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.ts'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.ts'
+import { clearTables, closeDbConnection, setupTestRequest, testRequest } from '@/tests/integration/test-utils/index.ts'
 
 describe('Create Characters', () => {
   beforeAll(setupTestRequest)

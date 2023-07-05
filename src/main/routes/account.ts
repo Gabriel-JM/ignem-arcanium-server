@@ -2,9 +2,9 @@ import {
   makeAccountLoginController,
   makeCreateAccountController,
   makeVerifyTokenController
-} from '@/account/main/factories/index.js'
-import { adaptRoute } from '@/main/adapters/index.js'
-import { Router } from '@/main/server/router.js'
+} from '@/account/main/factories/index.ts'
+import { adaptRoute } from '@/main/adapters/index.ts'
+import { Router } from '@/main/server/router.ts'
 
 export function accountRoutes(router: Router) {
   router.http('post', '/login', adaptRoute(makeAccountLoginController()))

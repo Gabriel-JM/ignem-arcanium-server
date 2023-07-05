@@ -1,4 +1,4 @@
-import { Validator } from '@/common/validation/protocols/index.js'
+import { Validator } from '@/common/validation/protocols/index.ts'
 
 export class OneOfValuesValidator implements Validator {
   #fields: Record<string, unknown[]>

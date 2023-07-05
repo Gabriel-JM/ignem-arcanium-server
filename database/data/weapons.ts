@@ -1,4 +1,4 @@
-import { WeaponSubTypes } from '../../src/domain/constants/index.js'
+import { WeaponSubTypes } from '../../src/domain/constants/index.ts'
 
 function generateDamage(damage: string, ...types: string[]) {
   const typesRecord = types.reduce((acc, type) => {

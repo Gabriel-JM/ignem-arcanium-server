@@ -1,2 +1,2 @@
-export * from './nanoid-unique-id-generator.js'
-export * from './id-prefixes.js'
+export * from './nanoid-unique-id-generator.ts'
+export * from './id-prefixes.ts'

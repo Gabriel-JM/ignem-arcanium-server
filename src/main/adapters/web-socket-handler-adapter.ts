@@ -1,5 +1,5 @@
-import { RouteContext } from '@/main/server/router.js'
-import { Controller } from '@/presentation/protocols/index.js'
+import { RouteContext } from '@/main/server/router.ts'
+import { Controller } from '@/presentation/protocols/index.ts'
 import { connection } from 'websocket'
 
 export function adaptEvent(controller: Controller, responseEvent: string) {

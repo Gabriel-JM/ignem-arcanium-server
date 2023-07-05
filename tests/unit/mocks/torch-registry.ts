@@ -1,4 +1,4 @@
-import { FindTorchRegistryByIdRepositoryResult } from '@/data/protocols/repository/index.js'
+import { FindTorchRegistryByIdRepositoryResult } from '@/data/protocols/repository/index.ts'
 
 export const dummyFindAllTorchRegistriesRepositoryResult = [{
   id: 'any_id',

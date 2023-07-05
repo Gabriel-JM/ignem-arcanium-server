@@ -1,8 +1,8 @@
-import { UniqueIdGenerator } from '@/data/protocols/identification/index.js'
-import { CreateCharacterRepository, FindManyItemsRepository, FindSlotItemByIdRepository } from '@/data/protocols/repository/index.js'
-import { Character } from '@/domain/entities/index.js'
-import { ShieldOrArmor, Weapon } from '@/domain/interfaces/index.js'
-import { CreateCharacter, CreateCharacterParams, CreateCharacterResult } from '@/domain/usecases/index.js'
+import { UniqueIdGenerator } from '@/data/protocols/identification/index.ts'
+import { CreateCharacterRepository, FindManyItemsRepository, FindSlotItemByIdRepository } from '@/data/protocols/repository/index.ts'
+import { Character } from '@/domain/entities/index.ts'
+import { ShieldOrArmor, Weapon } from '@/domain/interfaces/index.ts'
+import { CreateCharacter, CreateCharacterParams, CreateCharacterResult } from '@/domain/usecases/index.ts'
 
 export class DbCreateCharacter implements CreateCharacter {
   #uniqueIdGenerator: UniqueIdGenerator

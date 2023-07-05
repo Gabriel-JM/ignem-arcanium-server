@@ -1,4 +1,4 @@
-import { CustomValidator, CustomValidatorRecord } from '@/validation/validators/index.js'
+import { CustomValidator, CustomValidatorRecord } from '@/validation/validators/index.ts'
 
 function makeSut(fields: Record<string, CustomValidatorRecord>) {
   const sut = new CustomValidator(fields)

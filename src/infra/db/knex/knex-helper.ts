@@ -1,5 +1,5 @@
 import knex, { Knex } from 'knex'
-import path from 'path'
+import path from 'node:path'
 
 export function connect() : Knex {
   const connection = process.env.DATABASE_URL

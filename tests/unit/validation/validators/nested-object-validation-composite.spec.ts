@@ -1,5 +1,5 @@
-import { FakeValidator } from '@/tests/unit/mocks/index.js'
-import { NestedObjectValidationComposite } from '@/validation/composites/index.js'
+import { FakeValidator } from '@/tests/unit/mocks/index.ts'
+import { NestedObjectValidationComposite } from '@/validation/composites/index.ts'
 
 function makeSut() {
   const fakeValidator1 = new FakeValidator()

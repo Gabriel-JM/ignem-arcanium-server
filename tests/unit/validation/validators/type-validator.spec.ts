@@ -1,4 +1,4 @@
-import { TypeValidator } from '@/validation/validators/index.js'
+import { TypeValidator } from '@/validation/validators/index.ts'
 
 function makeSut(fields: Record<string, string | string[]>) {
   const sut = new TypeValidator(fields)

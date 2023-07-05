@@ -1,5 +1,5 @@
 import { Knex } from 'knex'
-import { makeAlchemicalItems } from '../data/alchemical-items.js'
+import { makeAlchemicalItems } from '../data/alchemical-items.ts'
 
 const alchemicalItems = makeAlchemicalItems()
 

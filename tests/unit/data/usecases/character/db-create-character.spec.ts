@@ -1,5 +1,5 @@
-import { FindSlotItemByIdRepository } from '@/data/protocols/repository/index.js'
-import { DbCreateCharacter } from '@/data/usecases/index.js'
+import { FindSlotItemByIdRepository } from '@/data/protocols/repository/index.ts'
+import { DbCreateCharacter } from '@/data/usecases/index.ts'
 import {
   fakeArmor,
   fakeCreateCharacterParams,
@@ -8,7 +8,7 @@ import {
   mockFindManyItemsRepository,
   mockFindSlotItemByIdRepository,
   mockUniqueIdGenerator
-} from '@/tests/unit/mocks/index.js'
+} from '@/tests/unit/mocks/index.ts'
 
 function makeSut() {
   const uniqueIdGeneratorSpy = mockUniqueIdGenerator()

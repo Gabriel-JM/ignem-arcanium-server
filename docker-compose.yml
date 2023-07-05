@@ -1,6 +1,6 @@
 services:
   app:
-    image: node:lts-alpine3.16
+    image: deno:latest
     container_name: 'ignem-arcanium'
     user: 1000:1000
     working_dir: /app

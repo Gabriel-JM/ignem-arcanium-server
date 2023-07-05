@@ -1,13 +1,13 @@
-import { makeAuthDecorator } from '@/account/main/factories/index.js'
-import { DbCreateCharacter } from '@/data/usecases/index.js'
-import { KnexCreateCharacterRepository } from '@/infra/db/knex/character/knex-create-character-repository.js'
-import { KnexItemRepository } from '@/infra/db/knex/knex-item-repository.js'
-import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
-import { applyErrorAndValidationDecorators } from '@/main/factories/decorators/index.js'
-import { makeKnexHelper } from '@/main/factories/repositories/index.js'
-import { makeKnexRepository } from '@/main/factories/repositories/knex-repository.js'
-import { makeCreateCharacterValidator } from '@/main/factories/validators/index.js'
-import { CreateCharacterController } from '@/presentation/controllers/index.js'
+import { makeAuthDecorator } from '@/account/main/factories/index.ts'
+import { DbCreateCharacter } from '@/data/usecases/index.ts'
+import { KnexCreateCharacterRepository } from '@/infra/db/knex/character/knex-create-character-repository.ts'
+import { KnexItemRepository } from '@/infra/db/knex/knex-item-repository.ts'
+import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.ts'
+import { applyErrorAndValidationDecorators } from '@/main/factories/decorators/index.ts'
+import { makeKnexHelper } from '@/main/factories/repositories/index.ts'
+import { makeKnexRepository } from '@/main/factories/repositories/knex-repository.ts'
+import { makeCreateCharacterValidator } from '@/main/factories/validators/index.ts'
+import { CreateCharacterController } from '@/presentation/controllers/index.ts'
 
 export function makeCreateCharacterController() {
   const uniqueIdGenerator = new NanoIdUniqueIdGenerator()

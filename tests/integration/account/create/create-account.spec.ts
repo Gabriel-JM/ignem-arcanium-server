@@ -1,8 +1,8 @@
 import chai from 'chai'
-import { server } from '@/main/server/app.js'
-import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
+import { server } from '@/main/server/app.ts'
+import { testKnex } from '@/tests/integration/test-db-connection/knex.ts'
 import { randomUUID } from 'crypto'
-import { testSetup } from '@/tests/integration/test-utils/test-setup.js'
+import { testSetup } from '@/tests/integration/test-utils/test-setup.ts'
 
 describe('Create account', () => {
   testSetup('characters', 'accounts')

@@ -1,3 +1,3 @@
-export * from './item.js'
-export * from './weapon.js'
-export * from './inventory-item.js'
+export * from './item.ts'
+export * from './weapon.ts'
+export * from './inventory-item.ts'
