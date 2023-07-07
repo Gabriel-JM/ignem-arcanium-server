@@ -31,9 +31,9 @@ export class ContentRepository {
 
   async getChildContentChildren(parentId: string): Promise<Content[]> {
     const contentChildren = await this.#prisma.$queryRaw<Content[]>`
-      select * from content
+      select * from contents
       join content_children
-      on parentId = '${parentId}';
+      on "parentId" = '${parentId}';
     `
 
     return Promise.all(contentChildren.map(async content => {
