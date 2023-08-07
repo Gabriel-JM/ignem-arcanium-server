@@ -7,13 +7,15 @@ import { FieldsValidationComposite } from '@/common/validation/composites/fields
 import { makeAuthDecorator } from '@/account/main/factories/auth.js'
 import { ErrorHandlerControllerDecorator } from '@/main/decorators/error-handler-controller-decorator.js'
 import { prisma } from '@/main/config/prisma.js'
+import { makeLocalFileUploader } from '@/common/factories/file-uploaders-factories.js'
 
 export function makeContentController() {
   const contentController = new ContentController(
     new ContentRepository(
       prisma,
       new NanoIdUniqueIdGenerator()
-    )
+    ),
+    makeLocalFileUploader()
   )
 
   const create = applyErrorAndValidationDecorators(
@@ -39,8 +41,8 @@ function makeCreateContentValidator() {
   return new ValidatorComposite(
     new FieldsValidationComposite({
       type: 'string',
-      icon: 'string?',
-      cover: 'string?',
+      icon: 'object?',
+      cover: 'object?',
       title: 'string',
       value: 'string',
       properties: 'object'

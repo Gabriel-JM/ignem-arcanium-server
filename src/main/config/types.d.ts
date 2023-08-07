@@ -5,6 +5,7 @@ declare global {
       DATABASE_URL: string
       SHOW_LOGS: string
       ENCRYPTER_SECRET: string
+      SERVER_HOST: string
     }
   }
 }
