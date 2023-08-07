@@ -1,6 +1,7 @@
-export function ok(data: any) {
+export function ok(data: any, headers?: Record<string, string>) {
   return {
     statusCode: 200,
+    headers,
     body: data
   }
 }

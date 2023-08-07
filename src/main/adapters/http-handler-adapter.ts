@@ -16,6 +16,11 @@ export function adaptRoute(controller: Controller) {
 
     cors(res)
     res.statusCode = response.statusCode
+    
+    if (response.headers) {
+      res.writeHead(response.statusCode, response.headers)
+    }
+    
     res.end(JSON.stringify(response.body))
   }
 }
@@ -33,6 +38,11 @@ export function adaptRouteFN(controllerFn: ControllerFN) {
 
     cors(res)
     res.statusCode = response.statusCode
+
+    if (response.headers) {
+      res.writeHead(response.statusCode, response.headers)
+    }
+
     res.end(JSON.stringify(response.body))
   }
 }
