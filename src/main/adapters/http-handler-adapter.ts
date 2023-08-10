@@ -19,6 +19,8 @@ export function adaptRoute(controller: Controller) {
     
     if (response.headers) {
       res.writeHead(response.statusCode, response.headers)
+      res.end(response.body)
+      return
     }
     
     res.end(JSON.stringify(response.body))

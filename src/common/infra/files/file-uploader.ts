@@ -1,3 +1,8 @@
+export interface FileInfo {
+  mimeType: string
+  data: Buffer
+}
+
 export interface FileUploader {
-  upload(data: Buffer): Promise<string>
+  upload(info: FileInfo): Promise<string>
 }

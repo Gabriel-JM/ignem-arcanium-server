@@ -1,7 +1,7 @@
 import busboy from 'busboy'
 import { IncomingMessage } from 'node:http'
 
-export function getRequestData(request: IncomingMessage) {
+export async function getRequestData(request: IncomingMessage) {
   const contentType = request.headers['content-type']
 
   if (contentType === 'application/json') {
@@ -9,7 +9,8 @@ export function getRequestData(request: IncomingMessage) {
   }
 
   if (contentType?.startsWith('multipart/form-data')) {
-    return parseFormDataBody(request)
+    const rawFormData = await parseFormDataBody(request)
+    return nomalizeFormData(rawFormData)
   }
 
   return null
@@ -35,7 +36,11 @@ function parseJSONBody(request: IncomingMessage) {
   })
 }
 
-function parseFormDataBody(request: IncomingMessage) {
+type RawFormData = Record<string, Buffer> & {
+  data?: string
+}
+
+function parseFormDataBody(request: IncomingMessage): Promise<RawFormData> {
   return new Promise((resolve, reject) => {
     try {
       const boy = busboy({ headers: request.headers })
@@ -77,4 +82,16 @@ function parseFormDataBody(request: IncomingMessage) {
       reject(error)
     }
   })
+}
+
+function nomalizeFormData(rawFormData: RawFormData) {
+  const { data: jsonData, ...fileFields } = rawFormData
+  let body = { ...fileFields }
+  
+  if (jsonData) {
+    const data = JSON.parse(jsonData)
+    body = { ...body, ...data }
+  }
+
+  return body
 }

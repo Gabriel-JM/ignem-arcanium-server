@@ -6,10 +6,12 @@ interface RequestContent {
   accountId: string
   cover?: {
     filename: string
+    mimeType: string
     data: Buffer
   }
   icon?: {
     filename: string
+    mimeType: string
     data: Buffer
   }
   type: string
@@ -38,11 +40,11 @@ export class ContentController {
     let iconURL: string | null = null
     
     if (data.cover) {
-      coverURL = await this.#fileUploader.upload(data.cover.data)
+      coverURL = await this.#fileUploader.upload(data.cover)
     }
 
     if (data.icon) {
-      iconURL = await this.#fileUploader.upload(data.icon.data)
+      iconURL = await this.#fileUploader.upload(data.icon)
     }
     
     const content = await this.#repository.create({

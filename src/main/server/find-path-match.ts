@@ -17,11 +17,11 @@ function createPathRegex(path: string) {
     return path
   }
 
-	const identifiers = Array.from(path.matchAll(/\/:([\w_\-$]+)/g))
+	const identifiers = Array.from(path.matchAll(/\/:([\w_\-$\.]+)/g))
     .map(match => match[1])
 	
 	const pathRegexString = identifiers.reduce((acc, value) => {
-	  return acc.replace(`:${value}`, `(?<${value}>[\\w_\\-$@]+)`)
+	  return acc.replace(`:${value}`, `(?<${value}>[\\w_\\-$@\\.]+)`)
 	}, path)
 	
 	return new RegExp(pathRegexString)

@@ -1,7 +1,8 @@
-import { writeFile } from 'fs/promises'
-import { FileUploader } from './file-uploader.js'
+import { mkdir, writeFile } from 'fs/promises'
+import { FileInfo, FileUploader } from './file-uploader.js'
 import { resolve } from 'path'
 import { randomUUID } from 'crypto'
+import { existsSync } from 'fs'
 
 export class LocalFileUploader implements FileUploader {
   #localHost: string
@@ -10,10 +11,30 @@ export class LocalFileUploader implements FileUploader {
     this.#localHost = localHost
   }
   
-  async upload(data: Buffer): Promise<string> {
+  async upload(info: FileInfo): Promise<string> {
+    const { data, mimeType } = info
+    const extension = this.#getExtensionFromMimeType(mimeType)
     const fileId = randomUUID()
-    await writeFile(resolve('tmp', fileId), data)
+    const fileName = `${fileId}.${extension}`
 
-    return `${this.#localHost}/file/${fileId}`
+    if (!existsSync(resolve('tmp'))) {
+      await mkdir(resolve('tmp'))
+    }
+
+    await writeFile(resolve('tmp', fileName), data, {
+      encoding: 'binary'
+    })
+
+    return `${this.#localHost}/file/${fileName}`
+  }
+
+  #getExtensionFromMimeType(mimeType: string) {
+    let [, type] = mimeType.split('/')
+
+    if (type === 'jpeg') {
+      type = 'jpg'
+    }
+
+    return type.toLowerCase()
   }
 }
