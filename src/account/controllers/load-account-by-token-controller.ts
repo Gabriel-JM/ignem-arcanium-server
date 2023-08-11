@@ -2,7 +2,7 @@ import { InvalidAccessTokenError } from '@/data/errors/index.js'
 import { Decrypter } from '@/data/protocols/cryptography/index.js'
 import { FindAccountByIdRepository } from '@/data/protocols/repository/index.js'
 import { ok } from '@/presentation/helpers/index.js'
-import { Controller } from '@/presentation/protocols/index.js'
+import { Controller } from '@/common/presentation/protocols/index.js'
 
 export class LoadAccountByTokenController implements Controller {
   #decrypter: Decrypter

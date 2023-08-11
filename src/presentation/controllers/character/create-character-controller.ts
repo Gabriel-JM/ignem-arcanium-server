@@ -1,6 +1,6 @@
+import { Controller } from '@/common/presentation/protocols/index.js'
 import { CreateCharacter, CreateCharacterInventoryItem } from '@/domain/usecases/index.js'
 import { created } from '@/presentation/helpers/index.js'
-import { Controller } from '@/presentation/protocols/controller.js'
 
 interface CreateCharacterControllerParams {
   accountId: string

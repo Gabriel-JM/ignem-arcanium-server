@@ -1,4 +1,4 @@
-import { HTTPResponse } from '@/presentation/protocols/index.js'
+import { HTTPResponse } from './index.js'
 
 export interface Controller {
   handle(params: any): Promise<HTTPResponse>

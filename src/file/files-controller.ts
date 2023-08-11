@@ -1,6 +1,5 @@
+import { Controller, HTTPResponse } from '@/common/presentation/protocols/index.js'
 import { notFound, ok } from '@/presentation/helpers/http.js'
-import { Controller } from '@/presentation/protocols/controller.js'
-import { HTTPResponse } from '@/presentation/protocols/http.js'
 import { readFile } from 'fs/promises'
 import { extname, resolve } from 'path'
 

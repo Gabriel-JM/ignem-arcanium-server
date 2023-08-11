@@ -3,7 +3,7 @@ import { Encrypter, TextHasher } from '@/data/protocols/cryptography/index.js'
 import { UniqueIdGenerator } from '@/data/protocols/identification/index.js'
 import { CheckAccountByEmailRepository, CreateAccountRepository } from '@/data/protocols/repository/index.js'
 import { created } from '@/presentation/helpers/http.js'
-import { Controller } from '@/presentation/protocols/index.js'
+import { Controller } from '@/common/presentation/protocols/index.js'
 
 export interface CreateAccountParams {
   name: string

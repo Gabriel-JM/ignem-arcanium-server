@@ -1,6 +1,6 @@
 import { LoadAccountByTokenController } from '@/account/controllers/index.js'
 import { InvalidAccessTokenError } from '@/data/errors/index.js'
-import { Controller, HTTPResponse } from '@/presentation/protocols/index.js'
+import { Controller, HTTPResponse } from '@/common/presentation/protocols/index.js'
 
 interface AuthControllerDecoratorParams {
   authorization: string
