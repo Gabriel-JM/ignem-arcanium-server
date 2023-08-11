@@ -1,6 +1,6 @@
 import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
-import { JwtEncrypter } from '@/infra/cryptography/index.js'
+import { JwtEncrypter } from '@/account/infra/cryptography/index.js'
 import {
   clearTables,
   closeDbConnection,

@@ -1,4 +1,4 @@
-import { JwtEncrypter } from '@/infra/cryptography/index.js'
+import { JwtEncrypter } from '@/account/infra/cryptography/index.js'
 import { NanoIdUniqueIdGenerator } from '@/infra/identification/index.js'
 import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { clearTables, closeDbConnection, setupTestRequest, testRequest } from '@/tests/integration/test-utils/index.js'

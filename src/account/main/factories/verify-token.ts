@@ -1,5 +1,5 @@
 import { VerifyTokenController } from '@/account/controllers/verify-token-controller.js'
-import { JwtEncrypter } from '@/infra/cryptography/index.js'
+import { JwtEncrypter } from '@/account/infra/cryptography/index.js'
 import { applyErrorAndValidationDecorators } from '@/main/factories/decorators/index.js'
 import { makeVerifyTokenValidator } from '@/main/factories/validators/index.js'
 

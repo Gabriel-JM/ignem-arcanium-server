@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { JwtEncrypter } from '@/infra/cryptography/index.js'
+import { JwtEncrypter } from '@/account/infra/cryptography/index.js'
 
 function makeSut() {
   const signSpy = vi.spyOn(jwt, 'sign')

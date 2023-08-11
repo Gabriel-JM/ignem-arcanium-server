@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http'
 import { server } from '@/main/server/app.js'
 import { testKnex } from '@/tests/integration/test-db-connection/knex.js'
 import { nanoid } from 'nanoid'
-import { JwtEncrypter } from '@/infra/cryptography/index.js'
+import { JwtEncrypter } from '@/account/infra/cryptography/index.js'
 
 describe('Create account', () => {
   beforeAll(async () => {
