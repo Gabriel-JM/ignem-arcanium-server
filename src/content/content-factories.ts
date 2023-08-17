@@ -31,9 +31,16 @@ export function makeContentController() {
     })
   )
 
+  const del = new ErrorHandlerControllerDecorator(
+    makeAuthDecorator({
+      handle: contentController.delete.bind(contentController)
+    })
+  )
+
   return {
     findByAccount,
-    create
+    create,
+    del
   }
 }
 
