@@ -46,10 +46,17 @@ export class ErrorHandlerControllerDecorator implements Controller {
       error.details = [error.detail]
     },
     [PrismaClientKnownRequestError.name](err: PrismaClientKnownRequestError & ApplicationError) {
-      if (err.code === 'P2001') {
+      const cause = String(err.meta?.cause ?? '')
+
+      if (cause.includes('not exist') || cause.includes('not found')) {
         err.name = 'NotFoundError'
-        err.details = ['']
+        err.type = 'Search'
+        err.details = ['Register not found']
+        return
       }
+
+      err.name = 'InternalError'
+      err.details = ['Internal error. Try again later']
     }
   }
 
