@@ -77,13 +77,9 @@ export class ContentRepository {
     })
   }
 
-  // async create(data: CreateContent) {
-  //   return await this.#knex
-  //     .table('contents')
-  //     .insert({
-  //       ...data,
-  //       id: this.#idGenerator.generate('contents')
-  //     })
-  //     .returning('*')
-  // }
+  async delete(id: string) {
+    await this.#prisma.contents.delete({
+      where: { id }
+    })
+  }
 }

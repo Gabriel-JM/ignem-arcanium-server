@@ -1,4 +1,4 @@
-import { ok } from '@/presentation/helpers/http.js'
+import { noContent, ok } from '@/presentation/helpers/http.js'
 import { ContentRepository } from './content-repository.js'
 import { FileUploader } from '@/common/infra/files/file-uploader.js'
 
@@ -58,5 +58,11 @@ export class ContentController {
     })
 
     return ok(content)
+  }
+
+  async delete(data: { id: string }) {
+    await this.#repository.delete(data.id)
+
+    return noContent()
   }
 }

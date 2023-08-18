@@ -7,4 +7,5 @@ export function contentRoutes(router: Router) {
 
   router.http('get', '/contents', adaptRoute(contentFns.findByAccount))
   router.http('post', '/contents', adaptRoute(contentFns.create))
+  router.http('delete', '/contents/:id', adaptRoute(contentFns.del))
 }
